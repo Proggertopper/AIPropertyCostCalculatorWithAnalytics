@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/mainForPropertySale.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    <a href="./mainPage.html" class="back-btn">← Назад</a>
+
+    <section class="calculator">
+        <h1>Калькулятор продажи недвижимости</h1>
+        <p class="subtitle">
+            Узнайте реальную прибыль и стоит ли продавать объект сейчас
+        </p>
+
+        <div class="grid">
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Параметры сделки</h3>
+
+                <label>
+                    Цена покупки
+                    <input type="number" id="buyPrice" value="100000">
+                </label>
+
+                <label>
+                    Цена продажи
+                    <input type="number" id="sellPrice" value="130000">
+                </label>
+
+                <label>
+                    Срок владения (лет)
+                    <input type="number" id="years" value="5">
+                </label>
+
+                <label>
+                    Налог при продаже (%)
+                    <input type="number" id="tax" value="5">
+                </label>
+
+                <label>
+                    Комиссия агенту (%)
+                    <input type="number" id="commission" value="3">
+                </label>
+
+                <label>
+                    Инфляция (% в год)
+                    <input type="number" id="inflation" value="4">
+                </label>
+
+                <label>
+                    Расходы на ремонт / улучшения
+                    <input type="number" id="renovation" value="10000">
+                </label>
+
+                <button onclick="calculateSale()">Рассчитать</button>
+            </div>
+
+            <!-- RESULT -->
+            <div class="card result">
+                <h3>Результаты</h3>
+
+                <div class="row">
+                    <span>Налог при продаже</span>
+                    <strong id="taxAmount">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Комиссия</span>
+                    <strong id="commissionAmount">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Чистая прибыль</span>
+                    <strong id="netProfit">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Доходность (годовая)</span>
+                    <strong id="annualReturn">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Реальная доходность</span>
+                    <strong id="realReturn">—</strong>
+                </div>
+
+                <div id="decision" class="decision">—</div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer class="footer" style="background-color: #DFD0B8;">
+        <div class="footer-content">
+            <p>© 2025 PropertyCost</p>
+            <ul class="footer-links mb-2">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="./disclaimer.html">Disclaimer</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="../js/propertySale.js"></script>
+</body>
+</html>

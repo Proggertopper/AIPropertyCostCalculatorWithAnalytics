@@ -1,0 +1,34 @@
+*, 
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: black;
+}
+
+body{
+    min-height: 100dvh;
+    margin:0;
+}
+
+ul, ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+

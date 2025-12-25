@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/main.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <a href="./mainPage.html" class="back-btn">← Назад</a>
+    
+    <main class="container">
+    
+        <h1>Стоимость владения недвижимостью</h1>
+        <p>
+            Владение недвижимостью включает гораздо больше расходов,
+            чем просто ипотечный платёж.
+        </p>
+    
+        <h2>Что учитывается в расчётах</h2>
+    
+        <ul class="list">
+            <li>💰 Цена покупки недвижимости</li>
+            <li>🏦 Проценты по ипотеке</li>
+            <li>🏛️ Налоги на имущество</li>
+            <li>🛡️ Страховка</li>
+            <li>🔧 Ремонты и обслуживание</li>
+            <li>🏘️ HOA и коммунальные услуги</li>
+        </ul>
+    
+        <p>
+            По статистике, более 90% покупателей не считают эти расходы,
+            что приводит к ошибочным финансовым решениям.
+        </p>
+    
+        <div class="note">
+    
+            
+            
+                <form id="tco-form" class="tco-form">
+            
+                    <div class="form-group">
+                        <label for="price">Цена недвижимости (₴)</label>
+                        <input type="number" id="price" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="years">Срок владения (лет)</label>
+                        <input type="number" id="years" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="tax">Налог (%)</label>
+                        <input type="number" id="tax" step="0.1" required>
+                    </div>
+            
+                    <div class="form-group">
+                        <label for="maintenance">Годовое обслуживание (₴)</label>
+                        <input type="number" id="maintenance" value="0">
+                    </div>
+            
+                    <button type="submit" class="btn">Рассчитать</button>
+                </form>
+            
+                <!-- Результат -->
+                <div id="results"></div>
+            
+                <!-- График -->
+                <div class="chart-wrapper">
+                    <canvas id="costChart"></canvas>
+                </div>
+        </div>
+    </main>
+
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <p>© 2025 PropertyCost</p>
+            <ul class="footer-links mb-2">
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms of Service</a></li>
+                <li><a href="./disclaimer.html">Disclaimer</a></li>
+                <li><a href="#">Contact us</a></li>
+                <li><a href="#">About</a></li>
+            </ul>
+        </div>
+    </footer>
+
+
+    <script src="../js/ownership-cost.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

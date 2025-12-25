@@ -1,0 +1,30 @@
+/* main.css */
+
+/* base */
+@import "base/reset.css";
+@import "base/colors.css";
+@import "base/variables.css";
+@import "base/typography.css";
+
+/* layout */
+@import "layout/layout.css";
+@import "layout/headerWithNavbar.css";
+@import "layout/main.css";
+@import "layout/footer.css";
+
+
+/* components */
+@import "components/buttons.css";
+@import "components/forms.css";
+
+/* utilities */
+@import "utilities/spacing.css";
+@import "utilities/text.css";
+@import "utilities/display.css";
+@import "utilities/flex.css";
+@import "utilities/width.css";
+@import "utilities/height.css";
+@import "utilities/error.css";
+
+
+

@@ -1,0 +1,64 @@
+.btn {
+    text-align: center;
+    border-radius: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-signin {
+    background-color:#1E3A8A;
+    border: 0.1rem solid black; 
+    color: whitesmoke;
+}
+.btn-signin:hover {
+    text-decoration: underline;
+    background-color: #1D4ED8;
+}
+
+.bg-body-signin{
+    opacity: 1;
+    background-color: rgb(43, 48, 53);
+}
+
+.btn-login {
+    background-color:#1E3A8A ;
+    color: white;
+    border: 0.1rem solid black;
+}
+
+.btn-login:hover {
+    text-decoration: underline;
+    background-color: #1D4ED8;
+}
+
+.btn-primary {
+    width: 70%;
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor:pointer;
+}
+
+.back-btn {
+    position: fixed; /* или sticky, возможно */
+    top: 1rem;        /* отступ от верхнего края */
+    left: 1rem;       /* отступ от левого края */
+    background-color: #153448; 
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    z-index: 1000;    /* чтобы было поверх всего */
+    transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+    background-color: #0d2530;
+}
+

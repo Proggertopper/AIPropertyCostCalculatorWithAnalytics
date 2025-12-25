@@ -1,0 +1,42 @@
+.header{ 
+    position: sticky;
+    top:0; 
+    z-index: 1000;
+    display: flex;
+    width: 100%; 
+}
+
+.navbar { 
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem; 
+    width: 100%;
+} 
+
+.navbar-nav { 
+    display: flex; 
+    flex-wrap: wrap;
+    flex-grow: 0;
+    align-items: center; 
+    list-style: none; 
+    gap:0.75rem; 
+    margin: auto ; 
+} 
+
+.logo { 
+    display: flex; 
+    align-items: center;
+    margin-left: 1rem; 
+    font-weight: bold; 
+    font-size: 1.5rem; 
+}
+
+@media (min-width: 468px) and (max-width: 678px) {
+    /* Меняем flex направление navbar на колонку */
+    .login{
+        margin-right: auto;
+    }
+}
+

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/mainForCashFlow.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <section class="calculator">
+        <h2>Cash Flow недвижимости</h2>
+        <p class="subtitle">
+            Узнайте, приносит ли объект деньги каждый месяц
+        </p>
+
+        <div class="grid">
+            <!-- INPUTS -->
+            <div class="card">
+                <h3>Доход</h3>
+
+                <label>
+                    Аренда в месяц
+                    <input type="number" id="rent" value="1000">
+                </label>
+
+                <label>
+                    Простой (%)
+                    <input type="number" id="vacancy" value="5">
+                </label>
+            </div>
+
+            <div class="card">
+                <h3>Расходы</h3>
+
+                <label>
+                    Ипотека в месяц
+                    <input type="number" id="mortgage" value="600">
+                </label>
+
+                <label>
+                    Эксплуатация
+                    <input type="number" id="expenses" value="200">
+                </label>
+
+                <label>
+                    Налоги и страховка
+                    <input type="number" id="taxes" value="100">
+                </label>
+
+                <button onclick="calculateCashFlow()">Рассчитать</button>
+            </div>
+
+            <!-- RESULTS -->
+            <div class="card result">
+                <h3>Результат</h3>
+
+                <div class="row">
+                    <span>Доход (чистый)</span>
+                    <strong id="income">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Расходы</span>
+                    <strong id="totalExpenses">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Cash Flow / месяц</span>
+                    <strong id="cashFlowMonth">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Cash Flow / год</span>
+                    <strong id="cashFlowYear">—</strong>
+                </div>
+
+                <div id="status" class="status">—</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="../js/cashflow.js"></script>
+</body>
+</html>

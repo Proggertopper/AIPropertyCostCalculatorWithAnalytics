@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    <form id="loginForm">
+        <input type="email" id="email" placeholder="Email" required />
+        <input type="password" id="password" placeholder="Пароль" required />
+        <button type="submit">Войти</button>
+    </form>
+    
+    <button id="googleLogin">Войти через Google</button>
+    
+    <script>
+        const form = document.getElementById("loginForm");
+        form.addEventListener("submit", async e => {
+            e.preventDefault();
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const res = await fetch("/api/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",       // важно для сессии
+                body: JSON.stringify({ email, password })
+            });
+
+            if (res.ok) {
+                window.location.href = "/mainPage.html"; // редирект после успешного логина
+            } else {
+                alert("Неверный логин или пароль");
+            }
+        });
+
+        // Кнопка Google OAuth
+        document.getElementById("googleLogin").addEventListener("click", () => {
+            window.location.href = "/auth/google";
+        });
+    </script>
+</body>
+</html>
