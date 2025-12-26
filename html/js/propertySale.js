@@ -1,3 +1,12 @@
+// 1️⃣ Получаем CSRF-токен при загрузке страницы
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
+
 function calculateSale() {
   const buyPrice = +document.getElementById("buyPrice").value;
   const sellPrice = +document.getElementById("sellPrice").value;
@@ -51,4 +60,24 @@ function calculateSale() {
     decision.textContent = "Доходность ниже инфляции ⛔";
     decision.className = "decision bad";
   }
+
+  // 3️⃣ Отправляем результат на сервер (POST с CSRF)
+  fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      expression: `${buyPrice},${sellPrice},${years}`,
+      result: realReturn
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Сервер ответил:", data);
+  })
+  .catch(err => console.error("Ошибка при отправке:", err));
 }
+
+document.getElementById("calcBtn").addEventListener("click", calculateSale);

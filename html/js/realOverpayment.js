@@ -1,3 +1,10 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
 function calculateOverpayment() {
   const loan = +document.getElementById("loan").value;
   const rate = +document.getElementById("rate").value / 100;
@@ -33,4 +40,23 @@ function calculateOverpayment() {
 
   document.getElementById("realOverpayment").textContent =
     realOverpayment.toFixed(0) + " $";
+
+    fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      expression: `${loan},${rate},${years},${inflation}`,
+      result: realOverpayment
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Сервер ответил:", data);
+  })
+  .catch(err => console.error("Ошибка при отправке:", err));
 }
+
+ocument.getElementById("calcBtn").addEventListener("click", calculateOverpayment);

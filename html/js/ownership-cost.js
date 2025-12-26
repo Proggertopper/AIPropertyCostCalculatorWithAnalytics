@@ -1,10 +1,13 @@
-const themeBtn = document.getElementsByClassName('theme-toggle');
-themeBtn.addEventListener('click', () => {
-    const body = document.body;
-    body.dataset.bsTheme = body.dataset.bsTheme === 'light' ? 'dark' : 'light';
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/csrf");
+    const data = await res.json();
+    csrfToken = data.csrfToken;
 });
 
-const form = document.getElementById('tco-form');
+
+
+const form = document.getElementById('tco-form');// хз может есть 
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -71,4 +74,21 @@ form.addEventListener('submit', (e) => {
             }
         }
     });
+
+    fetch("/api/app/calculation", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({
+            expression: `${price},${years},${tax},${maintenance}`,
+            result: totalCost
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log("Сервер ответил:", data);
+    })
+    .catch(err => console.error("Ошибка при отправке:", err));
 });

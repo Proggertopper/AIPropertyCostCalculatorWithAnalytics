@@ -1,3 +1,11 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
+
 function calculateCashFlow() {
   const rent = +document.getElementById("rent").value;
   const vacancy = +document.getElementById("vacancy").value / 100;
@@ -33,4 +41,23 @@ function calculateCashFlow() {
     status.textContent = "Объект убыточен ⚠️";
     status.className = "status negative";
   }
+
+  const expression = { rent, vacancy, mortgage, expenses, taxes };
+  const result = { netIncome, totalExpenses, cashFlowMonth, cashFlowYear, status: status.textContent };
+
+  fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({ expression, result })
+  })
+  .then(res => res.json())
+  .then(data => console.log("Сервер ответил:", data))
+  .catch(err => console.error("Ошибка при отправке данных:", err));
+
+
 }
+
+document.getElementById("calcBtn").addEventListener("click", calculateCashFlow);

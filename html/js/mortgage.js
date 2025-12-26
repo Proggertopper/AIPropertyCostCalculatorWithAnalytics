@@ -1,4 +1,10 @@
-// Смена темы
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/csrf");
+    const data = await res.json();
+    csrfToken = data.csrfToken;
+});
+
 const moneyFormatter = new Intl.NumberFormat('en-US' , {
         style : 'currency' ,
         currency : 'USD'
@@ -72,6 +78,27 @@ document.getElementById('propertyCalculator').addEventListener("submit" , functi
     document.getElementById('totalPayment').textContent =`Общая сумма к выплате: ${moneyFormatter.format(totalPayment)}`;
     document.getElementById('totalInterest').textContent = `Общие проценты: ${moneyFormatter.format(totalInterest)}`;
 
+    const expression = { price, down, ratePercent, termYears };
+const result = {
+    monthlyPayment,
+    totalPayment,
+    totalInterest
+};
+
+fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({ expression, result })
+})
+.then(res => res.json())
+.then(data => {
+    console.log("Сервер ответил:", data);
+})
+.catch(err => console.error("Ошибка при отправке данных:", err));
+
     const tbody = document.querySelector('#schedule tbody');
     tbody.innerHTML = '';
 
@@ -109,29 +136,29 @@ for (let i = 1; i <= term; i++) {
     principalData.push(principal.toFixed(2));
 }
 
-if (window.loanChart) {
-    window.loanChart.destroy();
-}
+// if (window.loanChart) {
+//     window.loanChart.destroy();
+// }
 
-const ctx = document.getElementById('paymentChart').getContext('2d');
+// const ctx = document.getElementById('paymentChart').getContext('2d');
 
-window.loanChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-    labels,
-    datasets: [
-                {
-            label: 'Проценты',
-            data: interestData,
-            borderWidth: 2
-            },
-            {
-            label: 'Тело кредита',
-            data: principalData,
-            borderWidth: 2
-            }
-        ]
-    }
-});
+// window.loanChart = new Chart(ctx, {
+//     type: 'line',
+//     data: {
+//     labels,
+//     datasets: [
+//                 {
+//             label: 'Проценты',
+//             data: interestData,
+//             borderWidth: 2
+//             },
+//             {
+//             label: 'Тело кредита',
+//             data: principalData,
+//             borderWidth: 2
+//             }
+//         ]
+//     }
+// });
 
 });

@@ -1,3 +1,10 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
 function calculateRenovation() {
   const priceBefore = +priceBeforeEl.value;
   const rentBefore = +rentBeforeEl.value;
@@ -44,6 +51,24 @@ function calculateRenovation() {
   roiEl.textContent = roi.toFixed(1) + " %";
   paybackEl.textContent =
     payback === Infinity ? "не окупается" : payback.toFixed(1) + " лет";
+
+    fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      expression: `${priceBefore},${rentBefore},${renovationCost},${priceIncrease},${rentIncrease},${agentFee},${saleTax},${years}`,
+      result: netProfit
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Сервер ответил:", data);
+  })
+  .catch(err => console.error("Ошибка при отправке:", err));
+
 }
 
 /* aliases */
@@ -63,3 +88,5 @@ const extraRentEl = document.getElementById("extraRent");
 const netProfitEl = document.getElementById("netProfit");
 const roiEl = document.getElementById("roi");
 const paybackEl = document.getElementById("payback");
+
+document.getElementById("calcBtn").addEventListener("click", calculateRenovation);

@@ -1,3 +1,10 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
 function calculateBreakEven() {
   const price = +document.getElementById("price").value;
   const downPayment = +document.getElementById("downPayment").value;
@@ -27,4 +34,23 @@ function calculateBreakEven() {
 
   document.getElementById("breakEvenPrice").textContent =
     maxPrice.toFixed(0) + " $";
+
+    const expression = { price, downPayment, mortgage, expenses, taxes, vacancy };
+  const result = { breakEvenRent, maxPrice };
+
+  fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({ expression, result })
+  })
+  .then(res => res.json())
+  .then(data => console.log("Сервер ответил:", data))
+  .catch(err => console.error("Ошибка при отправке данных:", err));
+
+
 }
+
+document.getElementById("calcBtn").addEventListener("click", calculateBreakEven);

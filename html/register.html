@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Document</title>
 </head>
 <body> <!--bg-body-signin-->
@@ -11,29 +11,12 @@
         <input type="email" id="email" placeholder="Email" required />
         <input type="password" id="password" placeholder="Пароль" required />
         <button type="submit">Зарегистрироваться</button>
+        <button id="googleLogin">Продолжить через Google</button>
+        <button id="facebookLogin">Продолжить через Facebook</button>
+        <!--<button id="appleLogin">Продолжить через Apple</button>-->
     </form>
     
-    <script>
-        const form = document.getElementById("registerForm");
-        form.addEventListener("submit", async e => {
-            e.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
-
-            const res = await fetch("/api/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            });
-
-            if (res.ok) {
-                alert("Регистрация прошла успешно!");
-                window.location.href = "/login.html";
-            } else {
-                alert("Ошибка регистрации");
-            }
-        });
-    </script>
+    <script src="/js/register.js"></script>
 
 </body>
 </html>

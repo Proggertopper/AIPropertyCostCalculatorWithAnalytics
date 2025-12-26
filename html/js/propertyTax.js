@@ -1,3 +1,11 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
+
 function calculateTaxes() {
   const price = +priceInput.value;
   const rent = +rentIncome.value;
@@ -45,6 +53,23 @@ function calculateTaxes() {
   totalFeesEl.textContent = totalFees.toFixed(0) + " $";
   netProfitEl.textContent = totalRentNet.toFixed(0) + " $";
   finalProfitEl.textContent = finalProfit.toFixed(0) + " $";
+
+  fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      expression: `${price},${rent},${years}`,
+      result: finalProfit
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Сервер ответил:", data);
+  })
+  .catch(err => console.error("Ошибка при отправке:", err));
 }
 
 /* aliases */
@@ -65,3 +90,5 @@ const totalTaxesEl = document.getElementById("totalTaxes");
 const totalFeesEl = document.getElementById("totalFees");
 const netProfitEl = document.getElementById("netProfit");
 const finalProfitEl = document.getElementById("finalProfit");
+
+document.getElementById("calcBtn").addEventListener("click", calculateTaxes);

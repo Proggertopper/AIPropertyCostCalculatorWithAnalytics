@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/mainForAllCalc.css">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="/css/mainForAllCalc.css">
+    <link rel="stylesheet" href="/css/main.css">
 
     <title>Все калькуляторы | PropertyCost</title>
 </head>
@@ -33,8 +33,10 @@
                 </li>
             </ul>
             <div class="d-flex gap-3 mr-3">
-                <a class="btn btn-login py-2 px-2" href="#">Войти</a>
-                <a class="btn btn-signin py-2 px-2" href="./signUser.html">Регистрация</a>
+                <a id="btn-login" class="btn btn-login py-2 px-2" href="#">Войти</a>
+                <a id="btn-signin" class="btn btn-signin py-2 px-2" href="./signUser.html">Регистрация</a>
+                <button id="logoutBtn" style="display:none">Выйти</button>
+                <span id="userEmail"></span>
             </div>
         </nav>
     </header>
@@ -114,5 +116,9 @@
         </div>
     </footer>
 </div>
+
+
+<script src="/js/logout.js"></script>
+
 </body>
 </html>

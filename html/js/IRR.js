@@ -1,3 +1,11 @@
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/csrf");
+    const data = await res.json();
+    csrfToken = data.csrfToken;
+});
+
+
 function calculateIRR(cashFlows, guess = 0.1) {
     let rate = guess;
     for (let i = 0; i < 500; i++) {
@@ -68,4 +76,26 @@ function calculate() {
 
     document.getElementById("payback").textContent =
         (initialInvestment / cashFlow).toFixed(1) + " лет";
+
+        const expression = { 
+        price, downPayment, purchaseCosts, renovation,
+        rent, vacancy, expenses, mortgage,
+        years, growth, saleTax
+    };
+    const result = { cashFlow, roi, irr, payback: initialInvestment / cashFlow };
+
+    fetch("/api/app/calculation", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-Token": csrfToken
+        },
+        body: JSON.stringify({ expression, result })
+    })
+    .then(res => res.json())
+    .then(data => console.log("Сервер ответил:", data))
+    .catch(err => console.error("Ошибка при отправке данных:", err));
+
 }
+
+document.getElementById("calcBtn").addEventListener("click", calculate);

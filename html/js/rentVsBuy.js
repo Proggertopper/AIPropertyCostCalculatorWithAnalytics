@@ -1,4 +1,11 @@
-// Смена темы
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+  const res = await fetch("/api/csrf");
+  const data = await res.json();
+  csrfToken = data.csrfToken;
+});
+
+
 const moneyFormatter = new Intl.NumberFormat('en-US' , {
         style : 'currency' ,
         currency : 'USD'
@@ -26,6 +33,23 @@ const moneyFormatter = new Intl.NumberFormat('en-US' , {
 
     document.getElementById('winner').textContent =
     rentTotal < buyTotal ? 'Аренда выгоднее' : 'Покупка выгоднее';
+
+    fetch("/api/app/calculation", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken
+    },
+    body: JSON.stringify({
+      expression: `${rent},${mortgage},${years}`,
+      result: rentTotal < buyTotal ? 'rent' : 'buy'
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log("Сервер ответил:", data);
+  })
+  .catch(err => console.error("Ошибка при отправке:", err));
 });
 
 function validateInputs({ rent, mortgage, years }) {
