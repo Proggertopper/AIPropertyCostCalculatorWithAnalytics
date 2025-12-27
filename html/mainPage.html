@@ -6,35 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PropertyCost</title>
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="icon" href="/images/discount_5094378.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@500&family=Rubik+Gemstones&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
-    <div class="mainPage">
-        <header class ="header" style="background-color: #153448;">
+    <div class="mainPage ">
+        <header class ="header " style="background: #020617;">
                 <nav class="navbar my-3 mx-3">
                     <div class="logo" >
+                        <a href="./mainPage.html" class="white-color">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-wallet white-color"
                             viewBox="0 0 16 16">
                             <path
                                 d="M0 3a2 2 0 0 1 2-2h13.5a.5.5 0 0 1 0 1H15v2a1 1 0 0 1 1 1v8.5a1.5 1.5 0 0 1-1.5 1.5h-12A2.5 2.5 0 0 1 0 12.5zm1 1.732V12.5A1.5 1.5 0 0 0 2.5 14h12a.5.5 0 0 0 .5-.5V5H2a2 2 0 0 1-1-.268M1 3a1 1 0 0 0 1 1h12V2H2a1 1 0 0 0-1 1" />
-                        </svg>
-                        <span><a href="./mainPage.html" class="white-color">PropertyCost</a></span>
+                        </svg><span>PropertyCost</span>
+                    </a>
                     </div>
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link px-2 white-color" href="./allCalculators.html">Калькуляторы</a>
+                                    <a class="nav-link px-2 white-color" href="./allCalculators.html">Calculators</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link px-2 white-color" href="./guides.html">Гайды</a>
+                                    <a class="nav-link px-2 white-color" href="./guides.html">Guides</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link px-2 white-color" href="./AboutProject.html">О проекте</a>
+                                    <a class="nav-link px-2 white-color" href="./AboutProject.html">About Project</a>
                                 </li>
                             </ul>
                         <div class="login d-flex gap-3 ">
-                            <a id="btn-login" class="btn btn-login py-2 px-2" href="./login.html">Войти</a>
-                            <a id="btn-signin" class="btn btn-signin py-2 px-2" href="./register.html">Регистрация</a>
-                            <button id="logoutBtn" style="display:none">Выйти</button>
+                            <a id="btn-login" class="btn btn-login py-2 px-2" href="./login.html">Login</a>
+                            <a id="btn-signin" class="btn btn-signin py-2 px-2" href="./register.html">Sign</a>
+                            <button id="logoutBtn" style="display:none">Logout</button>
                             <span id="userEmail"></span>
                         </div>
                 </nav>
@@ -47,30 +53,30 @@
                     <section class="cards">
                         <h2 class="text-align-center">Most Popular Calculators</h2>
                         <a href="./RentOrBuy.html">
-                            <article class="card">
+                            <article class="card" style="background-image: url(../images/side1.jpg); background-size: cover; background-position: center; color: white; filter: brightness(100%) contrast(110%) saturate(30%);" >
                                 <h3>Аренда vs Покупка</h3>
-                                <p>Сравните затраты за 10–30 лет.</p>
+                                <p style="font-weight: 700;">Сравните затраты за 10–30 лет.</p>
                             </article>
                         </a>
 
                         <a href="ownership-cost.html">
-                            <article class="card">
+                            <article class="card" style="background-image: url(../images/side3.jpg); background-size: cover; background-position: center; color: white; filter: brightness(85%) contrast(110%);">
                                 <h3>Стоимость владения</h3>
-                                <p>Налоги, ремонты, проценты, обслуживание.</p>
+                                <p style="font-weight: 700;">Налоги, ремонты, проценты, обслуживание.</p>
                             </article>
                         </a>
 
                         <a href="./mortgage.html">
-                            <article class="card">
+                            <article class="card" style="background-image: url(../images/side2.jpg); background-size: cover; background-position: center; color: white;">
                                 <h3>Ипотека</h3>
-                                <p>Платёж, переплата, график.</p>
+                                <p style="font-weight: 700;">Платёж, переплата, график.</p>
                             </article>
                         </a>
 
                         <a href="propertySaleWithInflation.html">
-                            <article class="card">
+                            <article class="card" style="background-image: url(../images/side4.jpg); background-size: cover; background-position: center; color: white; font-weight: 900; ">
                                 <h3>цена недвижимости</h3>
-                                <p>или нет</p>
+                                <p style="font-weight: 700;">или нет</p>
                             </article>
                         </a>
                     </section>
@@ -149,8 +155,8 @@
         </main>
 
 
-        <footer class="py-2 my-2">
-                <ul class="footer-links mb-3 pb-3 justify-content-center">
+        <footer class="py-2">
+                <ul class="footer-links mb-3 pb-3 justify-content-center mt-2">
                     <li><a href="#" class="px-2">Privacy Policy</a></li>
                     <li><a href="#" class="px-2">Terms of Service</a></li>
                     <li><a href="./disclaimer.html" class="px-2">Disclaimer</a></li>
@@ -160,6 +166,7 @@
                 <p class="text-center">© 2025 PropertyCost</p>
         </footer>
     </div>
+
 
 
     <script src="/js/mainPage.js"></script>

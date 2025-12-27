@@ -1,22 +1,60 @@
 const form = document.getElementById("registerForm");
-        form.addEventListener("submit", async e => {
-            e.preventDefault();
-            const email = document.getElementById("email").value;
-            const password = document.getElementById("password").value;
+const errorBox = document.getElementById("error");
 
-            const res = await fetch("/api/auth/register", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            });
+//  показать ошибку
+function showError(message) {
+    errorBox.textContent = message;
+    errorBox.style.display = "block";
+}
 
-            if (res.ok) {
-                alert("Регистрация прошла успешно!");
-                window.location.href = "/login.html";
-            } else {
-                alert("Ошибка регистрации");
-            }
+//  обработка ошибок из URL (?error=...)
+const params = new URLSearchParams(window.location.search);
+const error = params.get("error");
+
+const errorMessages = {
+    email_exists: "User with this email already exists",
+    weak_password: "Password must be at least 8 characters",
+    invalid_email: "Invalid email address",
+    internal_error: "Server error. Try again later"
+};
+
+if (error && errorMessages[error]) {
+    showError(errorMessages[error]);
+}
+
+// 👉 submit формы
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorBox.style.display = "none";
+
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    try {
+        const res = await fetch("/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password })
         });
+
+        if (res.ok) {
+            window.location.href = "/login.html";
+            return;
+        }
+
+        //  сервер возвращает JSON с кодом ошибки
+        const data = await res.json();
+
+        if (data.error && errorMessages[data.error]) {
+            showError(errorMessages[data.error]);
+        } else {
+            showError(errorMessages.internal_error);
+        }
+
+    } catch (err) {
+        showError(errorMessages.internal_error);
+    }
+});
 
     // Кнопка Google OAuth
         document.getElementById("googleLogin").addEventListener("click", () => {

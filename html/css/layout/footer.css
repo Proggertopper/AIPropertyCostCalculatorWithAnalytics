@@ -1,3 +1,9 @@
+footer {
+        background: #020617;
+        color: #cbd5f5;
+        padding: 40px 0;
+    }
+
 .footer-links {
     display: flex;
     flex-wrap: wrap;
@@ -5,6 +11,16 @@
     margin:0;
 }
 .footer-links a{
-    color: blue;
+    color: white;
 }
+
+
+
+footer p {
+        font-size: 14px;
+        opacity: 0.8;
+    }
+
+
+
 

@@ -1,23 +1,67 @@
+// async function checkUser() {
+//             const res = await fetch("/api/auth/me", { credentials: "include" });
+//             const data = await res.json();
+
+//             if (data.loggedIn) {
+//                 // скрываем кнопки Login/Register
+//                 document.getElementById("btn-login").style.display = "none";
+//                 document.getElementById("btn-signin").style.display = "none";
+
+//                 // показываем кнопку Logout
+//                 document.getElementById("logoutBtn").style.display = "inline-block";
+//                 document.getElementById("userEmail").innerText = data.email;
+//             } else {
+//                 document.getElementById("logoutBtn").style.display = "none";
+//             }
+//         }
+
+//         checkUser();
+
+//         document.getElementById("logoutBtn").addEventListener("click", async () => {
+//                 await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
+//                 window.location.href = "/login.html";
+//             });
+
+
 async function checkUser() {
-            const res = await fetch("/api/auth/me", { credentials: "include" });
-            const data = await res.json();
+    const res = await fetch("/api/auth/me", { credentials: "include" });
+    const data = await res.json();
 
-            if (data.loggedIn) {
-                // скрываем кнопки Login/Register
-                document.getElementById("btn-login").style.display = "none";
-                document.getElementById("btn-signin").style.display = "none";
+    const loginBtn = document.getElementById("btn-login");
+    const registerBtn = document.getElementById("btn-signin");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const userEmailElem = document.getElementById("userEmail");
 
-                // показываем кнопку Logout
-                document.getElementById("logoutBtn").style.display = "inline-block";
-                document.getElementById("userEmail").innerText = data.email;
-            } else {
-                document.getElementById("logoutBtn").style.display = "none";
-            }
+    if (data.loggedIn) {
+        loginBtn.style.display = "none";
+        registerBtn.style.display = "none";
+        logoutBtn.style.display = "inline-block";
+        userEmailElem.innerText = data.email;
+    } else {
+        loginBtn.style.display = "inline-block";
+        registerBtn.style.display = "inline-block";
+        logoutBtn.style.display = "none";
+        userEmailElem.innerText = "";
+    }
+}
+
+// Проверяем статус пользователя при загрузке
+checkUser();
+
+document.getElementById("logoutBtn").addEventListener("click", async () => {
+    // Получаем CSRF-токен
+    const csrfRes = await fetch("/api/csrf", { credentials: "include" });
+    const csrfData = await csrfRes.json();
+    
+    // Отправляем logout с CSRF-токеном
+    await fetch("/api/auth/logout", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "X-CSRF-Token": csrfData.csrfToken
         }
+    });
 
-        checkUser();
-
-        document.getElementById("logoutBtn").addEventListener("click", async () => {
-                await fetch("/api/auth/logout", { method: "POST", credentials: "include" });
-                window.location.href = "/login.html";
-            });
+    // Обновляем отображение кнопок
+    checkUser();
+});

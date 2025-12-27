@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="icon" href="/images/discount_5094378.png">
     <title>Login</title>
 </head>
 <body>
-    <form id="loginForm">
+    <!--<form id="loginForm">
         <input type="email" id="email" placeholder="Email" required />
         <input type="password" id="password" placeholder="Пароль" required />
 
@@ -20,8 +22,67 @@
     
     <button id="googleLogin">Войти через Google</button>
     <button id="facebookLogin">Войти через Facebook</button>
-    <!--<button id="appleLogin">Войти через Apple</button>-->
+    <button id="appleLogin">Войти через Apple</button>-->
     
+    <div class="login-page">
+    
+        <div class="login-card">
+    
+            <div class="login-header">
+                <h1>PropertyCost</h1>
+                <p>Secure access to financial transactions</p>
+            </div>
+
+            <div id="error" class="login-error"></div>
+    
+            <form id="loginForm" class="login-form">
+    
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="you@company.com" required />
+                </div>
+    
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="••••••••" required />
+                </div>
+    
+                <div class="form-options">
+                    <label class="remember">
+                        <input type="checkbox" name="rememberMe" />
+                        remember me
+                    </label>
+    
+                    <!--<a href="#" class="forgot">Забыли пароль?</a>-->
+                </div>
+    
+                <button type="submit" class="btn-primary">
+                    Login
+                </button>
+    
+            </form>
+    
+            <div class="divider">
+                <span>или</span>
+            </div>
+    
+            <div class="social-login">
+                <button id="googleLogin" class="btn-social google">
+                    Login with Google
+                </button>
+    
+                <button id="facebookLogin" class="btn-social facebook">
+                    Login with Facebook
+                </button> 
+                
+            </div>
+    
+        </div>
+    
+    </div>
+
+
+
     <script src="/js/login.js"></script>
 </body>
 </html>

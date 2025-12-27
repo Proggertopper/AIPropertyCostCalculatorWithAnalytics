@@ -8,6 +8,7 @@ async function initTables() {
         email TEXT UNIQUE,
         password_hash TEXT,
         google_id TEXT,
+        facebook_id TEXT,
         created_at TIMESTAMP DEFAULT NOW()
     )
     `);

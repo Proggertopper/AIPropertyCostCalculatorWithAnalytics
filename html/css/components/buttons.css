@@ -7,13 +7,12 @@
 }
 
 .btn-signin {
-    background-color:#1E3A8A;
-    border: 0.1rem solid black; 
-    color: whitesmoke;
+    background-color: #C9A227;
+    color: #111;
 }
 .btn-signin:hover {
     text-decoration: underline;
-    background-color: #1D4ED8;
+    background-color:  #e6bb31;
 }
 
 .bg-body-signin{
