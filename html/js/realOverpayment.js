@@ -1,6 +1,6 @@
 let csrfToken;
 window.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/api/csrf");
+  const res = await fetch("/api/csrf" , {credentials:"include"});
   const data = await res.json();
   csrfToken = data.csrfToken;
 });
@@ -59,4 +59,4 @@ function calculateOverpayment() {
   .catch(err => console.error("Ошибка при отправке:", err));
 }
 
-ocument.getElementById("calcBtn").addEventListener("click", calculateOverpayment);
+document.getElementById("calcBtn").addEventListener("click", calculateOverpayment);

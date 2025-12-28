@@ -77,7 +77,7 @@ if (!accessToken) {
 
         if (!user.rows[0]) {
             user = await db.query(
-                "SELECT * FROM users WHERE email=$1",
+                "SELECT * FROM users WHERE email=$1",   
                 [profile.email]
             );
 
@@ -104,8 +104,7 @@ req.session.regenerate((err) => {
         console.error("Session regenerate failed:", err);// идет туда откуда запускал или на хостинг сервер 
         return res.redirect("/login.html?error=internal_error");
     }
-    req.session.userId = user.rows[0].id;
-    req.session.email = user.rows[0].email;
+    req.session.userId = user.rows[0].id;   //user.email не храним даже если id утечет челик ничего не сделает 
     res.redirect("/mainPage.html");
 });
 });

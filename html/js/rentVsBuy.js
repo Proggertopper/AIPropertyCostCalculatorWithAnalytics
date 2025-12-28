@@ -1,6 +1,6 @@
 let csrfToken;
 window.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/api/csrf");
+  const res = await fetch("/api/csrf" , {credentials:"include"});
   const data = await res.json();
   csrfToken = data.csrfToken;
 });

@@ -5,6 +5,48 @@
     box-shadow: 0 10px 25px rgba(0,0,0,0.08);
 }
 
+.cardForMain1 {
+    background-image: url(../images/side1.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    color: white; 
+    filter: brightness(100%) contrast(110%) saturate(30%);
+}
+.cardForMain1 p {
+    font-weight: 700;
+}
+.cardForMain2 {
+    background-image: url(../images/side3.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    color: white; 
+    filter: brightness(85%) contrast(110%);
+}
+
+.cardForMain2 p {
+    font-weight: 700;
+}
+.cardForMain3 {
+    background-image: url(../images/side2.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    color: white;
+}
+
+.cardForMain3 p {
+    font-weight: 700;
+}
+.cardForMain4 {
+    background-image: url(../images/side4.jpg); 
+    background-size: cover; 
+    background-position: center; 
+    color: white; 
+}
+
+.cardForMain4 p {
+    font-weight: 700;
+}
+
 .card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 30px rgba(0,0,0,0.12);
@@ -16,3 +58,4 @@ label {
     margin-bottom: 0.25rem;
     font-weight: 500;
 }
+

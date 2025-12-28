@@ -1,4 +1,10 @@
 const form = document.getElementById("loginForm");
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/csrf" , {credentials:"include"});
+    const data = await res.json();
+    csrfToken = data.csrfToken;
+});
 form.addEventListener("submit", async e => {
     e.preventDefault();
     const email = document.getElementById("email").value;
@@ -7,7 +13,7 @@ form.addEventListener("submit", async e => {
     try {
         const res = await fetch("/api/auth/login", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , "x-csrf-token": csrfToken },
             body: JSON.stringify({ email, password }),
             credentials: "include"
         });

@@ -4,6 +4,7 @@
     z-index: 1000;
     display: flex;
     width: 100%; 
+    background: #020617;
 }
 
 .navbar { 

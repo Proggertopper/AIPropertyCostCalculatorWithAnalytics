@@ -133,7 +133,6 @@ function registerGoogleRoutes(app){
             }
 
             req.session.userId = user.rows[0].id;
-            req.session.email = user.rows[0].email;
 
             res.redirect("/mainPage.html");
         });

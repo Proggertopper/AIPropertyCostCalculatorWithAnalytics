@@ -9,6 +9,10 @@
     grid-template-columns: 280px 1fr;
     gap:2rem;
     padding: 2rem;
+    background-image: url(../images/Untitled_design.png);
+    background-size: cover; 
+    background-position: center; 
+    color: white;
 }
 
 .mainPage aside.sidebar{

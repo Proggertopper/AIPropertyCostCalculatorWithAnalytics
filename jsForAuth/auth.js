@@ -3,6 +3,8 @@ const db = require("./db");
 const rateLimit = require("express-rate-limit");
 const tokens = require("./tokens");
 
+const validator = require("validator");
+
 
 
 const loginLimiter = rateLimit({ windowMs: 15*60*1000, max: 10 ,standardHeaders: true, legacyHeaders: false  });
@@ -17,11 +19,22 @@ function delay(ms) {
 
 module.exports = app => {
 
+
     
 app.post("/api/auth/register", registerLimiter, async (req, res) => {
+    const csrfToken = req.headers["x-csrf-token"];
+            const secret = req.session.csrfSecret;
+        
+            if (!secret || !csrfToken) {
+        return res.status(403).json({ error: "CSRF token missing" });
+    }
+
+            if (!tokens.verify(secret, csrfToken)) {
+            return res.status(403).json({ error: "Invalid CSRF token" });
+            }
     const { email, password } = req.body;
 
-    if (!email || !password || !email.includes("@") || password.length < 8) {
+    if (!email || !password || !email.includes("@") || password.length < 8 || !validator.isEmail(email)) {
         return res.status(400).json({ error: "invalid_data" });
     }
 
@@ -40,10 +53,10 @@ app.post("/api/auth/register", registerLimiter, async (req, res) => {
     } catch (e) {
         if (e.code === "23505") {
             await delay(1000);
-            return res.status(409).json({ error: "email_exists" });
+            return res.status(400).json({ error: "registration_failed" });
         }
         await delay(1000);
-        return res.status(500).json({ error: "internal_error" });
+        return res.status(400).json({ error: "registration_failed" });
     }
 
     res.status(201).json({ ok: true });
@@ -52,6 +65,16 @@ app.post("/api/auth/register", registerLimiter, async (req, res) => {
 
 
     app.post("/api/auth/login", loginLimiter, async (req, res) => {
+        const csrfToken = req.headers["x-csrf-token"];
+            const secret = req.session.csrfSecret;
+        
+            if (!secret || !csrfToken) {
+        return res.status(403).json({ error: "CSRF token missing" });
+    }
+
+            if (!tokens.verify(secret, csrfToken)) {
+            return res.status(403).json({ error: "Invalid CSRF token" });
+            }
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -83,45 +106,68 @@ app.post("/api/auth/register", registerLimiter, async (req, res) => {
         if (err) return res.status(500).json({ error: "internal_error" });
 
         req.session.userId = user.rows[0].id;
-        req.session.email = user.rows[0].email;
         res.json({ ok: true });
     });
 });
 
+
+
+
+    
     app.post("/api/auth/logout", (req, res) => {
-        const csrfToken = req.headers["x-csrf-token"];
-            const secret = req.session.csrfSecret;
-        
-            if (!secret || !csrfToken) {
-        return res.status(403).json({ error: "CSRF token missing" });
+    const csrfToken = req.headers["x-csrf-token"];
+    const secret = req.session.csrfSecret;
+
+    if (!secret || !csrfToken || !tokens.verify(secret, csrfToken)) {
+    return res.status(403).json({ error: "csrf" });
     }
 
-            if (!tokens.verify(secret, csrfToken)) {
-            return res.status(403).json({ error: "Invalid CSRF token" });
-            }
-    req.session.destroy();
+    req.session.regenerate(() => {
     res.json({ ok: true });
     });
+});
 
-    app.get("/api/auth/me", (req, res) => {
-    if (!req.session.userId) return res.json({ loggedIn: false });
-    
-    res.json({
-        loggedIn: true,
-        userId: req.session.userId,
-        email: req.session.email // можно сохранять email при login
-    });
+
+app.get("/api/auth/me", async (req, res) => {
+    if (!req.session.userId) {
+        return res.json({ loggedIn: false });
+    }
+
+    res.set("Cache-Control", "no-store");
+
+    try {
+        const result = await db.query(
+            "SELECT email FROM users WHERE id = $1",
+            [req.session.userId]
+        );
+
+        if (!result.rows[0]) {
+            return res.json({ loggedIn: false });
+        }
+
+        res.json({
+            loggedIn: true,
+            userId: req.session.userId,
+            email: result.rows[0].email
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: "internal_error" });
+    }
 });
 
 app.get("/api/csrf", (req, res) => {
-    if (!req.session.csrfSecret) {
-    req.session.csrfSecret = tokens.secretSync();
+    if (!req.session) {
+        return res.status(403).end();
     }
 
-    const csrfToken = tokens.create(req.session.csrfSecret);
+    if (!req.session.csrfSecret) {
+        req.session.csrfSecret = tokens.secretSync();
+    }
 
-    res.json({ csrfToken });
+    res.json({ csrfToken: tokens.create(req.session.csrfSecret) });
 });
+
 // console.warn("Failed login", {
 //     email,                          хз нужно или нет 
 //     ip: req.ip,

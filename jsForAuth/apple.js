@@ -51,7 +51,7 @@
 //     const user = jwt.decode(tokenRes.data.id_token);
 
 //         req.session.userId = user.sub;
-//         req.session.email = user.email;
+//         
 
 //         res.redirect("/mainPage.html");
 //     } catch (err) {

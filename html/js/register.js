@@ -7,6 +7,13 @@ function showError(message) {
     errorBox.style.display = "block";
 }
 
+let csrfToken;
+window.addEventListener("DOMContentLoaded", async () => {
+    const res = await fetch("/api/csrf" , {credentials:"include"});
+    const data = await res.json();
+    csrfToken = data.csrfToken;
+});
+
 //  обработка ошибок из URL (?error=...)
 const params = new URLSearchParams(window.location.search);
 const error = params.get("error");
@@ -15,7 +22,8 @@ const errorMessages = {
     email_exists: "User with this email already exists",
     weak_password: "Password must be at least 8 characters",
     invalid_email: "Invalid email address",
-    internal_error: "Server error. Try again later"
+    internal_error: "Server error. Try again later",
+    registration_failed : "Registration failed. Please check your input."
 };
 
 if (error && errorMessages[error]) {
@@ -33,7 +41,7 @@ form.addEventListener("submit", async (e) => {
     try {
         const res = await fetch("/api/auth/register", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: { "Content-Type": "application/json" , "x-csrf-token": csrfToken },
             body: JSON.stringify({ email, password })
         });
 
