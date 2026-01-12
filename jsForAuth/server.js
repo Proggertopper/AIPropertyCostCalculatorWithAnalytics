@@ -25,6 +25,7 @@ app.set('trust proxy', 1);
 app.use(express.json({ limit: "10kb" }));
 
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '127.0.0.1'; 
 
 // app.use(session({
 //     store: new pgSession({
@@ -191,8 +192,8 @@ Sitemap: https://mypropertycost.com/sitemap.xml
 
 
 //app.listen(3000, () => console.log("Server started on http://localhost:3000")); //для продакшена 
-app.listen(PORT, '127.0.0.1', () =>
-    console.log(`Server on 127.0.0.1:${PORT}`)
+app.listen(PORT, HOST, () =>
+    console.log(`Server on ${HOST}:${PORT}`)
 );
 
 
