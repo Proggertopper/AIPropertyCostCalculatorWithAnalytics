@@ -1,0 +1,68 @@
+.btn {
+    text-align: center;
+    border-radius: 0.5rem;
+    display: inline-block;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btn-signup {
+    background-color: #C9A227;
+    color: #111;
+    padding: 5px;
+    /* margin-right: .5rem; */
+}
+.btn-signin:hover {
+    text-decoration: underline;
+    background-color:  #e6bb31;
+}
+
+.bg-body-signup{
+    opacity: 1;
+    background-color: rgb(43, 48, 53);
+}
+
+.btn-login {
+    background-color:#1E3A8A ;
+    color: white;
+    border: 0.1rem solid black;
+    padding: 5px;
+}
+
+.btn-login:hover {
+    text-decoration: underline;
+    background-color: #1D4ED8;
+}
+
+
+
+.btn-primary {
+    
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor:pointer;
+}
+
+.back-btn { 
+    color: #334155;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;   
+    margin:2rem;
+    display: inline-block;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+
+
+
+
+
+
+

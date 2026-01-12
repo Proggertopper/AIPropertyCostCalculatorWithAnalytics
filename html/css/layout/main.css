@@ -1,0 +1,65 @@
+
+.mainPage {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: auto 1fr auto;
+}
+
+/* .mainPage main.layout{
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap:2rem;
+    padding: 2rem;
+    background: none;     
+    color: white;
+      background-image: url(../../images/Untitled_design.jpg);
+    background-size: cover;
+    background-position: center; 
+}  */
+
+ .layout-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1; 
+}
+
+.mainPage main.layout {
+    position: relative;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+    padding: 2rem;
+    color: white;
+    background: none;
+    
+} 
+
+
+.mainPage aside.sidebar{
+    position: sticky;
+    top:7rem;
+    align-self:flex-start;
+}
+
+
+
+
+
+@media(max-width:900px){
+    .mainPage main.layout {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+    .mainPage aside.sidebar {
+        position: relative; /* обычный поток */
+        top: auto;
+        margin:auto; /* отступ от основного контента */
+    }
+    
+}
+
+

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Mortgage overpayment calculator: find out how much interest you will actually pay on your loan with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/realOverpayment.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForRealOverpayment.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>RealOverpayment — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Mortgage Real Overpayment</h1>
+        <p class="subtitle">
+            Find out how much you actually overpay considering inflation
+        </p>
+    
+        <div class="grid">
+    
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Mortgage Parameters</h3>
+    
+                <label for="loan">
+                    Loan Amount ($)
+                </label>
+                <input type="number" id="loan" min="1" max="10000000" step="1000" required />
+                <div class="error" id="loanError"></div>
+    
+                <label for="rate">
+                    Interest Rate (% per year)
+                </label>
+                <input type="number" id="rate" min="0.1" max="50" step="0.01" required />
+                <div class="error" id="rateError"></div>
+    
+                <label for="years">
+                    Loan Term (years)
+                </label>
+                <input type="number" id="years" min="1" max="50" step="1" required />
+                <div class="error" id="yearsError"></div>
+    
+                <label for="inflation">
+                    Inflation Rate (% per year)
+                </label>
+                <input type="number" id="inflation" min="0" max="50" step="0.01" />
+                <div class="error" id="inflationError"></div>
+    
+                <button id="calcBtn" type="button">
+                    Calculate
+                </button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Monthly Payment</span>
+                    <strong id="payment">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Nominal Overpayment</span>
+                    <strong id="nominalOverpayment">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Real Overpayment</span>
+                    <strong id="realOverpayment">—</strong>
+                </div>
+    
+                <div class="explain">
+                    Real overpayment considers the loss of money purchasing power
+                </div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+</main>
+
+    <script src="/js/realOverpayment.js"></script>
+</body>
+</html>

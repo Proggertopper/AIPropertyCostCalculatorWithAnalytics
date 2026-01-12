@@ -1,0 +1,36 @@
+.d-inline-block{
+    display: inline-block;
+}
+
+.d-flex{
+    display: flex;
+}
+
+.flex-d-col {
+    flex-direction: column;
+}
+
+.justify-content-center{
+    justify-content: center;
+}
+
+.align-items-center{
+    align-items: center;
+}
+
+.gap-3 {
+    gap:1rem;
+}
+
+.gap-3 {
+    gap: 2rem;
+}
+
+.gap-5 {
+  gap: 3rem;
+}
+
+.d-grid {
+    display: grid;
+}
+

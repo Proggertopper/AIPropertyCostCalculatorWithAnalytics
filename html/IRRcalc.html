@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Internal Rate of Return (IRR) calculator for real estate investments: evaluate profitability and investment efficiency with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/IRRcalc.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForIRR.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>IRR — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h2>Real Estate Investment Performance</h2>
+        <p class="subtitle">
+            Calculate property profitability including rent, expenses, and sale
+        </p>
+    
+        <div class="calc-grid">
+    
+            <!-- PROPERTY -->
+            <div class="calc-card">
+                <h3>Property Details</h3>
+    
+                <label>Property Price
+                    <input type="number" id="price">
+                    <div class="error" id="priceError"></div>
+                </label>
+    
+                <label>Down Payment
+                    <input type="number" id="downPayment">
+                    <div class="error" id="downPaymentError"></div>
+                </label>
+    
+                <label>Purchase Costs
+                    <input type="number" id="purchaseCosts">
+                    <div class="error" id="purchaseCostsError"></div>
+                </label>
+    
+                <label>Renovation
+                    <input type="number" id="renovation">
+                    <div class="error" id="renovationError"></div>
+                </label>
+            </div>
+    
+            <!-- INCOME & EXPENSES -->
+            <div class="calc-card">
+                <h3>Income & Expenses</h3>
+    
+                <label>Monthly Rent
+                    <input type="number" id="rent">
+                    <div class="error" id="rentError"></div>
+                </label>
+    
+                <label>Vacancy (%)
+                    <input type="number" id="vacancy">
+                    <div class="error" id="vacancyError"></div>
+                </label>
+    
+                <label>Annual Expenses
+                    <input type="number" id="expenses">
+                    <div class="error" id="expensesError"></div>
+                </label>
+    
+                <label>Annual Mortgage
+                    <input type="number" id="mortgage">
+                    <div class="error" id="mortgageError"></div>
+                </label>
+            </div>
+    
+            <!-- INVESTMENT -->
+            <div class="calc-card">
+                <h3>Investment Parameters</h3>
+    
+                <label>Holding Period (years)
+                    <input type="number" id="years">
+                    <div class="error" id="yearsError"></div>
+                </label>
+    
+                <label>Price Growth (%)
+                    <input type="number" id="growth">
+                    <div class="error" id="growthError"></div>
+                </label>
+    
+                <label>Sale Tax (%)
+                    <input type="number" id="saleTax">
+                    <div class="error" id="saleTaxError"></div>
+                </label>
+    
+                <button id="calcBtn">Calculate</button>
+            </div>
+    
+            <!-- RESULTS -->
+            <div id="results" class="calc-card result">
+                <h3>Results</h3>
+    
+                <div class="result-item">
+                    <span>Annual Cash Flow</span>
+                    <strong id="cashFlow">—</strong>
+                </div>
+    
+                <div class="result-item">
+                    <span>ROI</span>
+                    <strong id="roi">—</strong>
+                </div>
+    
+                <div class="result-item">
+                    <span>IRR</span>
+                    <strong id="irr">—</strong>
+                </div>
+    
+                <div class="result-item">
+                    <span>Payback Period</span>
+                    <strong id="payback">—</strong>
+                </div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+    </main>
+
+
+    <script src="/js/IRR.js"></script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Home ownership cost calculator: analyze expenses for mortgage, taxes, insurance, and maintenance with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/ownership-cost.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForOwnershipCost.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Ownership — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Property Ownership Cost Calculator</h1>
+        <p class="subtitle">
+            Owning property involves more expenses than it seems at first glance
+        </p>
+    
+        <div class="grid">
+    
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Parameters</h3>
+    
+                <label>
+                    Property Price
+                    <input type="number" id="price">
+                    <div class="error" id="priceError"></div>
+                </label>
+    
+                <label>
+                    Ownership Period (years)
+                    <input type="number" id="years">
+                    <div class="error" id="yearsError"></div>
+                </label>
+    
+                <label>
+                    Property Tax (% per year)
+                    <input type="number" id="tax" step="0.1">
+                    <div class="error" id="taxError"></div>
+                </label>
+    
+                <label>
+                    Annual Maintenance
+                    <input type="number" id="maintenance" >
+                    <div class="error" id="maintenanceError"></div>
+                </label>
+    
+                <button id="calcBtn">Calculate</button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Result</h3>
+    
+                <div class="row">
+                    <span>Total Ownership Cost</span>
+                    <strong id="totalCost">—</strong>
+                </div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+    </main>
+
+
+    <script src="/js/ownership-cost.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html>

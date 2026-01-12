@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Renovation cost calculator with inflation: estimate home renovation expenses and impact on property value with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/renovationCalcWithInflation.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForRenovationCalc.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>RenovationCalc — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Renovation ROI Calculator</h1>
+        <p class="subtitle">
+            Estimate renovation payback and its impact on investment returns
+        </p>
+    
+        <div class="grid">
+    
+            <!-- PROPERTY DETAILS -->
+            <div class="card">
+                <h3>Property</h3>
+    
+                <label for="priceBefore">Price before renovation ($)</label>
+                <input type="number" id="priceBefore" required />
+                <div class="error" id="priceBeforeError"></div>
+    
+                <label for="rentBefore">Rent before renovation (per year, $)</label>
+                <input type="number" id="rentBefore" required />
+                <div class="error" id="rentBeforeError"></div>
+    
+                <label for="renovationCost">Renovation cost ($)</label>
+                <input type="number" id="renovationCost" required />
+                <div class="error" id="renovationCostError"></div>
+    
+                <label for="priceIncrease">Expected price increase (%)</label>
+                <input type="number" id="priceIncrease" />
+                <div class="error" id="priceIncreaseError"></div>
+    
+                <label for="rentIncrease">Expected rent increase (%)</label>
+                <input type="number" id="rentIncrease" />
+                <div class="error" id="rentIncreaseError"></div>
+            </div>
+    
+            <!-- SALE -->
+            <div class="card">
+                <h3>Sale</h3>
+    
+                <label for="agentFee">Agent fee (%)</label>
+                <input type="number" id="agentFee" />
+                <div class="error" id="agentFeeError"></div>
+    
+                <label for="saleTax">Sale tax (%)</label>
+                <input type="number" id="saleTax" />
+                <div class="error" id="saleTaxError"></div>
+    
+                <label for="years">Holding period (years)</label>
+                <input type="number" id="years" required />
+                <div class="error" id="yearsError"></div>
+    
+                <button id="calcBtn" type="button">
+                    Calculate
+                </button>
+            </div>
+    
+            <!-- RESULTS -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Price after renovation</span>
+                    <strong id="priceAfter">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Rent after renovation</span>
+                    <strong id="rentAfter">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Additional rental income</span>
+                    <strong id="extraRent">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Net renovation profit</span>
+                    <strong id="netProfit">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Renovation ROI</span>
+                    <strong id="roi">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Payback period</span>
+                    <strong id="payback">—</strong>
+                </div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+    </main>
+
+    <script src="/js/renovationCalc.js"></script>
+</body>
+</html>

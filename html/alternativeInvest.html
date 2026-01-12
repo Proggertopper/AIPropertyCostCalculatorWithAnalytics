@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Compare real estate investments with alternative options: analyze ROI, cash flow, and investment efficiency with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/mainForAlternativeInvest.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/alternativeInvest.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>AlternativeInvest — PropertyCost</title>
+</head>
+<body>
+
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Property vs Alternative Investments</h1>
+        <p class="subtitle">
+            Compare which option generates more money over the same period
+        </p>
+    
+        <div class="grid">
+    
+            <!-- PROPERTY -->
+            <div class="card">
+                <h3>Property</h3>
+    
+                <label>
+                    Initial Investment
+                    <input type="number" id="propertyInitial">
+                    <div class="error" id="propertyInitialError"></div>
+                </label>
+    
+                <label>
+                    Annual Cash Flow
+                    <input type="number" id="propertyCashflow">
+                    <div class="error" id="propertyCashflowError"></div>
+                </label>
+    
+                <label>
+                    Annual Property Growth (%)
+                    <input type="number" id="propertyGrowth">
+                    <div class="error" id="propertyGrowthError"></div>
+                </label>
+            </div>
+    
+            <!-- ALTERNATIVE INVESTMENTS -->
+            <div class="card">
+                <h3>Alternative Investments</h3>
+    
+                <label>
+                    Expected Annual Return (%)
+                    <input type="number" id="altReturn">
+                    <div class="error" id="altReturnError"></div>
+                </label>
+    
+                <label>
+                    Additional Contribution / year
+                    <input type="number" id="altContribution">
+                    <div class="error" id="altContributionError"></div>
+                </label>
+            </div>
+    
+            <!-- PARAMETERS -->
+            <div class="card">
+                <h3>Parameters</h3>
+    
+                <label>
+                    Investment Term (years)
+                    <input type="number" id="years">
+                    <div class="error" id="yearsError"></div>
+                </label>
+    
+                <button id="calcBtn">Compare</button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Property Value</span>
+                    <strong id="propertyResult">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Alternative Value</span>
+                    <strong id="alternativeResult">—</strong>
+                </div>
+    
+                <div id="winner" class="winner">—</div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+</main>
+    
+    <script src="/js/alternativeInvest.js"></script>
+</body>
+</html>

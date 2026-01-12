@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Property sale calculator with inflation: estimate profit and real value of your home over time with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/propertySaleWithInflation.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForPropertySale.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>PropertySale — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Property Sale Calculator</h1>
+        <p class="subtitle">
+            Find out real profit and whether it's worth selling your property now
+        </p>
+    
+        <div class="grid">
+    
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Transaction Details</h3>
+    
+                <label>
+                    Purchase Price
+                    <input type="number" id="buyPrice">
+                    <div class="error" id="buyPriceError"></div>
+                </label>
+    
+                <label>
+                    Sale Price
+                    <input type="number" id="sellPrice">
+                    <div class="error" id="sellPriceError"></div>
+                </label>
+    
+                <label>
+                    Ownership Period (years)
+                    <input type="number" id="years">
+                    <div class="error" id="yearsError"></div>
+                </label>
+    
+                <label>
+                    Sale Tax (%)
+                    <input type="number" id="tax">
+                    <div class="error" id="taxError"></div>
+                </label>
+    
+                <label>
+                    Agent Commission (%)
+                    <input type="number" id="commission">
+                    <div class="error" id="commissionError"></div>
+                </label>
+    
+                <label>
+                    Inflation (% per year)
+                    <input type="number" id="inflation">
+                    <div class="error" id="inflationError"></div>
+                </label>
+    
+                <label>
+                    Renovation / Improvements
+                    <input type="number" id="renovation">
+                    <div class="error" id="renovationError"></div>
+                </label>
+    
+                <button id="calcBtn">Calculate</button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Sale Tax</span>
+                    <strong id="taxAmount">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Agent Commission</span>
+                    <strong id="commissionAmount">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Net Profit</span>
+                    <strong id="netProfit">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Annual Return</span>
+                    <strong id="annualReturn">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Real Return</span>
+                    <strong id="realReturn">—</strong>
+                </div>
+    
+                <div id="decision" class="decision">—</div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+    </main>
+
+
+    <script src="/js/propertySale.js"></script>
+</body>
+</html>

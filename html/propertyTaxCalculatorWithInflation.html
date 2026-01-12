@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Property tax calculator with inflation: calculate annual taxes for your US property using PropertyCost online tools.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/propertyTaxCalculatorWithInflation.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForPropertyTax.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>PropertyTax — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Property Taxes and Fees</h1>
+        <p class="subtitle">
+            Real calculation of tax burden considering future years
+        </p>
+    
+        <div class="grid">
+    
+            <!-- PROPERTY DETAILS -->
+            <div class="card">
+                <h3>Property Details</h3>
+    
+                <label>
+                    Property Price
+                    <input type="number" id="price" />
+                    <div class="error" id="priceError"></div>
+                </label>
+    
+                <label>
+                    Annual Rent
+                    <input type="number" id="rentIncome" />
+                    <div class="error" id="rentIncomeError"></div>
+                </label>
+    
+                <label>
+                    Ownership Period (years)
+                    <input type="number" id="years" />
+                    <div class="error" id="yearsError"></div>
+                </label>
+    
+                <label>
+                    Price Growth (% per year)
+                    <input type="number" id="priceGrowth" />
+                    <div class="error" id="priceGrowthError"></div>
+                </label>
+            </div>
+    
+            <!-- TAXES & FEES -->
+            <div class="card">
+                <h3>Taxes & Fees</h3>
+    
+                <label>
+                    Property Tax (%)
+                    <input type="number" id="propertyTax" />
+                    <div class="error" id="propertyTaxError"></div>
+                </label>
+    
+                <label>
+                    Rental Tax (%)
+                    <input type="number" id="rentTax" />
+                    <div class="error" id="rentTaxError"></div>
+                </label>
+    
+                <label>
+                    Annual Fees
+                    <input type="number" id="annualFees" />
+                    <div class="error" id="annualFeesError"></div>
+                </label>
+    
+                <label>
+                    Fee Growth (%)
+                    <input type="number" id="feeGrowth" />
+                    <div class="error" id="feeGrowthError"></div>
+                </label>
+            </div>
+    
+            <!-- SALE -->
+            <div class="card">
+                <h3>Sale</h3>
+    
+                <label>
+                    Sale Tax (%)
+                    <input type="number" id="saleTax" />
+                    <div class="error" id="saleTaxError"></div>
+                </label>
+    
+                <label>
+                    Agent Commission (%)
+                    <input type="number" id="agentFee" />
+                    <div class="error" id="agentFeeError"></div>
+                </label>
+    
+                <button id="calcBtn">Calculate</button>
+            </div>
+    
+            <!-- RESULTS -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Total Taxes</span>
+                    <strong id="totalTaxes">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Total Fees</span>
+                    <strong id="totalFees">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Net Profit</span>
+                    <strong id="netProfit">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Profit After Sale</span>
+                    <strong id="finalProfit">—</strong>
+                </div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+</main>
+
+    <script src="/js/propertyTax.js"></script>
+</body>
+</html>

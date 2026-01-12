@@ -1,0 +1,277 @@
+.dashboard {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    color: white;
+    
+}
+
+
+
+.dashboard-header h1 {
+    font-size: 2rem;
+}
+
+.dashboard-header {
+    color:black;
+}
+
+.muted {
+    color: #94a3b8;
+}
+
+.card {
+    background: #020617;
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.card h2 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.user-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.label {
+    display: block;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.value {
+    font-size: 1rem;
+}
+
+.status.success {
+    color: #22c55e;
+    font-weight: 600;
+}
+
+/* Summary */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 1rem;
+}
+
+.summary-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.summary-title {
+    font-size: 0.8rem;
+    color: #94a3b8;
+}
+
+.summary-value {
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+/* Calculations */
+.calculations-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+
+
+/* Settings */
+.settings-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+
+.calc-item {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    background: linear-gradient(180deg, #050914, #02040a);
+    border: 1px solid rgba(255, 255, 255, .06);
+}
+
+.calc-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.calc-title {
+    font-weight: 600;
+}
+
+.calc-date {
+    font-size: 12px;
+    opacity: .6;
+}
+
+.calc-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.calc-details {
+    margin-top: 12px;
+}
+
+.btn {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.btn-open {
+    background: #1e40af;
+    color: #fff;
+    border: none;
+}
+
+.btn-delete {
+    background: transparent;
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, .4);
+}
+
+
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+
+    display: none;
+    /* ⬅️ ВАЖНО */
+    justify-content: center;
+    align-items: center;
+
+    z-index: 1000;
+}
+
+.modal.open {
+    display: flex;
+}
+
+
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.modal-content p {
+    color: black;
+}
+
+.result-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.result-table td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.result-table td:first-child {
+    font-weight: bold;
+}
+
+.result-table td.negative {
+    color: red;
+}
+
+.result-table td.positive {
+    color: green;
+}
+
+
+.hidden {
+    display: none !important;
+}
+
+
+
+/* для UX отображение лучше */
+
+.value-positive {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.value-negative {
+    color: #f87171;
+    font-weight: 600;
+}
+
+.result-highlight {
+    font-size: 1.1em;
+    font-weight: 700;
+}
+
+.verdict {
+    margin: 12px 0;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.verdict.good {
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+}
+
+.verdict.bad {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+}
+
+
+.verdict.warn {
+    background: #dfaa26;
+}
+
+.verdict.info {
+    background: #60a5fa;
+}
+
+.details-toggle {
+    cursor: pointer;
+    color: #60a5fa;
+    font-size: 0.9em;
+    margin-bottom: 6px;
+    user-select: none;
+}
+
+.details-toggle:hover {
+    text-decoration: underline;
+}
+
+
+

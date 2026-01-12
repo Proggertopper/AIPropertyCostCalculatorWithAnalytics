@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Cash flow calculator for real estate: analyze rental income and expenses to optimize property returns with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/cashFlow.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForCashFlow.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>CashFlow — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h2>Property Cash Flow</h2>
+        <p class="subtitle">
+            Find out if your property generates monthly income
+        </p>
+    
+        <div class="grid">
+    
+            <!-- INCOME -->
+            <div class="card">
+                <h3>Income</h3>
+    
+                <label>
+                    Monthly Rent
+                    <input type="number" id="rent">
+                    <div class="error" id="rentError"></div>
+                </label>
+    
+                <label>
+                    Vacancy (%)
+                    <input type="number" id="vacancy">
+                    <div class="error" id="vacancyError"></div>
+                </label>
+            </div>
+    
+            <!-- EXPENSES -->
+            <div class="card">
+                <h3>Expenses</h3>
+    
+                <label>
+                    Mortgage / month
+                    <input type="number" id="mortgage">
+                    <div class="error" id="mortgageError"></div>
+                </label>
+    
+                <label>
+                    Maintenance
+                    <input type="number" id="expenses">
+                    <div class="error" id="expensesError"></div>
+                </label>
+    
+                <label>
+                    Taxes & Insurance
+                    <input type="number" id="taxes">
+                    <div class="error" id="taxesError"></div>
+                </label>
+    
+                <button id="calcBtn">Calculate</button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Net Income</span>
+                    <strong id="income">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Total Expenses</span>
+                    <strong id="totalExpenses">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Cash Flow / month</span>
+                    <strong id="cashFlowMonth">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Cash Flow / year</span>
+                    <strong id="cashFlowYear">—</strong>
+                </div>
+    
+                <div id="status" class="status">—</div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+</main>
+    
+    <script src="/js/cashflow.js"></script>
+</body>
+</html>

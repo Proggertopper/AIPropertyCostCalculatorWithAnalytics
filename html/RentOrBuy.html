@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Rent vs Buy calculator: analyze financial benefits and decide whether renting or buying a home is best in the USA with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/RentOrBuy.html">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/mainForRentVsBuy.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>RentVsBuy — PropertyCost</title>
+</head>
+<body>
+    <a href="./allCalculators.html" class="back-btn">← Back</a>
+
+    <main id="main-content">
+    <section class="calculator">
+        <h1>Rent vs Buy Calculator</h1>
+        <p class="subtitle">
+            Compare whether renting or buying a property is more cost-effective
+        </p>
+    
+        <div class="grid">
+    
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Parameters</h3>
+    
+                <label>
+                    Monthly Rent ($)
+                    <input type="number" id="rent">
+                    <div class="error" id="rentError"></div>
+                </label>
+    
+                <label>
+                    Monthly Mortgage Payment ($)
+                    <input type="number" id="mortgage">
+                    <div class="error" id="mortgageError"></div>
+                </label>
+    
+                <label>
+                    Term (years)
+                    <input type="number" id="years">
+                    <div class="error" id="yearsError"></div>
+                </label>
+
+                <label>
+                    Property Value ($)
+                    <input id="propertyValue" type="number" />
+                    <span class="error" id="propertyValueError"></span>
+                </label>
+
+                <button id="calcBtn" type="button">Compare</button>
+            </div>
+    
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Results</h3>
+    
+                <div class="row">
+                    <span>Total Rent Cost</span>
+                    <strong id="rentResult">—</strong>
+                </div>
+    
+                <div class="row">
+                    <span>Total Purchase Cost</span>
+                    <strong id="buyResult">—</strong>
+                </div>
+    
+                <div id="winner" class="winner">—</div>
+            </div>
+        </div>
+    
+        <p class="disclaimer">
+            Results are for informational purposes only and do not constitute financial advice.
+            <a href="/disclaimer.html">Read full disclaimer</a>
+        </p>
+    </section>
+</main>
+
+    <script src="/js/rentVsBuy.js"></script>
+</body>
+</html>
