@@ -24,6 +24,8 @@ const app = express();
 app.set('trust proxy', 1);
 app.use(express.json({ limit: "10kb" }));
 
+const PORT = process.env.PORT || 3000;
+
 // app.use(session({
 //     store: new pgSession({
 //     pool: pool, // используем существующий пул соединений
@@ -41,6 +43,12 @@ app.use(express.json({ limit: "10kb" }));
 //     maxAge: 1000 * 60 * 60 * 24 // 1 день для обычной и 30 для remember me только надо ее еще сделать или делать уже гугловскую 
 //     }
 // }));
+
+// if (process.env.NODE_ENV === 'development') {
+//     console.log('⚡ Dev mode enabled: логирование и тестовые фичи включены');
+// } else if (process.env.NODE_ENV === 'production') {
+//     console.log('✅ Prod mode: логирование минимальное, безопасный режим');
+// } НА БУДУЩЕЕ МОЖНО ЛОГИРОВАТЬ ХОРОШО 
 
 
 
@@ -183,8 +191,8 @@ Sitemap: https://mypropertycost.com/sitemap.xml
 
 
 //app.listen(3000, () => console.log("Server started on http://localhost:3000")); //для продакшена 
-app.listen(3000, '127.0.0.1', () =>
-    console.log("Server on 127.0.0.1:3000")
+app.listen(PORT, '127.0.0.1', () =>
+    console.log(`Server on 127.0.0.1:${PORT}`)
 );
 
 
