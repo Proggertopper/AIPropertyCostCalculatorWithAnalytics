@@ -38,6 +38,15 @@ const percentFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 1
 });
 
+function formatPayback(value) {
+  if (value === null || !isFinite(value)) return "Not profitable";
+  const years = Math.floor(value);
+  const months = Math.round((value - years) * 12);
+  if (years && months) return `${years} yrs ${months} months`;
+  if (years) return `${years} yrs`;
+  return `${months} months`;
+}
+
 /* ===== calculation ===== */
 
 function calculateRenovation() {
@@ -46,13 +55,14 @@ function calculateRenovation() {
   const priceBefore = +priceBeforeEl.value;
   const rentBefore = +rentBeforeEl.value;
   const renovationCost = +renovationCostEl.value;
-
   const priceIncrease = +priceIncreaseEl.value;
   const rentIncrease = +rentIncreaseEl.value;
-
   const agentFee = +agentFeeEl.value;
   const saleTax = +saleTaxEl.value;
   const years = +yearsEl.value;
+  const discountRate = +discountRateEl.value  || 0;
+  const inflationRate = +inflationRateEl.value  || 0;
+
 
   let valid = true;
 
@@ -120,6 +130,25 @@ function calculateRenovation() {
     name: "Holding period"
   });
 
+  valid = valid && validateNumber({
+     value: inflationRate,
+      min: 0, 
+      max: 100, 
+      errorEl: inflationRateError, 
+      name: "Inflation rate" });
+
+  valid = valid && validateNumber({
+     value: discountRate, 
+     min: 0, 
+     max: 100, 
+     errorEl: discountRateError, 
+     name: "Discount rate" });
+
+  if (renovationCost > priceBefore) {
+    renovationCostError.textContent = "⚠ Renovation cost exceeds property price!";
+    valid = false;
+  }
+
   if (!valid) return;
 
   /* ===== logic ===== */
@@ -130,27 +159,38 @@ function calculateRenovation() {
   const extraRentPerYear = rentAfter - rentBefore;
   const totalExtraRent = extraRentPerYear * years;
 
+  let totalExtraRentPV = 0;
+  for (let i = 1; i <= years; i++) {
+    totalExtraRentPV += extraRentPerYear / Math.pow(1 + discountRate - inflationRate, i);
+  }
+
   const agentCost = priceAfter * (agentFee / 100);
   const saleTaxCost = priceAfter * (saleTax / 100);
 
-  const saleProfit =
-    priceAfter -
-    priceBefore -
-    renovationCost -
-    agentCost -
-    saleTaxCost;
+  const saleProfit =priceAfter - priceBefore - renovationCost - agentCost - saleTaxCost;
 
-  const rentProfit = totalExtraRent;
-  const netProfit = rentProfit + saleProfit;
+  const netProfit = saleProfit + totalExtraRent;
+  const netProfitPV = saleProfit + totalExtraRentPV; // дисконтированный
 
   const roi =
     renovationCost > 0
       ? (netProfit / renovationCost) * 100
       : null;
+  
+  const roiPV = renovationCost > 0 ? (netProfitPV / renovationCost) * 100 : null;
 
   let payback = null;
   if (extraRentPerYear > 0 && netProfit > 0) {
     payback = renovationCost / extraRentPerYear;
+  }
+
+  function formatPayback(value) {
+    if (value === null || !isFinite(value)) return "Not profitable";
+    const years = Math.floor(value);
+    const months = Math.round((value - years) * 12);
+    if (years && months) return `${years} yrs ${months} months`;
+    if (years) return `${years} yrs`;
+    return `${months} months`;
   }
 
   /* ===== output ===== */
@@ -159,9 +199,16 @@ function calculateRenovation() {
   rentAfterEl.textContent = moneyFormatter.format(rentAfter) + " / year";
   extraRentEl.textContent = moneyFormatter.format(totalExtraRent);
   netProfitEl.textContent = moneyFormatter.format(netProfit);
-  roiEl.textContent = roi.toFixed(1) + " %"; // или percentFormatter.format(roi / 100)
-  paybackEl.textContent =
-    payback === Infinity ? "Not Profitable" : payback.toFixed(1) + " years";
+
+  roiEl.textContent = roi === null ? "N/A" : percentFormatter.format(roi / 100);
+  roiPVEl.textContent = roiPV === null ? "N/A" : percentFormatter.format(roiPV / 100);
+  paybackEl.textContent = formatPayback(payback);
+
+  netProfitEl.style.color = netProfit >= 0 ? "green" : "red";
+
+  roiEl.style.color = roi >= 0 ? "green" : "red";
+  roiPVEl.style.color = roiPV >= 0 ? "green" : "red";
+  paybackEl.style.color = payback && payback > years ? "orange" : "black";
 
   /* ===== save ===== */
 
@@ -182,15 +229,20 @@ function calculateRenovation() {
         rentIncrease,
         agentFee,
         saleTax,
-        years
+        years,
+        discountRate,
+        inflationRate
       },
       resultData: {
         priceAfter,
         rentAfter,
         totalExtraRent,
+        totalExtraRentPV,
         saleProfit,
         netProfit,
+        netProfitPV,
         roi,
+        roiPV,
         payback
       }
     })
@@ -212,12 +264,15 @@ const rentIncreaseEl = document.getElementById("rentIncrease");
 const agentFeeEl = document.getElementById("agentFee");
 const saleTaxEl = document.getElementById("saleTax");
 const yearsEl = document.getElementById("years");
+const discountRateEl = document.getElementById("discountRate");
+const inflationRateEl = document.getElementById("inflationRate");
 
 const priceAfterEl = document.getElementById("priceAfter");
 const rentAfterEl = document.getElementById("rentAfter");
 const extraRentEl = document.getElementById("extraRent");
 const netProfitEl = document.getElementById("netProfit");
 const roiEl = document.getElementById("roi");
+const roiPVEl = document.getElementById("roiPV");
 const paybackEl = document.getElementById("payback");
 
 /* errors */
@@ -229,6 +284,8 @@ const rentIncreaseError = document.getElementById("rentIncreaseError");
 const agentFeeError = document.getElementById("agentFeeError");
 const saleTaxError = document.getElementById("saleTaxError");
 const yearsError = document.getElementById("yearsError");
+const discountRateError = document.getElementById("discountRateError");
+const inflationRateError = document.getElementById("inflationRateError");
 
 document
   .getElementById("calcBtn")

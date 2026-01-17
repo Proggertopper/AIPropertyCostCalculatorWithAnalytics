@@ -3,19 +3,8 @@
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr auto;
+    background: rgb(4, 4, 8);
 }
-
-/* .mainPage main.layout{
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap:2rem;
-    padding: 2rem;
-    background: none;     
-    color: white;
-      background-image: url(../../images/Untitled_design.jpg);
-    background-size: cover;
-    background-position: center; 
-}  */
 
  .layout-bg {
     position: absolute;
@@ -27,6 +16,9 @@
     z-index: -1; 
 }
 
+
+
+
 .mainPage main.layout {
     position: relative;
     display: grid;
@@ -34,7 +26,6 @@
     gap: 2rem;
     padding: 2rem;
     color: white;
-    background: none;
     
 } 
 

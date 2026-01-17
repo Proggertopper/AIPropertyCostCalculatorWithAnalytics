@@ -42,6 +42,9 @@ function calculateCashFlow() {
   const mortgage = +mortgageInput.value;
   const expenses = +expensesInput.value;
   const taxes = +taxesInput.value;
+  const inflation = +inflationInput.value;
+
+ 
 
   let valid = true;
 
@@ -83,6 +86,14 @@ function calculateCashFlow() {
     max: 100_000_000,
     errorEl: taxesError,
     name: "Taxes & Insurance"
+  }); 
+  
+  valid = valid && validateNumber({
+    value: inflation,
+    min: -5,
+    max: 40,
+    errorEl: inflationError,
+    name: "Inflation %"
   });
 
   if (!valid) return;
@@ -91,20 +102,44 @@ function calculateCashFlow() {
   const netIncome = rent * (1 - vacancy / 100);
   const totalExpenses = mortgage + expenses + taxes;
 
-  const cashFlowMonth = netIncome - totalExpenses;
+  const cashFlowMonth = netIncome - totalExpenses; 
   const cashFlowYear = cashFlowMonth * 12;
+
+  const inflationRate = inflation / 100;
+
+  const realCashFlowMonth = cashFlowMonth / (1 + inflationRate);
+  const realCashFlowYear = realCashFlowMonth * 12;
+
+
+// stress test
+  const stressVacancy = vacancy + 5;
+  const stressExpenses = expenses * 1.1;
+
+  const stressIncome =
+    rent * (1 - stressVacancy / 100);
+
+  const stressTotalExpenses =
+    mortgage + stressExpenses + taxes;
+
+  const stressCashFlow =
+    stressIncome - stressTotalExpenses;
 
   /* ===== output ===== */
   incomeEl.textContent = moneyFormatter.format(netIncome);
   totalExpensesEl.textContent = moneyFormatter.format(totalExpenses);
   cashFlowMonthEl.textContent = moneyFormatter.format(cashFlowMonth);
   cashFlowYearEl.textContent = moneyFormatter.format(cashFlowYear);
+  realCashFlowMonthEl.textContent = moneyFormatter.format(realCashFlowMonth);
+  realCashFlowYearEl.textContent = moneyFormatter.format(realCashFlowYear);
 
-  if (cashFlowMonth > 0) {
-    statusEl.textContent = "Property generates profit 💰";
+  if (cashFlowMonth > rent * 0.1) {
+    statusEl.textContent = "Strong positive cash flow 💰";
     statusEl.className = "status positive";
+  } else if (cashFlowMonth > 0) {
+    statusEl.textContent = "Marginal cash flow ⚠️";
+    statusEl.className = "status warn";
   } else {
-    statusEl.textContent = "Property is at a loss ⚠️";
+    statusEl.textContent = "Negative cash flow ❌";
     statusEl.className = "status negative";
   }
 
@@ -124,13 +159,17 @@ function calculateCashFlow() {
         vacancy,
         mortgage,
         expenses,
-        taxes
+        taxes,
+        inflation
       },
       resultData: {
         netIncome,
         totalExpenses,
         cashFlowMonth,
         cashFlowYear,
+        realCashFlowMonth,
+        realCashFlowYear,
+        stressCashFlow,
         status: statusEl.textContent
       }
     })
@@ -147,11 +186,14 @@ const vacancyInput = document.getElementById("vacancy");
 const mortgageInput = document.getElementById("mortgage");
 const expensesInput = document.getElementById("expenses");
 const taxesInput = document.getElementById("taxes");
+const inflationInput = document.getElementById("inflation");
 
 const incomeEl = document.getElementById("income");
 const totalExpensesEl = document.getElementById("totalExpenses");
 const cashFlowMonthEl = document.getElementById("cashFlowMonth");
 const cashFlowYearEl = document.getElementById("cashFlowYear");
+const realCashFlowMonthEl =document.getElementById("realCashFlowMonth");
+const realCashFlowYearEl =document.getElementById("realCashFlowYear");
 const statusEl = document.getElementById("status");
 const resultsEl = document.getElementById("results");
 
@@ -161,6 +203,7 @@ const vacancyError = document.getElementById("vacancyError");
 const mortgageError = document.getElementById("mortgageError");
 const expensesError = document.getElementById("expensesError");
 const taxesError = document.getElementById("taxesError");
+const inflationError= document.getElementById("inflationError");
 
 document
   .getElementById("calcBtn")

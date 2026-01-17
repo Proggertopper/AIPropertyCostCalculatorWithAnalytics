@@ -63,3 +63,27 @@ if (logoutBtn) {
         location.reload();
     });
 }
+
+
+async function checkLogin() {
+    try {
+        const res = await fetch("/api/auth/me");
+        const data = await res.json();
+
+        if (!data.loggedIn) {
+            // показываем блок для гостей
+            document.getElementById('guest-promo').classList.remove("hidden");
+            document.getElementById('guest-promo').classList.add("demo-wrapper");
+        }
+        else {
+            document.getElementById('user-promo').classList.remove("hidden");
+            document.getElementById('user-promo').classList.add("compact-teaser");
+
+        }
+    } catch (err) {
+        console.error("Ошибка при проверке логина:", err);
+    }
+}
+
+// Проверяем при загрузке страницы
+checkLogin();

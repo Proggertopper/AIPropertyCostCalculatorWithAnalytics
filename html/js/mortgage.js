@@ -43,6 +43,8 @@ function calculateMortgage(e) {
     const ratePercent = +interestRateInput.value;
     const termYears = +loanTermInput.value;
 
+    
+
     let valid = true;
 
     valid = valid && validateNumber({
@@ -84,10 +86,17 @@ function calculateMortgage(e) {
     const monthlyRate = ratePercent / 100 / 12;
     const months = termYears * 12;
     const loanAmount = price - down;
+    if (loanAmount <= 0) {
+        downError.textContent = "Down payment must be less than property price";
+        return;
+    }
 
-    const monthlyPayment =
-        loanAmount *
-        (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)));
+    let monthlyPayment;
+    if (monthlyRate === 0) {
+        monthlyPayment = loanAmount / months;
+    } else {
+        monthlyPayment = loanAmount * (monthlyRate / (1 - Math.pow(1 + monthlyRate, -months)));
+    }
 
     const totalPayment = monthlyPayment * months;
     const totalInterest = totalPayment - loanAmount;

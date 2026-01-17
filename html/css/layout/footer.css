@@ -10,6 +10,7 @@
     padding: 0;
     margin:0;
     gap: 6px;
+    list-style: none;
 }
 .footer-links a{
     color: white;
@@ -21,6 +22,7 @@
 footer p {
         font-size: 14px;
         opacity: 0.8;
+        color: #cbd5f5;
     } 
 
   @media (max-width: 480px) {

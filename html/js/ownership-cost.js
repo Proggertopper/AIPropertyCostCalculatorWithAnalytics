@@ -42,6 +42,7 @@ function calculateOwnershipCost() {
     const years = +yearsInput.value;
     const taxPercent = +taxInput.value;
     const maintenance = +maintenanceInput.value;
+    const inflation = +inflationInput.value; 
 
     let valid = true;
 
@@ -77,20 +78,31 @@ function calculateOwnershipCost() {
         name: "Maintenance"
     });
 
+    valid = valid && validateNumber({ value: inflation, min: -5, max: 40, errorEl: inflationError, name: "Inflation %" });
+
     if (!valid) return;
 
     /* ===== logic ===== */
 
     const taxRate = taxPercent / 100;
+    const discountRate = inflation/100;
+
+
     let totalCost = price;
 
+    let totalCostPV=price;
+
     for (let year = 1; year <= years; year++) {
-        totalCost += price * taxRate + maintenance;
+        const annualCost = price * taxRate + maintenance;
+        totalCost += annualCost;
+        totalCostPV += annualCost / Math.pow(1 + discountRate, year); // дисконтируем с учётом инфляции
     }
+
 
     /* ===== output ===== */
 
     totalCostEl.textContent = moneyFormatter.format(totalCost);
+    totalCostPVEl.textContent = moneyFormatter.format(totalCostPV);
 
     /* ===== save ===== */
 
@@ -107,10 +119,11 @@ function calculateOwnershipCost() {
                 price,
                 years,
                 taxPercent,
-                maintenance
+                maintenance,
+                inflation
             },
             resultData: {
-                totalCost
+                totalCost, totalCostPV
             }
         })
     }).catch(console.error);
@@ -126,16 +139,40 @@ const priceInput = document.getElementById("price");
 const yearsInput = document.getElementById("years");
 const taxInput = document.getElementById("tax");
 const maintenanceInput = document.getElementById("maintenance");
+const inflationInput = document.getElementById("inflation");
 
 const totalCostEl = document.getElementById("totalCost");
+const totalCostPVEl = document.getElementById("totalCostPV");
 
 /* errors */
 const priceError = document.getElementById("priceError");
 const yearsError = document.getElementById("yearsError");
 const taxError = document.getElementById("taxError");
 const maintenanceError = document.getElementById("maintenanceError");
+const inflationError = document.getElementById("inflationError");
 
 /* button */
 document
     .getElementById("calcBtn")
     .addEventListener("click", calculateOwnershipCost);
+
+
+async function checkLogin() {
+    try {
+        const res = await fetch("/api/auth/me");
+        const data = await res.json();
+
+        if (!data.loggedIn) {
+            // показываем блок для гостей
+            document.getElementById('guest-promo').style.display = 'block';
+        }
+        else {
+            document.getElementById('user-promo').style.display = 'flex'
+        }
+    } catch (err) {
+        console.error("Ошибка при проверке логина:", err);
+    }
+}
+
+// Проверяем при загрузке страницы
+checkLogin();

@@ -2,7 +2,7 @@
 .forHero {
     max-width: 1100px;
     margin: 0 auto;
-    padding: 40px 24px 80px;
+    padding: 40px 0px 80px;
 }
 
 .hero-main h2 {
@@ -20,11 +20,11 @@
 }
 
 .forHero>section {
-    
+   
     border-radius: 20px;
-    padding: 32px;
+    padding: 18px;
     margin-bottom: 32px;
-    background: rgba(15, 23, 42, 0.75);
+    /* background: rgba(15, 23, 42, 0.75); */
     backdrop-filter: none;
 }
 
@@ -42,7 +42,7 @@
 .forHero li {
     color: #cbd5e1;
     line-height: 1.7;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .forHero ul,
@@ -66,8 +66,8 @@
 }
 
 .feature-card {
-    background: rgba(59, 130, 246, 0.08);
-    border: 1px solid rgba(59, 130, 246, 0.25);
+    /* background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.25); */
     border-radius: 20px;
     padding: 24px;
 }
@@ -95,10 +95,40 @@
  
 
 
-@media (max-width:1410px){
+/* @media (max-width:1410px){
     .forHero {
         text-align: center;
     }
+} */
+
+
+
+/* ===== Text Content ===== */
+.text-section {
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    margin-bottom: 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.text-section h2 {
+    margin-bottom: 15px;
+    font-size: 24px;
+    color: #333;
+}
+
+.text-section p,
+.text-section li {
+    margin-bottom: 12px;
+    color: #444;
+    font-size: 15px;
+}
+
+.text-section ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
 }
 
 

@@ -19,14 +19,76 @@
     <title>PropertySale — PropertyCost</title>
 </head>
 <body>
-    <a href="./allCalculators.html" class="back-btn">← Back</a>
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="./mainPage.html" class="white-color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="currentColor"
+                        class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
+                    </svg><span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="./allCalculators.html">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="./guides.html">Guides</a></li>
+                    <li><a class="nav-link white-color px-2" href="./AboutProject.html">About Project</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="./login.html">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="./register.html">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="./account.html" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    </header>
 
     <main id="main-content">
     <section class="calculator">
+        
+        <div class="hero">
         <h1>Property Sale Calculator</h1>
         <p class="subtitle">
             Find out real profit and whether it's worth selling your property now
         </p>
+            <div class="benefits-bar">
+                <div class="benefit-item">Inflation-adjusted profit</div>
+                <div class="benefit-item">Net proceeds calculation</div>
+                <div class="benefit-item">Market vs property performance</div>
+                <div class="benefit-item">Hold-or-sell guidance</div>
+            </div>
+        </div>
     
         <div class="grid">
     
@@ -35,44 +97,44 @@
                 <h3>Transaction Details</h3>
     
                 <label>
-                    Purchase Price
-                    <input type="number" id="buyPrice">
+                    Purchase Price($)
+                    <input type="number" id="buyPrice" placeholder="300000">
                     <div class="error" id="buyPriceError"></div>
                 </label>
     
                 <label>
-                    Sale Price
-                    <input type="number" id="sellPrice">
+                    Sale Price($)
+                    <input type="number" id="sellPrice" placeholder="250000">
                     <div class="error" id="sellPriceError"></div>
                 </label>
     
                 <label>
-                    Ownership Period (years)
-                    <input type="number" id="years">
+                    Ownership Period(years)
+                    <input type="number" id="years" placeholder="6">
                     <div class="error" id="yearsError"></div>
                 </label>
     
                 <label>
-                    Sale Tax (%)
-                    <input type="number" id="tax">
+                    Sale Tax(%)
+                    <input type="number" id="tax" placeholder="10">
                     <div class="error" id="taxError"></div>
                 </label>
     
                 <label>
-                    Agent Commission (%)
-                    <input type="number" id="commission">
+                    Agent Commission(%)
+                    <input type="number" id="commission" placeholder="3">
                     <div class="error" id="commissionError"></div>
                 </label>
     
                 <label>
-                    Inflation (% per year)
-                    <input type="number" id="inflation">
+                    Inflation(%)
+                    <input type="number" id="inflation" placeholder="5">
                     <div class="error" id="inflationError"></div>
                 </label>
     
                 <label>
-                    Renovation / Improvements
-                    <input type="number" id="renovation">
+                    Renovation / Improvements($)
+                    <input type="number" id="renovation" placeholder="100000">
                     <div class="error" id="renovationError"></div>
                 </label>
     
@@ -111,15 +173,255 @@
                 <div id="decision" class="decision">—</div>
             </div>
         </div>
+
+        <div id="guest-promo" class="hidden">
+            <div class="playful-blob">
+                <div class="blob-content">
+                    <span class="blob-emoji">🚀</span>
+                    <div class="blob-title">Ready to make smarter decisions?</div>
+                    <div class="blob-text">Join our community and get access to your personal calculation dashboard with full
+                        history and insights</div>
+                    <a href="./register.html"><button class="blob-btn">Create Free Account</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="user-promo" class="hidden">
+            <span class="teaser-emoji">💡</span>
+            <div class="teaser-content">
+                <div class="teaser-title-small">Want to check your calculation?</div>
+                <div class="teaser-text-small">Hit the button to keep track of all your comparisons and verdicts</div>
+            </div>
+            <a href="./account.html"><button class="teaser-btn">Profile</button></a>
+        </div>
     
         <p class="disclaimer">
             Results are for informational purposes only and do not constitute financial advice.
+            This calculator assumes a single buy-and-sell transaction without interim cash flows.
             <a href="/disclaimer.html">Read full disclaimer</a>
         </p>
     </section>
+
+    <div class="content-wrapper">
+    
+        <!-- Introduction -->
+        <div class="content-section">
+            <h2>Property Sale Calculator: Understanding Real Profit After Inflation and Time</h2>
+    
+            <p>The profit shown on a closing statement rarely tells the full story. A property bought for $300,000 and sold
+                for $500,000 appears to generate a $200,000 gain, but this ignores inflation and the changing value of money
+                over time.</p>
+    
+            <p>The Property Sale Calculator adjusts your sale outcome for inflation and market appreciation, showing what
+                your profit means in today’s purchasing power. A sale that looks successful in nominal terms may deliver
+                little or no real wealth once inflation and costs are accounted for.</p>
+    
+            <p>This calculator helps property owners and investors determine whether selling truly increases wealth or
+                simply keeps pace with inflation.</p>
+        </div>
+    
+        <!-- What It Reveals -->
+        <div class="content-section">
+            <h2>What This Calculator Reveals Beyond the Sale Price</h2>
+    
+            <p>A higher sale price does not automatically mean real profit. Inflation and long holding periods can
+                significantly reduce true gains.</p>
+    
+            <ul>
+                <li>Real profit after inflation adjustment</li>
+                <li>Market-relative performance versus general appreciation</li>
+                <li>How much growth is real versus inflation-driven</li>
+                <li>Whether holding the property was financially worthwhile</li>
+            </ul>
+    
+            <p>The difference between nominal gains and real gains often reshapes how successful an investment truly was.
+            </p>
+        </div>
+    
+        <!-- Key Questions -->
+        <div class="content-section">
+            <h2>Key Questions This Calculator Answers</h2>
+    
+            <ul>
+                <li>
+                    <strong>What is my real profit?</strong>
+                    Nominal gains may shrink significantly once inflation is applied.
+                </li>
+                <li>
+                    <strong>Did the property outperform the market?</strong>
+                    Separates general market growth from property-specific performance.
+                </li>
+                <li>
+                    <strong>Is appreciation real or inflation-driven?</strong>
+                    Helps identify genuine wealth creation versus currency depreciation.
+                </li>
+                <li>
+                    <strong>Was holding the property worth it?</strong>
+                    Reveals opportunity cost versus alternative investments.
+                </li>
+            </ul>
+        </div>
+    
+        <!-- How It Works -->
+        <div class="content-section">
+            <h2>How the Property Sale Calculation Works</h2>
+    
+            <p>The calculation begins with the original purchase price and final sale price, representing entry and exit
+                points across different economic conditions.</p>
+    
+            <p>The purchase price is adjusted forward using inflation assumptions, showing how much value was required at
+                sale just to preserve purchasing power.</p>
+    
+            <p>Market appreciation assumptions separate baseline market growth from property-specific performance, revealing
+                whether the property truly outperformed local trends.</p>
+    
+            <p>Selling costs such as agent commissions and closing expenses are deducted to reflect realistic net proceeds.
+            </p>
+        </div>
+    
+        <!-- Selling Costs -->
+        <div class="content-section">
+            <h2>Selling Costs and Their Impact</h2>
+    
+            <p>Transaction costs significantly affect real outcomes.</p>
+    
+            <ul>
+                <li>Agent commissions (typically 5–6%)</li>
+                <li>Closing and escrow costs (1–2%)</li>
+                <li>Transfer taxes and local fees</li>
+            </ul>
+    
+            <p>On a $600,000 sale, selling costs alone can exceed $40,000, reducing reinvestable capital.</p>
+        </div>
+    
+        <!-- Why Inflation Matters -->
+        <div class="content-section">
+            <h2>Why Inflation-Adjusted Analysis Matters</h2>
+    
+            <p>Without inflation adjustment, long-term investments often appear more successful than they actually are.</p>
+    
+            <div class="highlight-box">
+                <p>At 3% annual inflation, prices double in about 24 years just to maintain purchasing power.</p>
+            </div>
+    
+            <p>A property that doubles in nominal value over decades may only break even in real terms.</p>
+        </div>
+    
+        <!-- Real World Example -->
+        <div class="content-section">
+            <h2>Real-World Example</h2>
+    
+            <p>A property purchased for $350,000 and sold 20 years later for $650,000 appears highly profitable.</p>
+    
+            <p>After adjusting for inflation and selling costs, the real gain may shrink to less than $40,000 — a minimal
+                real return over two decades.</p>
+    
+            <p>This demonstrates how nominal success can mask weak real performance.</p>
+        </div>
+    
+        <!-- Market Comparison -->
+        <div class="content-section">
+            <h2>Comparing Property Performance to the Market</h2>
+    
+            <p>The calculator shows whether your property outperformed or underperformed broader market trends.</p>
+    
+            <ul>
+                <li>Outperformance may reflect location, upgrades, or timing</li>
+                <li>Underperformance often signals structural or management issues</li>
+            </ul>
+    
+            <p>Understanding this difference helps refine future investment decisions.</p>
+        </div>
+    
+        <!-- Hold or Sell -->
+        <div class="content-section">
+            <h2>Using the Calculator for Hold-or-Sell Decisions</h2>
+    
+            <p>If real appreciation has been minimal after inflation, selling and reallocating capital may be the better
+                choice — even if nominal prices are rising.</p>
+    
+            <p>This tool helps evaluate opportunity cost and capital efficiency, not just price appreciation.</p>
+        </div>
+    
+        <!-- Appreciation Assumptions -->
+        <div class="content-section">
+            <h2>Market Appreciation Assumptions</h2>
+    
+            <p>Market appreciation represents baseline growth driven by economic and demographic factors.</p>
+    
+            <p>The calculator separates this baseline from property-specific performance so you can test conservative,
+                realistic, and optimistic scenarios.</p>
+        </div>
+    
+        <!-- How to Use -->
+        <div class="content-section">
+            <h2>How to Use the Calculator Effectively</h2>
+    
+            <div class="highlight-box">
+                <p>Test higher inflation scenarios to measure downside risk</p>
+            </div>
+    
+            <div class="highlight-box">
+                <p>Compare different appreciation assumptions</p>
+            </div>
+    
+            <div class="highlight-box">
+                <p>Adjust holding periods to find optimal exit timing</p>
+            </div>
+        </div>
+    
+        <!-- Interpretation -->
+        <div class="content-section">
+            <h2>How to Interpret the Results</h2>
+    
+            <ul>
+                <li><strong>Positive real result:</strong> Purchasing power increased</li>
+                <li><strong>Negative real result:</strong> Wealth destruction despite nominal gains</li>
+                <li><strong>Near zero:</strong> Value preserved but no real growth</li>
+            </ul>
+    
+            <p>Wealth is measured in purchasing power, not nominal dollars.</p>
+        </div>
+    
+        <!-- Who This Is For -->
+        <div class="content-section">
+            <h2>Who This Calculator Is For</h2>
+    
+            <ul>
+                <li>Property owners planning to sell</li>
+                <li>Investors reviewing long-term performance</li>
+                <li>People comparing real estate to other investments</li>
+                <li>Anyone making hold-versus-sell decisions</li>
+            </ul>
+        </div>
+    
+        <!-- Bottom Line -->
+        <div class="content-section">
+            <h2>Bottom Line: Real Profit vs Illusion</h2>
+    
+            <p>Nominal gains can be misleading. Real profit requires outpacing inflation, covering selling costs, and
+                justifying capital lock-up.</p>
+    
+            <p>This calculator reveals whether a property truly built wealth or merely created the appearance of success.
+            </p>
+        </div>
+    
+    </div>
     </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="./privacyPolicy.html" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="./termsOfService.html" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="./disclaimer.html" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="./contactUs.html" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
 
 
     <script src="/js/propertySale.js"></script>
+    <script src="/js/logout.js" defer></script>
 </body>
 </html>

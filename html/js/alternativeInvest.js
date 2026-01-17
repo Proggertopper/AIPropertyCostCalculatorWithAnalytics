@@ -31,6 +31,21 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
+function calculateFutureValue({ initial, annualContribution, annualReturn, years, inflationRate, taxRate }) {
+  let value = initial;
+  for (let i = 0; i < years; i++) {
+    value += value * (annualReturn / 100);
+    value += annualContribution;
+    value -= value * (taxRate / 100);   // налог
+    value /= 1 + inflationRate / 100;   // инфляция
+  }
+  return value;
+}
+
+function calculateRealReturnPercent({ initial, finalValue, years }) {
+  return ((Math.pow(finalValue / initial, 1 / years) - 1) * 100);
+}
+
 /* ===== calculation ===== */
 function calculateComparison() {
   clearErrors();
@@ -41,6 +56,12 @@ function calculateComparison() {
 
   const altReturn = +altReturnInput.value;
   const altContribution = +altContributionInput.value;
+
+  const propertyInflation = +propertyInflationInput.value;
+  const propertyTaxRate = +propertyTaxInput.value;
+
+  const altInflation = +altInflationInput.value;
+  const altTaxRate = +altTaxInput.value;
 
   const years = +yearsInput.value;
 
@@ -94,19 +115,66 @@ function calculateComparison() {
     name: "Investment Term"
   });
 
+  // валидация новых полей
+  valid = valid && validateNumber({
+    value: propertyInflation,
+    min: 0,
+    max: 100,
+    errorEl: propertyInflationError,
+    name: "Property Inflation Rate"
+  });
+
+  valid = valid && validateNumber({
+    value: propertyTaxRate,
+    min: 0,
+    max: 100,
+    errorEl: propertyTaxError,
+    name: "Property Tax Rate"
+  });
+
+  valid = valid && validateNumber({
+    value: altInflation,
+    min: 0,
+    max: 100,
+    errorEl: altInflationError,
+    name: "Alternative Inflation Rate"
+  });
+
+  valid = valid && validateNumber({
+    value: altTaxRate,
+    min: 0,
+    max: 100,
+    errorEl: altTaxError,
+    name: "Alternative Tax Rate"
+  });
+
   if (!valid) return;
 
   /* ===== logic ===== */
-  let propertyValue = propertyInitial;
-  for (let y = 1; y <= years; y++) {
-    propertyValue *= 1 + propertyGrowth / 100;
-    propertyValue += propertyCashflow;
-  }
 
-  let alternativeValue = propertyInitial;
-  for (let y = 1; y <= years; y++) {
-    alternativeValue = alternativeValue * (1 + altReturn / 100) + altContribution;
-  }
+  const propertyValue = calculateFutureValue({
+    initial: propertyInitial,
+    annualContribution: propertyCashflow,
+    annualReturn: propertyGrowth,
+    years,
+    inflationRate: propertyInflation,
+    taxRate: propertyTaxRate
+  });
+
+  const alternativeValue = calculateFutureValue({
+    initial: propertyInitial,
+    annualContribution: altContribution,
+    annualReturn: altReturn,
+    years,
+    inflationRate: altInflation,
+    taxRate: altTaxRate
+  });
+
+  const propertyRealReturnPercent = calculateRealReturnPercent({ initial: propertyInitial, finalValue: propertyValue, years });
+  const alternativeRealReturnPercent = calculateRealReturnPercent({ initial: propertyInitial, finalValue: alternativeValue, years });
+
+  const difference = alternativeValue - propertyValue;
+  const winner = difference > 0 ? "Alternative Investment" : "Property";
 
   /* ===== output ===== */
   propertyResultEl.textContent = moneyFormatter.format(propertyValue);
@@ -115,9 +183,12 @@ function calculateComparison() {
   if (propertyValue > alternativeValue) {
     winnerEl.textContent = "Property Wins 📈";
     winnerEl.className = "winner property";
-  } else {
+  } else if (alternativeValue > propertyValue) {
     winnerEl.textContent = "Alternative Investments Win 📊";
     winnerEl.className = "winner alternative";
+  } else {
+    winnerEl.textContent = "Tie 🤝";
+    winnerEl.className = "winner tie";
   }
 
   /* ===== save ===== */
@@ -135,14 +206,21 @@ function calculateComparison() {
         propertyInitial,
         propertyCashflow,
         propertyGrowth,
+        propertyInflation,
+        propertyTaxRate,
         altReturn,
         altContribution,
+        altInflation,
+        altTaxRate,
         years
       },
       resultData: {
         propertyValue,
         alternativeValue,
-        winner: winnerEl.textContent
+        propertyRealReturnPercent,
+        alternativeRealReturnPercent,
+        difference,
+        winner
       }
     })
   }).catch(console.error);
@@ -166,6 +244,12 @@ const alternativeResultEl = document.getElementById("alternativeResult");
 const winnerEl = document.getElementById("winner");
 const resultsEl = document.getElementById("results");
 
+const propertyInflationInput = document.getElementById("propertyInflation");
+const propertyTaxInput = document.getElementById("propertyTax");
+
+const altInflationInput = document.getElementById("altInflation");
+const altTaxInput = document.getElementById("altTax");
+
 /* errors */
 const propertyInitialError = document.getElementById("propertyInitialError");
 const propertyCashflowError = document.getElementById("propertyCashflowError");
@@ -175,6 +259,12 @@ const altReturnError = document.getElementById("altReturnError");
 const altContributionError = document.getElementById("altContributionError");
 
 const yearsError = document.getElementById("yearsError");
+
+const propertyInflationError = document.getElementById("propertyInflationError");
+const propertyTaxError = document.getElementById("propertyTaxError");
+
+const altInflationError = document.getElementById("altInflationError");
+const altTaxError = document.getElementById("altTaxError");
 
 document
   .getElementById("calcBtn")

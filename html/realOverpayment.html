@@ -19,14 +19,76 @@
     <title>RealOverpayment — PropertyCost</title>
 </head>
 <body>
-    <a href="./allCalculators.html" class="back-btn">← Back</a>
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="./mainPage.html" class="white-color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="currentColor"
+                        class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
+                    </svg><span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="./allCalculators.html">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="./guides.html">Guides</a></li>
+                    <li><a class="nav-link white-color px-2" href="./AboutProject.html">About Project</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="./login.html">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="./register.html">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="./account.html" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    </header>
 
     <main id="main-content">
     <section class="calculator">
-        <h1>Mortgage Real Overpayment</h1>
+        
+        <div class="hero">
+            <h1>Mortgage Real Overpayment</h1>
         <p class="subtitle">
             Find out how much you actually overpay considering inflation
         </p>
+            <div class="benefits-bar">
+                <div class="benefit-item">Inflation-adjusted cost</div>
+                <div class="benefit-item">Real vs nominal comparison</div>
+                <div class="benefit-item">Loan strategy evaluation</div>
+                <div class="benefit-item">Long-term financial planning</div>
+            </div>
+        </div>
     
         <div class="grid">
     
@@ -35,27 +97,27 @@
                 <h3>Mortgage Parameters</h3>
     
                 <label for="loan">
-                    Loan Amount ($)
+                    Loan Amount($)
                 </label>
-                <input type="number" id="loan" min="1" max="10000000" step="1000" required />
+                <input type="number" id="loan" placeholder="100000" required />
                 <div class="error" id="loanError"></div>
     
                 <label for="rate">
-                    Interest Rate (% per year)
+                    Interest Rate(%)
                 </label>
-                <input type="number" id="rate" min="0.1" max="50" step="0.01" required />
+                <input type="number" id="rate" placeholder="5" required />
                 <div class="error" id="rateError"></div>
     
                 <label for="years">
-                    Loan Term (years)
+                    Loan Term(years)
                 </label>
-                <input type="number" id="years" min="1" max="50" step="1" required />
+                <input type="number" id="years" placeholder="5" required />
                 <div class="error" id="yearsError"></div>
     
                 <label for="inflation">
-                    Inflation Rate (% per year)
+                    Inflation Rate(%)
                 </label>
-                <input type="number" id="inflation" min="0" max="50" step="0.01" />
+                <input type="number" id="inflation" placeholder="6" />
                 <div class="error" id="inflationError"></div>
     
                 <button id="calcBtn" type="button">
@@ -87,14 +149,221 @@
                 </div>
             </div>
         </div>
+
+        <div id="guest-promo" class="hidden">
+            <div class="playful-blob">
+                <div class="blob-content">
+                    <span class="blob-emoji">🚀</span>
+                    <div class="blob-title">Ready to make smarter decisions?</div>
+                    <div class="blob-text">Join our community and get access to your personal calculation dashboard with full
+                        history and insights</div>
+                    <a href="./register.html"><button class="blob-btn">Create Free Account</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="user-promo" class="hidden">
+            <span class="teaser-emoji">💡</span>
+            <div class="teaser-content">
+                <div class="teaser-title-small">Want to check your calculation?</div>
+                <div class="teaser-text-small">Hit the button to keep track of all your comparisons and verdicts</div>
+            </div>
+            <a href="./account.html"><button class="teaser-btn">Profile</button></a>
+        </div>
     
         <p class="disclaimer">
             Results are for informational purposes only and do not constitute financial advice.
             <a href="/disclaimer.html">Read full disclaimer</a>
         </p>
     </section>
+
+    <div class="content-wrapper">
+    
+        <!-- Introduction -->
+        <div class="content-section">
+            <h2>Mortgage Real Overpayment: What Your Loan Actually Costs in Today's Money</h2>
+    
+            <p>Most borrowers focus on total interest paid, but this ignores inflation. Money paid 20 or 30 years from now
+                is worth far less than money paid today.</p>
+    
+            <p>A mortgage that appears to cost $180,000 in overpayment may actually cost only $95,000 in real purchasing
+                power once inflation is considered.</p>
+    
+            <p>Understanding real overpayment reveals the true economic burden of a mortgage and helps you decide whether
+                paying down debt aggressively or investing elsewhere makes more sense.</p>
+        </div>
+    
+        <!-- Nominal vs Real -->
+        <div class="content-section">
+            <h2>The Difference Between Nominal and Real Overpayment</h2>
+    
+            <p><strong>Nominal overpayment</strong> is the total amount paid over the loan term minus the original loan
+                amount. It is mathematically correct but economically incomplete.</p>
+    
+            <p><strong>Real overpayment</strong> adjusts each payment for inflation, showing what you actually paid in
+                today’s purchasing power.</p>
+    
+            <div class="highlight-box">
+                <p>$382,000 nominal overpayment may equal only $95,000 in real terms after inflation.</p>
+            </div>
+    
+            <p>This distinction fundamentally changes how expensive a mortgage truly is.</p>
+        </div>
+    
+        <!-- Why It Matters -->
+        <div class="content-section">
+            <h2>Why Real Overpayment Reveals the True Mortgage Cost</h2>
+    
+            <p>Inflation continuously erodes purchasing power. Fixed mortgage payments stay the same nominally, but their
+                real burden declines over time.</p>
+    
+            <ul>
+                <li>Higher inflation reduces real mortgage cost</li>
+                <li>Later payments matter far less economically</li>
+                <li>Identical loans can have very different real costs</li>
+            </ul>
+    
+            <p>This is why fixed-rate mortgages perform well during inflationary periods.</p>
+        </div>
+    
+        <!-- Example Scenarios -->
+        <div class="content-section">
+            <h2>Inflation Scenarios: Same Loan, Different Reality</h2>
+    
+            <p>Two identical $400,000 mortgages at 6% for 30 years can produce very different real outcomes depending on
+                inflation.</p>
+    
+            <ul>
+                <li><strong>Low inflation (1%):</strong> real overpayment ≈ $346,000</li>
+                <li><strong>Moderate inflation (3%):</strong> real overpayment ≈ $267,000</li>
+            </ul>
+    
+            <p>The real economic burden differs by nearly $80,000 despite identical payments.</p>
+        </div>
+    
+        <!-- Calculation -->
+        <div class="content-section">
+            <h2>How Real Mortgage Overpayment Is Calculated</h2>
+    
+            <p>Each mortgage payment is discounted back to present value using the inflation rate.</p>
+    
+            <ul>
+                <li>Monthly payment calculated via standard amortization</li>
+                <li>Each payment adjusted for inflation over time</li>
+                <li>All adjusted payments summed</li>
+                <li>Original loan amount subtracted</li>
+            </ul>
+    
+            <p>Payments made far in the future are discounted most heavily, reducing their real impact.</p>
+        </div>
+    
+        <!-- When It Matters -->
+        <div class="content-section">
+            <h2>When Real vs. Nominal Overpayment Matters Most</h2>
+    
+            <ul>
+                <li>Comparing 15-year vs. 30-year mortgages</li>
+                <li>Deciding whether to prepay principal</li>
+                <li>Choosing between fixed and adjustable rates</li>
+                <li>Analyzing true long-term housing costs</li>
+            </ul>
+    
+            <p>Using nominal figures alone often exaggerates financing costs and distorts decisions.</p>
+        </div>
+    
+        <!-- Practical Implications -->
+        <div class="content-section">
+            <h2>Practical Implications for Borrowers</h2>
+    
+            <ul>
+                <li>Long-term mortgages are cheaper than they appear</li>
+                <li>Inflation benefits fixed-rate borrowers</li>
+                <li>Later payments consume far less purchasing power</li>
+                <li>Real interest rate matters more than nominal rate</li>
+            </ul>
+    
+            <p>A 6% mortgage during 3% inflation costs roughly 3% in real terms.</p>
+        </div>
+    
+        <!-- How to Use -->
+        <div class="content-section">
+            <h2>How to Use Real Overpayment Analysis</h2>
+    
+            <div class="highlight-box">
+                <p>Compare real mortgage cost to real investment returns</p>
+            </div>
+    
+            <div class="highlight-box">
+                <p>Evaluate whether prepaying principal makes economic sense</p>
+            </div>
+    
+            <div class="highlight-box">
+                <p>Use real costs for rent vs. buy comparisons</p>
+            </div>
+    
+            <p>Adjust your mental accounting: future debt is worth less than present debt.</p>
+        </div>
+    
+        <!-- Misconceptions -->
+        <div class="content-section">
+            <h2>Common Misconceptions About Mortgage Overpayment</h2>
+    
+            <ul>
+                <li>"I’m paying double what I borrowed"</li>
+                <li>"Every dollar of interest is wasted"</li>
+                <li>"I should always pay off my mortgage ASAP"</li>
+                <li>"Total interest paid is the true cost"</li>
+            </ul>
+    
+            <p>These statements are often true nominally, but misleading economically.</p>
+        </div>
+    
+        <!-- Integration -->
+        <div class="content-section">
+            <h2>Integration with Total Cost of Ownership</h2>
+    
+            <p>Real overpayment is one part of total property ownership analysis.</p>
+    
+            <ul>
+                <li>Mortgage overpayment (real terms)</li>
+                <li>Property taxes (inflate over time)</li>
+                <li>Insurance and maintenance (inflate)</li>
+                <li>Opportunity cost of capital</li>
+            </ul>
+    
+            <p>Consistent real-term analysis prevents distorted conclusions.</p>
+        </div>
+    
+        <!-- Key Takeaways -->
+        <div class="content-section">
+            <h2>Key Takeaways</h2>
+    
+            <ul>
+                <li><strong>Real overpayment shows true cost</strong></li>
+                <li><strong>Inflation favors fixed-rate borrowers</strong></li>
+                <li><strong>The gap grows with time and inflation</strong></li>
+                <li><strong>Use real costs for economic decisions</strong></li>
+            </ul>
+    
+            <p>Real overpayment isn’t a technical trick — it’s the correct economic framework for understanding what your
+                mortgage actually costs.</p>
+        </div>
+    
+    </div>
 </main>
 
+<footer class="pb-3 ">
+    <ul class="footer-links pb-3 justify-content-center mb-3 ">
+        <li><a href="./privacyPolicy.html" class="px-2 py-2">Privacy Policy</a></li>
+        <li><a href="./termsOfService.html" class="px-2 py-2">Terms of Service</a></li>
+        <li><a href="./disclaimer.html" class="px-2 py-2">Disclaimer</a></li>
+        <!-- не менять марджины и ботоммы сломается адаптивность-->
+        <li><a href="./contactUs.html" class="px-2 py-2">Contact us</a></li>
+    </ul>
+    <p class="text-center">© 2026 PropertyCost</p>
+</footer>
+
     <script src="/js/realOverpayment.js"></script>
+    <script src="/js/logout.js" defer></script>
 </body>
 </html>

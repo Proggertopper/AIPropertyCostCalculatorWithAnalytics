@@ -19,9 +19,9 @@ function validateInputs({ loan, rate, years, inflation }) {
     valid = false;
   }
 
-  if (isNaN(rate) || rate <= 0 || rate > 99) {
+  if (isNaN(rate) || rate < 0.1 || rate > 70) {
     document.getElementById("rateError").textContent =
-      "Interest rate must be between 0.1 and 50";
+      "Interest rate must be between 0.1 and 70";
     valid = false;
   }
 
@@ -32,7 +32,7 @@ function validateInputs({ loan, rate, years, inflation }) {
     !Number.isInteger(years)
   ) {
     document.getElementById("yearsError").textContent =
-      "Enter a whole number of years (1–50)";
+      "Enter a whole number of years (1-70)";
     valid = false;
   }
 
@@ -62,10 +62,18 @@ async function calculateOverpayment() {
   const years = +document.getElementById("years").value;
   const inflation = +document.getElementById("inflation").value;
 
+  // if (inflation > rate) {
+  //   "⚠️ Inflation exceeds interest rate — real debt burden decreases"
+  // }
+
+
   if (!validateInputs({ loan, rate, years, inflation })) return;
 
   const rateDecimal = rate / 100;
   const inflationDecimal = inflation / 100;
+
+  const realInterestRate =
+    ((1 + rateDecimal) / (1 + inflationDecimal) - 1) * 100;
 
   const months = years * 12;
   const monthlyRate = rateDecimal / 12;
@@ -86,9 +94,15 @@ async function calculateOverpayment() {
 
   const realOverpayment = realTotalPaid - loan;
 
+  
+
+
   document.getElementById("payment").textContent = moneyFormatter.format(payment);
   document.getElementById("nominalOverpayment").textContent = moneyFormatter.format(nominalOverpayment);
-  document.getElementById("realOverpayment").textContent = moneyFormatter.format(realOverpayment);
+  document.getElementById("realOverpayment").textContent =
+    realOverpayment < 0
+      ? "Inflation fully offsets interest"
+      : moneyFormatter.format(realOverpayment);
 
   try {
     const res = await fetch("/api/app/calculation", {
@@ -104,7 +118,8 @@ async function calculateOverpayment() {
         resultData: {
           monthlyPayment: Math.round(payment),
           nominalOverpayment: Math.round(nominalOverpayment),
-          realOverpayment: Math.round(realOverpayment)
+          realOverpayment: Math.round(realOverpayment),
+          realInterestRate
         }
       })
     });

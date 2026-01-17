@@ -20,43 +20,104 @@
 </head>
 <body>
 
-    <a href="./allCalculators.html" class="back-btn">← Back</a>
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="./mainPage.html" class="white-color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="currentColor"
+                        class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
+                    </svg><span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="./allCalculators.html">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="./guides.html">Guides</a></li>
+                    <li><a class="nav-link white-color px-2" href="./AboutProject.html">About Project</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="./login.html">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="./register.html">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="./account.html" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    </header>
 
     <main id="main-content">
     <section class="calculator">
+        
+        <div class="hero">
         <h1>Mortgage Calculator</h1>
         <p class="subtitle">
             Calculate your monthly payment and total loan cost
         </p>
+            <div class="benefits-bar">
+                <div class="benefit-item">Full monthly payment breakdown</div>
+                <div class="benefit-item">Upfront cost analysis</div>
+                <div class="benefit-item">Payment optimization tools</div>
+                <div class="benefit-item">Financial planning and risk management</div>
+            </div>
+        </div>
     
         <div class="grid">
     
             <!-- INPUT -->
             <div class="card">
                 <h3>Parameters</h3>
-    <!-- placeholder="75000" хз ставить или нет -->
                 <form id="propertyCalculator">
                     <label>
-                        Property Price ($)
-                        <input type="number" id="propertyPrice">
+                        Property Price($)
+                        <input type="number" id="propertyPrice" placeholder="300000">
                         <div class="error" id="priceError"></div>
                     </label>
     
                     <label>
-                        Down Payment ($)
-                        <input type="number" id="downPayment">
+                        Down Payment($)
+                        <input type="number" id="downPayment" placeholder="20000">
                         <div class="error" id="downError"></div>
                     </label>
     
                     <label>
-                        Interest Rate (%)
-                        <input type="number" id="interestRate">
+                        Interest Rate(%)
+                        <input type="number" id="interestRate" placeholder="7">
                         <div class="error" id="rateError"></div>
                     </label>
     
                     <label>
-                        Loan Term (years)
-                        <input type="number" id="loanTerm">
+                        Loan Term(years)
+                        <input type="number" id="loanTerm" placeholder="5">
                         <div class="error" id="termError"></div>
                     </label>
     
@@ -84,14 +145,257 @@
                 </div>
             </div>
         </div>
+
+        <div id="guest-promo" class="hidden">
+            <div class="playful-blob">
+                <div class="blob-content">
+                    <span class="blob-emoji">🚀</span>
+                    <div class="blob-title">Ready to make smarter decisions?</div>
+                    <div class="blob-text">Join our community and get access to your personal calculation dashboard with full
+                        history and insights</div>
+                    <a href="./register.html"><button class="blob-btn">Create Free Account</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="user-promo" class="hidden">
+            <span class="teaser-emoji">💡</span>
+            <div class="teaser-content">
+                <div class="teaser-title-small">Want to check your calculation?</div>
+                <div class="teaser-text-small">Hit the button to keep track of all your comparisons and verdicts</div>
+            </div>
+            <a href="./account.html"><button class="teaser-btn">Profile</button></a>
+        </div>
     
         <p class="disclaimer">
             Results are for informational purposes only and do not constitute financial advice.
             <a href="/disclaimer.html">Read full disclaimer</a>
         </p>
     </section>
+
+    <div class="content-wrapper">
+    
+        <!-- Introduction -->
+        <div class="content-section">
+            <h2>Mortgage Calculator: Understanding the True Cost of Homeownership</h2>
+            <p>Homeownership is a cornerstone of the financial journey for many, representing both a major investment and a
+                place to build a future. Yet the excitement of buying a home often obscures a critical reality: the true
+                cost of a mortgage extends far beyond the listed home price or the basic principal and interest payment.</p>
+    
+            <p>Many buyers are surprised by the accumulation of additional fees and ongoing expenses that accompany a
+                mortgage. This guide exists to remove that uncertainty and provide clarity around every component of your
+                mortgage obligation.</p>
+    
+            <p>By understanding the full picture, you can make informed decisions that align with your long-term financial
+                stability rather than relying on incomplete or overly optimistic assumptions.</p>
+        </div>
+    
+        <!-- Sticker Price Myth -->
+        <div class="content-section">
+            <h2>Beyond the Sticker Price: A Common Mortgage Misconception</h2>
+            <p>The home’s purchase price is often the first number buyers focus on. It shapes expectations and drives early
+                affordability discussions. However, concentrating solely on this figure creates a dangerous blind spot.</p>
+    
+            <p>Many buyers assess affordability based only on the principal and interest payment shown during pre-approval.
+                This narrow focus ignores significant recurring and upfront costs that materially affect monthly and
+                long-term affordability.</p>
+    
+            <p>Failing to account for these expenses can place unnecessary strain on household finances and limit future
+                flexibility.</p>
+        </div>
+    
+        <!-- What This Covers -->
+        <div class="content-section">
+            <h2>What This Mortgage Guide Covers</h2>
+            <p>This guide provides a comprehensive breakdown of the real financial commitment behind a mortgage.</p>
+    
+            <ul>
+                <li>Principal and interest payments</li>
+                <li>Mortgage insurance (PMI or MIP)</li>
+                <li>Property taxes</li>
+                <li>Homeowner’s insurance</li>
+                <li>Escrow accounts</li>
+                <li>Bank and servicing fees</li>
+                <li>Upfront closing costs</li>
+                <li>Ongoing ownership expenses</li>
+            </ul>
+    
+            <p>The goal is to help you understand true affordability and plan confidently for long-term homeownership.</p>
+        </div>
+    
+        <!-- Principal & Interest -->
+        <div class="content-section">
+            <h2>Understanding Principal and Interest</h2>
+            <p>At the core of every mortgage are two fundamental components: principal and interest.</p>
+    
+            <p>The <strong>principal</strong> is the amount borrowed to purchase the home. Payments toward principal reduce
+                your loan balance and build equity.</p>
+    
+            <p>The <strong>interest</strong> is the lender’s charge for providing the loan. In the early years of a
+                mortgage,
+                a larger share of each payment goes toward interest due to amortization.</p>
+        </div>
+    
+        <!-- Interest Rate Impact -->
+        <div class="content-section">
+            <h2>How Interest Rates Affect Your Mortgage</h2>
+            <p>The interest rate has a powerful influence on both your monthly payment and total loan cost.</p>
+    
+            <p>Even small differences in rates can result in tens or hundreds of thousands of dollars in additional interest
+                over the life of a loan. Higher rates slow equity accumulation and increase overall cost.</p>
+    
+            <p>Understanding interest rate options and timing can significantly improve long-term affordability.</p>
+        </div>
+    
+        <!-- Beyond P&I -->
+        <div class="content-section">
+            <h2>The True Monthly Mortgage Payment: Beyond Principal and Interest</h2>
+            <p>Your real monthly mortgage obligation often includes more than principal and interest. This full payment is
+                commonly referred to as <strong>PITI</strong>.</p>
+        </div>
+    
+        <!-- PMI -->
+        <div class="content-section">
+            <h2>Private Mortgage Insurance (PMI) and Mortgage Insurance Premium (MIP)</h2>
+            <p>If your down payment is less than 20%, lenders usually require mortgage insurance.</p>
+    
+            <p>PMI (for conventional loans) and MIP (for FHA loans) protect the lender, not the borrower. While they allow
+                lower down payments, they increase monthly costs and delay full affordability.</p>
+    
+            <p>Understanding cancellation rules and duration is critical when evaluating long-term cost.</p>
+        </div>
+    
+        <!-- Property Taxes -->
+        <div class="content-section">
+            <h2>Property Taxes: A Variable Cost</h2>
+            <p>Property taxes are mandatory and fund local services such as schools and infrastructure.</p>
+    
+            <p>They are based on assessed value and local tax rates, both of which can change over time. Rising property
+                values often lead to higher tax bills.</p>
+    
+            <p>These increases directly impact your monthly payment when paid through escrow.</p>
+        </div>
+    
+        <!-- Insurance -->
+        <div class="content-section">
+            <h2>Homeowner’s Insurance: Protecting Your Investment</h2>
+            <p>Homeowner’s insurance protects your property and belongings from unexpected events like fire, storms, or
+                theft.</p>
+    
+            <p>Premiums vary based on coverage level, location, deductible, and replacement cost. Insurance is typically
+                required by lenders and included in escrow.</p>
+        </div>
+    
+        <!-- Escrow -->
+        <div class="content-section">
+            <h2>Escrow Accounts: How Lenders Manage Taxes and Insurance</h2>
+            <p>Most lenders require escrow accounts to ensure property taxes and insurance premiums are paid on time.</p>
+    
+            <p>Your lender collects a portion of these costs monthly and pays the bills on your behalf. Changes in tax or
+                insurance rates can cause escrow shortages and payment adjustments.</p>
+        </div>
+    
+        <!-- Other Fees -->
+        <div class="content-section">
+            <h2>Other Bank and Servicer Fees</h2>
+            <p>Additional fees may include late payment penalties, servicing charges, or transaction fees.</p>
+    
+            <p>While less common than PITI components, these costs should still be reviewed carefully in loan documents.</p>
+        </div>
+    
+        <!-- Upfront Costs -->
+        <div class="content-section">
+            <h2>Upfront Costs That Shape Your Mortgage</h2>
+            <p>Before making your first payment, you face significant upfront expenses that influence long-term cost.</p>
+        </div>
+    
+        <!-- Closing Costs -->
+        <div class="content-section">
+            <h2>Closing Costs: The Initial Financial Barrier</h2>
+            <p>Closing costs typically range from 2% to 5% of the loan amount and include appraisal, title, origination, and
+                legal fees.</p>
+    
+            <p>Although paid once, they represent a meaningful upfront investment that should be planned carefully.</p>
+        </div>
+    
+        <!-- Down Payment -->
+        <div class="content-section">
+            <h2>Down Payment: Your Initial Investment</h2>
+            <p>The down payment reduces the loan amount and influences interest, PMI requirements, and monthly payments.</p>
+    
+            <p>Larger down payments lower long-term cost and increase financial flexibility.</p>
+        </div>
+    
+        
+    
+        <div class="content-section">
+            <h2>Maintenance and Repairs</h2>
+            <p>Homes require constant upkeep and occasional major repairs. Budgeting 1%–3% of the home’s value annually is
+                a common guideline.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>Utilities</h2>
+            <p>Electricity, heating, water, internet, and waste services vary by home size, location, and efficiency.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>HOA Fees (If Applicable)</h2>
+            <p>HOA fees cover shared amenities and maintenance and must be included in affordability calculations.</p>
+        </div>
+    
+        <!-- Strategy -->
+        <div class="content-section">
+            <h2>Strategic Planning for Mortgage Success</h2>
+            <p>Understanding costs is only the first step. Strategic planning allows you to optimize payments and reduce
+                risk.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>True Affordability vs Pre-Approval</h2>
+            <p>Pre-approval reflects what a lender allows, not necessarily what fits your lifestyle or goals.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>Refinancing Opportunities</h2>
+            <p>Refinancing can reduce interest rates, adjust loan terms, and improve cash flow when conditions allow.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>Paying Off Your Mortgage Faster</h2>
+            <p>Extra principal payments significantly reduce total interest and accelerate equity growth.</p>
+        </div>
+    
+        <div class="content-section">
+            <h2>Emergency Planning</h2>
+            <p>A strong emergency fund protects against unexpected repairs or income disruptions.</p>
+        </div>
+    
+        <!-- Conclusion -->
+        <div class="content-section">
+            <h2>Conclusion: Mastering the True Cost of Your Mortgage</h2>
+            <p>Understanding the full cost of homeownership empowers better decisions, realistic budgeting, and long-term
+                financial stability.</p>
+    
+            <p>With clear insight into every component, you gain control over one of the largest financial commitments of
+                your life.</p>
+        </div>
+    
+    </div>
     </main>
 
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="./privacyPolicy.html" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="./termsOfService.html" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="./disclaimer.html" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="./contactUs.html" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
     <script src="/js/mortgage.js"></script>
+    <script src="/js/logout.js" defer></script>
 </body>
 </html>

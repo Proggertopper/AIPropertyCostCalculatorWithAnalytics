@@ -39,24 +39,30 @@ const percentFormatter = new Intl.NumberFormat("en-US", {
 
 /* ===== IRR ===== */
 function calculateIRR(cashFlows, guess = 0.1) {
-    let rate = guess;
+    const maxIter = 1000;
+    const tol = 1e-6;
 
-    for (let i = 0; i < 500; i++) {
-        let npv = 0;
-        let dnpv = 0;
+    let low = -0.9999;   // нижняя граница (-99.99% годовых)
+    let high = 10;        // верхняя граница (1000% годовых)
 
-        for (let t = 0; t < cashFlows.length; t++) {
-            npv += cashFlows[t] / Math.pow(1 + rate, t);
-            dnpv -= t * cashFlows[t] / Math.pow(1 + rate, t + 1);
+    const npv = (rate) => {
+        return cashFlows.reduce((sum, cf, t) => sum + cf / Math.pow(1 + rate, t), 0);
+    };
+
+    let irr = guess;
+    for (let i = 0; i < maxIter; i++) {
+        irr = (low + high) / 2;
+        const val = npv(irr);
+
+        if (Math.abs(val) < tol) return irr;
+        if (val > 0) {
+            low = irr;
+        } else {
+            high = irr;
         }
-
-        if (!isFinite(npv) || !isFinite(dnpv)) return null;
-
-        const newRate = rate - npv / dnpv;
-        if (Math.abs(newRate - rate) < 1e-6) return rate;
-        rate = newRate;
     }
-    return null;
+
+    return irr; // если не сошлось, возвращаем последнее приближение
 }
 
 /* ===== main calculation ===== */
@@ -76,6 +82,7 @@ function calculate() {
     const years = +yearsInput.value;
     const growth = +growthInput.value;
     const saleTax = +saleTaxInput.value;
+    const inflation = +inflationInput.value;
 
     let valid = true;
 
@@ -92,6 +99,7 @@ function calculate() {
     valid = valid && validate({ value: years, min: 1, max: 100, errorEl: yearsError, name: "Holding Period (years)" });
     valid = valid && validate({ value: growth, min: -99, max: 2000, errorEl: growthError, name: "Price Growth %" });
     valid = valid && validate({ value: saleTax, min: 0, max: 80, errorEl: saleTaxError, name: "Sale Tax %" });
+    valid = valid && validate({ value: inflation, min: -5, max: 40, errorEl: inflationError, name: "Inflation " });
 
     if (!valid) return;
 
@@ -115,29 +123,39 @@ function calculate() {
     const profitFromSale =
         futurePrice * (1 - saleTax / 100) - price;
 
+    // формируем cashflows для IRR
     const cashFlows = [-initialInvestment];
-
     for (let i = 1; i <= years; i++) {
-        cashFlows.push(i === years ? cashFlow + profitFromSale : cashFlow);
+        if (i === years) {
+            cashFlows.push(cashFlow + profitFromSale);
+        } else {
+            cashFlows.push(cashFlow);
+        }
     }
 
     const irr = calculateIRR(cashFlows);
-    if (irr === null) {
-        document.getElementById("irr").textContent = "—";
-        return;
+    const realIRR = irr !== null ? ((1 + irr) / (1 + inflation / 100) - 1) * 100 : null;
+
+    const totalProfit = cashFlow * years + (profitFromSale - initialInvestment);
+    const roi = (totalProfit / initialInvestment) * 100;
+
+    // точный payback с учётом продажи
+    let cumulative = -initialInvestment;
+    let paybackYears = 0;
+    for (let i = 1; i <= years; i++) {
+        cumulative += i === years ? cashFlow + profitFromSale : cashFlow;
+        if (cumulative >= 0) {
+            paybackYears = i - 1 + (initialInvestment - (i - 1) * cashFlow) / cashFlow;
+            break;
+        }
     }
-
-    const roi =
-        ((cashFlow * years + profitFromSale) / initialInvestment) * 100;
-
-    const payback =
-        initialInvestment / cashFlow;
 
     /* output */
     cashFlowEl.textContent = moneyFormatter.format(cashFlow);
     roiEl.textContent = roi.toFixed(2) + " %";
     irrEl.textContent = irr !== null ? (irr * 100).toFixed(2) + " %" : "—";
-    paybackEl.textContent = payback.toFixed(1) + " лет";
+    paybackEl.textContent = paybackYears ? (paybackYears.toFixed(1) + " years") : "—";
+    document.getElementById("realIRR").textContent = realIRR !== null ? realIRR.toFixed(2) + " %" : "—";
 
     /* save */
     fetch("/api/app/calculation", {
@@ -152,10 +170,10 @@ function calculate() {
             inputData: {
                 price, downPayment, purchaseCosts, renovation,
                 rent, vacancy, expenses, mortgage,
-                years, growth, saleTax
+                years, growth, saleTax , inflation
             },
             resultData: {
-                cashFlow, roi, irr, payback
+                cashFlow, roi, irr: irr * 100, realIRR , paybackYears
             }
         })
     }).catch(console.error);
@@ -180,6 +198,7 @@ const mortgageInput = document.getElementById("mortgage");
 const yearsInput = document.getElementById("years");
 const growthInput = document.getElementById("growth");
 const saleTaxInput = document.getElementById("saleTax");
+const inflationInput = document.getElementById("inflation");
 
 /* result */
 const cashFlowEl = document.getElementById("cashFlow");
@@ -199,5 +218,6 @@ const mortgageError = document.getElementById("mortgageError");
 const yearsError = document.getElementById("yearsError");
 const growthError = document.getElementById("growthError");
 const saleTaxError = document.getElementById("saleTaxError");
+const inflationError = document.getElementById("inflationError");
 
 document.getElementById("calcBtn").addEventListener("click", calculate);

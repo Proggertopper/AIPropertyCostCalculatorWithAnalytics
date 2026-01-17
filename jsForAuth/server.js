@@ -1,4 +1,6 @@
 require("dotenv").config();
+console.log("SESSION_SECRET =", process.env.SESSION_SECRET);
+console.log("NODE_ENV =", process.env.NODE_ENV);
 const express = require("express");
 const session = require("express-session");
 
@@ -22,7 +24,7 @@ const app = express();
 
 
 app.set('trust proxy', 1);
-app.use(express.json({ limit: "10kb" }));
+
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '127.0.0.1'; 
@@ -45,31 +47,65 @@ const HOST = process.env.HOST || '127.0.0.1';
 //     }
 // }));
 
-// if (process.env.NODE_ENV === 'development') {
-//     console.log('⚡ Dev mode enabled: логирование и тестовые фичи включены');
-// } else if (process.env.NODE_ENV === 'production') {
-//     console.log('✅ Prod mode: логирование минимальное, безопасный режим');
-// } НА БУДУЩЕЕ МОЖНО ЛОГИРОВАТЬ ХОРОШО 
+if (process.env.NODE_ENV === 'development') {
+    app.use(session({
+        store: new RedisStore({
+            client: redisClient,
+            prefix: "sess:"
+        }),
+        name: "session",
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        proxy: false,
+        cookie: {
+            httpOnly: true,
+            secure: false,        // обязательно в проде
+            sameSite: "lax",     // OAuth работает
+            maxAge: 1000 * 60 * 60 * 24
+        }
+    }));
+} else if (process.env.NODE_ENV === 'production') {
+    app.use(session({
+        store: new RedisStore({
+            client: redisClient,
+            prefix: "sess:"
+        }),
+        name: "__Host-session",
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        proxy: true,
+        cookie: {
+            httpOnly: true,
+            secure: true,        // обязательно в проде
+            sameSite: "lax",     // OAuth работает
+            maxAge: 1000 * 60 * 60 * 24
+        }
+    }));
+} 
+
+app.use(express.json({ limit: "10kb" }));
 
 
 
-app.use(session({
-    store:new RedisStore({
-        client: redisClient,
-        prefix: "sess:"
-    }),
-    name: "__Host-session",
-    secret: process.env.SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false,
-    proxy: true,
-    cookie: {
-        httpOnly: true,
-        secure: true,        // обязательно в проде
-        sameSite: "lax",     // OAuth работает
-        maxAge: 1000 * 60 * 60 * 24
-    }
-}));
+// app.use(session({
+//     store:new RedisStore({
+//         client: redisClient,
+//         prefix: "sess:"
+//     }),
+//     name: "__Host-session",
+//     secret: process.env.SESSION_SECRET,
+//     resave: false,
+//     saveUninitialized: false,
+//     proxy: true,
+//     cookie: {
+//         httpOnly: true,
+//         secure: true,        // обязательно в проде
+//         sameSite: "lax",     // OAuth работает
+//         maxAge: 1000 * 60 * 60 * 24
+//     }
+// }));
 
 app.use((err, req, res, next) => {
     console.error("EXPRESS ERROR:", err);

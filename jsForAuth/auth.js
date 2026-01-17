@@ -133,8 +133,8 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
     app.post("/api/auth/login", loginLimiter, async (req, res) => {
         const csrfToken = req.headers["x-csrf-token"];
             const secret = req.session.csrfSecret;
-        // console.log("Secret:", req.session.csrfSecret);
-        // console.log("Token:", csrfToken);
+         console.log("Secret:", req.session.csrfSecret);
+         console.log("Token:", csrfToken);
 
         res.set("Cache-Control", "no-store");
         

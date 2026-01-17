@@ -48,15 +48,19 @@
     cursor:pointer;
 }
 
-.back-btn { 
-    color: #334155;
-    border-radius: 5px;
+.back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    color: #475569;
     text-decoration: none;
-    font-weight: bold;   
-    margin:2rem;
-    display: inline-block;
-    margin-top: 10px;
-    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-btn:hover {
+    color: #0f172a;
 }
 
 

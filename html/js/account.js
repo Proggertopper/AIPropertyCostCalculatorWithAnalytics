@@ -1,4 +1,4 @@
-fetch("/api/auth/me" )
+fetch("/api/auth/me", { credentials: "include" })
     .then(r => {
         if (r.status === 401) {
             location.href = "./login.html";
@@ -199,13 +199,20 @@ const CALC_FORMATS = {
             propertyInitial: "money",
             propertyCashflow: "money",
             propertyGrowth: "percent",
+            propertyInflation: "percent",
+            propertyTaxRate:"percent",
             altReturn: "percent",
             altContribution: "percent",
+            altInflation: "percent",
+            altTaxRate: "percent",
             years: "years"
         },
         result: {
             propertyValue: "money",
             alternativeValue: "money",
+            propertyRealReturnPercent: "percent",
+            alternativeRealReturnPercent: "percent",
+            difference: "money",
             winner: "text"
         }
     },
@@ -216,7 +223,7 @@ const CALC_FORMATS = {
             downPayment: "money",
             mortgage: "money",
             expenses: "money",
-            taxes: "percent",
+            taxes: "money",
             vacancy: "percent"
         },
         result: {
@@ -232,13 +239,17 @@ const CALC_FORMATS = {
             vacancy: "percent",
             mortgage: "money",
             expenses: "money",
-            taxes: "percent"
+            taxes: "percent",
+            inflation: "percent"
         },
         result: {
             netIncome: "money",
             totalExpenses: "money",
             cashFlowMonth: "money",
             cashFlowYear: "money",
+            realCashFlowMonth: "money",
+            realCashFlowYear: "money",
+            stressCashFlow: "money",
             status: "text"
         }
     },
@@ -255,13 +266,15 @@ const CALC_FORMATS = {
             mortgage: "money",
             years: "years",
             growth: "percent",
-            saleTax: "percent"
+            saleTax: "percent",
+            inflation: "percent"
         },
         result: {
             cashFlow: "money",
             roi: "percent",
             irr: "percent",
-            payback: "payback"
+            realIRR: "percent",
+            paybackYears: "payback"
         }
     },
 
@@ -284,10 +297,12 @@ const CALC_FORMATS = {
             price: "money",
             years: "years",
             taxPercent: "percent",
-            maintenance: "money"
+            maintenance: "money",
+            inflation: "percent"
         },
         result: {
-            totalCost: "money"
+            totalCost: "money",
+            totalCostPV: "money"
         }
     },
 
@@ -321,13 +336,18 @@ const CALC_FORMATS = {
             annualFees: "money",
             feeGrowth: "percent",
             saleTax: "percent",
-            agentFee: "percent"
+            agentFee: "percent",
+            inflationRate: "percent"
         },
         result: {
             totalTaxes: "money",
             totalFees: "money",
             totalRentNet: "money",
-            finalProfit: "money"
+            finalProfit: "money",
+            finalProfitPV: "money",
+            simpleROI: "percent",
+            realROI: "percent",
+            taxBurdenPercent: "percent"
         }
     },
 
@@ -341,7 +361,8 @@ const CALC_FORMATS = {
         result: {
             monthlyPayment: "money",
             nominalOverpayment: "money",
-            realOverpayment: "money"
+            realOverpayment: "money",
+            realInterestRate: "percent"
         }
     },
 
@@ -354,17 +375,23 @@ const CALC_FORMATS = {
             rentIncrease: "percent",
             agentFee: "percent",
             saleTax: "percent",
-            years: "years"
+            years: "years",
+            discountRate: "percent",
+            inflationRate: "percent"
         },
         result: {
             priceAfter: "money",
             rentAfter: "money",
             totalExtraRent: "money",
+            totalExtraRentPV: "money",
             saleProfit: "money",
             netProfit: "money",
+            netProfitPV: "money",
             roi: "percent",
+            roiPV: "percent",
             payback: "payback"
         }
+
     },
 
     rent_vs_buy: {
@@ -372,38 +399,26 @@ const CALC_FORMATS = {
             rent: "money",
             mortgage: "money",
             years: "years",
-            propertyValue: "money"
+            propertyValue: "money",
+            rentGrowth: "percent",
+            mortgageRate: "percent",
+            propertyGrowth: "percent",
+            inflation: "percent"
         },
         result: {
             rentTotal: "money",
             mortgagePaid: "money",
-            equity: "money",
             buyNetCost: "money",
             winner: "text"
         }
     }
 };
 
-function calculateBreakEven(input) {
-    const mortgage = Number(input.mortgage || 0);
-    const expenses = Number(input.expenses || 0);
-    const taxes = Number(input.taxes || 0) / 100;
-    const vacancy = Number(input.vacancy || 0) / 100;
-
-    const totalCost = mortgage + expenses + mortgage * taxes;
-    const breakEvenRent = totalCost / (1 - vacancy);
-
-    const breakEvenPrice = Number(input.price) + totalCost;
-    return { breakEvenRent, breakEvenPrice };
-}
-
-
-
-
 
 function renderWarnings(calc) {
-    if (!calc || !calc.result_data) return null; // <--- защита от undefined
-
+    if (!calc || !calc.result_data) return null;
+    
+    const box = document.createElement("div");
     const r = calc.result_data;
     const i = calc.input_data;
 
@@ -416,10 +431,95 @@ function renderWarnings(calc) {
             w.className = "verdict warn";
             w.textContent =
                 "⚠️ Payback period exceeds selected investment horizon.";
-            return w;
+            box.appendChild(w);
         }
     }
-    return null;
+
+    if (calc.calculator_type === "break_even") {
+        const r = calc.result_data;
+        const i = calc.input_data;
+
+        if (i.vacancy > 20) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent = "⚠️ High vacancy assumption (>20%).";
+            box.appendChild(w);
+        }
+
+        if (r.breakEvenRent > i.price * 0.012) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent="⚠️ Required rent exceeds 1.2% of purchase price.";
+            box.appendChild(w);
+        }
+
+        if (i.mortgage === 0) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent="ℹ️ Mortgage not included. Results assume cash purchase.";
+            box.appendChild(w);
+        }
+    }
+
+    if (calc.calculator_type === "property_taxes") {
+        const r = calc.result_data;
+
+        if (r.taxBurdenPercent > 60) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent =
+                "⚠️ High effective tax rate. Consider legal tax optimization strategies.";
+            box.appendChild(w);
+        }
+    }
+    
+    if (calc.calculator_type === "ownership_cost") {
+        const price = Number(i.price || 0);
+        const total = Number(r.totalCost || 0);
+        const real = Number(r.totalCostPV || 0);
+        const years = Number(i.years || 0);
+        const tax = Number(i.taxPercent || 0);
+        const maintenance = Number(i.maintenance || 0);
+
+        if (!price) return null;
+
+        // if (real > price * 2) {
+        //     const w = document.createElement("div");
+        //     w.className = "verdict warn";
+        //     w.textContent =
+        //         "⚠️ Total real ownership cost exceeds 2x property price.";
+        //     return w;
+        // }
+
+        // ⚠️ Высокие налоги
+        if (tax > 5) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent =
+                "⚠️ High annual property tax (>5% of property price).";
+            box.appendChild(w);
+        }
+
+        // ⚠️ Высокое обслуживание
+        if (maintenance > price * 0.03) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent =
+                "⚠️ High maintenance costs (>3% of property price per year).";
+            box.appendChild(w);
+        }
+
+        // ⚠️ Очень длинный период владения
+        if (years > 50) {
+            const w = document.createElement("div");
+            w.className = "verdict warn";
+            w.textContent =
+                "⚠️ Very long ownership period (>50 years). Forecast reliability is low.";
+            box.appendChild(w);
+        }
+    }
+
+    return box.childNodes.length ? box : null;
 }
 
 function renderInputData(calc) {
@@ -429,35 +529,36 @@ function renderInputData(calc) {
     const schema = CALC_FORMATS[calc.calculator_type]?.input || {};
 
     for (const key in schema) {
+        const raw = calc.input_data?.[key];
+        if (raw === undefined || raw === null) continue;
+
         const li = document.createElement("li");
+
         const type = schema[key] || "number";
         const formatter = FORMAT[type] || FORMAT.number;
 
-        li.textContent = `${humanInputName(key)}: ${formatter(calc.input_data[key])}`;
+        li.textContent = `${humanInputName(key)}: ${formatter(raw)}`;
         ul.appendChild(li);
     }
 
     return ul;
 }
 
+
 function renderResultData(calc) {
     const table = document.createElement("table");
     table.className = "result-table";
 
-
     const r = calc.result_data;
-    const i = calc.input_data;
-
-    // 🟢 для break-even пересчитываем результат
-    if (calc.calculator_type === "break_even") {
-        const be = calculateBreakEven(calc.input_data);
-        r.breakEvenRent = be.breakEvenRent;
-        r.breakEvenPrice = be.breakEvenPrice;
-    }
 
     const schema = CALC_FORMATS[calc.calculator_type]?.result || {};
 
-    for (const key in calc.result_data) {
+    for (const key in schema) {
+        if (!(key in r)) continue;
+
+        const raw = r[key];
+        if (raw === undefined || raw === null) continue;
+
         const row = document.createElement("tr");
 
         const name = document.createElement("td");
@@ -467,10 +568,22 @@ function renderResultData(calc) {
         const type = schema[key] ?? "number";
         const formatter = FORMAT[type] || FORMAT.number;
 
-        const raw = calc.result_data[key];
         value.textContent = formatter(raw);
 
-        const negativeMetrics = ["totalInterest", "taxAmount", "commissionAmount","totalPayment","totalCost","totalExpenses"];
+        const negativeMetrics = [
+            "totalInterest",
+            "taxAmount",
+            "commissionAmount",
+            "totalPayment",
+            "totalCost",
+            "totalExpenses"
+        ];
+
+        if (key === "realIRR") {
+            if (raw > 0) value.classList.add("value-positive");
+            else value.classList.add("value-negative");
+            value.classList.add("result-highlight");
+        }
 
         if (typeof raw === "number") {
             if (negativeMetrics.includes(key)) {
@@ -481,8 +594,7 @@ function renderResultData(calc) {
             }
         }
 
-        // ключевые метрики
-        if (["roi", "netProfit", "irr"].includes(key)) {
+        if (["roi", "roiPV", "netProfit", "netProfitPV", "irr"].includes(key)) {
             value.classList.add("result-highlight");
         }
 
@@ -493,6 +605,7 @@ function renderResultData(calc) {
 
     return table;
 }
+
 
 const INVESTMENT_CALCS = [
     "renovation_roi",
@@ -562,48 +675,203 @@ function renderVerdict(calc) {
 function investmentVerdict(calc) {
     const v = document.createElement("div");
     v.className = "verdict";
-
+    
     const r = calc.result_data;
 
-    // Проверяем ключевые метрики: irr, netProfit, roi
-    if (
-        (typeof r.irr === "number" && r.irr < 7) ||
+    if(calc.calculator_type === "renovation_roi"){
+        if ((typeof r.netProfitPV === "number" && r.netProfitPV <= 0) ||
+            (typeof r.roiPV === "number" && r.roiPV <= 0)) {
+            v.classList.add("bad");
+            v.textContent = "❌ This investment is not profitable when discounted at the given rate.";
+        } else if ((typeof r.netProfit === "number" && r.netProfit <= 0) ||
+            (typeof r.roi === "number" && r.roi <= 0)) {
+            v.classList.add("warn");
+            v.textContent = "⚠️ Investment is profitable nominally but loses value after discounting.";
+        } else {
+            v.classList.add("good");
+            v.textContent = "✅ This investment looks profitable even after discounting.";
+        }
+    }
+
+    else if (calc.calculator_type === "alternative_investment") {
+        
+        const r = calc.result_data;
+        const diff = Number(r.difference || 0);
+        const propRR = Number(r.propertyRealReturnPercent || 0);
+        const altRR = Number(r.alternativeRealReturnPercent || 0);
+
+        if (altRR > propRR && diff > 0) {
+            v.classList.add("good");
+            v.textContent = "✅ Alternative investment outperforms property after inflation, taxes, and risk adjustments.";
+        } else if (Math.abs(diff) < 0.05 * Math.max(r.propertyValue, r.alternativeValue)) {
+            v.classList.add("info");
+            v.textContent = "ℹ️ Results are close — property and alternative investments are nearly equal.";
+        } else {
+            v.classList.add("bad");
+            v.textContent = "❌ Property investment performs better on a risk-adjusted basis.";
+        }
+
+        return v;
+    }
+
+    else if (calc.calculator_type === "property_taxes") {
+        const r = calc.result_data;
+
+        const finalPV = Number(r.finalProfitPV || 0);
+        const finalNominal = Number(r.finalProfit || 0);
+        const realROI = Number(r.realROI || 0);
+        const simpleROI = Number(r.simpleROI || 0);
+
+        // ❌ Реально убыточно
+        if (finalPV <= 0 || realROI <= 0) {
+            v.classList.add("bad");
+            v.textContent =
+                "❌ This investment loses value after inflation, taxes, and fees.";
+        }
+        // ⚠️ Номинально ок, реально плохо
+        else if (finalNominal > 0 && finalPV <= finalNominal * 0.3) {
+            v.classList.add("warn");
+            v.textContent =
+                "⚠️ Nominal profit exists, but inflation significantly reduces returns.";
+        }
+        // ✅ Всё хорошо
+        else {
+            v.classList.add("good");
+            v.textContent =
+                "✅ Investment remains profitable after taxes and inflation.";
+        }
+
+        return v;
+    }
+
+    else if (calc.calculator_type === "property_sale") {
+        const r = calc.result_data;
+
+        const net = Number(r.netProfit || 0);
+        const annual = Number(r.annualReturn || 0);
+        const real = Number(r.realReturn || 0);
+
+        // ❌ убыточно в реальности
+        if (net <= 0 || real <= 0) {
+            v.classList.add("bad");
+            v.textContent =
+                "❌ Sale results in a loss after inflation and costs.";
+        }
+        // ⚠️ номинально ок, реально слабо
+        else if (real < 2) {
+            v.classList.add("warn");
+            v.textContent =
+                "⚠️ Sale is profitable nominally, but real return is very low.";
+        }
+        // 🟡 нормально, но не инвестиционно
+        else if (real < 5) {
+            v.classList.add("info");
+            v.textContent =
+                "ℹ️ Sale preserves capital with modest real growth.";
+        }
+        // ✅ сильная продажа
+        else {
+            v.classList.add("good");
+            v.textContent =
+                "✅ Sale delivers strong real annual return.";
+        }
+
+        return v;
+    }
+
+    else if (calc.calculator_type === "property_irr") {
+        const realIRR = Number(r.realIRR || 0);
+        const irr = Number(r.irr || 0);
+
+        // ❌ реально убыточно
+        if (realIRR <= 0) {
+            v.classList.add("bad");
+            v.textContent = "❌ Investment loses value after inflation (real IRR ≤ 0%).";
+        }
+        // ⚠️ номинально прибыльно, но реальная доходность низкая
+        else if (realIRR > 0 && realIRR < 5) {
+            v.classList.add("warn");
+            v.textContent = `⚠️ Investment nominally profitable (IRR ${irr.toFixed(2)}%), but real IRR is low (${realIRR.toFixed(2)}%).`;
+        }
+        // ✅ нормально
+        else {
+            v.classList.add("good");
+            v.textContent = `✅ Investment looks profitable after inflation (real IRR ${realIRR.toFixed(2)}%).`;
+        }
+
+        return v;
+    }
+
+    // Общая логика для других инвесткалькуляторов
+    
+    if ((typeof r.irr === "number" && r.irr < 7) ||
         (typeof r.netProfit === "number" && r.netProfit <= 0) ||
-        (typeof r.roi === "number" && r.roi <= 0)
-    ) {
+        (typeof r.roi === "number" && r.roi <= 0)) {
         v.classList.add("bad");
         v.textContent = "❌ This investment is not profitable based on provided inputs.";
     } else {
         v.classList.add("good");
         v.textContent = "✅ This investment looks profitable based on provided inputs.";
     }
-
     return v;
+
 }
 
 function cashFlowVerdict(calc) {
-    const v = document.createElement("div");
-    v.className = "verdict";
+    if (!calc || !calc.result_data) return null;
 
     const r = calc.result_data;
-    const cashFlowMonth = Number(r.cashFlowMonth);
+    const i = calc.input_data;
 
-    if (!isNaN(cashFlowMonth)) {
-        if (cashFlowMonth > 0) {
-            v.classList.add("good");
-            v.textContent = "✅ Property generates positive cash flow.";
-        } else if (cashFlowMonth < 0) {
-            v.classList.add("bad");
-            v.textContent = "❌ Property has negative cash flow.";
-        } else {
-            v.classList.add("info");
-            v.textContent = "ℹ️ Cash flow is zero.";
-        }
-    } else {
-        v.classList.add("info");
-        v.textContent = "ℹ️ Cash flow data unavailable.";
+    /* ❌ Реальный cash flow отрицательный */
+    if (r.realCashFlowMonth < 0) {
+        const v = document.createElement("div");
+        v.className = "verdict negative";
+        v.textContent =
+            "❌ Real cash flow is negative after inflation. Investment loses purchasing power.";
+        return v;
     }
 
+    /* ⚠️ Stress test не выдержан */
+    if (r.stressCashFlow < 0) {
+        const v = document.createElement("div");
+        v.className = "verdict warn";
+        v.textContent =
+            "⚠️ Investment fails stress test (vacancy +5%, expenses +10%).";
+        return v;
+    }
+
+    /* ⚠️ Высокая вакансия */
+    if (i.vacancy > 15) {
+        const v = document.createElement("div");
+        v.className = "verdict warn";
+        v.textContent =
+            "⚠️ High vacancy assumption. Income may be unstable.";
+        return v;
+    }
+
+    /* ⚠️ Ипотека слишком большая */
+    if (i.mortgage > i.rent * 0.6) {
+        const v = document.createElement("div");
+        v.className = "verdict warn";
+        v.textContent =
+            "⚠️ Mortgage exceeds 60% of rent. High leverage risk.";
+        return v;
+    }
+
+    /* ✅ Хорошая инвестиция */
+    if (r.cashFlowMonth > i.rent * 0.1) {
+        const v = document.createElement("div");
+        v.className = "verdict positive";
+        v.textContent =
+            "✅ Strong positive cash flow with inflation protection.";
+        return v;
+    }
+
+    const v = document.createElement("div");
+    v.className = "verdict info";
+    v.textContent =
+        "ℹ️ Cash flow is close to break-even. Small changes may affect profitability.";
     return v;
 }
 
@@ -618,16 +886,18 @@ function comparisonVerdict(calc) {
         const i = calc.input_data;
 
         const beRent = Number(r.breakEvenRent || 0);
-        const totalCost = Number(i.mortgage || 0) + Number(i.expenses || 0) + (Number(i.mortgage || 0) * Number(i.taxes || 0) / 100);
+        const totalCost = Number(i.mortgage || 0) + Number(i.expenses || 0) + Number(i.taxes || 0);
 
-        // Логика: если break-even рент очень высокая — warn, если низкая — good
-        if (beRent > totalCost * 2) {  // слишком большая рента по сравнению с расходами
-            winner = "alternative";
-        } else if (beRent <= totalCost * 1.5) { // приемлемая рента
-            winner = "property";
+        if (beRent > i.price * 0.012) {
+            v.classList.add("warn");
+            v.textContent =
+                "⚠️ Required break-even rent is high relative to purchase price.";
         } else {
-            winner = "equal";
+            v.classList.add("good");
+            v.textContent =
+                "✅ Break-even rent looks achievable under current assumptions.";
         }
+        return v;
     }
 
     if (["property", "buy"].includes(winner)) {
@@ -679,38 +949,56 @@ function costVerdict(calc) {
     // mortgage_overpayment
     if (calc.calculator_type === "mortgage_overpayment") {
         const loan = Number(calc.input_data.loan || 0);
-        const overpay = Number(r.nominalOverpayment || 0);
+        const nominal = Number(r.nominalOverpayment || 0);
+        const real = Number(r.realOverpayment || 0);
 
-        if (!loan || !overpay) {
+        if (!loan || !nominal) {
             v.classList.add("info");
             v.textContent = "ℹ️ Not enough data to evaluate overpayment.";
-        } else if (overpay / loan > 0.8) {
-            v.classList.add("bad");
-            v.textContent = "❌ High overpayment. Consider refinancing or reducing loan term.";
-        } else if (overpay / loan > 0.4) {
-            v.classList.add("warn");
-            v.textContent = "⚠️ Moderate overpayment. Loan cost is significant.";
-        } else {
-            v.classList.add("good");
-            v.textContent = "✅ Loan overpayment is acceptable.";
         }
-
-        return v;
+        // сначала смотрим реальную переплату
+        else if (real / loan > 0.6) {
+            v.classList.add("bad");
+            v.textContent = "❌ High real overpayment even after inflation.";
+        }
+        else if (real / loan > 0.3) {
+            v.classList.add("warn");
+            v.textContent = "⚠️ Moderate real overpayment after inflation.";
+        }
+        // если реальная ок, но номинальная высокая
+        else if (nominal / loan > 0.5) {
+            v.classList.add("info");
+            v.textContent = "ℹ️ Nominal overpayment is high, but inflation reduces real cost.";
+        }
+        else {
+            v.classList.add("good");
+            v.textContent = "✅ Loan overpayment is acceptable in real terms.";
+        }
     }
 
-    // ownership_cost
     if (calc.calculator_type === "ownership_cost") {
-        const cost = Number(r.totalCost || 0);
+        const price = Number(calc.input_data.price || 0);
+        const total = Number(r.totalCost || 0);
+        const real = Number(r.totalCostPV || 0);
 
-        if (!cost) {
+        if (!price || !total) {
             v.classList.add("info");
             v.textContent = "ℹ️ Ownership cost data unavailable.";
-        } else if (cost > 0) {
+        }
+        else if (real > price * 2) {
+            v.classList.add("bad");
+            v.textContent =
+                "❌ Total real ownership cost exceeds 2× property price. Ownership is inefficient.";
+        }
+        else if (real > price * 1.3) {
             v.classList.add("warn");
-            v.textContent = "⚠️ Ownership cost is significant.";
-        } else {
+            v.textContent =
+                "⚠️ Ownership costs are high relative to property price.";
+        }
+        else {
             v.classList.add("good");
-            v.textContent = "✅ Ownership cost is low.";
+            v.textContent =
+                "✅ Ownership costs are reasonable relative to property value.";
         }
 
         return v;
@@ -772,14 +1060,16 @@ function openCalculation(calc, container, button) {
     openedDetails = container;
     openedButton = button;
 
-    try{
-        container.appendChild(renderVerdict(calc));
-    }catch(e){
-        container.textContent = "Failed to render calculation.";
-    }
-    
+    const verdictEl = renderVerdict(calc);
+    container.appendChild(verdictEl);
+
+    const isBad = verdictEl.classList.contains("bad") ||
+        verdictEl.classList.contains("negative");
+
     const warning = renderWarnings(calc);
-    if (warning) container.appendChild(warning);
+    if (warning && !isBad) {
+        container.appendChild(warning);
+    }
     //input
     const inputTitle = document.createElement("h4");
     inputTitle.textContent = "Input data";

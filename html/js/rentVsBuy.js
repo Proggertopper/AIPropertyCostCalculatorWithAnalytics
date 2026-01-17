@@ -14,29 +14,46 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
 document.getElementById("calcBtn").addEventListener("click", e => {
   e.preventDefault();
 
-  const rent = +document.getElementById("rent").value;
+  let rent = +document.getElementById("rent").value;
   const years = +document.getElementById("years").value;
-  const mortgage = +document.getElementById("mortgage").value;
+  let mortgage = +document.getElementById("mortgage").value;
   const propertyValue = +document.getElementById("propertyValue").value;
+  const rentGrowth = +document.getElementById("rentGrowth").value / 100;
+  const mortgageRate = +document.getElementById("mortgageRate").value / 100;
+  const propertyGrowth = +document.getElementById("propertyGrowth").value / 100;
+  const inflation = +document.getElementById("inflation").value / 100;
 
-  if (!validateInputs({ rent, mortgage, years, propertyValue })) return;
+  if (!validateInputs({ rent, mortgage, years, propertyValue, rentGrowth , mortgageRate, propertyGrowth , inflation })) return;
 
   /* ===== calculations ===== */
 
-  const rentTotal = rent * 12 * years;
-  const mortgagePaid = mortgage * 12 * years;
+  let rentTotal = 0;
+  let mortgagePaid = 0;
+  let propertyValueFinal = propertyValue;
 
-  // минимально корректная модель:
-  const equity = Math.max(propertyValue - mortgagePaid, 0);
-  const buyNetCost = mortgagePaid - equity;
+  for (let year = 1; year <= years; year++) {
+    // рост аренды
+    rentTotal += rent * 12;
+    rent *= 1 + rentGrowth;
+
+    // ипотека с процентами
+    mortgagePaid += mortgage * 12;
+    mortgage *= 1 + mortgageRate;
+
+    // рост стоимости недвижимости
+    propertyValueFinal *= 1 + propertyGrowth;
+  }
+
+  // покупка с учётом инфляции
+  const buyNetCost = Math.max(mortgagePaid - propertyValueFinal / (1 + inflation) ** years, 0);
 
   /* ===== output ===== */
 
   document.getElementById("rentResult").textContent =
-    `Rent (total paid): ${moneyFormatter.format(rentTotal)}`;
+    `Rent (total paid with growth): ${moneyFormatter.format(rentTotal)}`;
 
   document.getElementById("buyResult").textContent =
-    `Buy (net cost): ${moneyFormatter.format(buyNetCost)}`;
+    `Buy (net cost adjusted for growth and inflation): ${moneyFormatter.format(buyNetCost)}`;
 
   document.getElementById("winner").textContent =
     rentTotal < buyNetCost
@@ -63,13 +80,16 @@ document.getElementById("calcBtn").addEventListener("click", e => {
         rent,
         mortgage,
         years,
-        propertyValue
+        propertyValue,
+        rentGrowth,
+        mortgageRate,
+        propertyGrowth,
+        inflation
       },
 
       resultData: {
         rentTotal,
         mortgagePaid,
-        equity,
         buyNetCost,
         winner: rentTotal < buyNetCost ? "rent" : "buy"
       }
@@ -83,7 +103,7 @@ document.getElementById("calcBtn").addEventListener("click", e => {
 
 /* ===== validation ===== */
 
-function validateInputs({ rent, mortgage, years, propertyValue }) {
+function validateInputs({ rent, mortgage, years, propertyValue, rentGrowth, mortgageRate, propertyGrowth, inflation }) {
   let isValid = true;
 
   document.querySelectorAll(".error").forEach(e => (e.textContent = ""));
@@ -112,6 +132,25 @@ function validateInputs({ rent, mortgage, years, propertyValue }) {
     isValid = false;
   }
 
+  if (isNaN(mortgageRate) || mortgageRate < 0 || mortgageRate > 100) {
+    document.getElementById("mortgageRateError").textContent = "Enter a valid mortgage rate (0-100%)";
+    isValid = false;
+  }
+  if (isNaN(propertyGrowth) || propertyGrowth < -50 || propertyGrowth > 50) {
+    document.getElementById("propertyGrowthError").textContent = "Enter a valid property growth (-50% to 50%)";
+    isValid = false;
+  }
+  if (isNaN(rentGrowth) || rentGrowth < -50 || rentGrowth > 50) {
+    document.getElementById("rentGrowthError").textContent = "Enter a valid rent growth (-50% to 50%)";
+    isValid = false;
+  }
+  if (isNaN(inflation) || inflation < 0 || inflation > 20) {
+    document.getElementById("inflationError").textContent = "Enter a valid inflation (0-20%)";
+    isValid = false;
+  }
+
   return isValid;
 }
+
+
 

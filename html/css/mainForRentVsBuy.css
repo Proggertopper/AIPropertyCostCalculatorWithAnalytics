@@ -1,12 +1,13 @@
 body {
     background: #f1f5f9;
     color: #0f172a;
+    line-height: 1.7;
 }
 
 /* layout */
 .calculator {
     max-width: 1100px;
-    margin: 80px auto;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
@@ -106,6 +107,82 @@ button:hover {
     color: #dc2626;
     font-size: 12px;
     margin-top: 4px;
+}
+
+          
+          @media (max-width: 900px) {
+              .hero h1 {
+                  font-size: 32px;
+              }
+    
+              .faq-grid {
+                  grid-template-columns: 1fr;
+              }
+    
+              .content-section {
+                  padding: 24px;
+              }
+          }
+                   @media (max-width: 780px) {
+                    .result{
+                        width: 100%;
+                    }
+                   }
+
+    
+         .highlight-box {
+             background: #eff6ff;
+             border-left: 4px solid #3b82f6;
+             padding: 20px;
+             margin: 20px 0;
+             border-radius: 6px;
+         }
+    
+         .highlight-box p {
+             color: #1e40af;
+             margin: 0;
+         }
+    
+         .two-col {
+             display: grid;
+             grid-template-columns: 1fr 1fr;
+             gap: 24px;
+             margin: 24px 0;
+         }
+    
+         .cost-box {
+             background: #f9fafb;
+             padding: 20px;
+             border-radius: 8px;
+             border: 1px solid #e5e7eb;
+         }
+    
+         .cost-box h4 {
+             font-size: 18px;
+             font-weight: 600;
+             color: #1a1a1a;
+             margin-bottom: 12px;
+         }
+    
+    
+         @media (max-width: 768px) {
+             .content-section {
+                 padding: 24px;
+             }
+    
+             h2 {
+                 font-size: 22px;
+             }
+    
+             .two-col {
+                 grid-template-columns: 1fr;
+             }
+         }
+
+@media(max-width:360px){
+    .grid{
+         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+    }
 }
 
 

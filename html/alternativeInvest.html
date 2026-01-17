@@ -20,16 +20,79 @@
 </head>
 <body>
 
-    <a href="./allCalculators.html" class="back-btn">← Back</a>
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="./mainPage.html" class="white-color">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="currentColor"
+                        class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                        <path
+                            d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
+                    </svg><span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="./allCalculators.html">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="./guides.html">Guides</a></li>
+                    <li><a class="nav-link white-color px-2" href="./AboutProject.html">About Project</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="./login.html">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="./register.html">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="./account.html" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    </header>
 
 
     <main id="main-content">
     <section class="calculator">
+        
+        
+        <div class="hero">
         <h1>Property vs Alternative Investments</h1>
         <p class="subtitle">
             Compare which option generates more money over the same period
         </p>
-    
+            <div class="benefits-bar">
+                <div class="benefit-item">Cross-asset comparison</div>
+                <div class="benefit-item">Opportunity cost analysis</div>
+                <div class="benefit-item">Scenario modeling and compounding visualization</div>
+                <div class="benefit-item">Portfolio and capital allocation support</div>
+            </div>
+        </div>
+
         <div class="grid">
     
             <!-- PROPERTY -->
@@ -37,21 +100,33 @@
                 <h3>Property</h3>
     
                 <label>
-                    Initial Investment
-                    <input type="number" id="propertyInitial">
+                    Initial Investment($)
+                    <input type="number" id="propertyInitial" placeholder="100000">
                     <div class="error" id="propertyInitialError"></div>
                 </label>
     
                 <label>
-                    Annual Cash Flow
-                    <input type="number" id="propertyCashflow">
+                    Annual Cash Flow($)
+                    <input type="number" id="propertyCashflow" placeholder="80000">
                     <div class="error" id="propertyCashflowError"></div>
                 </label>
     
                 <label>
-                    Annual Property Growth (%)
-                    <input type="number" id="propertyGrowth">
+                    Annual Property Growth(%)
+                    <input type="number" id="propertyGrowth" placeholder="20">
                     <div class="error" id="propertyGrowthError"></div>
+                </label>
+
+                <label>
+                    Inflation Rate(%)
+                    <input type="number" id="propertyInflation" placeholder="7">
+                    <div class="error" id="propertyInflationError"></div>
+                </label>
+                
+                <label>
+                    Tax Rate(%)
+                    <input type="number" id="propertyTax" placeholder="5">
+                    <div class="error" id="propertyTaxError"></div>
                 </label>
             </div>
     
@@ -60,15 +135,27 @@
                 <h3>Alternative Investments</h3>
     
                 <label>
-                    Expected Annual Return (%)
-                    <input type="number" id="altReturn">
+                    Expected Annual Return(%)
+                    <input type="number" id="altReturn" placeholder="4">
                     <div class="error" id="altReturnError"></div>
                 </label>
     
                 <label>
-                    Additional Contribution / year
-                    <input type="number" id="altContribution">
+                    Additional Contribution/year(%)
+                    <input type="number" id="altContribution" placeholder="5">
                     <div class="error" id="altContributionError"></div>
+                </label>
+
+                <label>
+                    Inflation Rate(%)
+                    <input type="number" id="altInflation" value="3">
+                    <div class="error" id="altInflationError"></div>
+                </label>
+                
+                <label>
+                    Tax Rate(%)
+                    <input type="number" id="altTax" placeholder="5">
+                    <div class="error" id="altTaxError"></div>
                 </label>
             </div>
     
@@ -77,8 +164,8 @@
                 <h3>Parameters</h3>
     
                 <label>
-                    Investment Term (years)
-                    <input type="number" id="years">
+                    Investment Term(years)
+                    <input type="number" id="years" placeholder="10">
                     <div class="error" id="yearsError"></div>
                 </label>
     
@@ -102,14 +189,346 @@
                 <div id="winner" class="winner">—</div>
             </div>
         </div>
+
+        <div id="guest-promo" class="hidden">
+            <div class="playful-blob">
+                <div class="blob-content">
+                    <span class="blob-emoji">🚀</span>
+                    <div class="blob-title">Ready to make smarter decisions?</div>
+                    <div class="blob-text">Join our community and get access to your personal calculation dashboard with full
+                        history and insights</div>
+                    <a href="./register.html"><button class="blob-btn">Create Free Account</button></a>
+                </div>
+            </div>
+        </div>
+        
+        <div id="user-promo" class="hidden">
+            <span class="teaser-emoji">💡</span>
+            <div class="teaser-content">
+                <div class="teaser-title-small">Want to check your calculation?</div>
+                <div class="teaser-text-small">Hit the button to keep track of all your comparisons and verdicts</div>
+            </div>
+            <a href="./account.html"><button class="teaser-btn">Profile</button></a>
+        </div>
     
         <p class="disclaimer">
             Results are for informational purposes only and do not constitute financial advice.
             <a href="/disclaimer.html">Read full disclaimer</a>
         </p>
     </section>
+
+    <div class="content-wrapper">
+    
+        <!-- Introduction -->
+        <div class="content-section">
+            <h2>Alternative Investments Calculator</h2>
+            <p><strong>Is real estate actually the best use of your capital?</strong></p>
+    
+            <p>You can use the Alternative Investments Calculator to compare real estate returns with other alternative
+                investment options like stocks, bonds, or diversified portfolios. It levels the playing field for different
+                asset classes by showing how your money might grow over time with various return assumptions.</p>
+    
+            <p>We designed this tool for investors who seek to base their asset allocation strategy on solid numbers instead
+                of stories.</p>
+    
+            <p>When you think about investment portfolio comparison, real estate vs stocks or real estate vs bonds often
+                comes up. This calculator helps with portfolio diversification strategy by revealing the opportunity cost of
+                capital in different choices. It supports capital allocation analysis and highlights risk-adjusted return
+                differences across options.</p>
+    
+            <p>Many people view real estate as a safe, hands-on asset. Yet, it brings challenges like lower liquidity risk,
+                more work, and concentrated investment risk. Comparing it to other assets shows if the rewards match these
+                drawbacks. This tool aids long-term wealth planning and financial decision-making tools by projecting
+                investment growth projection and compounded annual growth over your investment time horizon.</p>
+    
+            <p>In investment management, understanding passive vs active investment is key. Real estate often falls into
+                active, while stocks or bonds can be passive. This calculator enables investment return comparison to guide
+                your reinvestment strategy and pre-tax return comparison.</p>
+        </div>
+    
+        <!-- What Calculator Helps Compare -->
+        <div class="content-section">
+            <h2>What This Calculator Helps You Compare</h2>
+            <p>Investors frequently look at real estate alone. This calculator promotes wider thinking by answering
+                questions like:</p>
+    
+            <ul>
+                <li>How do my real estate returns stack up against a stock market investment?</li>
+                <li>What opportunity cost comes from locking capital into property?</li>
+                <li>How does time impact performance between asset classes?</li>
+                <li>At what return does real estate make sense given its work and risk?</li>
+                <li>How does diversified portfolio performance compare to concentrated real estate?</li>
+                <li>What trade-offs show up in portfolio trade-off analysis?</li>
+            </ul>
+    
+            <p>By placing outcomes next to each other, the calculator points out trade-offs that people often miss. It uses
+                investment scenario modeling to show clear pictures of potential results.</p>
+    
+            <p>For example, imagine putting $100,000 into real estate with 8% annual return versus stocks at 10%. Over 20
+                years, compounding might favor stocks. This tool visualizes that to help informed decisions.</p>
+    
+            <p>It also covers real estate return assumptions against equity investment comparison and bond investment
+                analysis. This helps financial professionals and individual investors alike in managing risks and seeking
+                high return options.</p>
+        </div>
+    
+        <!-- How Comparison Calculated -->
+        <div class="content-section">
+            <h2>How the Comparison Is Calculated (Plain Explanation)</h2>
+            <p>The calculator starts with an initial investment and applies different yearly return rates to each asset
+                class.</p>
+    
+            <p>For real estate, returns blend assumptions that cover cash flow, value growth, and borrowing effects. For
+                other assets like stocks or bonds, we model returns as yearly compounded growth over the chosen time frame.
+            </p>
+    
+            <p>We project all scenarios over the same period. This lets you compare final values, growth paths, and relative
+                results without mixing mismatched metrics.</p>
+    
+            <h3>Key Asset Classes Breakdown</h3>
+            <div class="asset-grid">
+                <div class="asset-card">
+                    <h4>Real Estate</h4>
+                    <p>Includes rental income, appreciation, and potential leverage. Assumed returns often range from 6-12%
+                        based on market and management.</p>
+                </div>
+    
+                <div class="asset-card">
+                    <h4>Stocks (Equities)</h4>
+                    <p>Modeled with historical averages like 7-10% annual growth, including dividends. Represents broader
+                        market exposure.</p>
+                </div>
+    
+                <div class="asset-card">
+                    <h4>Bonds</h4>
+                    <p>Lower risk with 3-5% returns typically. Focuses on fixed income and stability.</p>
+                </div>
+    
+                <div class="asset-card">
+                    <h4>Diversified Portfolios</h4>
+                    <p>Mixes assets for balanced growth, often 5-8% returns with reduced price swings.</p>
+                </div>
+            </div>
+    
+            <p>The tool uses asset class benchmarking to ensure fair comparisons. It focuses on long-term capital growth and
+                investment efficiency metric without diving into daily market price changes.</p>
+    
+            <p>Remember, this compares returns only. You should assess risk, price swings, and liquidity separately. Taxes
+                differ by person and place, so view results before taxes unless you specify otherwise.</p>
+    
+            <p>Borrowing can show up as higher return assumptions for real estate, but we emphasize outcome comparison over
+                financing details.</p>
+    
+            <div class="info-box">
+                <p><strong>Compounding power:</strong> Small return differences grow big over long periods. A 2% edge can
+                    double outcomes in 30 years.</p>
+            </div>
+        </div>
+    
+        <!-- Why Comparing Matters -->
+        <div class="content-section">
+            <h2>Why Comparing Alternative Investments Matters</h2>
+            <p>People often see real estate as safer or more real, but it includes lower liquidity, more effort, and focused
+                risk. Comparing to other classes helps check if the extra return justifies it.</p>
+    
+            <p>This calculator aids:</p>
+            <ul>
+                <li>Capital allocation decisions</li>
+                <li>Portfolio spreading investments planning</li>
+                <li>Risk-adjusted thinking</li>
+                <li>Long-term wealth strategy design</li>
+                <li>Investment portfolios optimization</li>
+                <li>Fund management choices</li>
+            </ul>
+    
+            <p>It changes the question from “Is real estate good?” to “Is real estate the best for this capital?” This
+                promotes better investment opportunity evaluation and total return analysis.</p>
+    
+            <p>In a world of many investment options, knowing the opportunity cost helps avoid regrets. For instance, tying
+                money in property might miss stock booms. This tool shows those scenarios clearly.</p>
+    
+            <p>Portfolio manager tools like this emphasize that no guarantee of future results exists. Past performance
+                guides assumptions, but markets change.</p>
+    
+            <p>Consider real estate investment trusts (REITs) as a bridge— they offer real estate exposure with stock-like
+                liquidity. The calculator can model these too.</p>
+    
+            <div class="key-takeaway">
+                <p><strong>Key Takeaways:</strong></p>
+                <ul>
+                    <li>Diversify to manage concentrated risks in single assets.</li>
+                    <li>Factor in effort: Active real estate vs passive stocks.</li>
+                    <li>Think long-term: Compounding favors consistent returns.</li>
+                    <li>Assess liquidity: Quick access matters in emergencies.</li>
+                    <li>Be tax efficient: Different assets have varying tax impacts.</li>
+                </ul>
+            </div>
+        </div>
+    
+        <!-- Location and Factors
+            <div class="content-section">
+                <h2>How Different Factors Affect Comparisons</h2>
+                <p>Investment results vary by market, economy, and personal situation. Key elements include:</p>
+                
+                <h3>Return Assumptions and Risks</h3>
+                <p>Higher assumed returns boost projections, but come with more price swings. Real estate might offer steady income, while stocks provide growth potential.</p>
+                
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Asset Class</th>
+                            <th>Typical Return</th>
+                            <th>Risk Level</th>
+                            <th>Liquidity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Real Estate</td>
+                            <td>6-12%</td>
+                            <td>Medium (local markets)</td>
+                            <td>Low</td>
+                        </tr>
+                        <tr>
+                            <td>Stocks</td>
+                            <td>7-10%</td>
+                            <td>High (market swings)</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Bonds</td>
+                            <td>3-5%</td>
+                            <td>Low</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Savings Account</td>
+                            <td>1-3%</td>
+                            <td>Very Low</td>
+                            <td>High</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <p>Annualized return calculations help standardize views. Adjust for your risk tolerance and investment time horizon.</p>
+                
+                <p>Economic factors like inflation or interest rates impact all classes differently. Real estate might hedge inflation better than bonds.</p>
+            </div> -->
+    
+        <!-- Soft CTA -->
+        <div class="content-section">
+            <h2>Get Deeper Insight From Your Results</h2>
+            <p>To dig into trade-offs, try these changes:</p>
+    
+            <div class="info-box">
+                <p>Drop real estate return assumptions for cautious tests.</p>
+            </div>
+    
+            <div class="info-box">
+                <p>Lengthen the time frame to view compounding effects.</p>
+            </div>
+    
+            <div class="info-box">
+                <p>Compare several return rates together.</p>
+            </div>
+    
+            <div class="info-box">
+                <p>Test reinvestment instead of taking money out.</p>
+            </div>
+    
+            <div class="info-box">
+                <p>Add custom assets like REITs or commodities.</p>
+            </div>
+    
+            <p>These shifts often flip which class looks best, revealing sensitivities.</p>
+        </div>
+    
+        <!-- FAQ -->
+        <div class="content-section">
+            <h2>Frequently Asked Questions</h2>
+    
+            <div class="faq-item">
+                <h4>Can this really compare real estate to stocks?</h4>
+                <p>Yes. By showing all as compounded returns over time, it enables fair comparisons across classes.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>Does this account for risk differences?</h4>
+                <p>Not directly. It compares returns; evaluate risk, price swings, and liquidity on your own.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>Are taxes included in the comparison?</h4>
+                <p>Usually no. Taxes differ by investor and area, so see results pre-tax unless noted.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>Why does real estate sometimes underperform in results?</h4>
+                <p>This occurs with modest assumptions or when compounding helps liquid assets over long times.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>Is leverage included for real estate?</h4>
+                <p>It can appear via higher return assumptions, but we focus on outcomes, not financing.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>How do I factor in taxes or fees?</h4>
+                <p>Adjust return assumptions downward to account for them in your scenarios.</p>
+            </div>
+    
+            <div class="faq-item">
+                <h4>What about inflation?</h4>
+                <p>Use real returns (above inflation) for assumptions to keep comparisons accurate.</p>
+            </div>
+        </div>
+    
+        <!-- Who Should Use -->
+        <div class="content-section">
+            <h2>Who This Calculator Is For</h2>
+            <p>This tool helps if you are:</p>
+            <ul>
+                <li>Deciding where to put new capital</li>
+                <li>Comparing real estate with passive investments</li>
+                <li>Planning long-term portfolio strategy</li>
+                <li>Checking opportunity cost before buying</li>
+                <li>Building a portfolio planning calculator approach</li>
+                <li>Seeking investing returns optimization</li>
+            </ul>
+            <p>It pairs well with IRR and cash flow tools for full real estate views in broader contexts.</p>
+    
+            <p>Whether you're a beginner or pro, it simplifies complex choices for better decisions.</p>
+        </div>
+    
+        <!-- Interpretation -->
+        <div class="content-section">
+            <h2>How to Interpret the Results</h2>
+            <p>Results display possible growth, not guarantees. Higher values don't mean better if your risk tolerance,
+                effort, or liquidity needs differ.</p>
+    
+            <p>Use comparisons to understand trade-offs, not chase top numbers. Bottom line: Balance returns with your full
+                financial picture.</p>
+    
+            <p>In long-term wealth planning, consider all factors. This tool is one piece in smart investment management.
+            </p>
+        </div>
+    
+    </div>
+
 </main>
+
+<footer class="pb-3 ">
+    <ul class="footer-links pb-3 justify-content-center mb-3 ">
+        <li><a href="./privacyPolicy.html" class="px-2 py-2">Privacy Policy</a></li>
+        <li><a href="./termsOfService.html" class="px-2 py-2">Terms of Service</a></li>
+        <li><a href="./disclaimer.html" class="px-2 py-2">Disclaimer</a></li>
+        <!-- не менять марджины и ботоммы сломается адаптивность-->
+        <li><a href="./contactUs.html" class="px-2 py-2">Contact us</a></li>
+    </ul>
+    <p class="text-center">© 2026 PropertyCost</p>
+</footer>
     
     <script src="/js/alternativeInvest.js"></script>
+    <script src="/js/logout.js" defer></script>
 </body>
 </html>

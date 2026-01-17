@@ -1,12 +1,13 @@
 body {
     background: #f1f5f9;
     color: #0f172a;
+    line-height: 1.7;
 }
 
 /* layout */
 .calculator {
     max-width: 1100px;
-    margin: 80px auto;
+    margin: 40px auto;
     padding: 0 20px;
 }
 
@@ -21,11 +22,12 @@ h1 {
     margin-bottom: 40px;
 }
 
-.grid {
+ .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
-}
+    
+} 
 
 /* cards */
 .card {
@@ -89,5 +91,195 @@ button:hover {
     font-size: 12px;
     margin-top: 4px;
 }
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    color: #0f172a;
+    margin-bottom: 1rem;
+    margin-top: 1.2rem;
+}
+
+.hero .subtitle {
+    font-size: 18px;
+    color: #64748b;
+    margin: 0 auto 30px;
+}
+
+.benefits-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    color: #475569;
+}
+
+.benefit-item::before {
+    content: "✓";
+    width: 20px;
+    height: 20px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+
+
+  p {
+      color: #3b3b3b;
+      margin-bottom: 16px;
+      font-size: 15px;
+  }
+
+  ul {
+      margin: 16px 0;
+      padding-left: 24px;
+      list-style: disc;
+  }
+
+  li {
+      color: #3b3b3b;
+      margin-bottom: 10px;
+      font-size: 15px;
+  }
+
+.info-box {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 6px;
+}
+
+.info-box p {
+    color: #1e40af;
+    margin: 0;
+}
+
+.cost-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.cost-card {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.cost-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e40af;
+    margin-bottom: 8px;
+}
+
+.cost-card p {
+    font-size: 14px;
+    margin: 0;
+}
+
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comparison-table th {
+    background: #f8fafc;
+    font-weight: 600;
+    color: #1a1a1a;
+}
+
+.faq-item {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.faq-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.faq-item h4 {
+    font-size: 17px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 10px;
+}
+
+strong {
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .content-section {
+        padding: 24px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    .cost-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+ @media(max-width:360px) {
+    .grid {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+} 
+
+ @media (max-width: 900px) {
+     .hero h1 {
+         font-size: 32px;
+     }
+
+     .faq-grid {
+         grid-template-columns: 1fr;
+     }
+
+     .content-section {
+         padding: 24px;
+     }
+ }
+
+ @media (max-width: 780px) {
+     .result {
+         width: 100%;
+     }
+ }
 
 

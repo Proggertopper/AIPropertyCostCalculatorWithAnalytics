@@ -5,4 +5,10 @@
     --my-breakpoint-lg:992px;
     --my-breakpoint-xl:1200px;
     --my-breakpoint-xxl:1400px;
+    --primary: #0a2540;
+    --secondary: #1e3a8a;
+    --accent: #2563eb;
+    --light: #f8fafc;
+    --gray: #64748b;
+    --border: #e5e7eb;
 }

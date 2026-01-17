@@ -229,6 +229,15 @@
     color: #f87171;
     font-weight: 600;
 }
+.positive {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+.negative {
+    color: #f87171;
+    font-weight: 600;
+}
 
 .result-highlight {
     font-size: 1.1em;
@@ -272,6 +281,7 @@
 .details-toggle:hover {
     text-decoration: underline;
 }
+
 
 
 
