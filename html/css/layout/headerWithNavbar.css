@@ -19,20 +19,23 @@
     align-items: center;
 }  
 
-.logo a {
-    display: inline-flex;
+ .logo a {
+    display: flex;
     align-items: center;
     font-size: 1.5rem;
     font-weight: 600;
     color: #fff;
-    text-decoration: none;
+    text-decoration: none;   
+    line-height: 1;
 }
 
 .logo svg {
+    width: 1em;
+    height: 1em;
     display: block;
-    margin-top: 0.19rem;
-    /* КЛЮЧЕВО */
-}
+    flex-shrink: 0;
+} 
+
 
 .nav-menu {
     display: grid;
@@ -47,6 +50,7 @@
     gap: 1.5rem;
     margin: 0 auto;
     list-style: none;
+    padding: 0;
 }
 
 
