@@ -1,0 +1,776 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="What is IRR (Internal Rate of Return)? Learn the clear definition, how IRR works, how to interpret it, and how to calculate IRR and XIRR in Excel/Google Sheets. Includes examples for investments and real estate, IRR vs ROI vs CAGR vs NPV, common pitfalls (multiple IRRs, reinvestment assumption), and a practical checklist + FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/what-is-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/what-is-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/what-is-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>What Is IRR? Internal Rate of Return Explained (With Examples) | PropertyCost</title>
+
+    <meta property="og:title" content="What Is IRR? Internal Rate of Return Explained" />
+    <meta property="og:description"
+        content="A practical guide to IRR: definition, interpretation, how to calculate (IRR/XIRR), examples, and common pitfalls like multiple IRRs and misleading comparisons." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/what-is-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="What Is IRR? Internal Rate of Return Explained">
+    <meta name="twitter:description"
+        content="Learn what IRR means, how it’s calculated, how to interpret it, and when IRR can mislead—plus real estate examples and a checklist.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/what-is-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"What is IRR","item":"https://mypropertycost.com/irr/what-is-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/what-is-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What does IRR mean?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR (Internal Rate of Return) is the discount rate that makes the net present value (NPV) of an investment’s cash flows equal to zero. Practically, it’s the annualized rate that summarizes how quickly an investment ‘turns’ your cash into more cash, given the timing of cash flows."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is IRR the same as ROI?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. ROI is a simple total return measure (profit divided by invested amount) and ignores time. IRR is time-weighted and annualized, so it accounts for when cash goes in and comes out."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I calculate IRR in Excel or Google Sheets?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use IRR(values) if cash flows are periodic (e.g., monthly or yearly). Use XIRR(values, dates) when cash flow dates are irregular, which is common in real estate. Include the initial investment as a negative cash flow and future distributions/sale proceeds as positive cash flows."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why can IRR be misleading?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR can mislead when projects have different sizes, different timelines, or non-standard cash flow patterns. It also assumes reinvestment at the IRR rate and can produce multiple IRRs when cash flows change sign more than once. Pair IRR with NPV, equity multiple, and scenario ranges."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is a good IRR for real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"There is no universal ‘good’ IRR because risk, leverage, market conditions, fees, and holding period matter. A ‘good’ IRR is one that beats your hurdle rate for that risk level and still looks reasonable under conservative assumptions."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">What is IRR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#definition">Definition (plain English)</a></li>
+                    <li><a href="#intuition">Intuition: why timing matters</a></li>
+                    <li><a href="#formula">IRR and NPV relationship</a></li>
+                    <li><a href="#example-simple">Simple example (one buy, one sell)</a></li>
+                    <li><a href="#example-multi">Example with multiple cash flows</a></li>
+                    <li><a href="#real-estate">IRR in real estate (levered vs unlevered)</a></li>
+                    <li><a href="#calc">How to calculate IRR (Excel/Sheets)</a></li>
+                    <li><a href="#interpret">How to interpret IRR</a></li>
+                    <li><a href="#compare">IRR vs ROI vs CAGR vs NPV</a></li>
+                    <li><a href="#pitfalls">Common pitfalls (and fixes)</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate IRR fast</div>
+                        <div class="sidebar-cta__sub">Plug in cash flows and dates.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>What Is IRR? Internal Rate of Return (IRR) Explained</h1>
+                        <p class="subtitle">
+                            IRR (Internal Rate of Return) is one of the most common investment metrics because it turns
+                            a messy stream of cash flows
+                            into a single annualized number. The problem: IRR is also one of the most misunderstood
+                            metrics—especially in real estate,
+                            where cash flows are irregular, leverage can inflate results, and small timing changes can
+                            swing the headline number.
+                            This guide explains IRR in plain English, shows how to calculate it (IRR vs XIRR), and gives
+                            you a practical framework to
+                            use IRR correctly (and avoid the classic traps).
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~18–26 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#definition">Definition</a>
+                    <a href="#calc">Calculate</a>
+                    <a href="#pitfalls">Pitfalls</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/calculator/">
+                            <strong>IRR calculator</strong>
+                            <span>Compute IRR/XIRR from cash flows and dates.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/real-estate-irr/">
+                            <strong>Real estate IRR</strong>
+                            <span>Levered vs unlevered, sale proceeds, fees.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/irr-vs-npv/">
+                            <strong>IRR vs NPV</strong>
+                            <span>When a “higher IRR” is not better.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>IRR (Internal Rate of Return)</strong> is the discount rate that makes an investment’s
+                        <strong>net present value (NPV) equal to zero</strong>.
+                        In plain English: it’s the annualized rate that summarizes how your money grows given
+                        <em>when</em> you invest cash and <em>when</em> you get cash back.
+                        IRR is useful for comparing projects with different cash flow timing, but it can be misleading
+                        when projects differ in size, timeline, or have unusual cash flow patterns.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical rule:</strong> Use IRR with at least one “backup metric” (NPV or equity
+                            multiple) and always test a conservative scenario.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definition">
+                    <h2>What IRR Means (Plain English Definition)</h2>
+                    <p>
+                        IRR is the single annual percentage rate that makes the “present value” of all cash flows equal
+                        to the initial investment.
+                        It treats the investment like a deal where money goes out and money comes back in over time—and
+                        asks:
+                    </p>
+                    <p>
+                        <strong>“What constant annual rate would make these cash flows break even in present-value
+                            terms?”</strong>
+                    </p>
+                    <p>
+                        The reason it’s called “internal” is that it’s based only on the cash flows of the project
+                        itself (the “inside” of the deal),
+                        not on external market comparisons. IRR doesn’t know your alternative options; it only
+                        summarizes what this specific cash flow stream implies.
+                    </p>
+
+                    <h3>What IRR is not</h3>
+                    <ul>
+                        <li><strong>Not ROI:</strong> ROI ignores time; IRR is time-sensitive.</li>
+                        <li><strong>Not guaranteed:</strong> IRR is computed from assumed or historical cash flows.
+                            Future IRR is a projection, not a promise.</li>
+                        <li><strong>Not always comparable:</strong> A higher IRR is not automatically “better” if the
+                            deal is smaller or shorter.</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="intuition">
+                    <h2>Intuition: Why Timing Matters (The Core Reason IRR Exists)</h2>
+                    <p>
+                        Consider two investments that both make you $10,000 in profit. One returns the profit in one
+                        year, the other returns the profit in ten years.
+                        Most people agree the one-year version is better. Why?
+                    </p>
+                    <ul>
+                        <li>You get your money back sooner (you can reinvest it).</li>
+                        <li>You take risk for less time.</li>
+                        <li>Inflation and uncertainty have less time to harm you.</li>
+                    </ul>
+                    <p>
+                        ROI alone can’t distinguish these cases well because it doesn’t “care” about time. IRR does.
+                        IRR is essentially a time-weighted way to express: <strong>how fast did this investment
+                            compound, given the timing of cash flows?</strong>
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>IRR and NPV: The Relationship (Why IRR Is a “Discount Rate”)</h2>
+                    <p>
+                        You don’t need to love formulas to use IRR, but this one idea makes everything click:
+                    </p>
+                    <div class="callout">
+                        <p><strong>IRR is the discount rate that makes NPV = 0.</strong></p>
+                    </div>
+                    <p>
+                        NPV takes each cash flow and discounts it back to today using a discount rate (your required
+                        return / hurdle rate).
+                        If NPV is positive at your hurdle rate, the investment clears your requirement.
+                    </p>
+                    <p>
+                        IRR flips the question: instead of choosing a discount rate and calculating NPV, it finds the
+                        discount rate where the NPV would be exactly zero.
+                        That “break-even discount rate” is the IRR.
+                    </p>
+
+                    <h3>Why that matters</h3>
+                    <ul>
+                        <li>If <strong>IRR is above</strong> your hurdle rate, NPV is typically positive (good sign).
+                        </li>
+                        <li>If <strong>IRR is below</strong> your hurdle rate, NPV is typically negative (bad sign).
+                        </li>
+                        <li>But comparisons get tricky when deal sizes differ or cash flows are unusual.</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="example-simple">
+                    <h2>Simple IRR Example (One Buy, One Sell)</h2>
+                    <p>
+                        Suppose you invest $100,000 today and receive $110,000 exactly one year later.
+                        Intuitively, that’s a 10% one-year return.
+                    </p>
+                    <ul>
+                        <li>Initial cash flow: <strong>-$100,000</strong> (money out)</li>
+                        <li>Year 1 cash flow: <strong>+$110,000</strong> (money in)</li>
+                    </ul>
+                    <p>
+                        The IRR here is 10% because discounting the $110,000 back one year at 10% gives $100,000.
+                        This is the simplest case and it matches intuition.
+                    </p>
+
+                    <h3>Why this example is too clean</h3>
+                    <p>
+                        Real investments rarely have just one inflow. Real estate can include monthly cash flow,
+                        repairs, refinance proceeds,
+                        and a final sale. That’s where IRR becomes more useful—and also more fragile.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="example-multi">
+                    <h2>IRR Example With Multiple Cash Flows</h2>
+                    <p>
+                        Here’s a more realistic “many cash flows” pattern:
+                    </p>
+                    <ul>
+                        <li>Today: invest <strong>-$100,000</strong></li>
+                        <li>End of Year 1: receive <strong>+$5,000</strong></li>
+                        <li>End of Year 2: receive <strong>+$5,000</strong></li>
+                        <li>End of Year 3: receive <strong>+$5,000</strong></li>
+                        <li>End of Year 4: receive <strong>+$5,000</strong></li>
+                        <li>End of Year 5: receive <strong>+$115,000</strong> (final distribution / sale)</li>
+                    </ul>
+                    <p>
+                        Total cash received is $135,000, which looks like a 35% “total” gain. But IRR will be lower than
+                        35% because the gains arrive over time.
+                        IRR converts this pattern into an annual rate that “explains” all those flows.
+                    </p>
+
+                    <h3>What changes IRR the most in multi-cash-flow deals</h3>
+                    <ul>
+                        <li><strong>Earlier cash flow increases IRR</strong> (even if the total is the same).</li>
+                        <li><strong>A higher final sale increases IRR</strong>.</li>
+                        <li><strong>Delays reduce IRR</strong> (because money is tied up longer).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            This is why IRR can be “optimized” by timing—sometimes in ways that look good on paper but
+                            don’t increase total dollars.
+                            Always check the total money returned (equity multiple) and/or NPV.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="real-estate">
+                    <h2>IRR in Real Estate: What You Must Include</h2>
+                    <p>
+                        Real estate investors use IRR constantly because real estate cash flows are rarely neat and
+                        periodic.
+                        A correct real estate IRR typically includes:
+                    </p>
+                    <ul>
+                        <li>Down payment (negative cash flow at purchase)</li>
+                        <li>Closing costs (negative cash flow)</li>
+                        <li>Renovation / CapEx outlays (negative cash flows when paid)</li>
+                        <li>Operating cash flow / distributions (positive or negative over time)</li>
+                        <li>Refinance proceeds (positive cash flow when cash is pulled out)</li>
+                        <li>Sale proceeds net of selling costs and loan payoff (final positive cash flow)</li>
+                    </ul>
+
+                    <h3>Levered IRR vs unlevered IRR</h3>
+                    <p>
+                        In real estate you’ll often see two IRRs:
+                    </p>
+                    <ul>
+                        <li><strong>Unlevered IRR:</strong> cash flows assuming no debt (or before debt). This reflects
+                            the property economics.</li>
+                        <li><strong>Levered IRR:</strong> cash flows to equity after debt. This reflects the investor’s
+                            return with financing.</li>
+                    </ul>
+                    <p>
+                        Leverage can increase IRR, but it also increases risk. Comparing levered IRRs across deals with
+                        different leverage is risky
+                        unless you adjust for risk and understand the debt terms.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If you want a focused real estate explanation, use:
+                            <a href="/irr/real-estate-irr/">Real estate IRR</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="calc">
+                    <h2>How to Calculate IRR (Excel / Google Sheets)</h2>
+                    <p>
+                        Most people calculate IRR using spreadsheets. The key is choosing the right function:
+                    </p>
+
+                    <h3>IRR(values) for periodic cash flows</h3>
+                    <p>
+                        Use <strong>IRR()</strong> when cash flows happen at equal intervals (e.g., every year, every
+                        month).
+                        The function assumes spacing is consistent.
+                    </p>
+
+                    <h3>XIRR(values, dates) for irregular cash flows</h3>
+                    <p>
+                        Use <strong>XIRR()</strong> when cash flows happen on irregular dates (very common in real
+                        estate).
+                        You provide a list of cash flows and a matching list of dates.
+                    </p>
+
+                    <h3>Common setup mistakes (that break IRR)</h3>
+                    <ul>
+                        <li><strong>Missing the initial negative cash flow:</strong> IRR needs at least one negative and
+                            one positive cash flow.</li>
+                        <li><strong>Wrong signs:</strong> money you invest is negative; money you receive is positive.
+                        </li>
+                        <li><strong>Using IRR instead of XIRR:</strong> irregular timing can materially change the
+                            result.</li>
+                        <li><strong>Forgetting fees/selling costs:</strong> leaving out friction inflates IRR.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Want a fast check? Plug the same cash flows into the <a href="/irr/calculator/">IRR
+                                calculator</a> and compare.
+                            If your spreadsheet and calculator differ, the issue is usually timing (IRR vs XIRR) or sign
+                            conventions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="interpret">
+                    <h2>How to Interpret IRR (What a “High IRR” Actually Means)</h2>
+                    <p>
+                        IRR is an annualized rate. That sounds like a “yield,” but it’s not the same as a stable yearly
+                        yield.
+                        It’s the one rate that fits the entire cash flow timeline.
+                    </p>
+
+                    <h3>Interpretation rule #1: IRR is not a promise</h3>
+                    <p>
+                        Forward-looking IRR is a projection based on assumptions (rent growth, occupancy, expenses, sale
+                        cap rate, appreciation).
+                        Small assumption changes can shift IRR meaningfully—especially when the exit sale is a large
+                        portion of total returns.
+                    </p>
+
+                    <h3>Interpretation rule #2: compare IRR to a hurdle rate, not to other random IRRs</h3>
+                    <p>
+                        A “good IRR” depends on risk and alternatives. Your hurdle rate is your required return for that
+                        risk.
+                        If your hurdle rate is 10%, an 8% IRR may be unattractive even if it’s “positive.”
+                    </p>
+
+                    <h3>Interpretation rule #3: watch the timeline</h3>
+                    <p>
+                        A short deal can have a very high IRR because money turns fast.
+                        That doesn’t automatically mean it creates more wealth in dollars.
+                        Always look at:
+                    </p>
+                    <ul>
+                        <li>Total dollars returned</li>
+                        <li>Equity multiple (how many times your money you got back)</li>
+                        <li>NPV at your hurdle rate</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If you only take one lesson: <strong>IRR alone is incomplete.</strong> Pair it with NPV or
+                            equity multiple.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="compare">
+                    <h2>IRR vs ROI vs CAGR vs NPV (When Each Metric Wins)</h2>
+
+                    <h3>IRR vs ROI</h3>
+                    <p>
+                        <strong>ROI</strong> is total return: profit ÷ invested amount. It ignores time.
+                        <strong>IRR</strong> is time-aware and annualized.
+                        If timing varies, IRR is more informative. If you only care about total profit regardless of
+                        time, ROI can be fine.
+                    </p>
+
+                    <h3>IRR vs CAGR</h3>
+                    <p>
+                        <strong>CAGR</strong> (compound annual growth rate) works best when you invest once and get one
+                        final value.
+                        IRR handles multiple inflows/outflows (which is why it’s used for funds and real estate).
+                        If your cash flows are “one in, one out,” CAGR and IRR can be similar.
+                    </p>
+
+                    <h3>IRR vs NPV</h3>
+                    <p>
+                        <strong>NPV</strong> measures value in dollars at a chosen discount rate (your hurdle rate).
+                        IRR gives you a percent rate. When comparing projects of different sizes, NPV can be the more
+                        correct decision tool because it asks:
+                        “Which option creates more value in dollars at our required return?”
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Most professional analysis uses <strong>both</strong>: IRR for intuition and communication,
+                            NPV for decision clarity.
+                            See: <a href="/irr/irr-vs-npv/">IRR vs NPV</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="pitfalls">
+                    <h2>Common IRR Pitfalls (And How to Avoid Them)</h2>
+
+                    <h3>1) Multiple IRRs (when cash flows change sign more than once)</h3>
+                    <p>
+                        If cash flows go negative → positive → negative → positive, the IRR equation can have multiple
+                        solutions.
+                        That means IRR can become ambiguous or misleading.
+                        <br><strong>Fix:</strong> use NPV, or consider MIRR (modified IRR), or restructure the analysis
+                        to isolate phases.
+                    </p>
+
+                    <h3>2) Reinvestment assumption</h3>
+                    <p>
+                        IRR implicitly assumes interim cash flows are reinvested at the IRR itself.
+                        For very high IRRs, this can be unrealistic.
+                        <br><strong>Fix:</strong> use MIRR (which uses a realistic reinvestment rate) or check
+                        NPV/equity multiple.
+                    </p>
+
+                    <h3>3) Comparing different-sized projects using only IRR</h3>
+                    <p>
+                        A tiny deal can have a huge IRR but create fewer dollars than a larger deal with a lower IRR.
+                        <br><strong>Fix:</strong> compare NPV and total profit alongside IRR.
+                    </p>
+
+                    <h3>4) Comparing different timelines using only IRR</h3>
+                    <p>
+                        Short deals often show higher IRR. That doesn’t mean they are better for building wealth if
+                        capital can’t be redeployed reliably.
+                        <br><strong>Fix:</strong> consider your realistic ability to “repeat” the short deal and keep
+                        capital deployed.
+                    </p>
+
+                    <h3>5) Ignoring fees, taxes, and friction</h3>
+                    <p>
+                        Leaving out transaction costs or fees inflates IRR. In real estate, ignoring selling costs and
+                        CapEx is especially common.
+                        <br><strong>Fix:</strong> model net-of-fee cash flows and use conservative exit assumptions.
+                    </p>
+
+                    <h3>6) Using IRR without scenario ranges</h3>
+                    <p>
+                        A single IRR number can be fragile. One rent assumption or exit price change can swing it.
+                        <br><strong>Fix:</strong> run conservative / base / optimistic scenarios and check sensitivity.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            A good habit: if IRR changes dramatically with a small assumption tweak, don’t treat it as
+                            “the answer.”
+                            Treat it as a sensitivity warning.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist: Use IRR the Right Way</h2>
+                    <ul>
+                        <li>✅ Include at least one negative and one positive cash flow (correct signs)</li>
+                        <li>✅ Use XIRR if cash flow dates are irregular (common in real estate)</li>
+                        <li>✅ Include all friction: closing costs, fees, major CapEx, selling costs, taxes if you model
+                            them</li>
+                        <li>✅ Compare IRR to a hurdle rate that matches risk (not to a random benchmark)</li>
+                        <li>✅ Pair IRR with at least one backup metric (NPV or equity multiple)</li>
+                        <li>✅ Run conservative and optimistic scenarios (don’t trust one perfect case)</li>
+                        <li>✅ Watch for multiple IRRs if cash flows change sign more than once</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR/XIRR quickly in the <a href="/irr/calculator/">IRR calculator</a>,
+                            then sanity-check with NPV.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Calculate IRR/XIRR from cash flows and dates.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/irr-vs-npv/">IRR vs NPV</a>
+                            <p>Why higher IRR is not always better.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/real-estate-irr/">Real estate IRR</a>
+                            <p>Levered vs unlevered IRR, sale proceeds, and fees.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash flow</a>
+                            <p>How distributions and timing affect IRR.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/">Break-even</a>
+                            <p>Timeline thinking for investment decisions.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What does IRR mean?</h4>
+                        <p>
+                            IRR is the discount rate that makes the NPV of an investment’s cash flows equal to zero.
+                            Practically, it’s the annualized rate that summarizes returns while accounting for when cash
+                            flows happen.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is IRR the same as ROI?</h4>
+                        <p>
+                            No. ROI ignores time. IRR is time-weighted and annualized, so it accounts for the timing of
+                            cash flows.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I calculate IRR in Excel or Google Sheets?</h4>
+                        <p>
+                            Use IRR() for periodic cash flows and XIRR() for irregular dates. Include the initial
+                            investment as a negative value and future cash inflows as positive values.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why can IRR be misleading?</h4>
+                        <p>
+                            IRR can be misleading when deal sizes differ, timelines differ, or cash flows change sign
+                            multiple times (creating multiple IRRs). It also embeds reinvestment assumptions. Pair IRR
+                            with NPV and equity multiple and use scenario ranges.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is a good IRR for real estate?</h4>
+                        <p>
+                            There’s no universal number. “Good” depends on risk, leverage, holding period, and market
+                            conditions. Compare to your hurdle rate and test a conservative scenario.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        IRR is a powerful metric because it compresses complex cash flow timing into one annualized
+                        rate.
+                        But it’s easy to misuse. To use IRR correctly: calculate it with the right timing method (often
+                        XIRR),
+                        include all real-world costs, compare it to a risk-appropriate hurdle rate, and pair it with NPV
+                        or equity multiple.
+                        If a deal’s IRR looks great but collapses with small assumption changes, treat that as a
+                        warning—not a win.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute your IRR/XIRR in the <a href="/irr/calculator/">IRR calculator</a> and
+                            compare it to NPV at your hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. IRR depends entirely on cash flow assumptions and timing. Real-world results
+                        vary with risk, leverage, fees, taxes, and market conditions.
+                        For irregular real estate cash flows, XIRR is typically more appropriate than IRR.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

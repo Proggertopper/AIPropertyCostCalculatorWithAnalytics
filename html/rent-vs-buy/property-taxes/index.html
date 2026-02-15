@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent vs buy with property taxes (U.S.): how taxes change total cost, break-even, and net position over 5, 10, and 30 years. Learn how to model tax growth, reassessments, escrow, deductions, and realistic scenarios. Includes FAQs and checklists." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/property-taxes/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/property-taxes/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/property-taxes/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy With Property Taxes (U.S.) — Break-Even, True Cost, and How to Model Taxes</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy With Property Taxes (U.S.) — Break-Even, True Cost" />
+    <meta property="og:description"
+        content="Property taxes can flip rent vs buy outcomes. Learn how to model tax growth and reassessments, how escrow affects monthly cost, and why taxes matter most for short and medium horizons. Includes scenarios and FAQs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/property-taxes/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/property-taxes/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "Property Taxes", "item": "https://mypropertycost.com/rent-vs-buy/property-taxes/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/property-taxes/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do high property taxes make renting better than buying?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "High property taxes increase the non-equity cost of owning and can push break-even farther out, especially over 3–10 years. They don’t automatically mean renting is better, but taxes must be modeled realistically (including growth and reassessments) to compare net position fairly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I model property taxes over 10 to 30 years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avoid keeping taxes flat. Model taxes with a realistic growth assumption and consider reassessment behavior. Run conservative scenarios where taxes rise faster than expected to see how sensitive your outcome is."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do tax deductions change rent vs buy outcomes?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Sometimes, but they’re not guaranteed and depend on your tax situation. It’s safer to run a baseline scenario without assuming large deductions and then run a separate scenario with estimated tax benefits."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do property taxes matter more for short holding periods?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because taxes are a recurring cash cost that doesn’t build equity. Over short horizons, taxes take a larger share of your total timeline and can overwhelm the modest equity you build early, especially after selling costs."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">Property Taxes</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-taxes-matter">Why property taxes change rent vs buy results</a></li>
+                    <li><a href="#taxes-vs-equity">Taxes vs equity: what’s cost and what isn’t</a></li>
+                    <li><a href="#tax-growth">Tax growth and reassessment (don’t keep taxes flat)</a></li>
+                    <li><a href="#escrow">Escrow: why the monthly payment can jump</a></li>
+                    <li><a href="#short-vs-long">Why taxes matter more over 3–10 years</a></li>
+                    <li><a href="#tax-benefits">Tax benefits: how to model safely</a></li>
+                    <li><a href="#how-to-run">How to run tax scenarios in the calculator</a></li>
+                    <li><a href="#checklist">Property tax checklist (quick)</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Test your tax reality</div>
+                        <div class="sidebar-cta__sub">Run a “taxes rise faster” scenario and see if the winner flips.
+                        </div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy With Property Taxes (U.S.)<br>Break-Even, True Cost, and How to Model Taxes</h1>
+                        <p class="subtitle">
+                            Property taxes are one of the biggest “silent” costs in U.S. homeownership — and they can
+                            flip a rent vs buy outcome.
+                            Taxes don’t build equity, they often rise over time, and they hit your cash flow every year.
+                            This guide shows how property taxes affect break-even and how to model taxes realistically
+                            over 5, 10, and 30 years.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~11 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-taxes-matter">Why taxes matter</a>
+                    <a href="#taxes-vs-equity">Taxes vs equity</a>
+                    <a href="#tax-growth">Tax growth & reassessment</a>
+                    <a href="#escrow">Escrow</a>
+                    <a href="#short-vs-long">Short vs long</a>
+                    <a href="#tax-benefits">Tax benefits</a>
+                    <a href="#how-to-run">Run scenarios</a>
+                    <a href="#checklist">Checklist</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Include taxes and compare net position over time.</span>
+                        </a>
+                        <a class="start-here__card" href="/property-tax/">
+                            <strong>Taxes & Fees Calculator</strong>
+                            <span>Model transaction costs and ownership taxes in detail.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/assumptions/">
+                            <strong>Assumptions guide</strong>
+                            <span>Choose realistic ranges and stress-test the outcome.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why-taxes-matter">
+                    <h2>Why Property Taxes Change Rent vs Buy Results</h2>
+                    <p>
+                        Property taxes are a recurring cost that doesn’t build equity. That makes them different from
+                        principal payments,
+                        which become ownership in the home. In rent vs buy terms, property taxes behave like a permanent
+                        “service fee” for owning.
+                    </p>
+                    <p>
+                        Taxes matter so much because they can be large, they can grow, and they apply every year you
+                        hold the property.
+                        In some markets, property taxes can be similar to (or higher than) the annual maintenance
+                        reserve — meaning they meaningfully change your long-run cost profile.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key point:</strong> If you ignore taxes or keep them flat for decades, you can
+                            easily produce a misleading “buy wins” result.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="taxes-vs-equity">
+                    <h2>Taxes vs Equity: What’s Cost and What Isn’t</h2>
+                    <p>
+                        A clean rent vs buy model separates:
+                    </p>
+                    <ul>
+                        <li><strong>Equity building:</strong> principal paydown + appreciation (asset growth)</li>
+                        <li><strong>Non-equity costs:</strong> interest, taxes, insurance, HOA, maintenance, transaction
+                            fees</li>
+                    </ul>
+                    <p>
+                        Property taxes belong in the second group. They reduce your net position without increasing your
+                        ownership stake.
+                        That’s why they influence break-even: they increase the “carrying cost” of holding a home.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="tax-growth">
+                    <h2>Tax Growth and Reassessment: Don’t Keep Taxes Flat</h2>
+                    <p>
+                        The most common modeling mistake is taking year-one property taxes and applying that same dollar
+                        amount forever.
+                        In reality, taxes can change as assessments change, local rates change, or reassessments occur
+                        after a purchase.
+                        How taxes behave varies by jurisdiction — but the modeling principle is the same:
+                        <strong>use a growth assumption and stress-test it</strong>.
+                    </p>
+
+                    <h3>How to model taxes realistically</h3>
+                    <ul>
+                        <li><strong>Base case:</strong> start with the best estimate of current annual tax and grow it
+                            modestly over time.</li>
+                        <li><strong>Conservative scenario:</strong> test a higher tax growth rate.</li>
+                        <li><strong>Reassessment risk:</strong> run a scenario where taxes jump early, then grow from
+                            that new base.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical test:</strong> If a “tax jump” scenario flips the outcome, your decision
+                            is sensitive to tax uncertainty —
+                            which is especially important for 3–10 year horizons.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="escrow">
+                    <h2>Escrow: Why Your Monthly Payment Can Jump</h2>
+                    <p>
+                        Many U.S. mortgages include escrow: the lender collects money each month for property taxes and
+                        insurance,
+                        then pays those bills when due. This is convenient, but it can create surprises:
+                    </p>
+                    <ul>
+                        <li>If taxes rise, your escrow payment can increase.</li>
+                        <li>If insurance rises, escrow can increase.</li>
+                        <li>If escrow was underfunded, you can owe a shortage and see a higher monthly payment.</li>
+                    </ul>
+                    <p>
+                        In rent vs buy modeling, escrow doesn’t change the total cost — it changes cash flow timing.
+                        But cash flow is real. If ownership costs already stretch your budget, escrow volatility
+                        matters.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Cash flow rule:</strong> If you can only afford buying when escrow stays perfect,
+                            the plan is fragile.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="short-vs-long">
+                    <h2>Why Taxes Matter More Over 3–10 Years</h2>
+                    <p>
+                        Over 30 years, equity building can be large enough that taxes feel “small” in comparison,
+                        depending on appreciation and your mortgage structure.
+                        Over 3–10 years, equity building is smaller and selling costs are large — so recurring costs
+                        like taxes can dominate.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Short holds (3–5 years)</h4>
+                            <ul>
+                                <li>Taxes are a large share of the timeline</li>
+                                <li>Equity build-up is limited early</li>
+                                <li>Selling costs can wipe out gains</li>
+                                <li>Tax increases can flip results fast</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Long holds (10–30 years)</h4>
+                            <ul>
+                                <li>More time for equity growth</li>
+                                <li>Costs get “diluted” across more years</li>
+                                <li>Taxes still matter, but are less likely to dominate alone</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="mini-note">
+                        If you might move soon, pair this guide with <a href="/rent-vs-buy/3-5-years/">3–5 years reality
+                            check</a>.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="tax-benefits">
+                    <h2>Tax Benefits: How to Model Safely (Without Overpromising)</h2>
+                    <p>
+                        Some buyers assume large tax deductions will make owning dramatically cheaper.
+                        Sometimes tax benefits matter — but they depend on your overall tax situation and aren’t
+                        guaranteed.
+                        A safe modeling approach is to treat tax benefits as a separate scenario, not the baseline that
+                        your decision depends on.
+                    </p>
+
+                    <h3>Safe approach</h3>
+                    <ul>
+                        <li><strong>Baseline:</strong> run the comparison without assuming large tax benefits.</li>
+                        <li><strong>Tax benefit scenario:</strong> add estimated benefits and see how much the result
+                            changes.</li>
+                        <li><strong>Decision quality:</strong> if buying only works with aggressive tax assumptions,
+                            treat it as fragile.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Principle:</strong> Don’t require tax benefits for the purchase to “work.”
+                            Treat them as upside if they happen, not the foundation of the decision.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-run">
+                    <h2>How to Run Property Tax Scenarios in the Rent vs Buy Calculator</h2>
+                    <p>
+                        You don’t need perfect forecasting. You need a model that stays sensible under realistic ranges.
+                        Here’s a simple workflow:
+                    </p>
+
+                    <h3>Step 1: Enter your best current estimate</h3>
+                    <ul>
+                        <li>Annual property taxes</li>
+                        <li>Insurance and HOA if applicable</li>
+                        <li>Maintenance reserve</li>
+                        <li>Closing and selling costs</li>
+                    </ul>
+
+                    <h3>Step 2: Run “taxes rise faster”</h3>
+                    <p>
+                        Increase taxes over time (or approximate by increasing average tax cost if the calculator uses a
+                        single number).
+                        This reveals tax sensitivity and whether taxes are the factor deciding your outcome.
+                    </p>
+
+                    <h3>Step 3: Run a reassessment jump test</h3>
+                    <p>
+                        If a tax jump is plausible, run a scenario where taxes increase early, then continue growing.
+                        If this flips the outcome, your decision is sensitive and you should treat buying as
+                        higher-variance.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Taxes can flip break-even</h4>
+                            <p>Run a “reassessment + growth” scenario and see if buying still wins over your real
+                                holding period.</p>
+                        </div>
+                        <a href="/rent-vs-buy/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Property Tax Checklist (Quick)</h2>
+                    <p>
+                        Before you finalize your model, do a quick sanity check:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Numbers</h4>
+                            <ul>
+                                <li>Current annual tax estimate (best available)</li>
+                                <li>Whether taxes recently increased in the area</li>
+                                <li>Whether reassessment after purchase is common</li>
+                                <li>Plan for growth instead of flat taxes</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Cash flow</h4>
+                            <ul>
+                                <li>Escrow included?</li>
+                                <li>Can your budget handle an escrow increase?</li>
+                                <li>Are taxes + HOA a large share of monthly cost?</li>
+                                <li>Do you have reserves for volatility?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> If you’re unsure, model taxes conservatively.
+                            Underestimating taxes is one of the most common ways to make buying look too attractive.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        Property taxes are part of a broader ownership cost model. Use these pages to tighten the full
+                        picture:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Include property taxes, then stress-test growth and reassessment scenarios.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/property-tax/">Taxes & Fees Calculator</a>
+                            <p>Model ownership taxes and transaction costs (closing and selling) more explicitly.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Taxes, insurance, HOA, and maintenance — the non-equity costs that decide outcomes.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/common-mistakes/">Common Mistakes</a>
+                            <p>Why flat taxes and missing selling costs cause misleading results.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Do high property taxes make renting better than buying?</h4>
+                        <p>
+                            High property taxes increase the non-equity cost of owning and can push break-even farther
+                            out, especially over 3–10 years.
+                            They don’t automatically mean renting is better, but taxes must be modeled realistically
+                            (including growth and reassessments)
+                            to compare net position fairly.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How should I model property taxes over 10 to 30 years?</h4>
+                        <p>
+                            Avoid keeping taxes flat. Model taxes with a realistic growth assumption and consider
+                            reassessment behavior.
+                            Run conservative scenarios where taxes rise faster than expected to see how sensitive your
+                            outcome is.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Do tax deductions change rent vs buy outcomes?</h4>
+                        <p>
+                            Sometimes, but they depend on your tax situation. It’s safer to run a baseline scenario
+                            without assuming large deductions
+                            and then run a separate scenario with estimated tax benefits.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do property taxes matter more for short holding periods?</h4>
+                        <p>
+                            Because taxes are a recurring cash cost that doesn’t build equity.
+                            Over short horizons, taxes take a larger share of your timeline and can overwhelm the modest
+                            equity you build early,
+                            especially after selling costs.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the fastest “tax reality check” before buying?</h4>
+                        <p>
+                            Run a “tax jump + growth” scenario and see if buying still wins over your true holding
+                            period.
+                            If taxes flip the outcome, your decision is sensitive — and renting may be the safer
+                            financial strategy.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: Taxes Are a Permanent Cost — Model Them Like It</h2>
+                    <p>
+                        Property taxes can be a decisive factor in rent vs buy because they reduce net position without
+                        building equity.
+                        They also tend to change over time, making “flat tax forever” models misleading.
+                    </p>
+                    <p>
+                        Run conservative scenarios: taxes rising faster, a possible reassessment jump, and realistic
+                        selling costs.
+                        If buying still wins, it’s stronger. If it only wins under optimistic tax assumptions, treat
+                        buying as a fragile decision — and consider renting for flexibility.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: test your assumptions in the <a href="/rent-vs-buy/calculator/">Rent vs Buy
+                                Calculator</a> and compare break-even under different tax paths.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions (tax growth, reassessments,
+                        transaction costs, and ownership expenses).
+                        For decisions, run your numbers in the <a href="/rent-vs-buy/calculator/">calculator</a> and
+                        consider local tax rules and market conditions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

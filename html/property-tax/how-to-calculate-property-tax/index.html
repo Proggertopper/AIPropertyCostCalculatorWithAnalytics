@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="How to calculate property tax (U.S.): step-by-step formula, assessed value vs market value, millage rates, exemptions, escrow, estimating taxes before buying, and how to model tax increases. Includes examples, checklists, stress tests, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/property-tax/how-to-calculate-property-tax/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/property-tax/how-to-calculate-property-tax/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/property-tax/how-to-calculate-property-tax/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>How to Calculate Property Tax (U.S.) — Formula, Examples, Exemptions | PropertyCost</title>
+
+    <meta property="og:title" content="How to Calculate Property Tax (U.S.)" />
+    <meta property="og:description"
+        content="Step-by-step property tax math: taxable value × rate, how exemptions and millage work, and how to estimate taxes before buying." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/property-tax/how-to-calculate-property-tax/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to Calculate Property Tax (U.S.)">
+    <meta name="twitter:description"
+        content="Taxable value × tax rate. Learn millage, exemptions, escrow, and how to estimate taxes (especially after purchase reassessment).">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/property-tax/how-to-calculate-property-tax/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Property tax","item":"https://mypropertycost.com/property-tax/"},
+          {"@type":"ListItem","position":3,"name":"How to calculate property tax","item":"https://mypropertycost.com/property-tax/how-to-calculate-property-tax/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/property-tax/how-to-calculate-property-tax/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the formula to calculate property tax?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"In most U.S. jurisdictions, property tax is calculated as taxable assessed value multiplied by the local tax rate. Taxable value may be assessed value minus exemptions, and rates may be expressed as a percentage or as millage (mills)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I calculate property tax using a millage rate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A mill is $1 of tax per $1,000 of taxable value. Property tax = (taxable value ÷ 1,000) × millage rate."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I estimate property taxes before buying a home?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Estimate taxable value using purchase price or local reassessment rules, apply local effective tax rate, then adjust for exemptions you will qualify for. Run a conservative scenario in case reassessment resets taxable value or escrow estimates are low."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why is my lender’s escrow estimate different from my actual property tax bill?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Escrow estimates can be based on prior-year taxes that reflect the seller’s exemptions or a lower assessed value. After purchase or after a reassessment, your actual tax bill can be higher, causing an escrow shortage and higher monthly payments."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/property-tax/">Property tax</a>
+                <span class="sep">/</span>
+                <span class="current">How to calculate property tax</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#formula">The property tax formula</a></li>
+                    <li><a href="#terms">Key terms (assessed value, millage, exemptions)</a></li>
+                    <li><a href="#steps">Step-by-step: calculate your tax bill</a></li>
+                    <li><a href="#millage">How to calculate tax using millage</a></li>
+                    <li><a href="#examples">Examples (simple + realistic)</a></li>
+                    <li><a href="#before-buy">Estimating taxes before buying</a></li>
+                    <li><a href="#escrow">Escrow and monthly payments</a></li>
+                    <li><a href="#growth">How to model tax increases over time</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#stress-tests">Stress tests</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate taxes fast</div>
+                        <div class="sidebar-cta__sub">Run base + conservative scenarios.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/property-tax/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>How to Calculate Property Tax (U.S.): Formula, Millage, and Examples</h1>
+                        <p class="subtitle">
+                            Property tax looks like a simple bill, but the math can trip people up because there are two
+                            moving parts:
+                            <strong>taxable value</strong> (based on local assessment rules) and the <strong>tax
+                                rate</strong> (set by local budgets).
+                            To estimate property taxes accurately—especially before buying—you need to understand
+                            assessed value vs market value,
+                            how millage works, how exemptions reduce taxable value, and why taxes can jump after a sale.
+                            This guide walks through the formulas, shows practical examples, and includes checklists and
+                            stress tests to avoid surprises.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/property-tax/" aria-label="Back to Property tax hub">←
+                                    Back to Property tax</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~18–24 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#formula">Formula</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#before-buy">Before buying</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/property-tax/calculator/">
+                            <strong>Property tax calculator</strong>
+                            <span>Calculate quickly and stress-test scenarios.</span>
+                        </a>
+                        <a class="start-here__card" href="/property-tax/how-property-tax-works/">
+                            <strong>How property tax works</strong>
+                            <span>Assessment, rates, exemptions, escrow.</span>
+                        </a>
+                        <a class="start-here__card" href="/homeownership-cost/">
+                            <strong>Total cost of homeownership</strong>
+                            <span>Taxes are a major ongoing driver.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer: The Property Tax Calculation</h2>
+                    <p>
+                        The most common U.S. property tax calculation is:
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Property tax = (Taxable assessed value) × (Local tax rate)</strong></p>
+                    </div>
+
+                    <p>
+                        Where:
+                    </p>
+                    <ul>
+                        <li><strong>Assessed value</strong> is the value set by your local assessor for taxation (not
+                            always the same as market value).</li>
+                        <li><strong>Taxable value</strong> is assessed value minus exemptions (and sometimes capped by
+                            local rules).</li>
+                        <li><strong>Tax rate</strong> may be shown as a percentage or as a millage rate (mills).</li>
+                    </ul>
+
+                    <p>
+                        If you only remember one thing: your tax bill depends on both value and rate, and both can
+                        change.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>The Property Tax Formula (In Plain English)</h2>
+                    <p>
+                        Most property tax systems can be reduced to three steps:
+                    </p>
+
+                    <h3>Step 1: Start with assessed value</h3>
+                    <p>
+                        Your assessor assigns a value used for taxation. It may be updated annually or on a multi-year
+                        cycle.
+                        Some places assess at a percentage of market value; others aim for full market value.
+                    </p>
+
+                    <h3>Step 2: Subtract exemptions to get taxable value</h3>
+                    <p>
+                        Exemptions reduce taxable value. Examples include homestead exemptions for primary residences or
+                        senior/veteran exemptions.
+                        Some jurisdictions also cap how quickly taxable value can increase while you own the property.
+                    </p>
+
+                    <h3>Step 3: Multiply taxable value by tax rate</h3>
+                    <p>
+                        Your jurisdiction’s tax rate reflects multiple levies (schools, city, county, special
+                        districts).
+                        Multiply that rate by taxable value to get the annual tax bill.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>One-line summary:</strong> Assessed value → taxable value → multiply by tax rate →
+                            annual bill.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="terms">
+                    <h2>Key Terms You’ll See on Property Tax Pages</h2>
+
+                    <h3>Assessed value</h3>
+                    <p>
+                        The value the assessor uses for taxation. It can differ from market value, and it may lag the
+                        market.
+                    </p>
+
+                    <h3>Market value</h3>
+                    <p>
+                        What the home could sell for in an open market. Some jurisdictions try to assess near market
+                        value; others don’t.
+                    </p>
+
+                    <h3>Taxable value</h3>
+                    <p>
+                        The value you actually pay taxes on after exemptions and rules are applied.
+                    </p>
+
+                    <h3>Tax rate</h3>
+                    <p>
+                        Often shown as a percentage. In some states, it’s shown as a total “effective rate” across
+                        multiple districts.
+                    </p>
+
+                    <h3>Millage rate</h3>
+                    <p>
+                        A mill is $1 of tax per $1,000 of taxable value. Millage rates are common in some states and
+                        school tax systems.
+                    </p>
+
+                    <h3>Exemptions</h3>
+                    <p>
+                        Reductions to taxable value based on eligibility (homestead, senior, veteran, disability, etc.).
+                        Rules vary widely.
+                    </p>
+
+                    <h3>Escrow</h3>
+                    <p>
+                        Many lenders collect property taxes monthly and pay them when due. If estimates are wrong,
+                        monthly payments can change.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="steps">
+                    <h2>Step-by-Step: How to Calculate Your Property Tax Bill</h2>
+
+                    <h3>Step 1: Find assessed value (or estimate it)</h3>
+                    <p>
+                        If you already own the home, your assessor record lists assessed value.
+                        If you’re estimating before buying, you may need to approximate taxable value using purchase
+                        price and local reassessment behavior.
+                    </p>
+
+                    <h3>Step 2: Apply exemptions and local rules</h3>
+                    <p>
+                        Subtract exemptions you actually qualify for (don’t assume the seller’s exemptions apply to
+                        you).
+                        If your area has assessment caps, taxable value may be limited while you own the property.
+                    </p>
+
+                    <h3>Step 3: Get the tax rate</h3>
+                    <p>
+                        Tax rates may be shown directly, or you may compute an effective rate using the last bill:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Effective rate ≈ Annual bill ÷ taxable value</strong></p>
+                    </div>
+
+                    <h3>Step 4: Multiply taxable value by rate</h3>
+                    <p>
+                        This gives your annual property tax estimate.
+                        Divide by 12 to estimate the monthly equivalent (especially if paid through escrow).
+                    </p>
+
+                    <h3>Step 5: Stress-test (conservative scenario)</h3>
+                    <p>
+                        Because taxes can jump after purchase or reassessment, run a conservative case:
+                    </p>
+                    <ul>
+                        <li>higher taxable value (closer to purchase price),</li>
+                        <li>slightly higher tax rate (bonds/levies),</li>
+                        <li>no exemption (if uncertain).</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="millage">
+                    <h2>How to Calculate Property Tax Using a Millage Rate</h2>
+                    <p>
+                        Millage is just another way of expressing a tax rate.
+                        One mill equals $1 per $1,000 of taxable value.
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Property tax = (Taxable value ÷ 1,000) × (Millage rate)</strong></p>
+                    </div>
+
+                    <p>
+                        Example: if your taxable value is $250,000 and millage rate is 20 mills:
+                    </p>
+                    <ul>
+                        <li>$250,000 ÷ 1,000 = 250</li>
+                        <li>250 × 20 = $5,000 annual tax</li>
+                    </ul>
+
+                    <p>
+                        If your bill includes multiple millage components (school, county, city), add them to get the
+                        total millage rate.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Examples: Simple and Realistic Property Tax Calculations</h2>
+
+                    <h3>Example 1: Simple percentage rate</h3>
+                    <p>
+                        Suppose:
+                    </p>
+                    <ul>
+                        <li>Assessed value: $400,000</li>
+                        <li>Homestead exemption: $50,000</li>
+                        <li>Taxable value: $350,000</li>
+                        <li>Tax rate: 1.2% (0.012)</li>
+                    </ul>
+                    <p>
+                        Annual tax:
+                    </p>
+                    <div class="callout">
+                        <p><strong>$350,000 × 0.012 = $4,200 per year</strong></p>
+                    </div>
+                    <p>
+                        Monthly equivalent: $4,200 ÷ 12 = $350/month.
+                    </p>
+
+                    <h3>Example 2: Millage rate</h3>
+                    <p>
+                        Suppose:
+                    </p>
+                    <ul>
+                        <li>Taxable value: $250,000</li>
+                        <li>Total millage: 32 mills</li>
+                    </ul>
+                    <p>
+                        Annual tax:
+                    </p>
+                    <div class="callout">
+                        <p><strong>($250,000 ÷ 1,000) × 32 = 250 × 32 = $8,000 per year</strong></p>
+                    </div>
+
+                    <h3>Example 3: “Seller bill” vs “buyer bill” (common surprise)</h3>
+                    <p>
+                        A home is listed with annual taxes of $3,200 based on the seller’s capped assessment and
+                        homestead exemption.
+                        You buy the home for $500,000 in an area that reassesses after sale.
+                        If the effective rate is 1.2%, a rough buyer bill could look like:
+                    </p>
+                    <div class="callout">
+                        <p><strong>$500,000 × 0.012 = $6,000 per year</strong></p>
+                    </div>
+                    <p>
+                        That’s nearly double—even though “taxes shown” looked low.
+                        This is why pre-buy estimation must account for reassessment and exemption resets.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Homebuyer warning:</strong> Listing sites often show prior taxes. Those can be the
+                            seller’s reality, not your future reality.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="before-buy">
+                    <h2>How to Estimate Property Taxes Before Buying a Home</h2>
+                    <p>
+                        Before buying, you’re usually missing one key input: what your taxable value will be after
+                        purchase.
+                        Use a conservative approach:
+                    </p>
+
+                    <h3>Step 1: Assume taxable value resets near purchase price (if unsure)</h3>
+                    <p>
+                        Many jurisdictions reassess toward market value after a sale or on regular cycles that catch up
+                        quickly.
+                        If current taxes look unusually low, assume they’ll rise.
+                    </p>
+
+                    <h3>Step 2: Use an effective tax rate</h3>
+                    <p>
+                        If you can find prior-year taxes and an assessed/taxable value, compute an effective rate and
+                        apply it to your expected taxable value.
+                        If you only know county-level averages, treat it as a rough starting point and stress-test.
+                    </p>
+
+                    <h3>Step 3: Apply only exemptions you qualify for</h3>
+                    <p>
+                        Run two cases:
+                    </p>
+                    <ul>
+                        <li><strong>With exemption</strong> (if you’re confident you qualify and will apply),</li>
+                        <li><strong>Without exemption</strong> (conservative case).</li>
+                    </ul>
+
+                    <h3>Step 4: Add a growth buffer</h3>
+                    <p>
+                        Long-term affordability depends on tax growth risk. Even modest increases matter over 5–10
+                        years.
+                        If your budget is tight, tax growth can be a hidden affordability cliff.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want a quick estimate?</h4>
+                            <p>
+                                Use the Property Tax calculator with purchase price as a taxable value proxy,
+                                then run a conservative scenario with higher value or higher rate.
+                            </p>
+                        </div>
+                        <a href="/property-tax/calculator/">Calculate property tax →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="escrow">
+                    <h2>Escrow and Monthly Payments: Translating Tax Into Your Budget</h2>
+                    <p>
+                        If your lender escrows taxes, your monthly mortgage payment includes:
+                    </p>
+                    <ul>
+                        <li>principal + interest,</li>
+                        <li>property taxes (escrow),</li>
+                        <li>homeowners insurance (escrow),</li>
+                        <li>possibly HOA fees (not escrowed by lender in many cases).</li>
+                    </ul>
+
+                    <h3>Why escrow causes payment changes</h3>
+                    <p>
+                        Escrow is adjusted annually based on actual bills. If taxes were underestimated, you can face:
+                    </p>
+                    <ul>
+                        <li>a higher ongoing monthly payment (to match the new tax estimate), and</li>
+                        <li>an added amount to repay last year’s shortage.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Budget rule:</strong> Treat property tax as a variable expense. Keep buffer,
+                            especially in year one.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="growth">
+                    <h2>How to Model Property Tax Increases Over Time</h2>
+                    <p>
+                        Property tax can increase due to:
+                    </p>
+                    <ul>
+                        <li>rising assessed value (reassessment),</li>
+                        <li>increasing tax rates (new bonds/levies or budget growth),</li>
+                        <li>loss of exemptions (change in eligibility or administrative issues).</li>
+                    </ul>
+
+                    <h3>A practical modeling approach</h3>
+                    <ul>
+                        <li><strong>Base case:</strong> assume moderate value growth and stable rate.</li>
+                        <li><strong>Conservative case:</strong> assume higher value growth and/or a slightly higher
+                            rate.</li>
+                        <li><strong>Shock case:</strong> assume reassessment resets taxable value closer to market
+                            value.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key point:</strong> If the deal only works when taxes stay flat forever, it’s
+                            fragile.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Property Tax Calculation Mistakes</h2>
+
+                    <h3>1) Using assessed value without checking exemptions</h3>
+                    <p>
+                        Fix: calculate taxable value, not just assessed value.
+                    </p>
+
+                    <h3>2) Using the seller’s tax bill as your forecast</h3>
+                    <p>
+                        Fix: model taxes based on your likely taxable value and your exemptions.
+                    </p>
+
+                    <h3>3) Confusing millage with percent</h3>
+                    <p>
+                        Fix: use the millage formula: (taxable value ÷ 1,000) × mills.
+                    </p>
+
+                    <h3>4) Ignoring multiple levies</h3>
+                    <p>
+                        Fix: total tax rate is often the sum of school + county + city + special districts.
+                    </p>
+
+                    <h3>5) Forgetting escrow adjustment risk</h3>
+                    <p>
+                        Fix: expect year-one escrow estimates to be imperfect; keep buffer.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Property Tax Calculation Checklist</h2>
+                    <ul>
+                        <li>✅ I identified assessed value (or estimated taxable value if buying).</li>
+                        <li>✅ I subtracted exemptions to get taxable value.</li>
+                        <li>✅ I used the correct local tax rate (or total millage).</li>
+                        <li>✅ I calculated annual and monthly equivalent taxes.</li>
+                        <li>✅ I ran a conservative scenario (higher taxable value and/or higher rate).</li>
+                        <li>✅ I considered escrow shortage risk after purchase.</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Stress Tests (Avoid Budget Surprises)</h2>
+
+                    <h3>1) Reassessment test</h3>
+                    <p>
+                        Assume taxable value resets to purchase price. Recompute taxes. If affordability is tight, your
+                        budget is fragile.
+                    </p>
+
+                    <h3>2) Rate increase test</h3>
+                    <p>
+                        Add a small increase in effective tax rate. If the monthly payment becomes uncomfortable, treat
+                        taxes as a major risk factor.
+                    </p>
+
+                    <h3>3) No exemption test</h3>
+                    <p>
+                        If exemption eligibility is uncertain, run a no-exemption scenario so you don’t rely on
+                        something you might not receive.
+                    </p>
+
+                    <h3>4) Escrow shortage test</h3>
+                    <p>
+                        Assume the lender underestimates year-one taxes. Model a higher future payment that includes
+                        shortage repayment.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to run these stress tests quickly?</h4>
+                            <p>
+                                Use the Property Tax calculator to compare base and conservative scenarios and translate
+                                taxes into a monthly budget number.
+                            </p>
+                        </div>
+                        <a href="/property-tax/calculator/">Run tax scenarios →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/property-tax/calculator/">Property tax calculator</a>
+                            <p>Calculate property tax and stress-test assumptions.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-tax/how-property-tax-works/">How property tax works</a>
+                            <p>Assessment, rates, exemptions, escrow, appeals.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Homeownership</a>
+                            <p>Property tax is a major ongoing cost input.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage calculator</a>
+                            <p>See monthly payment including escrow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/">Rent vs Buy</a>
+                            <p>Taxes can flip the rent vs buy result in some markets.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the formula for property tax?</h4>
+                        <p>
+                            Typically: taxable assessed value × local tax rate. Taxable value is assessed value minus
+                            exemptions and local adjustments.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I calculate property tax using millage?</h4>
+                        <p>
+                            Property tax = (taxable value ÷ 1,000) × millage rate (mills).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I estimate taxes before buying?</h4>
+                        <p>
+                            Use purchase price as a proxy for taxable value (if reassessment is likely), apply a local
+                            effective rate, and run conservative scenarios for reassessment and rate increases.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why can my escrow estimate be wrong?</h4>
+                        <p>
+                            Lenders often base escrow on prior-year taxes that reflect seller exemptions or lower
+                            assessments. After purchase or reassessment, your actual bill can be higher, creating a
+                            shortage and higher monthly payments.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Property tax calculation is straightforward once you separate value from rate:
+                        taxable value (assessed value minus exemptions) multiplied by your local tax rate (or millage).
+                        The biggest mistakes come from using the seller’s bill, ignoring reassessment behavior, and
+                        skipping conservative stress tests.
+                        Estimate taxes using a purchase-price taxable value proxy when appropriate, apply only
+                        exemptions you qualify for, and plan for escrow adjustments—especially in year one.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run a base and conservative scenario in the <a
+                                href="/property-tax/calculator/">Property Tax calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Rules vary by state and locality.
+                        For exact assessment ratios, exemption rules, and appeal deadlines, use your local assessor and
+                        tax collector resources.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

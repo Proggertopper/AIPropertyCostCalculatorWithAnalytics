@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description"
+        content="Internal Rate of Return (IRR) calculator for real estate investments: evaluate profitability and investment efficiency with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/irr/calculator/">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>IRR Calculator for Real Estate | PropertyCost</title>
+</head>
+
+<body class="calc-page">
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">Calculator</span>
+            </div>
+        </div>
+    </header>
+
+    <main >
+        <div class="hero">
+                <h1>Real Estate Investment</h1>
+                    <p class="subtitle">
+                        Calculate property profitability including rent, expenses, and sale
+                    </p>
+                    <div class="benefits-bar">
+                        <div class="benefit-item">Time-weighted return calculation</div>
+                        <div class="benefit-item">Full cash-flow modeling</div>
+                        <div class="benefit-item">Investment comparison tool</div>
+                        <div class="benefit-item">Scenario and risk analysis</div>
+                    </div>
+            </div>
+
+        <section class="calculator">
+            <div class="grid">
+
+                <!-- PROPERTY -->
+                <div class="card">
+                    <h3>Property Details</h3>
+
+                    <label>Property Price ($)
+                        <input type="number" id="price" placeholder="350000">
+                        <div class="error" id="priceError"></div>
+                    </label>
+
+                    <label>Down Payment ($)
+                        <input type="number" id="downPayment" placeholder="70000">
+                        <div class="error" id="downPaymentError"></div>
+                    </label>
+
+                    <label>Purchase Costs ($)
+                        <input type="number" id="purchaseCosts" placeholder="15000">
+                        <div class="error" id="purchaseCostsError"></div>
+                    </label>
+
+                    <label>Renovation ($)
+                        <input type="number" id="renovation" placeholder="25000">
+                        <div class="error" id="renovationError"></div>
+                    </label>
+                </div>
+
+                <!-- INCOME & EXPENSES -->
+                <div class="card">
+                    <h3>Income & Expenses</h3>
+
+                    <label>Monthly Rent ($)
+                        <input type="number" id="rent" placeholder="2600">
+                        <div class="error" id="rentError"></div>
+                    </label>
+
+                    <label>Vacancy (%)
+                        <input type="number" id="vacancy" placeholder="6">
+                        <div class="error" id="vacancyError"></div>
+                    </label>
+
+                    <label>Annual Expenses ($)
+                        <input type="number" id="expenses" placeholder="12000">
+                        <div class="error" id="expensesError"></div>
+                    </label>
+
+                    <label>Annual Mortgage ($)
+                        <input type="number" id="mortgage" placeholder="18000">
+                        <div class="error" id="mortgageError"></div>
+                    </label>
+                </div>
+
+                <!-- INVESTMENT -->
+                <div class="card">
+                    <h3>Investment Parameters</h3>
+
+                    <label>Holding Period (years)
+                        <input type="number" id="years" placeholder="10">
+                        <div class="error" id="yearsError"></div>
+                    </label>
+
+                    <label>Price Growth (%)
+                        <input type="number" id="growth" placeholder="3">
+                        <div class="error" id="growthError"></div>
+                    </label>
+
+                    <label>Sale Tax (%)
+                        <input type="number" id="saleTax" placeholder="15">
+                        <div class="error" id="saleTaxError"></div>
+                    </label>
+
+                    <label>
+                        Inflation (%)
+                        <input type="number" id="inflation" placeholder="2.5" />
+                        <div class="error" id="inflationError"></div>
+                    </label>
+
+                    <button id="calcBtn">Calculate</button>
+                </div>
+
+                <!-- RESULTS -->
+                <div id="results" class="card result">
+                    <h3>Results</h3>
+
+                    <div class="result-item">
+                        <span>Annual Cash Flow</span>
+                        <strong id="cashFlow">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>ROI</span>
+                        <strong id="roi">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>IRR</span>
+                        <strong id="irr">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Real IRR</span>
+                        <strong id="realIRR">—</strong>
+                    </div>
+
+                    <div class="result-item">
+                        <span>Payback Period</span>
+                        <strong id="payback">—</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guest-promo" class="hidden playful-blob">
+                <div class="blob-content">
+                        <span class="blob-emoji">🚀</span>
+                        <div class="blob-title">Ready to make smarter decisions?</div>
+                        <div class="blob-text">Join our community and get access to your personal calculation dashboard
+                            with full history and insights</div>
+                        <a href="/signup/" class="blob-btn">Create Free Account</a>
+                </div>
+            </div>
+
+            <div id="user-promo" class="hidden compact-teaser">
+                <span class="teaser-emoji ">💡</span>
+                <div class="teaser-content">
+                    <div class="teaser-title-small">Saved in your workspace</div>
+                    <div class="teaser-text-small">Open your workspace to review saved calculations, comparisons, and verdicts
+                    </div>
+                </div>
+                <a href="/account/" class="teaser-btn">Open account</a>
+            </div>
+
+            <div class="disclaimer">
+                Estimates only, not financial advice.
+                <a href="/disclaimer/">Read full disclaimer</a>
+            </div>
+        </section>
+
+        <section class="guide-layout" aria-label="Guide">
+            <aside class="guide-nav" aria-label="Jump to">
+                <details class="jump" open>
+                    <summary class="jump-summary">
+                        Jump to
+                        <span class="jump-caret" aria-hidden="true"></span>
+                    </summary>
+        
+                    <nav class="jump-links">
+                        <a href="#intro">Introduction</a>
+                        <a href="#what-shows">What IRR tells you</a>
+                        <a href="#how-works">How it works</a>
+                        <a href="#why-key">Why IRR matters</a>
+                        <a href="#tips">Tips</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#who">Who should use</a>
+                        <a href="#interpret">How to interpret</a>
+                    </nav>
+                </details>
+            </aside>
+        
+            <div class="guide-content">
+
+            <!-- Introduction -->
+            <div class="content-section" id="intro">
+                <h2>Internal Rate of Return (IRR) Calculator for Real Estate</h2>
+                <p><strong>How profitable is this real estate investment, really?</strong></p>
+
+                <p>The Internal Rate of Return (IRR) Calculator helps you figure out the real yearly return on a real
+                    estate
+                    investment. It looks at when cash comes in and goes out during the whole time you own the property.
+                </p>
+
+                <p>Unlike basic return on investment (ROI), IRR considers the timing of money movements. This makes it a
+                    top
+                    choice for professional investors who need accurate insights.</p>
+
+                <p>We created this calculator for people checking out rental properties, quick flips, or long-term real
+                    estate
+                    deals. It gives you a solid number to compare with other options like stocks or bonds.</p>
+
+                <p>Real estate investing involves more than just buying and selling. You deal with ongoing cash flows
+                    from rent,
+                    costs for upkeep, and big events like selling the property. IRR ties all these together into one
+                    easy-to-understand rate. This helps you see if the investment matches your goals, whether you want
+                    steady
+                    income or quick profits.</p>
+
+                <p>Many beginners stick to simple math like total profit divided by cost, but that misses key details.
+                    For
+                    example, getting money back sooner is better because you can reinvest it. IRR accounts for this time
+                    value
+                    of money, giving a clearer picture of performance.</p>
+            </div>
+
+            <!-- What Calculator Shows -->
+            <div class="content-section" id="what-shows">
+                <h2>What IRR Tells You That ROI Does Not</h2>
+                <p>Basic ROI shows your profit compared to what you invested, but it skips over time. Making the same
+                    profit in
+                    five years beats doing it in twenty years.</p>
+
+                <p>The IRR calculator answers key questions like:</p>
+                <ul>
+                    <li>What yearly return does this property give me?</li>
+                    <li>How do rent money, costs, and property value growth work together over years?</li>
+                    <li>Does this beat investing in stocks, bonds, or another property?</li>
+                    <li>How much does my return change if the selling price or ownership time shifts?</li>
+                    <li>What risks hide in the cash flow timing?</li>
+                    <li>How does borrowing money affect the overall return?</li>
+                </ul>
+
+                <p>By turning all money movements into one yearly rate, IRR simplifies comparing tricky investments.
+                    This is
+                    vital in real estate, where deals vary in length, leverage, and cash patterns.</p>
+
+                <p>Think about two properties: one gives steady rent but sells for a small gain after ten years. The
+                    other has
+                    lower rent but flips for big profit in three years. ROI might look similar, but IRR shows the
+                    quicker one
+                    often wins due to faster capital reuse.</p>
+
+                <p>Investors use IRR to spot deals that maximize returns while managing risks. It reveals if a property
+                    ties up
+                    money too long or generates cash too slowly.</p>
+            </div>
+
+            <!-- How Calculation Works -->
+            <div class="content-section" id="how-works">
+                <h2>How the IRR Calculation Works (In Simple Terms)</h2>
+                <p>The calculator follows every money movement in the investment.</p>
+
+                <h3>Initial Investments and Outflows</h3>
+                <p>At the start, you put in money for things like down payment, closing fees, and early fixes. These are
+                    your
+                    first cash outflows.</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h4>Down Payment</h4>
+                        <p>The upfront cash you pay to buy the property, usually 20% or more for investment loans. Lower
+                            amounts
+                            might require extra insurance.</p>
+                    </div>
+
+
+                    <div class="metric-card">
+                        <h4>Renovation Expenses</h4>
+                        <p>Costs to fix up the property before renting or selling, which can range from minor updates to
+                            full
+                            rehabs.</p>
+                    </div>
+                </div>
+
+                <h3>Ongoing Cash Flows</h3>
+                <p>During ownership, you get rent income but subtract costs for operations, taxes, insurance, upkeep,
+                    and loan
+                    payments.</p>
+
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h4>Rental Income</h4>
+                        <p>Money from tenants, which might grow with market rents or inflation adjustments.</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>Operating Expenses</h4>
+                        <p>Day-to-day costs like repairs, property management, utilities, and vacancies.</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>Taxes and Insurance</h4>
+                        <p>Property taxes based on location and value, plus insurance to protect against damages.</p>
+                    </div>
+
+                    <div class="metric-card">
+                        <h4>Financing Costs</h4>
+                        <p>Interest on loans, which can boost returns if cash flow covers it well.</p>
+                    </div>
+                </div>
+
+                <h3>Final Exit</h3>
+                <p>At the end, the model adds net money from selling the property. This subtracts remaining loan payoff
+                    and
+                    selling fees.</p>
+
+                <p>IRR finds the yearly rate where the current value of all these flows hits zero. Simply put, it shows
+                    the
+                    annual return that matches what you put in with what you get back.</p>
+
+                <p>We use math formulas to solve for this rate, often through trial and error in spreadsheets. The
+                    calculator
+                    handles this automatically, saving you time.</p>
+
+                <div class="info-box">
+                    <p><strong>Timing matters most:</strong> Early positive cash flows boost IRR because you reinvest
+                        sooner.
+                        Delays in income hurt the rate.</p>
+                </div>
+            </div>
+
+            <!-- Why IRR Key Metric -->
+            <div class="content-section" id="why-key">
+                <h2>Why IRR Is a Key Metric for Real Estate Investors</h2>
+                <p>IRR looks at both timing and size of returns, which matters a lot in real estate. A property with
+                    quick cash
+                    might beat one with more total profit but slower payouts.</p>
+
+                <p>Investors rely on this metric for:</p>
+                <ul>
+                    <li>Comparing deals with varying ownership lengths</li>
+                    <li>Checking borrowed vs all-cash buys</li>
+                    <li>Figuring out best times to sell or refinance</li>
+                    <li>Matching real estate against stocks or other assets</li>
+                    <li>Spotting hidden risks in cash flow patterns</li>
+                    <li>Evaluating multi-unit vs single-family investments</li>
+                </ul>
+
+                <p>Knowing IRR stops you from overrating deals that seem great but underperform. It shows true
+                    efficiency of
+                    your money.</p>
+
+                <p>In competitive markets, IRR helps prioritize opportunities. For instance, a flip with 25% IRR in one
+                    year
+                    might trump a rental at 10% over five years, depending on your risk tolerance.</p>
+
+                <p>Professional funds and REITs use IRR to report performance, making it a standard for benchmarking.
+                </p>
+
+                <div class="highlight-box">
+                    <p>IRR shines in leveraged deals: Borrowing can amplify returns if income covers costs, but it also
+                        adds
+                        risk if markets dip.</p>
+                </div>
+            </div>
+
+            <!-- Soft CTA -->
+            <div class="content-section" id="tips">
+                <h2>Get Deeper Insight From Your Results</h2>
+                <p>To explore different outcomes, try these changes:</p>
+
+                <div class="info-box">
+                    <p>Shift the ownership time to compare short flips vs long holds.</p>
+                </div>
+
+                <div class="info-box">
+                    <p>Alter the sell price for best-case and worst-case markets.</p>
+                </div>
+
+                <div class="info-box">
+                    <p>Tweak rent increases or costs to check sensitivity.</p>
+                </div>
+
+                <div class="info-box">
+                    <p>Compare borrowed money vs all-cash buys.</p>
+                </div>
+
+                <div class="info-box">
+                    <p>Adjust vacancy rates or repair budgets for realistic risks.</p>
+                </div>
+
+                <p>These tweaks often highlight true risks and chances. They help refine your strategy before committing
+                    funds.
+                </p>
+            </div>
+
+            <!-- FAQ -->
+            <div class="content-section" id="faq">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h4>What is a good IRR for real estate?</h4>
+                    <p>No single best number exists, but many aim for rates above stock market averages. This accounts
+                        for less
+                        liquidity and more work in real estate.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Does IRR include rent income and value growth?</h4>
+                    <p>Yes. The calculation covers all money flows: rent, costs, and sell proceeds.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Does borrowing affect IRR?</h4>
+                    <p>Yes. Loans can raise or lower IRR based on rates, income, and market results.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Can same ROI mean different IRRs?</h4>
+                    <p>Yes. Cash timing can create big IRR differences even with equal profits.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Is IRR good for long predictions?</h4>
+                    <p>IRR depends on your inputs. Use it more for comparing options than exact forecasts.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>How does IRR handle taxes?</h4>
+                    <p>You can include tax impacts in cash flows, like deductions for interest or depreciation, to get
+                        after-tax
+                        IRR.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What if cash flows are negative?</h4>
+                    <p>IRR works with mixed flows, showing if the investment recovers and profits overall.</p>
+                </div>
+            </div>
+
+            <!-- Who Should Use -->
+            <div class="content-section" id="who">
+                <h2>Who This Calculator Is For</h2>
+                <p>This tool fits if you are:</p>
+                <ul>
+                    <li>Reviewing rental or mixed properties</li>
+                    <li>Comparing several investment choices</li>
+                    <li>Choosing leverage plans</li>
+                    <li>Planning sell times for current holdings</li>
+                    <li>Balancing real estate with other investments</li>
+                    <li>Testing market assumptions</li>
+                </ul>
+                <p>Pair it with cash flow or cost tools for a full view. This combo helps spot strong deals.</p>
+
+                <p>Beginners gain from seeing how inputs affect outcomes. Pros use it to fine-tune models and pitch to
+                    partners.
+                </p>
+            </div>
+
+            <!-- Interpretation -->
+            <div class="content-section" id="interpret">
+                <h2>How to Interpret Your IRR Result</h2>
+                <p>IRR gives an average yearly return, not a promise. Higher rates mean better capital use, but skip
+                    risks, ups
+                    and downs, or work involved.</p>
+
+                <p>Use IRR to support choices, not as the only factor. Compare to your targets, like 8-12% for rentals
+                    or 20%+
+                    for flips.</p>
+
+                <p>Watch for multiple IRRs in complex flows—rare but possible. Always check assumptions for realism.</p>
+
+                <p>In summary, IRR cuts through noise to show investment efficiency. Master it to build wealth smarter
+                    in real
+                    estate.</p>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+
+    <script src="/js/IRR.js"></script>
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

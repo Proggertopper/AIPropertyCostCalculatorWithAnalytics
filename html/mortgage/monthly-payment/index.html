@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Monthly mortgage payment explained (U.S.): learn how principal + interest, property taxes, homeowners insurance, and PMI form your payment. See how rate, term, down payment, and loan amount change costs, plus affordability tips, examples, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/mortgage/monthly-payment/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/mortgage/monthly-payment/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/mortgage/monthly-payment/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Monthly Mortgage Payment Explained (U.S.) — P&amp;I, Escrow, PMI, and What Changes It Most</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Monthly Mortgage Payment Explained (U.S.) — P&amp;I, Escrow, PMI" />
+    <meta property="og:description"
+        content="Learn exactly what’s inside a monthly mortgage payment: principal + interest, property taxes, homeowners insurance, and PMI. See what changes it most and how to estimate affordability." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/mortgage/monthly-payment/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/mortgage/monthly-payment/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://mypropertycost.com/mortgage/" },
+          { "@type": "ListItem", "position": 3, "name": "Monthly Payment", "item": "https://mypropertycost.com/mortgage/monthly-payment/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/mortgage/monthly-payment/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is included in a monthly mortgage payment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A monthly mortgage payment typically includes principal and interest (P&I). Many homeowners also pay property taxes and homeowners insurance through escrow, and some pay PMI if the down payment is under 20%."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does my payment change even with a fixed-rate mortgage?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "With a fixed-rate loan, principal and interest stay stable, but escrowed costs like property taxes and insurance can rise over time. If you have an ARM, the interest rate itself can adjust too."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How much does a 1% rate change affect my mortgage payment?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on the loan amount and term, but a 1% change can move payments significantly over 30 years. The larger the loan, the bigger the impact—use the calculator to test a +1% scenario."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is it better to put 20% down to avoid PMI?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Avoiding PMI can reduce your monthly payment, but putting more down ties up cash. The right choice depends on PMI cost, your investment return assumptions, and how much liquidity you want to keep."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/mortgage/">Mortgage</a>
+                <span class="sep">/</span>
+                <span class="current">Monthly Payment</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#what-is-monthly-payment">What a monthly mortgage payment really includes</a></li>
+                    <li><a href="#pi">Principal &amp; interest (P&amp;I): the core payment</a></li>
+                    <li><a href="#escrow">Escrow: property taxes + homeowners insurance</a></li>
+                    <li><a href="#pmi">PMI: when it applies and how it affects payment</a></li>
+                    <li><a href="#what-moves-payment">What changes your payment the most</a></li>
+                    <li><a href="#examples">Quick examples and sanity checks</a></li>
+                    <li><a href="#affordability">Affordability: payment vs total housing cost</a></li>
+                    <li><a href="#how-to-use-calculator">How to use the calculator effectively</a></li>
+                    <li><a href="#related">Related guides + calculators</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Run your payment</div>
+                        <div class="sidebar-cta__sub">Test your base scenario + a +1% rate scenario in 30 seconds.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Monthly Mortgage Payment Explained (U.S.)<br>P&amp;I, Escrow, PMI, and What Changes It Most
+                        </h1>
+                        <p class="subtitle">
+                            A “mortgage payment” is usually more than principal and interest. In the U.S., many
+                            homeowners also pay
+                            property taxes and homeowners insurance through escrow — and PMI if their down payment is
+                            under 20%.
+                            This guide breaks down each component, shows what moves your payment most, and helps you
+                            model affordability
+                            the right way.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/mortgage/" aria-label="Back to Mortgage hub">← Back to
+                                    Mortgage hub</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~12 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#what-is-monthly-payment">What’s included</a>
+                    <a href="#pi">Principal &amp; interest</a>
+                    <a href="#escrow">Escrow</a>
+                    <a href="#pmi">PMI</a>
+                    <a href="#what-moves-payment">What moves payment</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#affordability">Affordability</a>
+                    <a href="#how-to-use-calculator">How to use calculator</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Estimate payment, total interest, and amortization.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/amortization-schedule/">
+                            <strong>Amortization explained</strong>
+                            <span>Why early payments are interest-heavy.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/pmi/">
+                            <strong>PMI guide</strong>
+                            <span>When you pay it and how to remove it.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <!-- SECTION 1 -->
+                <div class="content-section" id="what-is-monthly-payment">
+                    <h2>What a Monthly Mortgage Payment Really Includes</h2>
+                    <p>
+                        In everyday conversation, people say “my mortgage payment is $X.” But in the U.S., that number
+                        can mean one of two things:
+                    </p>
+                    <ul>
+                        <li><strong>P&amp;I only:</strong> principal and interest for the loan itself.</li>
+                        <li><strong>PITI (often the real monthly bill):</strong> principal, interest, taxes, and
+                            insurance.</li>
+                    </ul>
+                    <p>
+                        Depending on your loan type and down payment, you might also add <strong>PMI</strong> (private
+                        mortgage insurance),
+                        plus optional costs like HOA dues. When you’re evaluating affordability — or comparing rent vs
+                        buy —
+                        it’s almost always more accurate to use the full “housing payment” rather than P&amp;I alone.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Quick rule:</strong> If a calculator only shows P&amp;I, it will often understate
+                            your real monthly cost.
+                            Add taxes + insurance (and PMI if needed) for a real-world number.
+                        </p>
+                    </div>
+
+                    <p>
+                        The goal of a mortgage calculator is not just to produce a payment number — it’s to show you the
+                        <strong>drivers</strong>.
+                        If you know which inputs matter most, you can plan your budget, negotiate smarter, and
+                        stress-test your decision.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 2 -->
+                <div class="content-section" id="pi">
+                    <h2>Principal &amp; Interest (P&amp;I): The Core Payment</h2>
+                    <p>
+                        Principal and interest is the part of your payment that repays the loan. It’s determined by:
+                    </p>
+                    <ul>
+                        <li><strong>Loan amount</strong> (purchase price minus down payment)</li>
+                        <li><strong>Interest rate</strong></li>
+                        <li><strong>Loan term</strong> (most commonly 30 years or 15 years)</li>
+                    </ul>
+
+                    <h3>Why early payments feel “slow” for equity</h3>
+                    <p>
+                        Fixed-rate mortgages amortize over time: the payment is designed so the loan ends at zero at the
+                        end of the term.
+                        In the early years, a larger share of each payment goes to interest. Over time, the interest
+                        portion falls and the principal portion rises.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical takeaway:</strong> If you sell after 3–5 years, you may not have paid down
+                            much principal,
+                            especially at higher rates. That’s why short holds are sensitive in rent vs buy comparisons.
+                        </p>
+                    </div>
+
+                    <p>
+                        This is also why rate changes are so powerful. A higher rate increases interest cost and raises
+                        the monthly payment —
+                        and it often slows early equity build-up. If you want a “sanity check,” always test a +1% rate
+                        scenario.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 3 -->
+                <div class="content-section" id="escrow">
+                    <h2>Escrow: Property Taxes + Homeowners Insurance</h2>
+                    <p>
+                        Many U.S. lenders require an <strong>escrow account</strong>, where you pay property taxes and
+                        homeowners insurance
+                        monthly as part of your mortgage bill. The lender then pays the annual or semiannual bills on
+                        your behalf.
+                    </p>
+
+                    <h3>Why escrow matters</h3>
+                    <ul>
+                        <li>It can add a large amount to the monthly payment (especially in high-tax states/counties).
+                        </li>
+                        <li>It can <strong>change over time</strong> even if your mortgage rate is fixed.</li>
+                        <li>Insurance premiums can rise, and property taxes can increase with assessments or local
+                            rates.</li>
+                    </ul>
+
+                    <p>
+                        This is why buyers sometimes feel “payment shock” a year into ownership: their P&amp;I never
+                        changed,
+                        but escrow did. A good budget assumes taxes and insurance can rise over time.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tip:</strong> If you’re estimating monthly cost, don’t guess taxes.
+                            Use the property’s tax history and your county’s rules, then add a buffer.
+                        </p>
+                    </div>
+
+                    <p>
+                        Escrow is also the bridge between a mortgage calculator and a true “total cost of ownership”
+                        model.
+                        If you only look at P&amp;I, you miss the costs that often decide affordability.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 4 -->
+                <div class="content-section" id="pmi">
+                    <h2>PMI: When It Applies and How It Affects Your Payment</h2>
+                    <p>
+                        <strong>PMI (private mortgage insurance)</strong> is typically required on conventional loans
+                        when your down payment is below 20%.
+                        PMI protects the lender—not you. The cost depends on factors like down payment percentage,
+                        credit profile, and loan size.
+                    </p>
+
+                    <h3>How PMI changes the real monthly payment</h3>
+                    <p>
+                        PMI is usually charged monthly and can add a meaningful amount to the payment, especially in the
+                        early years.
+                        The main benefit of putting 20% down is not only a smaller loan — it’s also avoiding PMI.
+                    </p>
+
+                    <h3>But PMI isn’t always a deal-breaker</h3>
+                    <p>
+                        Many buyers choose PMI because it allows them to buy earlier, keep more liquidity, or invest
+                        cash instead of putting it into the home.
+                        In that case, the correct comparison is:
+                    </p>
+                    <ul>
+                        <li>higher monthly payment + more invested cash (lower down payment), versus</li>
+                        <li>lower monthly payment + less liquidity (higher down payment).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision rule:</strong> If PMI is temporary and the home fits your timeline, it can
+                            be a “bridge cost.”
+                            If PMI is expensive and you’re close to 20% down, waiting or adjusting down payment can be
+                            smarter.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- SECTION 5 -->
+                <div class="content-section" id="what-moves-payment">
+                    <h2>What Changes Your Payment the Most</h2>
+                    <p>
+                        If you want the fastest way to “understand the mortgage,” focus on these levers:
+                    </p>
+
+                    <h3>1) Loan amount (price minus down payment)</h3>
+                    <p>
+                        Loan amount is the base of everything. Lower price or higher down payment reduces the principal
+                        you finance.
+                        That reduces monthly P&amp;I and total interest over the life of the loan.
+                    </p>
+
+                    <h3>2) Interest rate</h3>
+                    <p>
+                        Rate changes hit hard because they compound over decades. This is especially true for 30-year
+                        terms.
+                        A small rate difference can mean a large difference in total interest paid.
+                    </p>
+
+                    <h3>3) Term length (15 vs 30 years)</h3>
+                    <p>
+                        A 15-year loan usually has a higher monthly payment but much lower total interest.
+                        A 30-year loan has lower monthly payment and more flexibility, and some borrowers make extra
+                        payments voluntarily.
+                    </p>
+
+                    <h3>4) Taxes + insurance (escrow)</h3>
+                    <p>
+                        These can rival the P&amp;I difference between rates. In some counties, taxes alone add hundreds
+                        (or more) per month.
+                        Insurance can also be a major swing factor, especially in higher-risk areas.
+                    </p>
+
+                    <h3>5) PMI</h3>
+                    <p>
+                        PMI can be the “hidden” cost that flips affordability. It’s not permanent in many cases,
+                        but it matters most when budgets are tight.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> When comparing properties, always compare the full monthly
+                            cost:
+                            P&amp;I + taxes + insurance + PMI + HOA (if any). Not just the mortgage rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- SECTION 6 -->
+                <div class="content-section" id="examples">
+                    <h2>Quick Examples and Sanity Checks</h2>
+                    <p>
+                        You don’t need perfect math in your head, but you should have “sanity checks” so you can spot
+                        unrealistic estimates.
+                        Here are a few practical checks:
+                    </p>
+
+                    <h3>Sanity check A: Taxes and insurance aren’t optional</h3>
+                    <p>
+                        If someone quotes you a mortgage payment that looks “too low,” ask whether it includes escrow.
+                        Many online examples quote only P&amp;I.
+                    </p>
+
+                    <h3>Sanity check B: Higher rates reduce buying power</h3>
+                    <p>
+                        If rates increase, the same monthly payment supports a smaller loan amount.
+                        This is why the same home can feel affordable in one rate environment and unaffordable in
+                        another.
+                    </p>
+
+                    <h3>Sanity check C: Short hold = less principal paid</h3>
+                    <p>
+                        If you might sell in 3–5 years, don’t assume your balance will drop dramatically.
+                        Early amortization favors interest, so equity building is slower than many first-time buyers
+                        expect.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Use the <a href="/mortgage/calculator/">mortgage calculator</a> to run your exact numbers.
+                            Then pair it with the <a href="/homeownership-cost/">total cost of ownership</a> view for a
+                            realistic monthly budget.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- SECTION 7 -->
+                <div class="content-section" id="affordability">
+                    <h2>Affordability: Payment vs Total Housing Cost</h2>
+                    <p>
+                        A mortgage payment is only one part of affordability. A sustainable budget typically considers:
+                    </p>
+                    <ul>
+                        <li><strong>Monthly housing cost</strong> (PITI + PMI + HOA + utilities)</li>
+                        <li><strong>Maintenance reserves</strong> (homes require repairs)</li>
+                        <li><strong>Income stability</strong> and emergency funds</li>
+                        <li><strong>Other debts</strong> (car payments, student loans, credit cards)</li>
+                    </ul>
+
+                    <p>
+                        This is why many people feel “house poor” even when they technically qualify.
+                        A loan approval reflects lender rules; a comfortable life reflects your own margin.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical tip:</strong> If the payment works only when everything goes perfectly,
+                            your budget is too tight. Build margin for taxes/insurance increases and repairs.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- SECTION 8 -->
+                <div class="content-section" id="how-to-use-calculator">
+                    <h2>How to Use the Mortgage Calculator Effectively</h2>
+                    <p>
+                        Most people run one scenario and stop. A better approach is to run three quick tests:
+                    </p>
+
+                    <h3>1) Base scenario</h3>
+                    <p>
+                        Your likely purchase price, down payment, rate, term, and realistic taxes/insurance.
+                    </p>
+
+                    <h3>2) +1% rate scenario</h3>
+                    <p>
+                        See how sensitive your payment is to rates. This helps you avoid shopping at the edge of your
+                        budget.
+                    </p>
+
+                    <h3>3) “PMI vs more down payment” scenario</h3>
+                    <p>
+                        Compare a smaller down payment (with PMI) vs a larger down payment (without PMI).
+                        This shows the monthly difference and helps you decide whether liquidity or a lower payment
+                        matters more.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Ready to see your real payment?</h4>
+                            <p>Run your base scenario + a +1% stress test. It takes 30 seconds and shows your true
+                                sensitivity.</p>
+                        </div>
+                        <a href="/mortgage/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <!-- RELATED -->
+                <div class="content-section" id="related">
+                    <h2>Related guides + calculators</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage/amortization-schedule/">Amortization schedule</a>
+                            <p>See how interest vs principal changes over time and why early years build equity slowly.
+                            </p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/pmi/">PMI guide</a>
+                            <p>When you pay PMI, what affects the cost, and how you can remove it.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/extra-payments/">Extra payments</a>
+                            <p>How extra payments change payoff time and total interest—and the opportunity cost
+                                trade-off.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/">Rent vs Buy</a>
+                            <p>Your mortgage payment is the engine of the “buy” scenario—see how it changes break-even.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- FAQ -->
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is included in a monthly mortgage payment?</h4>
+                        <p>
+                            A monthly mortgage payment typically includes principal and interest (P&amp;I). Many
+                            homeowners also pay
+                            property taxes and homeowners insurance through escrow, and some pay PMI if the down payment
+                            is under 20%.
+                            HOA dues and utilities are usually separate.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does my payment change even with a fixed-rate mortgage?</h4>
+                        <p>
+                            With a fixed-rate loan, principal and interest stay stable, but escrowed costs like property
+                            taxes and
+                            insurance can rise over time. If you have an adjustable-rate mortgage (ARM), the interest
+                            rate itself can adjust too.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How much does a 1% rate change affect my mortgage payment?</h4>
+                        <p>
+                            It depends on the loan amount and term, but a 1% change can move payments significantly over
+                            30 years.
+                            The larger the loan, the bigger the impact—use the calculator to test a +1% scenario.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is it better to put 20% down to avoid PMI?</h4>
+                        <p>
+                            Avoiding PMI can reduce your monthly payment, but putting more down ties up cash. The right
+                            choice depends on
+                            PMI cost, your investment return assumptions, and how much liquidity you want to keep.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is escrow required?</h4>
+                        <p>
+                            Many lenders require escrow, especially with smaller down payments. Some allow you to waive
+                            escrow if you put more down
+                            and meet certain requirements, but then you must budget for taxes and insurance yourself.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- BOTTOM LINE -->
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom line</h2>
+                    <p>
+                        A real monthly mortgage payment is usually more than principal and interest. To model
+                        affordability correctly,
+                        include escrow (taxes + insurance) and PMI if applicable. Then stress-test your payment with a
+                        +1% rate scenario
+                        so you don’t buy at the edge of your budget.
+                    </p>
+                    <div class="callout">
+                        <p>
+                            Next step: open the <a href="/mortgage/calculator/">Mortgage Calculator</a> and run your
+                            base scenario + a +1% stress test.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions. Mortgage costs depend on
+                        loan type, lender rules,
+                        local property taxes, insurance pricing, and borrower credit profile. For decisions, use the
+                        <a href="/mortgage/calculator/">calculator</a> and verify estimates with a lender and local
+                        tax/insurance quotes.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

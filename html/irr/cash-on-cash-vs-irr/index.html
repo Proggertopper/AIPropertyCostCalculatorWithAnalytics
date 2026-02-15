@@ -1,0 +1,896 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Cash-on-cash vs IRR (U.S.): what each metric means, formulas, examples, when to use each, why they can disagree, levered vs unlevered returns, refinance/sale effects, and common mistakes. Includes checklists, stress tests, FAQs, and internal links to IRR and cash flow calculators." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/cash-on-cash-vs-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/cash-on-cash-vs-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/cash-on-cash-vs-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Cash-on-Cash vs IRR (U.S.) — Which Metric Should You Use? | PropertyCost</title>
+
+    <meta property="og:title" content="Cash-on-Cash vs IRR (U.S.)" />
+    <meta property="og:description"
+        content="Cash-on-cash is a yearly cash yield. IRR is a time-weighted return across all cash flows. Learn when each works, why they disagree, and how to avoid common mistakes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/cash-on-cash-vs-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Cash-on-Cash vs IRR (U.S.)">
+    <meta name="twitter:description"
+        content="Understand the difference between cash-on-cash return and IRR with clear examples, pitfalls, and a checklist.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/cash-on-cash-vs-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"Cash-on-cash vs IRR","item":"https://mypropertycost.com/irr/cash-on-cash-vs-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/cash-on-cash-vs-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is cash-on-cash return?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Cash-on-cash return is annual pre-tax cash flow divided by total cash invested. It is a one-year cash yield metric and does not include future sale proceeds unless you explicitly add them."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR (internal rate of return) is the annualized discount rate that makes the net present value of all cash flows equal to zero. It captures the timing of cash flows, including cash flow during the hold and proceeds at sale."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Which is better: cash-on-cash or IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Neither is universally better. Cash-on-cash is best for understanding near-term cash yield and affordability. IRR is best for comparing overall performance across time including the exit. Use both, along with absolute dollars and risk."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why can cash-on-cash and IRR disagree?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"They measure different things. Cash-on-cash looks at a single year’s cash yield, while IRR includes the timing and magnitude of all cash flows, especially sale proceeds. High cash-on-cash with weak appreciation can still produce a modest IRR, and low cash-on-cash early with a strong exit can produce a high IRR."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">Cash-on-cash vs IRR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#definitions">Definitions + formulas</a></li>
+                    <li><a href="#intuition">Intuition: what each metric “sees”</a></li>
+                    <li><a href="#examples">Examples: when they disagree</a></li>
+                    <li><a href="#use-cases">When to use cash-on-cash</a></li>
+                    <li><a href="#use-irr">When to use IRR</a></li>
+                    <li><a href="#leverage">Leverage: why debt changes everything</a></li>
+                    <li><a href="#exit">Exit effects: sale, refi, and IRR</a></li>
+                    <li><a href="#pitfalls">Common mistakes</a></li>
+                    <li><a href="#framework">A simple decision framework</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#stress-tests">Fast stress tests</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate IRR correctly</div>
+                        <div class="sidebar-cta__sub">Include cash flow + exit proceeds and compare scenarios.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open IRR calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Cash-on-Cash vs IRR (U.S.) — What’s the Difference?</h1>
+                        <p class="subtitle">
+                            Investors love simple metrics, but two numbers that seem similar can tell totally different
+                            stories.
+                            <strong>Cash-on-cash</strong> answers: “What cash yield am I getting this year on my cash
+                            invested?”
+                            <strong>IRR</strong> answers: “What annualized return am I getting across all cash flows
+                            over time, including the exit?”
+                            This guide goes deep (with practical examples) so you know when each metric is useful, why
+                            they can disagree,
+                            and how to avoid the most common modeling traps.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~16–20 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#definitions">Definitions</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#leverage">Leverage</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/calculator/">
+                            <strong>Run the IRR calculator</strong>
+                            <span>Model cash flows and exit proceeds, then compare scenarios.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/">
+                            <strong>Cash Flow hub</strong>
+                            <span>Cash-on-cash starts with correct cash flow assumptions.</span>
+                        </a>
+                        <a class="start-here__card" href="/property-sale/">
+                            <strong>Property Sale</strong>
+                            <span>Exit proceeds drive IRR more than most people expect.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>Cash-on-cash return</strong> is a one-year snapshot:
+                        annual cash flow divided by the cash you invested. It’s great for understanding near-term
+                        income yield and affordability.
+                    </p>
+                    <p>
+                        <strong>IRR</strong> is a multi-year performance metric:
+                        it summarizes all cash flows (including the sale) into one annualized rate.
+                        It’s great for comparing deals with different holding periods, different timing of cash flows,
+                        and different exit values.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Use both.</strong> Cash-on-cash tells you “does it cash flow now?”
+                            IRR tells you “what’s the overall return if everything happens as modeled?”
+                            If you only look at one, you can make very expensive mistakes.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Definitions + Formulas</h2>
+
+                    <h3>Cash-on-cash return (CoC)</h3>
+                    <p>
+                        Cash-on-cash is typically defined as:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Cash-on-cash return = Annual pre-tax cash flow ÷ Total cash invested</strong></p>
+                    </div>
+
+                    <p>
+                        “Annual pre-tax cash flow” is usually the cash left after operating expenses and debt service.
+                        The exact definition depends on your convention (and you should always state it), but a typical
+                        real-estate approach is:
+                    </p>
+                    <ul>
+                        <li><strong>Gross rent</strong> minus vacancy/credit loss</li>
+                        <li>minus <strong>operating expenses</strong> (taxes, insurance, HOA, management, maintenance,
+                            utilities if owner-paid)</li>
+                        <li>equals <strong>NOI</strong> (net operating income)</li>
+                        <li>minus <strong>debt service</strong> (mortgage payments)</li>
+                        <li>equals <strong>cash flow before tax</strong></li>
+                    </ul>
+
+                    <p>
+                        “Total cash invested” typically includes down payment, closing costs, initial repairs,
+                        and sometimes reserves depending on your convention. If you omit big cash items (repairs,
+                        CapEx, rent-ready), your cash-on-cash will be inflated.
+                    </p>
+
+                    <h3>IRR (Internal Rate of Return)</h3>
+                    <p>
+                        IRR is the annualized discount rate that makes the net present value (NPV) of cash flows equal
+                        to zero:
+                    </p>
+                    <div class="callout">
+                        <p><strong>NPV = 0 when discount rate = IRR</strong></p>
+                    </div>
+
+                    <p>
+                        In plain terms: IRR is the single rate that “fits” all the cash flows over time:
+                        your initial investment (negative), your cash flow during the hold (positive, usually),
+                        and your net proceeds at sale or refinance (positive).
+                    </p>
+
+                    <p>
+                        Because IRR includes timing, it can reward earlier cash flows more than later ones.
+                        That’s why two deals with identical total profit can have different IRRs if one returns cash
+                        sooner.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="intuition">
+                    <h2>Intuition: What Each Metric “Sees” (and What It Misses)</h2>
+
+                    <h3>What cash-on-cash sees</h3>
+                    <p>
+                        Cash-on-cash mainly “sees” your current income yield.
+                        It is most sensitive to:
+                    </p>
+                    <ul>
+                        <li>Rent level and vacancy assumptions</li>
+                        <li>Operating expenses and maintenance/CapEx reserves</li>
+                        <li>Interest rate and debt service</li>
+                        <li>How much cash you actually invested (including repairs and closing costs)</li>
+                    </ul>
+
+                    <p>
+                        Cash-on-cash is a strong metric for answering:
+                        “Can I comfortably hold this asset without bleeding cash?”
+                        It’s also useful for comparing a rental to other income investments (with caution).
+                    </p>
+
+                    <h3>What cash-on-cash misses</h3>
+                    <p>
+                        Cash-on-cash does not automatically include:
+                    </p>
+                    <ul>
+                        <li>Appreciation (unless it changes rent or you sell)</li>
+                        <li>Principal paydown (equity buildup)</li>
+                        <li>The exit (sale proceeds, selling costs, taxes)</li>
+                        <li>The time pattern of cash flows beyond one year</li>
+                    </ul>
+                    <p>
+                        That’s why a deal can have “great cash-on-cash” and still produce a mediocre overall return
+                        if the exit is weak or the property requires major capital expenses later.
+                    </p>
+
+                    <h3>What IRR sees</h3>
+                    <p>
+                        IRR sees the whole movie:
+                        all cash flows plus the exit, with timing.
+                        It is most sensitive to:
+                    </p>
+                    <ul>
+                        <li>Exit assumptions (sale price, selling costs, taxes, timing)</li>
+                        <li>Growth assumptions (rent growth, expense growth)</li>
+                        <li>Big events (renovations, refinancing, large CapEx)</li>
+                        <li>Hold period length (5 years vs 10 years can change IRR a lot)</li>
+                    </ul>
+
+                    <h3>What IRR can hide</h3>
+                    <p>
+                        IRR can look “good” even when the deal produces low absolute dollars.
+                        A small deal that returns cash quickly can have a high IRR but not change your life financially.
+                        That’s why you should also track:
+                    </p>
+                    <ul>
+                        <li><strong>Equity multiple</strong> (total cash returned ÷ cash invested)</li>
+                        <li><strong>Total profit</strong> (dollars)</li>
+                        <li><strong>Risk and variability</strong> (what happens in bad scenarios)</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Examples: When Cash-on-Cash and IRR Disagree</h2>
+
+                    <h3>Example 1: High cash-on-cash, modest IRR (great income, weak exit)</h3>
+                    <p>
+                        Imagine a rental with strong current cash flow because you bought cheaply in a stable market.
+                        Rent is solid relative to price, and expenses are controlled. Cash-on-cash might look excellent.
+                        But suppose appreciation is slow, and when you sell, transaction costs and taxes eat a big chunk
+                        of the gain. The overall IRR might be only moderate because the exit doesn’t add much beyond the
+                        income.
+                    </p>
+                    <p>
+                        This is common in “cash flow markets” where yields are high but long-term appreciation is less
+                        predictable.
+                        It’s not bad—just a different return profile: more income, less exit-driven upside.
+                    </p>
+
+                    <h3>Example 2: Low cash-on-cash early, high IRR (value-add with a strong exit)</h3>
+                    <p>
+                        Now imagine a value-add deal: you buy a property that needs work, rents are under-market, and
+                        you plan
+                        renovations. In year 1, cash flow might be low or even negative because of renovation downtime
+                        and
+                        higher expenses. Cash-on-cash looks poor.
+                    </p>
+                    <p>
+                        But if the plan succeeds, rents rise, the property stabilizes, and the sale (or refinance)
+                        produces
+                        a large equity gain. IRR can be high because the later exit cash flow is large relative to the
+                        initial investment.
+                    </p>
+
+                    <h3>Example 3: Same cash-on-cash, different IRR (exit timing changes everything)</h3>
+                    <p>
+                        Two rentals can have the same year-1 cash-on-cash return.
+                        If one is sold after 5 years at a high price and the other is held 10 years with a modest sale
+                        outcome,
+                        their IRRs can be very different even if the annual cash yield is similar.
+                    </p>
+                    <p>
+                        This is why IRR is often used in deal underwriting: it forces you to model the exit and timing.
+                        Cash-on-cash can’t answer “what is the return across the full hold” unless you extend it into a
+                        multi-year model.
+                    </p>
+
+                    <h3>Example 4: High IRR that’s misleading (multiple IRRs and sign changes)</h3>
+                    <p>
+                        IRR can become tricky when cash flows switch signs more than once (e.g., large CapEx mid-hold,
+                        cash-out refinance plus later capital call, etc.). In these cases, there can be multiple IRRs or
+                        the IRR can be unstable. This is one reason some investors prefer MIRR or also track NPV and
+                        equity multiple.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical takeaway:</strong> If your deal has irregular cash flows (big renovations,
+                            refi events,
+                            mid-hold capital injections), don’t rely on a single metric. Use IRR + equity multiple +
+                            cash-on-cash + scenario tests.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="use-cases">
+                    <h2>When Cash-on-Cash Is the Right Tool</h2>
+                    <p>
+                        Cash-on-cash is best when the primary question is: “What cash yield will I receive this year?”
+                        That’s why it’s popular with rental investors who care about monthly cash flow.
+                    </p>
+
+                    <h3>Use cash-on-cash for:</h3>
+                    <ul>
+                        <li><strong>Affordability:</strong> can the property carry itself after realistic expenses and
+                            reserves?</li>
+                        <li><strong>Income comparison:</strong> comparing income yield across rentals (with consistent
+                            assumptions)</li>
+                        <li><strong>Debt sensitivity:</strong> seeing how interest rate changes affect your cash flow
+                        </li>
+                        <li><strong>Short-term decisions:</strong> “If I buy this now, what’s the likely year-1 cash
+                            yield?”</li>
+                    </ul>
+
+                    <h3>But only if you model expenses honestly</h3>
+                    <p>
+                        Cash-on-cash is easy to inflate. The most common inflation sources are:
+                        ignoring vacancy, underestimating maintenance and CapEx, ignoring management (even if you
+                        self-manage),
+                        and forgetting “non-monthly” expenses like turnover, leasing costs, and periodic repairs.
+                    </p>
+                    <p>
+                        If you want cash-on-cash to be meaningful, your cash flow must include realistic reserves.
+                        Otherwise you’re measuring “paper cash flow” that disappears when the roof or HVAC fails.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="use-irr">
+                    <h2>When IRR Is the Right Tool</h2>
+                    <p>
+                        IRR is the right tool when the question is: “What’s my annualized return across the whole
+                        investment?”
+                        It’s particularly useful when comparing deals with different time patterns of cash flows.
+                    </p>
+
+                    <h3>Use IRR for:</h3>
+                    <ul>
+                        <li><strong>Comparing deals with different hold periods</strong> (5 years vs 10 years)</li>
+                        <li><strong>Value-add or development</strong> where much of the return comes from the exit</li>
+                        <li><strong>Refinance scenarios</strong> where timing of cash returned matters</li>
+                        <li><strong>Comparing reinvestment options</strong> with different cash flow timing</li>
+                    </ul>
+
+                    <h3>IRR forces you to include the exit</h3>
+                    <p>
+                        Many “good looking” deals look good because the exit is ignored.
+                        When you include realistic selling costs, taxes, and conservative appreciation,
+                        IRR often becomes more honest than a simple yield metric.
+                    </p>
+
+                    <h3>But don’t let IRR replace common sense</h3>
+                    <p>
+                        If a model uses optimistic assumptions (rent growth, no CapEx surprises, perfect vacancy, high
+                        exit price),
+                        IRR will look great. The problem is not IRR; it’s the assumptions.
+                        That’s why scenario and stress testing matter.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="leverage">
+                    <h2>Leverage: Why Debt Can Make Cash-on-Cash and IRR Move in Opposite Directions</h2>
+                    <p>
+                        Leverage (using a mortgage) changes returns because it changes:
+                        (1) how much cash you invest, and (2) how much cash flow you keep after debt service.
+                    </p>
+
+                    <h3>How leverage affects cash-on-cash</h3>
+                    <p>
+                        Cash-on-cash is very sensitive to the mortgage payment. Even if a property has strong NOI,
+                        a high interest rate or high leverage can crush year-1 cash flow—reducing cash-on-cash.
+                        That’s why cash-on-cash is often used as a “can it carry itself?” screen.
+                    </p>
+
+                    <h3>How leverage affects IRR</h3>
+                    <p>
+                        Leverage can increase IRR when the property’s total return (NOI growth + appreciation) exceeds
+                        the cost of debt.
+                        But leverage also increases risk: vacancy, repairs, or rent declines can cause negative cash
+                        flow.
+                    </p>
+
+                    <h3>Levered vs unlevered returns</h3>
+                    <p>
+                        Two clarifying terms:
+                    </p>
+                    <ul>
+                        <li><strong>Unlevered</strong> returns assume no debt (all cash purchase). This reflects the
+                            property as an asset.</li>
+                        <li><strong>Levered</strong> returns include debt. This reflects the return on your equity
+                            investment.</li>
+                    </ul>
+                    <p>
+                        Cash-on-cash is almost always a <em>levered</em> metric (because it uses cash invested and cash
+                        flow after debt service).
+                        IRR can be calculated levered or unlevered, and you should always specify which one you’re
+                        using.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> Don’t compare a levered IRR from one deal to an unlevered IRR from
+                            another.
+                            Keep the framework consistent.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="exit">
+                    <h2>Exit Effects: Sale, Refinance, and Why IRR Usually Changes More Than Cash-on-Cash</h2>
+                    <p>
+                        Cash-on-cash is a “during the hold” metric. IRR is an “entire lifecycle” metric.
+                        That means the exit usually matters more for IRR than people expect.
+                    </p>
+
+                    <h3>Sale proceeds can dominate IRR</h3>
+                    <p>
+                        In many deals, the biggest single cash flow happens at the end: net sale proceeds.
+                        That includes sale price minus selling costs, mortgage payoff, and sometimes taxes and fees.
+                        A small change in exit cap rate, sale price, or selling costs can move IRR dramatically.
+                    </p>
+
+                    <h3>Refinance can “pull forward” returns</h3>
+                    <p>
+                        A cash-out refinance can return capital to investors earlier.
+                        That can boost IRR because IRR rewards earlier cash flows.
+                        But refinancing also increases debt service and risk. A deal that looks great on IRR after a
+                        refi
+                        can become fragile if higher debt payments reduce cash flow too much.
+                    </p>
+
+                    <h3>Cash-on-cash can improve while IRR worsens (and vice versa)</h3>
+                    <p>
+                        If you refinance into a lower payment, cash-on-cash might rise (more cash flow).
+                        But if the refinance comes with large fees or extends the timeline for a profitable exit,
+                        IRR might not improve as much as expected.
+                    </p>
+                    <p>
+                        Similarly, a deal can have declining cash-on-cash (due to rising expenses) but a strong IRR if
+                        the exit
+                        is very favorable. That’s why you want both metrics.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="pitfalls">
+                    <h2>Common Mistakes (That Make These Metrics Lie)</h2>
+
+                    <h3>1) Using “pro forma” rents but “today” expenses</h3>
+                    <p>
+                        If you assume rents rise fast but expenses barely rise, cash-on-cash and IRR both inflate.
+                        For realistic models, grow expenses too: taxes, insurance, HOA, utilities, and maintenance often
+                        rise over time.
+                    </p>
+
+                    <h3>2) Ignoring CapEx reserves</h3>
+                    <p>
+                        If you omit lumpy expenses (roof, HVAC, plumbing, paint, flooring, turnover),
+                        your cash-on-cash becomes fantasy and your IRR becomes overly optimistic.
+                        Reserve planning doesn’t have to be perfect—just honest.
+                    </p>
+
+                    <h3>3) Treating principal paydown as “cash flow”</h3>
+                    <p>
+                        Principal paydown increases equity, but it’s not cash in your pocket unless you refinance or
+                        sell.
+                        Some people “feel” richer because equity rises, but cash-on-cash measures actual cash flow.
+                        Keep the concepts separate.
+                    </p>
+
+                    <h3>4) Using IRR without checking equity multiple and dollars</h3>
+                    <p>
+                        A high IRR can come from a quick payback on a small base.
+                        If your goal is wealth-building, you also need to track total profit and equity multiple.
+                        IRR alone can cause you to prefer “fast but small” deals over “slower but larger” deals.
+                    </p>
+
+                    <h3>5) Not stating pre-tax vs after-tax</h3>
+                    <p>
+                        Cash-on-cash is often quoted pre-tax. IRR is often quoted pre-tax. But investors sometimes
+                        compare
+                        a pre-tax number to an after-tax benchmark. Pick one convention and stick to it.
+                    </p>
+
+                    <h3>6) Ignoring vacancy and collection loss</h3>
+                    <p>
+                        Even stable rentals experience vacancy, turnover, and non-payment risk.
+                        Small vacancy assumptions can swing cash-on-cash and IRR significantly.
+                    </p>
+
+                    <h3>7) Overconfidence in exit assumptions</h3>
+                    <p>
+                        IRR is extremely sensitive to exit price. A small change in sale price or timing can move IRR a
+                        lot.
+                        Always run a conservative exit scenario and include selling costs.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Shortcut:</strong> If you only have time for one “honesty check,” stress-test the
+                            exit.
+                            Reduce sale price (or increase exit cap rate), add selling costs, and see how IRR changes.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="framework">
+                    <h2>A Simple Decision Framework: How to Use Both Metrics Together</h2>
+
+                    <h3>Step 1: Validate the deal’s cash survival (cash-on-cash + monthly cash flow)</h3>
+                    <p>
+                        Before you get excited about IRR, check if the deal can survive reality:
+                        vacancy, repairs, and expense growth. If the deal is cash-flow negative, ask:
+                        do you have reserves to carry it? Are you being paid for that risk with a likely strong exit?
+                    </p>
+
+                    <h3>Step 2: Evaluate overall performance (IRR + equity multiple + dollars)</h3>
+                    <p>
+                        After the deal passes the cash survival test, evaluate total performance:
+                        IRR tells you the annualized return, equity multiple tells you how much cash comes back in
+                        total,
+                        and total profit tells you if it’s worth the effort.
+                    </p>
+
+                    <h3>Step 3: Run scenario bands (conservative / base / optimistic)</h3>
+                    <p>
+                        If your IRR swings wildly with small changes in exit price or rent growth, the deal is fragile.
+                        Fragile deals require higher risk tolerance or better downside protection.
+                    </p>
+
+                    <h3>Step 4: Compare to your alternatives</h3>
+                    <p>
+                        A deal is not “good” in a vacuum. Compare it to:
+                        your other investment options, your personal risk tolerance, and your ability to manage a
+                        rental.
+                        A slightly lower IRR deal with stable cash flow can be better than a high IRR deal that keeps
+                        you awake at night.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist (Before You Trust CoC or IRR)</h2>
+                    <ul>
+                        <li>✅ Vacancy/credit loss included (not just “full rent”)</li>
+                        <li>✅ Maintenance + CapEx reserves included (not just minor repairs)</li>
+                        <li>✅ Property management included (even if you self-manage, price your time)</li>
+                        <li>✅ Expenses grow over time (taxes/insurance rarely stay flat)</li>
+                        <li>✅ Exit assumptions include selling costs and conservative sale price</li>
+                        <li>✅ You track IRR <em>and</em> equity multiple and total profit dollars</li>
+                        <li>✅ You specify levered vs unlevered returns</li>
+                        <li>✅ You specify pre-tax vs after-tax</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple rule:</strong> If you can’t explain why cash-on-cash and IRR differ in your
+                            model,
+                            you probably don’t understand which assumption is driving the result.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Fast Stress Tests (Make Your Metrics More Honest)</h2>
+
+                    <h3>1) Exit haircut test</h3>
+                    <p>
+                        Reduce your sale price estimate (or assume higher selling costs) and see how IRR changes.
+                        If IRR collapses, your deal is exit-dependent and higher risk.
+                    </p>
+
+                    <h3>2) Vacancy + expense spike test</h3>
+                    <p>
+                        Model a bad year: vacancy, a major repair, higher insurance/tax, or a surprise CapEx.
+                        Does cash-on-cash go negative? If yes, can you carry it?
+                    </p>
+
+                    <h3>3) Rate sensitivity test (if financing)</h3>
+                    <p>
+                        Small rate differences can change cash flow a lot.
+                        Test a higher mortgage rate or a refinance rate change and see how cash-on-cash responds.
+                    </p>
+
+                    <h3>4) “No growth” test</h3>
+                    <p>
+                        Assume rent growth is modest and expenses rise. If the deal only works with aggressive rent
+                        growth,
+                        you’re betting on a very specific future.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to see the full return picture?</h4>
+                            <p>
+                                Cash-on-cash starts with cash flow. IRR requires a full cash flow timeline and an exit.
+                                Run both with conservative assumptions.
+                            </p>
+                        </div>
+                        <a href="/irr/calculator/">Run the IRR calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Model cash flows + exit proceeds and calculate IRR consistently.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash Flow hub</a>
+                            <p>Cash-on-cash depends on realistic cash flow assumptions.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/cash-on-cash-return/">Cash-on-cash return</a>
+                            <p>Deep dive on CoC: definitions, inputs, and pitfalls.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/noi-net-operating-income/">NOI explained</a>
+                            <p>NOI is the foundation of many real estate return metrics.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale</a>
+                            <p>Net sale proceeds (after costs) often drive IRR.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/irr-vs-npv/">IRR vs NPV</a>
+                            <p>Why percent returns can mislead without dollar context.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is cash-on-cash return?</h4>
+                        <p>
+                            Cash-on-cash return is annual pre-tax cash flow divided by total cash invested.
+                            It’s a one-year cash yield metric. It’s great for seeing “what cash do I get this year on my
+                            cash?”
+                            but it does not automatically include appreciation or sale proceeds.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is IRR and why do investors use it?</h4>
+                        <p>
+                            IRR is the annualized rate that summarizes all cash flows over time (including the exit)
+                            into one number.
+                            Investors use IRR because it includes timing and can compare deals with different hold
+                            periods.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Which is better: cash-on-cash or IRR?</h4>
+                        <p>
+                            Neither is always better. Cash-on-cash is best for near-term cash yield and “can I hold this
+                            comfortably?”
+                            IRR is best for overall performance across time including the sale. Use both with scenario
+                            testing.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why can a deal have high cash-on-cash but low IRR?</h4>
+                        <p>
+                            If the deal produces strong yearly cash flow but weak appreciation and a modest exit (or
+                            high selling costs),
+                            the overall annualized return can be moderate. Cash-on-cash is a snapshot; IRR includes the
+                            full lifecycle.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why can a deal have low cash-on-cash but high IRR?</h4>
+                        <p>
+                            Value-add deals often have low cash flow early due to renovations or stabilization.
+                            If the plan creates a strong exit (higher rents, higher value), IRR can be high even if
+                            year-1 cash-on-cash is low.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Cash-on-cash and IRR are not competitors; they’re complementary.
+                        Cash-on-cash helps you understand <strong>near-term cash yield</strong> and survivability.
+                        IRR helps you understand <strong>total lifecycle return</strong> including the exit and timing.
+                        The safest approach is to model both with conservative assumptions, include realistic reserves
+                        and selling costs,
+                        and evaluate the deal using a small dashboard: cash-on-cash, IRR, equity multiple, and total
+                        profit dollars.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: build your cash flow assumptions, then calculate IRR with the exit included in
+                            the
+                            <a href="/irr/calculator/">IRR calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Definitions vary by investor and market. Always state whether returns are
+                        levered or unlevered,
+                        pre-tax or after-tax, and include realistic vacancy, expense growth, CapEx reserves, and selling
+                        costs.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,640 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent vs buy with maintenance costs (U.S.): how repairs and CapEx change total cost, break-even, and net position over 5, 10, and 30 years. Learn what to budget for roofs, HVAC, plumbing, appliances, and how to stress-test scenarios. Includes checklists and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/maintenance-costs/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/maintenance-costs/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/maintenance-costs/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy With Maintenance Costs (U.S.) — Repairs, CapEx, Break-Even, and Scenarios</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy With Maintenance Costs (U.S.) — Repairs, CapEx, Break-Even" />
+    <meta property="og:description"
+        content="Maintenance can flip rent vs buy results. Learn how to budget for repairs and capital expenses, why “1% rule” is just a starting point, and how to stress-test a ‘one big repair’ scenario over 5, 10, and 30 years." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/maintenance-costs/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/maintenance-costs/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "Maintenance Costs", "item": "https://mypropertycost.com/rent-vs-buy/maintenance-costs/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/maintenance-costs/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "How much should I budget for home maintenance each year?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Many people start with a percentage of home value, but the right budget depends on the home’s age, condition, climate, and systems. It’s safer to model a base annual reserve plus a ‘one big repair’ stress test over your holding period."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Does maintenance make renting better than buying?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Maintenance increases the non-equity cost of owning and can push break-even farther out, especially in short horizons. Renting can be more competitive when ownership repairs and capital expenses are underestimated."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do repairs matter more over 3 to 10 years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because one major repair event can be a large percentage of total costs over a short timeline. Over longer horizons, costs can average out, but short holds are exposed to ‘one-event’ risk."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What’s the difference between maintenance and CapEx?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Maintenance is ongoing upkeep (small repairs, servicing), while CapEx (capital expenses) are large replacements or upgrades like roofs, HVAC systems, windows, or major plumbing work."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">Maintenance Costs</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-maintenance-matters">Why maintenance flips rent vs buy outcomes</a></li>
+                    <li><a href="#maintenance-vs-capex">Maintenance vs CapEx: what to model</a></li>
+                    <li><a href="#how-big-costs-hit">Why “one big repair” dominates short horizons</a></li>
+                    <li><a href="#budget-framework">A practical budgeting framework</a></li>
+                    <li><a href="#what-to-expect">Common systems and replacement cycles</a></li>
+                    <li><a href="#scenarios">Scenarios to run in the calculator</a></li>
+                    <li><a href="#checklist">Maintenance checklist before you buy</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Stress-test repairs</div>
+                        <div class="sidebar-cta__sub">Add a “one big repair” scenario and see if buying still wins.
+                        </div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy With Maintenance Costs (U.S.)<br>Repairs, CapEx, Break-Even, and Scenarios</h1>
+                        <p class="subtitle">
+                            Maintenance is one of the most underestimated costs in rent vs buy comparisons.
+                            It’s not just small repairs — it’s the big replacements (roof, HVAC, plumbing) that often
+                            hit during a 5–10 year hold.
+                            This guide shows how to budget realistically, why short horizons are exposed to “one-event”
+                            risk, and how to run scenarios so your decision isn’t fragile.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~11 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-maintenance-matters">Why maintenance matters</a>
+                    <a href="#maintenance-vs-capex">Maintenance vs CapEx</a>
+                    <a href="#how-big-costs-hit">One big repair risk</a>
+                    <a href="#budget-framework">Budget framework</a>
+                    <a href="#what-to-expect">Replacement cycles</a>
+                    <a href="#scenarios">Scenarios</a>
+                    <a href="#checklist">Checklist</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Add maintenance and test “one big repair.”</span>
+                        </a>
+                        <a class="start-here__card" href="/homeownership-cost/">
+                            <strong>Total cost of ownership</strong>
+                            <span>All recurring ownership expenses in one model.</span>
+                        </a>
+                        <a class="start-here__card" href="/renovation-roi/">
+                            <strong>Renovation ROI</strong>
+                            <span>Estimate upgrade costs and whether they pay back.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why-maintenance-matters">
+                    <h2>Why Maintenance Flips Rent vs Buy Outcomes</h2>
+                    <p>
+                        Many rent vs buy comparisons underestimate maintenance because it’s not as visible as a mortgage
+                        payment.
+                        Rent is usually “all-in” housing cost (plus utilities), while owning splits costs into multiple
+                        categories:
+                        mortgage, taxes, insurance, HOA (sometimes), and maintenance/repairs.
+                    </p>
+                    <p>
+                        Maintenance is especially important because it’s partially unpredictable.
+                        Even if you budget a yearly amount, the timing is lumpy: you might have a quiet year, then
+                        replace a major system.
+                        In rent vs buy math, that means maintenance behaves like a volatility factor that can dominate
+                        short and medium horizons.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key point:</strong> If a rent vs buy model only works when maintenance is near-zero,
+                            you’re not modeling reality — you’re modeling luck.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="maintenance-vs-capex">
+                    <h2>Maintenance vs CapEx: What to Model</h2>
+                    <p>
+                        People often use the word “maintenance” for everything, but it helps to separate it into two
+                        categories:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Maintenance (ongoing upkeep)</h4>
+                            <ul>
+                                <li>Minor repairs (leaks, fixtures, small electrical)</li>
+                                <li>Service visits (HVAC tune-ups, pest control)</li>
+                                <li>Paint, caulk, small exterior fixes</li>
+                                <li>Landscaping and routine upkeep</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>CapEx (capital expenses)</h4>
+                            <ul>
+                                <li>Roof replacement</li>
+                                <li>HVAC replacement</li>
+                                <li>Water heater replacement</li>
+                                <li>Major plumbing or electrical work</li>
+                                <li>Windows, siding, foundation issues</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        In a simple rent vs buy calculator, you can roll these into one annual percentage or dollar
+                        estimate,
+                        but you should stress-test a “CapEx event” separately because timing matters.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="how-big-costs-hit">
+                    <h2>Why “One Big Repair” Dominates Short Horizons</h2>
+                    <p>
+                        Over 30 years, maintenance costs average out. Over 3–10 years, they don’t.
+                        A single major repair can represent a large share of your total housing cost over a short
+                        timeline.
+                        That’s why 3–5 year holds are especially exposed: you might sell before you’ve built enough
+                        equity to absorb the hit.
+                    </p>
+
+                    <h3>Short-horizon reality</h3>
+                    <ul>
+                        <li>Equity builds slower in early mortgage years.</li>
+                        <li>Selling costs can take a large portion of your proceeds.</li>
+                        <li>A major repair reduces your net position immediately.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Stress-test rule:</strong> Always run a scenario where one major repair happens
+                            during your holding period.
+                            If buying stops making sense, your decision is fragile.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="budget-framework">
+                    <h2>A Practical Budgeting Framework (Simple, Conservative)</h2>
+                    <p>
+                        You don’t need a perfect forecast. You need a budget that keeps you safe and a scenario test
+                        that shows your downside.
+                        Here’s a practical approach you can apply to almost any U.S. home:
+                    </p>
+
+                    <h3>1) Base annual reserve</h3>
+                    <p>
+                        Set aside an annual amount for routine maintenance and minor repairs. Think of this as “keeping
+                        the home functioning.”
+                        A percentage-of-value rule can be a starting point, but the real driver is the home’s age,
+                        condition, and systems.
+                    </p>
+
+                    <h3>2) CapEx reserve or “event” budget</h3>
+                    <p>
+                        Add either:
+                    </p>
+                    <ul>
+                        <li>a second reserve for major replacements, or</li>
+                        <li>a one-time repair event in your model (roof/HVAC/etc.)</li>
+                    </ul>
+
+                    <h3>3) Cash buffer (separate from the model)</h3>
+                    <p>
+                        Even if your calculator includes maintenance, cash flow timing matters.
+                        You want a separate emergency buffer so repairs don’t force debt or a bad sale decision.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Goal:</strong> Your budget should be conservative enough that a real-world repair
+                            doesn’t turn a good decision into financial stress.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="what-to-expect">
+                    <h2>Common Systems and Replacement Cycles (What to Watch)</h2>
+                    <p>
+                        Every home is different, but the key risk is simple: expensive systems that are near end-of-life
+                        when you buy.
+                        If you buy a home with a roof or HVAC system near replacement age, you’re implicitly agreeing to
+                        pay that cost — even if it’s not in the asking price.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>High-impact items</h4>
+                            <ul>
+                                <li><strong>Roof</strong> (major cost, resale impact)</li>
+                                <li><strong>HVAC</strong> (replacement + efficiency)</li>
+                                <li><strong>Plumbing</strong> (leaks, main line, water damage)</li>
+                                <li><strong>Electrical</strong> (panel, wiring issues)</li>
+                                <li><strong>Foundation/drainage</strong> (rare, but huge)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Moderate items</h4>
+                            <ul>
+                                <li>Water heater</li>
+                                <li>Appliances</li>
+                                <li>Exterior paint / siding repairs</li>
+                                <li>Windows (costly, but usually optional timing)</li>
+                                <li>Fencing, landscaping, minor exterior fixes</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p class="mini-note">
+                        You don’t need exact lifespans to model this. You just need to know whether your purchase is
+                        likely to trigger a big replacement in your hold window.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="scenarios">
+                    <h2>Scenarios to Run in the Calculator (Maintenance Edition)</h2>
+                    <p>
+                        Use these three scenarios to avoid “maintenance blindness”:
+                    </p>
+
+                    <h3>Scenario A: Base maintenance</h3>
+                    <ul>
+                        <li>Include a realistic annual maintenance reserve</li>
+                        <li>Include taxes, insurance, HOA, and selling costs</li>
+                    </ul>
+
+                    <h3>Scenario B: “One big repair” stress test</h3>
+                    <p>
+                        Add one major repair event during your holding period (roof, HVAC, plumbing).
+                        If buying loses under this scenario, consider whether you’re comfortable taking that risk.
+                    </p>
+
+                    <h3>Scenario C: Higher ongoing maintenance</h3>
+                    <p>
+                        Some homes are simply more expensive to maintain (older homes, harsh climates, deferred upkeep).
+                        Increase the annual maintenance assumption and see if the decision flips.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Maintenance can flip the winner</h4>
+                            <p>Run base vs “one big repair” and see whether buying still works for your real timeline.
+                            </p>
+                        </div>
+                        <a href="/rent-vs-buy/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Maintenance Checklist Before You Buy (Quick)</h2>
+                    <p>
+                        You don’t need to inspect everything yourself — but you should know where the big risks are
+                        before you trust the model.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Ask about / verify</h4>
+                            <ul>
+                                <li>Age of roof and HVAC</li>
+                                <li>Any known leaks or water damage</li>
+                                <li>Electrical panel condition</li>
+                                <li>Plumbing history (repairs, main line issues)</li>
+                                <li>Major renovations done recently (quality matters)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Modeling choices</h4>
+                            <ul>
+                                <li>Use a base annual reserve (not zero)</li>
+                                <li>Include one major repair scenario</li>
+                                <li>Don’t assume repairs “pay back” unless you model ROI</li>
+                                <li>Keep a cash buffer outside the model</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Short-horizon warning:</strong> If you might move in 3–5 years, maintenance risk
+                            matters more because there’s less time to absorb costs.
+                            Pair this with <a href="/rent-vs-buy/3-5-years/">3–5 years reality check</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        Maintenance connects directly to ownership costs, renovation decisions, and resale outcomes:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Taxes, insurance, maintenance, and operating costs in one view.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/renovation-roi/">Renovation ROI</a>
+                            <p>Estimate upgrade cost and whether it pays back at sale.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale (Inflation-Adjusted)</a>
+                            <p>See what you keep after selling costs and inflation — repairs matter here.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Run a “one big repair” stress test and see if the winner changes.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>How much should I budget for home maintenance each year?</h4>
+                        <p>
+                            Many people start with a percentage of home value, but the right budget depends on the
+                            home’s age, condition, climate, and systems.
+                            It’s safer to model a base annual reserve plus a “one big repair” stress test over your
+                            holding period.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does maintenance make renting better than buying?</h4>
+                        <p>
+                            Maintenance increases the non-equity cost of owning and can push break-even farther out,
+                            especially in short horizons.
+                            Renting can be more competitive when ownership repairs and capital expenses are
+                            underestimated.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do repairs matter more over 3 to 10 years?</h4>
+                        <p>
+                            Because one major repair event can be a large percentage of total costs over a short
+                            timeline.
+                            Over longer horizons, costs can average out, but short holds are exposed to “one-event”
+                            risk.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the difference between maintenance and CapEx?</h4>
+                        <p>
+                            Maintenance is ongoing upkeep (small repairs, servicing), while CapEx (capital expenses) are
+                            large replacements or upgrades
+                            like roofs, HVAC systems, windows, or major plumbing work.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the fastest maintenance “reality check” before buying?</h4>
+                        <p>
+                            Run a base maintenance budget and then add a “one big repair” scenario during your hold.
+                            If that flips the result, your decision is sensitive — and renting may be the safer
+                            financial strategy for short horizons.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: Maintenance Is the Missing Cost in Most Comparisons</h2>
+                    <p>
+                        Maintenance doesn’t build equity, but it’s real spending — and it’s often underestimated.
+                        Over short and medium horizons, one major repair can dominate the entire comparison.
+                    </p>
+                    <p>
+                        The best approach is conservative budgeting plus scenario testing.
+                        If buying still works with a realistic reserve and a “one big repair” stress test, it’s
+                        stronger.
+                        If it only works when maintenance is unrealistically low, treat the decision as fragile and
+                        consider renting for flexibility.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: add a “one big repair” stress test in the <a href="/rent-vs-buy/calculator/">Rent
+                                vs Buy Calculator</a> and see where your break-even lands.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions (maintenance reserves, repair
+                        events, transaction costs, and ownership expenses).
+                        For decisions, run your numbers in the <a href="/rent-vs-buy/calculator/">calculator</a> and
+                        consider a professional inspection and local cost factors.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

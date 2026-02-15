@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Escrow and mortgage payment (U.S.): learn how escrow accounts work, why your monthly payment changes, what escrow shortages/surpluses mean, how annual escrow analysis works, RESPA cushion limits, and how to predict tax/insurance increases. Includes examples, checklists, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Escrow and Mortgage Payment (U.S.) — Why Your Payment Changes + How Escrow Works | PropertyCost</title>
+
+    <meta property="og:title" content="Escrow and Mortgage Payment (U.S.)" />
+    <meta property="og:description"
+        content="Understand mortgage escrow: taxes/insurance escrowed with your payment, annual escrow analysis, shortage vs surplus, RESPA limits, and how to predict payment changes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Escrow and Mortgage Payment (U.S.)">
+    <meta name="twitter:description"
+        content="Why your mortgage payment changes: escrow basics, shortages/surpluses, annual escrow analysis, and what you can do.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Property Tax","item":"https://mypropertycost.com/property-tax/"},
+          {"@type":"ListItem","position":3,"name":"Escrow and mortgage payment","item":"https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/property-tax/escrow-and-mortgage-payment/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is an escrow account on a mortgage?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A mortgage escrow account (also called an impound account) is a separate account your loan servicer uses to collect money for property taxes and homeowners insurance as part of your monthly payment, then pay those bills on your behalf when they come due."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why did my mortgage payment go up if my interest rate didn’t change?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Most payment increases come from escrow: property taxes and insurance rose, or your escrow account had a shortage. After the annual escrow analysis, the servicer can increase your monthly escrow portion and may also require repayment of any shortage."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is an escrow shortage vs surplus?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A shortage means your escrow account doesn’t have enough funds to pay upcoming tax/insurance bills based on the servicer’s new estimate. A surplus means the account has more than needed beyond the allowed cushion; surpluses are typically refunded or credited."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How much cushion can a servicer require in escrow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Under federal rules (Regulation X / RESPA), a servicer may generally collect a cushion up to one-sixth of the estimated annual escrow disbursements (often described as up to about two months of escrow payments), unless a lower limit applies under state law or the mortgage documents."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/property-tax/">Property Tax</a>
+                <span class="sep">/</span>
+                <span class="current">Escrow and mortgage payment</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#basics">Escrow basics (PITI explained)</a></li>
+                    <li><a href="#why-payment-changes">Why your payment changes</a></li>
+                    <li><a href="#analysis">Annual escrow analysis (how it works)</a></li>
+                    <li><a href="#shortage">Escrow shortage, deficiency, surplus</a></li>
+                    <li><a href="#cushion">Escrow cushion limits (RESPA)</a></li>
+                    <li><a href="#examples">Examples (numbers)</a></li>
+                    <li><a href="#what-to-do">What to do when your payment jumps</a></li>
+                    <li><a href="#avoid">How to avoid escrow surprises</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#sources">Sources</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open tools">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Model your true monthly payment</div>
+                        <div class="sidebar-cta__sub">Include taxes + insurance and stress-test reassessment.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/homeownership-cost/">Open Homeownership Cost →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Escrow and Mortgage Payment (U.S.): Why Your Payment Changes</h1>
+                        <p class="subtitle">
+                            Many homeowners think their mortgage payment is “fixed” because the interest rate is fixed.
+                            But if your loan uses an escrow account, your monthly payment can change when
+                            <strong>property taxes</strong> or <strong>homeowners insurance</strong> change — or when
+                            the lender’s
+                            annual escrow analysis finds a shortage.
+                            This guide explains escrow in plain English, shows how shortages and surpluses work, and
+                            gives you
+                            a practical checklist for predicting — and reducing — payment surprises.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/property-tax/" aria-label="Back to Property Tax hub">←
+                                    Back to Property Tax</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-31">Jan 31, 2026</time></span>
+                                <span class="meta-chip">~15–18 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-payment-changes">Why payment changes</a>
+                    <a href="#analysis">Escrow analysis</a>
+                    <a href="#what-to-do">What to do</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/homeownership-cost/">
+                            <strong>Homeownership cost</strong>
+                            <span>Model taxes, insurance, maintenance and “true monthly” cost.</span>
+                        </a>
+                        <a class="start-here__card" href="/property-tax/homestead-exemption/">
+                            <strong>Homestead exemption</strong>
+                            <span>Lower taxable value (and sometimes limit tax growth).</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/">
+                            <strong>Mortgage calculator</strong>
+                            <span>See PITI (principal, interest, taxes, insurance) together.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick answer</h2>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Your mortgage payment can change even with a fixed rate</strong> because escrowed
+                            items change.
+                            If your servicer collects property taxes and insurance in escrow, they adjust your monthly
+                            escrow portion
+                            after an annual escrow analysis. If the account was underfunded, you may also have to repay
+                            a shortage.
+                        </p>
+                    </div>
+
+                    <ul>
+                        <li><strong>Fixed</strong> (usually): principal + interest (P&amp;I) on a fixed-rate mortgage.
+                        </li>
+                        <li><strong>Not fixed</strong> (often): property taxes, homeowners insurance, and sometimes PMI.
+                        </li>
+                        <li><strong>Most “surprise” increases</strong>: rising taxes/insurance + an escrow shortage at
+                            the same time.</li>
+                    </ul>
+
+                    <p class="mini-note">
+                        Terminology note: escrow accounts are also called <strong>impound accounts</strong> in some
+                        states.
+                        The concept is the same.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="basics">
+                    <h2>Escrow basics: what your mortgage payment is really made of (PITI)</h2>
+
+                    <p>
+                        A standard homeowner payment is often described as <strong>PITI</strong>:
+                    </p>
+
+                    <ul>
+                        <li><strong>P</strong> = Principal (the part that pays down your loan balance)</li>
+                        <li><strong>I</strong> = Interest (the cost of borrowing)</li>
+                        <li><strong>T</strong> = Taxes (property taxes, usually paid to your county/city/school
+                            district)</li>
+                        <li><strong>I</strong> = Insurance (homeowners insurance; sometimes flood insurance too)</li>
+                    </ul>
+
+                    <p>
+                        If your mortgage includes an escrow account, you typically pay one combined monthly amount to
+                        your loan servicer.
+                        The servicer keeps your principal and interest, and deposits the tax/insurance portion into your
+                        escrow account.
+                        When property taxes or insurance premiums come due, the servicer pays them from escrow.
+                    </p>
+
+                    <h3>Why lenders like escrow</h3>
+                    <p>
+                        Taxes and insurance protect the lender’s collateral. If you forget to pay property taxes, a tax
+                        lien can become a serious issue.
+                        If you let insurance lapse, the home is exposed to risk. Escrow reduces missed payments, which
+                        is why it is common for
+                        low-down-payment loans or certain programs.
+                    </p>
+
+                    <h3>Why homeowners like escrow (sometimes)</h3>
+                    <p>
+                        Escrow spreads big annual bills into monthly payments. Instead of writing a large check once or
+                        twice a year,
+                        you pay smaller amounts monthly. That can simplify budgeting — unless the estimate is wrong
+                        (which causes surprises).
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="why-payment-changes">
+                    <h2>Why your mortgage payment changes (the 5 most common causes)</h2>
+
+                    <h3>1) Property taxes increased</h3>
+                    <p>
+                        Property taxes can increase when assessed value rises, local tax rates change, or voter-approved
+                        levies pass.
+                        Even if your tax rate stays flat, your bill can rise if assessed value rises.
+                        Taxes are a classic “slow surprise”: they can look stable, then jump after reassessment —
+                        especially after a purchase.
+                    </p>
+
+                    <h3>2) Homeowners insurance increased</h3>
+                    <p>
+                        Insurance premiums can change due to regional risks, claim trends, replacement cost inflation,
+                        and insurer repricing.
+                        When the premium increases, escrow must collect more each month to cover the next renewal.
+                    </p>
+
+                    <h3>3) Your escrow account had a shortage</h3>
+                    <p>
+                        If the servicer’s previous estimate was too low, escrow may not have enough to pay the bills.
+                        When the servicer advances funds to pay taxes/insurance, the account can go negative.
+                        At the next analysis, the servicer increases your monthly escrow amount and may also require
+                        repayment of the shortage.
+                        That’s why payments can jump sharply in a single year.
+                    </p>
+
+                    <h3>4) PMI or other monthly items changed</h3>
+                    <p>
+                        Some borrowers also see payment changes due to mortgage insurance (PMI), escrowed HOA fees in
+                        rare cases,
+                        or changes after a modification. The biggest drivers are still taxes and insurance.
+                    </p>
+
+                    <h3>5) You changed insurers or tax exemptions</h3>
+                    <p>
+                        If you switched insurance policies, your premium schedule and due dates may change.
+                        If you gained or lost a tax exemption (homestead, senior, etc.), your tax bill may change.
+                        Escrow has to adapt to the new schedule and amounts.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key idea:</strong> Escrow isn’t “random.” Your payment changes because the servicer
+                            updates
+                            the estimate of what it must pay out for taxes and insurance.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="analysis">
+                    <h2>Annual escrow analysis: what your servicer does (and what to look for)</h2>
+
+                    <p>
+                        Federal servicing rules require servicers to analyze escrow accounts and adjust payments when
+                        needed.
+                        The analysis is essentially a forward-looking forecast: how much will taxes and insurance cost
+                        in the coming year,
+                        and how much should be collected monthly to pay those bills on time?
+                    </p>
+
+                    <h3>What the escrow analysis includes</h3>
+                    <p>
+                        A standard escrow statement shows:
+                    </p>
+                    <ul>
+                        <li><strong>Projected disbursements</strong> (expected tax and insurance payments)</li>
+                        <li><strong>Projected monthly deposits</strong> (your monthly escrow portion)</li>
+                        <li><strong>Running balance</strong> (how the balance changes over time)</li>
+                        <li><strong>Target balance / cushion</strong> (how much the servicer is allowed to hold as a
+                            reserve)</li>
+                        <li><strong>Shortage / deficiency / surplus</strong> (whether you’re under- or over-funded)</li>
+                    </ul>
+
+                    <h3>Where the “new monthly escrow payment” comes from</h3>
+                    <p>
+                        Servicers typically take the estimated annual escrow disbursements (tax + insurance),
+                        divide by 12, and then adjust for any shortage repayment (if applicable).
+                        The result is your new monthly escrow portion.
+                    </p>
+
+                    <h3>Why it often feels like “double counting”</h3>
+                    <p>
+                        Many homeowners get confused because the new monthly payment can include:
+                    </p>
+                    <ul>
+                        <li><strong>Higher ongoing escrow</strong> (because next year’s taxes/insurance are projected
+                            higher)</li>
+                        <li><strong>Plus shortage repayment</strong> (to replenish the account for the past
+                            underfunding)</li>
+                    </ul>
+                    <p>
+                        That’s two different things happening at the same time: the baseline goes up, and you’re also
+                        paying back a prior miss.
+                        If you’re reading an escrow statement, separate those two buckets.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="shortage">
+                    <h2>Escrow shortage vs deficiency vs surplus (plain-English definitions)</h2>
+
+                    <h3>Escrow shortage</h3>
+                    <p>
+                        A <strong>shortage</strong> means the account is projected to have too little money to cover
+                        upcoming disbursements
+                        while maintaining the required minimum balance. Shortages are common when tax bills or insurance
+                        premiums increase.
+                        The servicer may allow you to repay the shortage over time (often spread across monthly
+                        payments), subject to rules.
+                    </p>
+
+                    <h3>Escrow deficiency</h3>
+                    <p>
+                        A <strong>deficiency</strong> is typically a negative balance — meaning the servicer advanced
+                        money because escrow didn’t have enough
+                        when a bill came due. Deficiencies often occur when the estimate was too low and the bill hit
+                        earlier or higher than expected.
+                    </p>
+
+                    <h3>Escrow surplus</h3>
+                    <p>
+                        A <strong>surplus</strong> means the account has more funds than needed beyond the allowed
+                        cushion.
+                        In many cases, surplus funds must be returned or credited according to servicing rules.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Easy mental model:</strong><br>
+                            Shortage = projected to come up short.<br>
+                            Deficiency = already went negative.<br>
+                            Surplus = more than needed beyond allowed cushion.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="cushion">
+                    <h2>Escrow cushion limits (RESPA / Regulation X)</h2>
+
+                    <p>
+                        Many homeowners ask: “Why does the lender hold extra money in escrow?”
+                        The reason is timing and uncertainty: bills can come due before enough monthly payments have
+                        accumulated,
+                        or estimates can be slightly off. The “cushion” is a permitted reserve.
+                    </p>
+
+                    <p>
+                        Under federal servicing rules (Regulation X implementing RESPA), a servicer may generally
+                        require a cushion up to
+                        <strong>one-sixth of the estimated total annual escrow disbursements</strong> (often described
+                        as up to about two months of escrow payments),
+                        unless state law or the mortgage documents specify a lower amount.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Why this matters:</strong> If your taxes/insurance rise, the permitted cushion rises
+                            too.
+                            So your payment can increase not only because bills increased, but also because the allowed
+                            reserve target increased.
+                        </p>
+                    </div>
+
+                    <p class="mini-note">
+                        For the legal details, see 12 CFR § 1024.17 (escrow account rules), including annual escrow
+                        analysis and cushion limits.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Examples: how escrow changes your payment (with numbers)</h2>
+
+                    <p>
+                        Let’s walk through realistic examples using round numbers. These are illustrative — your
+                        schedule and due dates will differ.
+                    </p>
+
+                    <h3>Example 1: taxes and insurance rise (no shortage)</h3>
+                    <p>
+                        Suppose your annual property taxes were $4,800 ($400/mo) and insurance was $1,200 ($100/mo).
+                        Total escrow disbursements:
+                        $6,000/year → about $500/mo.
+                    </p>
+                    <p>
+                        Next year, taxes rise to $5,400 and insurance rises to $1,500. Total becomes $6,900/year → about
+                        $575/mo.
+                        If there was no shortage, your escrow portion increases roughly $75/mo, and your total mortgage
+                        payment increases by about $75/mo.
+                    </p>
+
+                    <h3>Example 2: taxes rose and you also have a shortage</h3>
+                    <p>
+                        Now assume last year the servicer estimated taxes too low and escrow came up $900 short when
+                        bills were paid.
+                        Your new escrow calculation must do two things:
+                        (1) collect more going forward, and
+                        (2) repay the $900 shortage.
+                    </p>
+                    <p>
+                        If the servicer spreads shortage repayment over 12 months, that adds about $75/mo on top of the
+                        higher baseline escrow.
+                        So the payment increase could feel like “double”:
+                        $75/mo (higher baseline) + $75/mo (shortage repayment) = ~$150/mo increase.
+                    </p>
+
+                    <h3>Example 3: first-year reassessment surprise after buying</h3>
+                    <p>
+                        A common scenario: the listing showed the seller’s taxes of $3,000/year, but after you buy, the
+                        assessed value resets and the new bill is $5,000/year.
+                        If escrow was set using the old bill, the account can be underfunded immediately.
+                    </p>
+                    <p>
+                        Result: your payment can jump in year two because your servicer updates the estimate, increases
+                        the monthly escrow portion,
+                        and may also collect shortage repayment. This is why buyers should always estimate taxes using
+                        “post-sale” assumptions rather than the seller’s bill.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to predict the payment change before it hits?</h4>
+                            <p>
+                                Model taxes and insurance in a base case, then run a higher-tax scenario (reassessment
+                                up) and higher-insurance scenario.
+                                If the budget breaks, you’ll know early.
+                            </p>
+                        </div>
+                        <a href="/homeownership-cost/">Run the model →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="what-to-do">
+                    <h2>What to do when your mortgage payment jumps</h2>
+
+                    <p>
+                        A payment increase is stressful, but you usually have a few actionable levers. The key is
+                        diagnosing the cause:
+                        taxes, insurance, shortage repayment, or a mistake.
+                    </p>
+
+                    <h3>Step 1: Read the escrow statement like a detective</h3>
+                    <ul>
+                        <li><strong>Identify the new annual tax amount</strong> used in the estimate.</li>
+                        <li><strong>Identify the new insurance premium</strong> used in the estimate.</li>
+                        <li><strong>Check if there’s a shortage/deficiency</strong> and how repayment is structured.
+                        </li>
+                        <li><strong>Look at due dates</strong> (a bill due early can increase required monthly
+                            deposits).</li>
+                    </ul>
+
+                    <h3>Step 2: Verify the tax bill and exemptions</h3>
+                    <p>
+                        If taxes rose, confirm the bill directly with your county tax collector/assessor records.
+                        Make sure your homestead exemption (or other exemptions) is applied if you qualify.
+                        Missing an exemption is one of the most common “avoidable” causes of higher taxes.
+                    </p>
+
+                    <h3>Step 3: Shop insurance (carefully)</h3>
+                    <p>
+                        Insurance pricing can vary widely. If premiums rose sharply, get multiple quotes and confirm
+                        coverage levels.
+                        Don’t underinsure just to lower the escrow payment — that can create long-term risk.
+                    </p>
+
+                    <h3>Step 4: Ask about shortage repayment options</h3>
+                    <p>
+                        Depending on the situation and rules, some servicers allow different repayment approaches (pay
+                        in full vs spread over time).
+                        Paying in full can reduce the monthly payment — but only if you have the cash and it makes sense
+                        for your budget.
+                    </p>
+
+                    <h3>Step 5: If something looks wrong, dispute it in writing</h3>
+                    <p>
+                        If the statement uses the wrong premium, wrong tax amount, or wrong due dates, contact the
+                        servicer and provide documentation.
+                        Keep everything in writing and save copies. Escrow errors do happen, especially around servicer
+                        transfers or recent policy changes.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="avoid">
+                    <h2>How to avoid escrow surprises (especially after buying)</h2>
+
+                    <h3>1) Don’t rely on the seller’s current tax bill</h3>
+                    <p>
+                        The seller’s taxes may reflect exemptions, capped assessments, or an older assessed value. After
+                        a sale, assessments can reset.
+                        When you’re buying, ask: “Will taxes be reassessed after purchase? If yes, what will the new
+                        taxable value likely be?”
+                    </p>
+
+                    <h3>2) Apply for homestead (and any other exemptions) immediately</h3>
+                    <p>
+                        If your home is your primary residence, apply for the homestead exemption as soon as you’re
+                        eligible.
+                        Even if the savings aren’t huge, the exemption can also interact with assessment growth rules in
+                        some states.
+                    </p>
+
+                    <h3>3) Budget with a “tax + insurance increase” buffer</h3>
+                    <p>
+                        A conservative homeowner budget assumes taxes and insurance rise over time.
+                        When interest rates are fixed, these are the main upward pressures on monthly cost.
+                    </p>
+
+                    <h3>4) Keep an eye on local reassessments and insurance renewal timing</h3>
+                    <p>
+                        Escrow isn’t random — it responds to bills. Track:
+                        (a) assessment notices, (b) tax bills, and (c) insurance renewal notices.
+                        If you see a jump, you’ll know a payment increase is likely within the next escrow analysis
+                        cycle.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Escrow checklist (save this)</h2>
+
+                    <ul>
+                        <li>✅ Know your payment breakdown: P&amp;I vs escrow (taxes + insurance)</li>
+                        <li>✅ Save your annual escrow statement (and compare year over year)</li>
+                        <li>✅ Verify county tax bill and assessed value after purchase</li>
+                        <li>✅ Apply for homestead exemption if eligible</li>
+                        <li>✅ Track insurance renewal premium each year</li>
+                        <li>✅ When payment rises, separate: baseline increase vs shortage repayment</li>
+                        <li>✅ Stress-test a higher tax + insurance scenario in your budget</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Most useful habit:</strong> Whenever you get a tax bill or insurance renewal notice,
+                            ask:
+                            “Will this change my escrow estimate?” If yes, plan ahead.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/property-tax/">Property Tax hub</a>
+                            <p>Rates, exemptions, assessments, and tools.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-tax/homestead-exemption/">Homestead exemption</a>
+                            <p>How to reduce taxable value (and sometimes limit increases).</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-tax/property-tax-rate-by-state/">Property tax rate by state</a>
+                            <p>Compare typical effective rates across the U.S.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Homeownership cost</a>
+                            <p>Model true monthly cost: taxes + insurance + maintenance.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage calculator</a>
+                            <p>See PITI and affordability sensitivity.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/">Rent vs Buy</a>
+                            <p>Escrow-driven cost increases can change the break-even timeline.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is an escrow account on a mortgage?</h4>
+                        <p>
+                            It’s an account your servicer uses to collect monthly funds for property taxes and
+                            insurance,
+                            then pay those bills when due. It’s a budgeting tool and a risk-control tool for lenders.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why did my mortgage payment go up if I have a fixed rate?</h4>
+                        <p>
+                            The fixed part is principal and interest. If your loan is escrowed, taxes and insurance can
+                            change.
+                            After the annual escrow analysis, the servicer updates your monthly escrow portion and may
+                            collect shortage repayment.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Can I remove escrow?</h4>
+                        <p>
+                            Sometimes, depending on loan type, equity, and lender policy. Some loans require escrow
+                            (especially with low down payment),
+                            and some lenders charge an escrow waiver fee. If you remove escrow, you must self-manage and
+                            pay taxes/insurance on time.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is an escrow shortage?</h4>
+                        <p>
+                            It’s when the servicer’s new projection shows the escrow account won’t have enough to cover
+                            upcoming tax/insurance bills.
+                            The servicer increases the monthly escrow amount and may require repayment of the shortage.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How much escrow cushion is allowed?</h4>
+                        <p>
+                            Federal rules generally allow a cushion up to one-sixth of annual escrow disbursements
+                            (often described as about two months of escrow payments),
+                            unless state law or the mortgage documents impose a lower limit.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom line</h2>
+                    <p>
+                        Escrow is the #1 reason “fixed-rate” homeowners still see payment increases.
+                        Once you understand the logic — taxes/insurance forecasts + annual escrow analysis + shortage
+                        repayment —
+                        the surprises become predictable.
+                        The best defense is simple: don’t rely on the seller’s tax bill, claim exemptions you qualify
+                        for,
+                        track insurance renewals, and budget with a buffer for taxes and insurance.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: model a “tax reassessment up” scenario in <a
+                                href="/homeownership-cost/">Homeownership Cost</a>.
+                            If the payment still works, your budget is robust.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="sources">
+                    <h2>Sources (official references)</h2>
+                    <p class="mini-note">
+                        The rules around escrow accounts and analysis are governed by federal servicing regulations.
+                        These sources explain the requirements, terminology, and limits.
+                    </p>
+                    <ul>
+                        <li>
+                            CFPB Regulation X — 12 CFR § 1024.17 (Escrow accounts):
+                            <a href="https://www.consumerfinance.gov/rules-policy/regulations/1024/17/"
+                                rel="nofollow noopener" target="_blank">
+                                consumerfinance.gov — § 1024.17
+                            </a>
+                        </li>
+                        <li>
+                            Federal Reserve (Regulation X reference page for § 1024.17):
+                            <a href="https://www.federalreserve.gov/frrs/regulations/section-102417-escrow-accounts.htm"
+                                rel="nofollow noopener" target="_blank">
+                                federalreserve.gov — Section 1024.17
+                            </a>
+                        </li>
+                        <li>
+                            CFPB Mortgage Servicing FAQs (includes escrow analysis discussion):
+                            <a href="https://www.consumerfinance.gov/compliance/compliance-resources/mortgage-resources/mortserv/mortgage-servicing-faqs/"
+                                rel="nofollow noopener" target="_blank">
+                                consumerfinance.gov — Mortgage Servicing FAQs
+                            </a>
+                        </li>
+                        <li>
+                            eCFR (Code of Federal Regulations) — 12 CFR Part 1024:
+                            <a href="https://www.ecfr.gov/current/title-12/chapter-X/part-1024" rel="nofollow noopener"
+                                target="_blank">
+                                ecfr.gov — 12 CFR Part 1024
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

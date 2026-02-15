@@ -1,0 +1,688 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Amortization schedule explained (U.S.): learn how mortgage payments split into interest vs principal over time, why early years are interest-heavy, how to read an amortization table, and how extra payments change payoff time and total interest. Includes examples, tips, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/mortgage/amortization-schedule/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/mortgage/amortization-schedule/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/mortgage/amortization-schedule/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Amortization Schedule Explained (U.S.) — Interest vs Principal, Equity Growth, and Extra Payments</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Amortization Schedule Explained (U.S.) — Interest vs Principal" />
+    <meta property="og:description"
+        content="Understand how mortgage payments split into interest vs principal over time, why early years are interest-heavy, and how extra payments change the schedule and total interest." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/mortgage/amortization-schedule/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/mortgage/amortization-schedule/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://mypropertycost.com/mortgage/" },
+          { "@type": "ListItem", "position": 3, "name": "Amortization Schedule", "item": "https://mypropertycost.com/mortgage/amortization-schedule/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/mortgage/amortization-schedule/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is an amortization schedule?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "An amortization schedule is a table that shows each mortgage payment over time, breaking it into interest and principal, and tracking the remaining balance after each payment."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why are mortgage payments mostly interest at the beginning?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Interest is calculated on the remaining loan balance. Early in the loan, the balance is highest, so the interest portion is largest. Over time, as the balance falls, interest decreases and more of each payment goes to principal."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do extra payments always reduce total interest?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes—if the extra amount is applied to principal, it reduces the balance faster, which reduces future interest charges and shortens the payoff time."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is amortization the same as home equity?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not exactly. Amortization is principal paydown on your loan. Home equity is your home value minus remaining loan balance, so it includes both principal paydown and any change in home value."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/mortgage/">Mortgage</a>
+                <span class="sep">/</span>
+                <span class="current">Amortization schedule</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#what-is-amortization">What an amortization schedule is</a></li>
+                    <li><a href="#why-interest-heavy">Why early payments are interest-heavy</a></li>
+                    <li><a href="#how-to-read-table">How to read an amortization table</a></li>
+                    <li><a href="#equity-vs-principal">Principal paydown vs home equity</a></li>
+                    <li><a href="#what-changes-schedule">What changes the schedule most</a></li>
+                    <li><a href="#extra-payments">Extra payments: how they change payoff + interest</a></li>
+                    <li><a href="#short-holds">Why amortization matters for 3–7 year holds</a></li>
+                    <li><a href="#how-to-use-calculator">How to use the calculator effectively</a></li>
+                    <li><a href="#related">Related guides + calculators</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">See your amortization</div>
+                        <div class="sidebar-cta__sub">Run your loan and inspect interest vs principal by year.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Amortization Schedule Explained (U.S.)<br>Interest vs Principal, Equity Growth, and Extra
+                            Payments</h1>
+                        <p class="subtitle">
+                            The amortization schedule is the “truth table” of a mortgage: it shows how every payment
+                            splits into
+                            interest and principal, and how the balance falls over time. This is why short holds can be
+                            tricky —
+                            and why extra payments can save a surprising amount of interest.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/mortgage/" aria-label="Back to Mortgage hub">← Back to
+                                    Mortgage hub</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~12 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#what-is-amortization">What it is</a>
+                    <a href="#why-interest-heavy">Why interest-heavy early</a>
+                    <a href="#how-to-read-table">How to read the table</a>
+                    <a href="#extra-payments">Extra payments</a>
+                    <a href="#short-holds">Short holds</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Get payment + interest and see amortization over time.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/monthly-payment/">
+                            <strong>Monthly payment explained</strong>
+                            <span>P&amp;I vs escrow vs PMI — what your “payment” really includes.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/extra-payments/">
+                            <strong>Extra payments guide</strong>
+                            <span>How to reduce interest and shorten payoff time.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="what-is-amortization">
+                    <h2>What an Amortization Schedule Is</h2>
+                    <p>
+                        An <strong>amortization schedule</strong> is a table (or timeline) that shows, for each payment
+                        period:
+                        (1) how much you pay, (2) how much goes to <strong>interest</strong>, (3) how much goes to
+                        <strong>principal</strong>, and (4) what your remaining loan <strong>balance</strong> is after
+                        the payment.
+                    </p>
+                    <p>
+                        Most U.S. fixed-rate mortgages are fully amortizing: the payment is designed so the balance
+                        reaches zero at
+                        the end of the loan term (commonly 30 years). The schedule helps you answer practical questions
+                        like:
+                    </p>
+                    <ul>
+                        <li>How much principal will I pay down in the first 5 years?</li>
+                        <li>How much interest will I pay over the life of the loan?</li>
+                        <li>What happens if I pay an extra $100/month?</li>
+                        <li>How much will I still owe if I sell in year 7?</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key idea:</strong> Your payment might feel “flat,” but what’s inside it changes
+                            every month.
+                            Amortization is the process of shifting from mostly interest to mostly principal over time.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why-interest-heavy">
+                    <h2>Why Early Payments Are Interest-Heavy</h2>
+                    <p>
+                        Mortgage interest is calculated on the remaining balance. Early in the loan, the balance is at
+                        its highest,
+                        so the interest charge is also highest. As you pay down principal, the balance shrinks — and
+                        future interest
+                        charges shrink too.
+                    </p>
+                    <p>
+                        This is the simplest way to understand why early equity build-up feels slow:
+                        <strong>you’re paying interest on a large balance</strong>.
+                    </p>
+
+                    <h3>Why this matters in real decisions</h3>
+                    <ul>
+                        <li><strong>Short holds:</strong> If you sell in 3–7 years, you may have paid down less
+                            principal than you expect.</li>
+                        <li><strong>High rates:</strong> Higher interest rates increase the interest portion and slow
+                            principal paydown even more.</li>
+                        <li><strong>Refinance decisions:</strong> Refinancing changes the schedule; understanding
+                            amortization helps you avoid “reset traps.”</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical takeaway:</strong> If your plan isn’t “forever,” you should model your
+                            expected holding period,
+                            not the full 30 years. The amortization schedule tells you what your balance will be when
+                            you sell.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-read-table">
+                    <h2>How to Read an Amortization Table</h2>
+                    <p>
+                        Most schedules show rows like this:
+                    </p>
+                    <ul>
+                        <li><strong>Payment number / date</strong></li>
+                        <li><strong>Payment amount</strong> (usually constant for fixed-rate P&amp;I)</li>
+                        <li><strong>Interest</strong> (declines over time)</li>
+                        <li><strong>Principal</strong> (rises over time)</li>
+                        <li><strong>Remaining balance</strong> (declines over time)</li>
+                    </ul>
+
+                    <h3>Common confusion: “My payment is the same, so why is principal different?”</h3>
+                    <p>
+                        The payment is calculated to be constant (for fixed-rate loans), but the interest is
+                        recalculated each period
+                        based on the current balance. When interest is high, principal is low. When interest falls,
+                        principal rises —
+                        even if the total payment stays the same.
+                    </p>
+
+                    <h3>Another confusion: “Is principal a cost?”</h3>
+                    <p>
+                        Principal is not a “consumption cost” like rent. It’s a transfer from cash to equity:
+                        you owe less, so your net worth can improve (assuming the home’s value doesn’t fall).
+                        The cost part is primarily <strong>interest</strong> plus ownership expenses (taxes, insurance,
+                        maintenance).
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="equity-vs-principal">
+                    <h2>Principal Paydown vs Home Equity</h2>
+                    <p>
+                        People often use “amortization” and “equity” interchangeably, but they’re not the same:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Principal paydown (amortization)</h4>
+                            <ul>
+                                <li>How much of the loan you’ve repaid</li>
+                                <li>Guaranteed by the schedule (if you make payments)</li>
+                                <li>Does not depend on market value</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Home equity</h4>
+                            <ul>
+                                <li>Home value minus remaining loan balance</li>
+                                <li>Includes principal paydown + market appreciation (or depreciation)</li>
+                                <li>Can go up or down with the market</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        This difference matters in two common scenarios:
+                    </p>
+                    <ul>
+                        <li><strong>Flat market:</strong> You can still build equity via principal paydown even if
+                            prices don’t rise.</li>
+                        <li><strong>Down market:</strong> You can pay down principal and still have limited equity if
+                            home values fall.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tip:</strong> When comparing rent vs buy, treat equity as a combination of
+                            amortization
+                            (principal paydown) and appreciation. They are two separate engines.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="what-changes-schedule">
+                    <h2>What Changes the Amortization Schedule Most</h2>
+                    <p>
+                        If you want to understand how to “control” amortization, focus on the inputs that move the
+                        schedule:
+                    </p>
+
+                    <h3>1) Interest rate</h3>
+                    <p>
+                        A higher rate increases the interest portion of each payment. That slows principal paydown,
+                        especially early.
+                        This is why high-rate environments can push break-even later in ownership decisions.
+                    </p>
+
+                    <h3>2) Term (15 vs 30 years)</h3>
+                    <p>
+                        A 15-year mortgage amortizes faster: a larger share of each payment goes to principal, and total
+                        interest is lower.
+                        The trade-off is a higher required monthly payment and reduced flexibility.
+                    </p>
+
+                    <h3>3) Down payment (loan amount)</h3>
+                    <p>
+                        A smaller loan means less interest and faster balance reduction in dollar terms.
+                        It doesn’t change the “shape” of amortization as much as rate/term, but it changes the size of
+                        everything.
+                    </p>
+
+                    <h3>4) Extra payments</h3>
+                    <p>
+                        Extra payments change the schedule dramatically because they reduce the balance faster than the
+                        original plan.
+                        That reduces future interest charges and often shortens the payoff time by years.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Always view amortization at your expected holding period
+                            (e.g., year 5, 7, 10).
+                            That’s the number that matters for selling, refinancing, or rent vs buy comparisons.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="extra-payments">
+                    <h2>Extra Payments: How They Change Payoff Time and Total Interest</h2>
+                    <p>
+                        Extra payments are one of the most powerful levers in mortgage math — but they only work if the
+                        extra amount is
+                        applied to <strong>principal</strong>. When principal falls faster, future interest falls too.
+                    </p>
+
+                    <h3>Two common strategies</h3>
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Extra monthly payment</h4>
+                            <ul>
+                                <li>Pay an extra amount each month (e.g., +$100)</li>
+                                <li>Easy to automate</li>
+                                <li>Strong effect over time due to compounding</li>
+                            </ul>
+                        </div>
+                        <div class="cost-box">
+                            <h4>One extra payment per year</h4>
+                            <ul>
+                                <li>Make a 13th payment annually (or split it monthly)</li>
+                                <li>Common “biweekly payment” approach</li>
+                                <li>Can shorten payoff time meaningfully</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>The trade-off: debt payoff vs investing</h3>
+                    <p>
+                        Paying extra principal produces a <strong>guaranteed</strong> return equal to your mortgage rate
+                        (roughly),
+                        because you avoid paying that interest in the future. Investing can potentially return more, but
+                        with risk.
+                        The right choice depends on your risk tolerance, liquidity needs, and time horizon.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: use <a href="/mortgage/extra-payments/">Extra payments</a> to compare savings vs
+                            opportunity cost.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="short-holds">
+                    <h2>Why Amortization Matters for 3–7 Year Holds</h2>
+                    <p>
+                        Many buyers assume, “If I pay a mortgage for five years, I’ll have built a lot of equity.”
+                        The amortization schedule is the reality check. In the early years, interest is a large share of
+                        the payment,
+                        and principal paydown may be modest — especially at higher rates.
+                    </p>
+
+                    <p>
+                        That doesn’t mean buying is wrong. It means your outcome depends more on:
+                    </p>
+                    <ul>
+                        <li>your transaction costs (closing + selling),</li>
+                        <li>your local taxes/insurance/maintenance, and</li>
+                        <li>market price movement (appreciation or decline).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If you expect to move in under 7 years, run your mortgage amortization at that year and pair
+                            it with your
+                            sale costs. This is how you avoid “I didn’t realize how little principal I paid down”
+                            surprises.
+                        </p>
+                    </div>
+
+                    <p>
+                        This is also why the mortgage calculator and rent vs buy calculator should be connected:
+                        amortization determines how much balance you still owe when you sell, which determines your net
+                        proceeds.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="how-to-use-calculator">
+                    <h2>How to Use the Mortgage Calculator to Understand Amortization</h2>
+                    <p>
+                        Use this workflow to get actionable insight fast:
+                    </p>
+
+                    <h3>1) Run your base loan</h3>
+                    <p>
+                        Input purchase price, down payment, interest rate, and term. Confirm the monthly P&amp;I.
+                    </p>
+
+                    <h3>2) Inspect year 5 / year 7 / year 10 balance</h3>
+                    <p>
+                        These “checkpoint” balances tell you what you will owe if you sell or refinance around those
+                        years.
+                        This is the most practical amortization output.
+                    </p>
+
+                    <h3>3) Test extra payments</h3>
+                    <p>
+                        Add an extra monthly amount and compare payoff time and total interest.
+                        If the savings are meaningful and the payment fits your budget, you’ve found a high-leverage
+                        move.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to see your interest vs principal by year?</h4>
+                            <p>Run your loan and check the balance at year 5, 7, and 10. Then test an extra payment
+                                scenario.</p>
+                        </div>
+                        <a href="/mortgage/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related guides + calculators</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage/monthly-payment/">Monthly payment explained</a>
+                            <p>What your payment includes: P&amp;I, escrow, and PMI—and how to model real affordability.
+                            </p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/extra-payments/">Extra payments</a>
+                            <p>How extra principal changes payoff time and total interest—and when investing might win
+                                instead.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/refinance-break-even/">Refinance break-even</a>
+                            <p>Refinancing changes your amortization timeline. Learn when a refi actually saves money
+                                after fees.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/">Rent vs Buy</a>
+                            <p>Amortization affects your equity and sale proceeds—key inputs to rent vs buy break-even.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is an amortization schedule?</h4>
+                        <p>
+                            An amortization schedule is a table that shows each mortgage payment over time, breaking it
+                            into interest and principal,
+                            and tracking the remaining loan balance after each payment.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why are mortgage payments mostly interest at the beginning?</h4>
+                        <p>
+                            Interest is calculated on the remaining loan balance. Early in the loan, the balance is
+                            highest, so the interest portion is largest.
+                            As the balance falls, interest declines and more of each payment goes to principal.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Do extra payments always reduce total interest?</h4>
+                        <p>
+                            Yes—if the extra amount is applied to principal. Reducing principal faster lowers future
+                            interest charges and typically shortens payoff time.
+                            Always confirm your lender applies extra payments to principal.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is amortization the same as home equity?</h4>
+                        <p>
+                            Not exactly. Amortization is principal paydown on your loan. Home equity is home value minus
+                            remaining loan balance,
+                            so it includes both principal paydown and any change in home value.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why should I care about amortization if I’m not staying 30 years?</h4>
+                        <p>
+                            Because your balance at the time you sell or refinance determines your net proceeds and real
+                            outcome.
+                            Short holds can have modest principal paydown, which makes selling costs and market movement
+                            more important.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom line</h2>
+                    <p>
+                        The amortization schedule explains why early mortgage payments feel interest-heavy and why
+                        principal paydown can be modest in the first years.
+                        Use amortization to plan realistic holding periods, evaluate refinance decisions, and quantify
+                        the impact of extra payments.
+                    </p>
+                    <div class="callout">
+                        <p>
+                            Next step: open the <a href="/mortgage/calculator/">Mortgage Calculator</a>, check your
+                            balance at year 5/7/10,
+                            and run an extra payment scenario to see how much interest you can save.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions. Actual amortization depends
+                        on your loan terms,
+                        payment frequency, and how extra payments are applied by your servicer. For decisions, run your
+                        numbers in the
+                        <a href="/mortgage/calculator/">calculator</a> and confirm details with your lender.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

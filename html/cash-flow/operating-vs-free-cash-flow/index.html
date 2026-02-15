@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Operating cash flow vs free cash flow (U.S.) explained: definitions, formulas, and the key differences. Learn how operating cash flow (OCF) is calculated, what free cash flow (FCF) means after capital expenditures, how these concepts map to real estate cash flow (NOI, CapEx reserves, debt service), and why ignoring CapEx creates fake “cash flow.” Includes examples, common mistakes, a quick comparison checklist, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Operating Cash Flow vs Free Cash Flow (U.S.) — Definitions, Formulas, and Real Estate Examples | PropertyCost
+    </title>
+
+    <meta property="og:title" content="Operating Cash Flow vs Free Cash Flow (U.S.)" />
+    <meta property="og:description"
+        content="Understand operating cash flow vs free cash flow: what each measures, the formulas, and why CapEx is the difference between “cash flow” and sustainable cash flow. Includes real estate mapping (NOI vs cash flow) and examples." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Operating Cash Flow vs Free Cash Flow (U.S.)">
+    <meta name="twitter:description"
+        content="OCF vs FCF explained with formulas and examples. Learn why CapEx is the difference, and how it maps to rental real estate cash flow (NOI vs net cash flow).">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"Operating vs free cash flow","item":"https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/operating-vs-free-cash-flow/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is operating cash flow (OCF)?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Operating cash flow (OCF) is the cash generated from a business’s core operations during a period. It reflects cash inflows from customers minus cash outflows for operating costs, adjusted for working capital changes."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is free cash flow (FCF)?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Free cash flow (FCF) is cash left after a business pays operating costs and capital expenditures (CapEx). It approximates the cash available to reinvest, pay down debt, pay dividends, or build reserves."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is the difference between operating cash flow and free cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"The key difference is capital expenditures: OCF measures cash from operations before CapEx, while FCF subtracts CapEx. That’s why FCF is often a better measure of sustainable cash generation."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How does OCF vs FCF relate to real estate cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"In rental real estate, NOI is similar to operating cash flow because it reflects operating performance before financing. Net cash flow after CapEx reserves and debt service is closer to free cash flow because it accounts for ongoing reinvestment needs and the owner’s financing obligations."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">Operating vs free cash flow</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#definitions">Definitions (OCF and FCF)</a></li>
+                    <li><a href="#why">Why the difference matters</a></li>
+                    <li><a href="#formulas">Formulas (OCF and FCF)</a></li>
+                    <li><a href="#what-includes">What each metric includes</a></li>
+                    <li><a href="#real-estate">Mapping to real estate cash flow (NOI vs net cash flow)</a></li>
+                    <li><a href="#examples">Worked examples</a></li>
+                    <li><a href="#interpret">How to interpret OCF vs FCF</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#related">Related links</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Want “real” cash flow?</div>
+                        <div class="sidebar-cta__sub">Include reserves/CapEx, not just operating costs.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Operating Cash Flow vs Free Cash Flow (U.S.): What’s the Difference and Why It Matters</h1>
+                        <p class="subtitle">
+                            “Cash flow” is one of the most used and abused phrases in finance.
+                            People often say a business (or rental property) “cash flows” because it produces cash from
+                            operations.
+                            But if it requires constant reinvestment—equipment replacements, renovations, roof and HVAC
+                            repairs—the cash left for the owner can be far lower.
+                            That’s the core difference between <strong>operating cash flow</strong> and <strong>free
+                                cash flow</strong>.
+                            In this guide you’ll learn definitions, formulas, how to interpret each metric, and how
+                            these concepts map to real estate
+                            (where NOI is closer to operating cash flow and net cash flow after reserves is closer to
+                            free cash flow).
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~20–28 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#definitions">Definitions</a>
+                    <a href="#real-estate">Real estate mapping</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/noi-net-operating-income/">
+                            <strong>NOI (net operating income)</strong>
+                            <span>NOI is the “operating” layer in rental real estate.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/real-estate-cash-flow/">
+                            <strong>Real estate cash flow</strong>
+                            <span>Net cash flow after reserves is what owners feel.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/rental-cash-flow-calculator-guide/">
+                            <strong>Calculator guide</strong>
+                            <span>How to avoid fake cash flow by missing CapEx.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>Operating cash flow (OCF)</strong> measures cash generated from core operations during a
+                        period.
+                        <strong>Free cash flow (FCF)</strong> measures cash left after paying for the capital
+                        expenditures (CapEx) required to maintain or grow operations.
+                        The difference is CapEx.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>OCF vs FCF in one sentence:</strong> OCF is cash from operations; FCF is cash you
+                            can actually “take out” after reinvestment.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Definitions: Operating Cash Flow vs Free Cash Flow</h2>
+
+                    <h3>What is operating cash flow (OCF)?</h3>
+                    <p>
+                        Operating cash flow is the cash generated (or used) by a business’s normal operations.
+                        It answers: <strong>Did the company’s core operations produce cash this period?</strong>
+                    </p>
+                    <p>
+                        OCF is usually reported on the cash flow statement.
+                        It takes net income and adjusts for non-cash items (like depreciation) and working capital
+                        changes (like receivables and payables).
+                    </p>
+
+                    <h3>What is free cash flow (FCF)?</h3>
+                    <p>
+                        Free cash flow is the cash left after operations <em>and</em> capital expenditures.
+                        It answers: <strong>After maintaining the asset base, how much cash is truly available?</strong>
+                    </p>
+                    <p>
+                        FCF is often used as a measure of “owner cash generation” because it’s closer to what can be
+                        used for debt reduction, dividends, buybacks,
+                        reserves, or reinvestment elsewhere.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Why investors care:</strong> Two companies can have similar OCF, but very different
+                            FCF if one requires heavy reinvestment.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why the Difference Matters (The “Reinvestment Reality” Problem)</h2>
+                    <p>
+                        The biggest cash flow misunderstandings come from ignoring reinvestment.
+                        A business can generate strong operating cash flow and still be “cash poor” if it must spend
+                        heavily on equipment, maintenance,
+                        or growth CapEx.
+                    </p>
+
+                    <h3>OCF can look good while FCF is weak</h3>
+                    <p>
+                        That’s not automatically bad.
+                        Some businesses spend heavily because they’re growing (growth CapEx).
+                        But if a business must spend heavily just to stay functional (maintenance CapEx), weak FCF can
+                        be a warning sign.
+                    </p>
+
+                    <h3>FCF is more “owner-relevant”</h3>
+                    <p>
+                        If your question is “How much cash is available to distribute or reinvest elsewhere?” FCF is
+                        closer to the answer.
+                        OCF is more “operations-relevant”: it tells you whether the core business is producing cash
+                        before reinvestment.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical takeaway:</strong> Use OCF to evaluate operational health; use FCF to
+                            evaluate sustainable cash generation.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="formulas">
+                    <h2>Formulas: Operating Cash Flow and Free Cash Flow</h2>
+
+                    <h3>Operating cash flow (simplified)</h3>
+                    <p>
+                        There are multiple ways to present OCF, but conceptually it’s cash from operations after working
+                        capital changes.
+                        A simplified version:
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>OCF ≈</strong> Net Income + Non-cash charges (e.g., depreciation) ± Working capital
+                            changes
+                        </p>
+                    </div>
+
+                    <h3>Free cash flow (classic)</h3>
+                    <p>
+                        Free cash flow subtracts CapEx:
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>FCF = OCF − CapEx</strong>
+                        </p>
+                    </div>
+
+                    <p>
+                        Some analysts use “FCF to the firm” or “FCF to equity” variants, but the core concept is
+                        consistent:
+                        free cash flow is what remains after the asset base is maintained.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="what-includes">
+                    <h2>What Each Metric Includes (and Excludes)</h2>
+
+                    <h3>Operating cash flow includes</h3>
+                    <ul>
+                        <li>Cash receipts from customers</li>
+                        <li>Cash paid for operating costs (wages, rent, supplies, etc.)</li>
+                        <li>Working capital impacts (timing of collecting money and paying bills)</li>
+                    </ul>
+
+                    <h3>Operating cash flow excludes</h3>
+                    <ul>
+                        <li>Capital expenditures (big investments in long-lived assets)</li>
+                        <li>Cash from financing (debt issuance/repayment, equity issuance)</li>
+                        <li>Cash from investing activities (acquisitions, asset sales)</li>
+                    </ul>
+
+                    <h3>Free cash flow includes</h3>
+                    <ul>
+                        <li>Everything in OCF</li>
+                        <li>Minus capital expenditures (maintenance and/or growth)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Translation:</strong> FCF answers, “How much cash is left after the business pays to
+                            keep the machine running?”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="real-estate">
+                    <h2>Mapping OCF vs FCF to Real Estate (NOI vs Net Cash Flow)</h2>
+                    <p>
+                        Real estate uses different terminology than corporate finance, but the same economic logic
+                        applies.
+                        Rental properties generate cash from operations (rent collected minus operating costs), and they
+                        also require reinvestment
+                        (CapEx like roofs, HVAC, exterior, major plumbing).
+                    </p>
+
+                    <h3>NOI is closer to “operating” cash flow</h3>
+                    <p>
+                        <strong>NOI (net operating income)</strong> equals effective income minus operating expenses.
+                        It is a property-level operating metric before financing.
+                        That makes NOI analogous to an “operating layer” like OCF.
+                    </p>
+
+                    <h3>Net rental cash flow after reserves is closer to “free cash flow”</h3>
+                    <p>
+                        In rental real estate, a practical “FCF-like” measure is:
+                        <strong>Net cash flow after vacancy, operating expenses, CapEx reserves, and debt
+                            service.</strong>
+                        CapEx reserves are the “maintenance CapEx” realism step.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Real estate mapping:</strong><br>
+                            NOI ≈ operating layer<br>
+                            Net cash flow after reserves and debt ≈ “owner free cash flow”
+                        </p>
+                    </div>
+
+                    <h3>Why this mapping matters</h3>
+                    <p>
+                        People say “this rental cash flows” because NOI is positive or because rent exceeds the mortgage
+                        payment.
+                        But if the property needs major repairs, that “cash flow” may be temporary.
+                        Sustainable rental cash flow requires the FCF mindset: include reinvestment needs.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Worked Examples</h2>
+
+                    <h3>Example 1: A business with strong OCF but weak FCF</h3>
+                    <p>
+                        Imagine a company generates $10M in operating cash flow.
+                        But it must spend $9M replacing equipment and maintaining facilities.
+                        Then:
+                        FCF = $10M − $9M = $1M.
+                    </p>
+                    <p>
+                        That business “cash flows” operationally, but doesn’t have much cash left for owners.
+                        It might still be a good company—especially if CapEx drives growth—but it’s not a “cash machine”
+                        for distributions.
+                    </p>
+
+                    <h3>Example 2: A rental property with “operating” cash flow but low “free” cash flow</h3>
+                    <p>
+                        A rental may show positive NOI, but after you add CapEx reserves and debt service, the owner’s
+                        net cash flow is near zero.
+                        That’s the real estate version of high OCF, low FCF.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Example logic:</strong><br>
+                            NOI looks healthy → “operating layer” is fine.<br>
+                            After reserves + debt → the owner doesn’t keep much cash.
+                        </p>
+                    </div>
+
+                    <h3>Example 3: A rental property with strong “free cash flow”</h3>
+                    <p>
+                        Another property might have similar rent but lower expenses, newer systems (lower near-term
+                        CapEx), and better financing.
+                        That can produce strong net cash flow after reserves.
+                        This is the “true cash flow” version—cash you can actually withdraw without starving future
+                        maintenance.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="interpret">
+                    <h2>How to Interpret Operating vs Free Cash Flow</h2>
+
+                    <h3>When OCF is most useful</h3>
+                    <ul>
+                        <li>Evaluating operational health</li>
+                        <li>Understanding whether operations produce cash before reinvestment</li>
+                        <li>Comparing “core engine” performance over time</li>
+                    </ul>
+
+                    <h3>When FCF is most useful</h3>
+                    <ul>
+                        <li>Estimating sustainable cash available to owners</li>
+                        <li>Evaluating debt paydown capacity</li>
+                        <li>Comparing capital intensity across businesses</li>
+                        <li>Understanding whether “cash flow” is real or deferred maintenance</li>
+                    </ul>
+
+                    <h3>The key interpretive question: maintenance vs growth</h3>
+                    <p>
+                        If CapEx is mostly growth, low FCF can be strategic.
+                        If CapEx is mostly maintenance, low FCF can signal weak economic sustainability.
+                        In rental real estate, many CapEx items are maintenance by nature (roof/HVAC), so you should
+                        treat them as required.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Real estate parallel:</strong> If you ignore CapEx, your “cash flow” is really “cash
+                            flow before the building ages.”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes</h2>
+
+                    <h3>Mistake 1: Treating operating cash flow as “free” cash flow</h3>
+                    <p>
+                        Fix: subtract CapEx (or add CapEx reserves) to see what’s actually available after reinvestment.
+                    </p>
+
+                    <h3>Mistake 2: Ignoring working capital in OCF</h3>
+                    <p>
+                        Fix: understand that OCF can move because of timing—collecting receivables or delaying payments.
+                        A one-time working capital swing is not always “quality” cash flow.
+                    </p>
+
+                    <h3>Mistake 3: Ignoring capital intensity differences</h3>
+                    <p>
+                        Fix: compare businesses (or property types) with similar reinvestment requirements.
+                        A low-CapEx business can convert more OCF into FCF than a heavy-CapEx business.
+                    </p>
+
+                    <h3>Mistake 4: Overlooking maintenance CapEx</h3>
+                    <p>
+                        Fix: treat maintenance CapEx as required. Deferred maintenance can make OCF look better
+                        temporarily while future costs rise.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Fast fix (real estate):</strong> Add a monthly CapEx reserve. If the deal stops
+                            “cash flowing,” it never truly did.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist: OCF vs FCF</h2>
+                    <ul>
+                        <li>✅ OCF measures cash from operations (before CapEx)</li>
+                        <li>✅ FCF subtracts CapEx (cash left after reinvestment)</li>
+                        <li>✅ A business can have high OCF and low FCF if it’s capital-intensive</li>
+                        <li>✅ In real estate, NOI is an “operating layer,” but net cash flow after reserves is the
+                            “free” layer</li>
+                        <li>✅ If you ignore CapEx, you risk measuring fake cash flow</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to compute “free” rental cash flow?</h4>
+                            <p>Use the cash flow calculator and include CapEx reserves.</p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is operating cash flow (OCF)?</h4>
+                        <p>
+                            Operating cash flow is the cash generated from a business’s core operations in a period,
+                            typically after working capital changes.
+                            It reflects whether operations produce cash before investing in long-lived assets.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is free cash flow (FCF)?</h4>
+                        <p>
+                            Free cash flow is cash left after operating cash flow minus capital expenditures (CapEx).
+                            It approximates cash available for owners, debt paydown, dividends, reserves, or
+                            reinvestment elsewhere.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is the difference between operating cash flow and free cash flow?</h4>
+                        <p>
+                            CapEx. OCF is cash from operations before CapEx; FCF subtracts CapEx.
+                            That’s why FCF often better reflects sustainable cash generation.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How does operating vs free cash flow relate to real estate?</h4>
+                        <p>
+                            In rental real estate, NOI is similar to an operating layer (income minus operating
+                            expenses, before financing).
+                            Net cash flow after CapEx reserves and debt service is closer to a free-cash-flow layer
+                            because it includes reinvestment needs and financing obligations.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/noi-net-operating-income/">NOI (net operating income)</a>
+                            <p>How NOI works and what it includes (and excludes).</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/real-estate-cash-flow/">Real estate cash flow</a>
+                            <p>Net cash flow after reserves and debt service.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/rental-cash-flow-calculator-guide/">Rental calculator guide</a>
+                            <p>How to model vacancy, reserves, and debt correctly.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/cash-on-cash-return/">Cash-on-cash return</a>
+                            <p>Cash yield on cash invested—use net cash flow, not rent-minus-mortgage.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Homeownership Cost</a>
+                            <p>Repairs and CapEx that make cash flow sustainable.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

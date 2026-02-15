@@ -1,0 +1,938 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Refinance vs prepay mortgage (U.S.): a practical decision framework to choose between refinancing and making extra principal payments. Learn break-even math, closing costs, rate vs term tradeoffs, recast vs refinance, cash-out nuance, taxes, PMI, timelines, and common mistakes. Includes checklist, stress tests, and FAQs + internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Refinance vs Prepay Mortgage (U.S.) — Which Saves More? | PropertyCost</title>
+
+    <meta property="og:title" content="Refinance vs Prepay Mortgage (U.S.)" />
+    <meta property="og:description"
+        content="Choose between refinancing and extra payments with break-even math, timelines, and a practical checklist. Avoid common mistakes and verify principal-only posting." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Refinance vs Prepay Mortgage (U.S.)">
+    <meta name="twitter:description"
+        content="A decision framework: break-even, closing costs, timelines, risk, and when extra payments beat refinancing.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Mortgage Overpayment","item":"https://mypropertycost.com/mortgage-overpayment/"},
+          {"@type":"ListItem","position":3,"name":"Refinance vs prepay","item":"https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/mortgage-overpayment/refinance-vs-prepay/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"Is it better to refinance or make extra mortgage payments?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"It depends on rate savings versus closing costs, your timeline to keep the loan, and your goals (lower payment vs faster payoff). Refinancing can lower your interest rate and payment, but costs money up front. Prepaying principal creates a guaranteed interest saving at roughly your current rate and can shorten payoff time without closing costs."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I calculate refinance break-even?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A simple break-even estimate is closing costs divided by monthly payment savings. If you expect to keep the new loan longer than the break-even period, refinancing is more likely to pay off. You should also compare total interest over your expected timeline, not just payment size."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"If I refinance, should I still prepay my mortgage?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Often yes, if your goal is faster payoff. After refinancing to a lower rate, you can keep making your old payment amount and apply the difference as principal-only. That can accelerate payoff while benefiting from the lower rate."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is recasting an alternative to refinancing?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A recast (re-amortization) can lower your monthly payment after a large principal reduction without changing your interest rate, usually for a small fee. It can be a good option when rates are higher than your current rate and you want lower payments without refinancing."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Do extra payments beat refinancing when rates are higher now?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"If current market rates are higher than your existing mortgage rate, refinancing to a higher rate usually doesn’t help. In that case, principal prepayments (and possibly a recast after a large lump sum) often make more sense for savings or cash-flow goals."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/mortgage-overpayment/">Mortgage Overpayment</a>
+                <span class="sep">/</span>
+                <span class="current">Refinance vs prepay</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#goals">Start with your goal</a></li>
+                    <li><a href="#refi">How refinancing creates savings</a></li>
+                    <li><a href="#prepay">How prepaying creates savings</a></li>
+                    <li><a href="#breakeven">Break-even: the core refinance test</a></li>
+                    <li><a href="#timeline">Timeline: staying put vs moving soon</a></li>
+                    <li><a href="#term">Term choices: 30→30, 30→15, reset traps</a></li>
+                    <li><a href="#recast">Recast vs refinance vs prepay</a></li>
+                    <li><a href="#cashout">Cash-out refinance vs extra payments</a></li>
+                    <li><a href="#taxes">Taxes, deductions, and after-tax thinking</a></li>
+                    <li><a href="#pmi">PMI/MIP and equity thresholds</a></li>
+                    <li><a href="#strategies">Practical decision playbook</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#stress-tests">Fast stress tests</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Model extra payments</div>
+                        <div class="sidebar-cta__sub">See payoff date and interest saved with prepayment.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage-overpayment/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Refinance vs Prepay Mortgage (U.S.): Which Saves More?</h1>
+                        <p class="subtitle">
+                            Homeowners usually face a simple-looking question with messy real-world details:
+                            <strong>Should I refinance to a lower rate, or keep my current loan and pay it down
+                                faster?</strong>
+                            Refinancing can lower your rate and payment, but it costs money up front and depends on how
+                            long you keep the loan.
+                            Prepaying principal is flexible and avoids closing costs, but the “return” is tied to your
+                            current rate and your liquidity needs.
+                            This guide gives you a clear decision framework, a break-even method, and the mistakes that
+                            most often lead to the wrong choice.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/mortgage-overpayment/"
+                                    aria-label="Back to Mortgage Overpayment hub">← Back to Mortgage Overpayment</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~14–18 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#breakeven">Break-even</a>
+                    <a href="#recast">Recast</a>
+                    <a href="#strategies">Playbook</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage-overpayment/calculator/">
+                            <strong>Mortgage Overpayment calculator</strong>
+                            <span>Model payoff time and interest saved with extra payments.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage-overpayment/extra-payments-save-interest/">
+                            <strong>Why extra payments save interest</strong>
+                            <span>Amortization explained in plain English.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage-overpayment/principal-only-payment/">
+                            <strong>Principal-only payment</strong>
+                            <span>Ensure extra money reduces principal (not “pay ahead”).</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        Refinancing is usually best when you can lower your interest rate enough that the monthly
+                        savings
+                        outweigh closing costs over the time you’ll keep the loan.
+                        Prepaying is usually best when you don’t expect to keep the loan long enough to break even,
+                        when current rates are not meaningfully lower than your existing rate, or when you want
+                        flexibility and no closing costs.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision shortcut:</strong>
+                            If you will keep the loan beyond break-even and the new loan meaningfully lowers your rate,
+                            refinance often wins.
+                            If you might move soon, or rates aren’t lower, prepaying (and/or recasting after a lump sum)
+                            often wins.
+                        </p>
+                    </div>
+
+                    <p>
+                        The rest of this guide helps you answer:
+                        <strong>How long is break-even?</strong>
+                        <strong>What’s your real goal (lower payment vs faster payoff)?</strong>
+                        and <strong>what mistakes flip the math?</strong>
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="goals">
+                    <h2>Start With Your Goal: Lower Payment, Faster Payoff, or Both?</h2>
+                    <p>
+                        People say “I want to save interest,” but they often mean one of three different goals:
+                    </p>
+
+                    <h3>Goal A: Lower my required monthly payment</h3>
+                    <p>
+                        If your priority is cash-flow relief, refinancing can help by lowering your rate and/or
+                        extending the term.
+                        A recast can also lower payments if you make a large principal reduction and your loan allows
+                        recasting.
+                        Prepaying alone usually does <em>not</em> reduce your required payment—it typically shortens
+                        payoff time instead.
+                    </p>
+
+                    <h3>Goal B: Pay the mortgage off faster</h3>
+                    <p>
+                        If you want to become debt-free sooner, principal prepayments are the direct tool.
+                        Refinancing to a lower rate can also help, and many borrowers combine both:
+                        refinance to a lower rate, then keep paying the old payment amount and apply the difference to
+                        principal.
+                    </p>
+
+                    <h3>Goal C: Maximize net worth (minimize interest while keeping flexibility)</h3>
+                    <p>
+                        This goal usually requires comparing multiple levers:
+                        rate reduction, closing costs, timeline, investing alternatives, and liquidity needs.
+                        The “best spreadsheet answer” isn’t always best if it increases risk or reduces flexibility.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key clarity:</strong> Refinancing is primarily a <em>rate and payment</em> tool.
+                            Prepaying is primarily a <em>principal and payoff speed</em> tool.
+                            Recasting is primarily a <em>payment reduction after principal reduction</em> tool.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="refi">
+                    <h2>How Refinancing Creates Savings (And Where It Can Backfire)</h2>
+                    <p>
+                        Refinancing replaces your existing mortgage with a new loan. Savings come from:
+                        a lower interest rate, a different term structure, or both.
+                        But refinancing also introduces friction: closing costs, potential “points,” and the risk of
+                        resetting your amortization clock.
+                    </p>
+
+                    <h3>What you gain by refinancing</h3>
+                    <ul>
+                        <li><strong>Lower rate:</strong> reduces interest on the remaining balance.</li>
+                        <li><strong>Lower payment:</strong> can free monthly cash flow.</li>
+                        <li><strong>Term change:</strong> switching to a shorter term can reduce total interest and
+                            accelerate payoff.</li>
+                        <li><strong>Structure change:</strong> removing some loan features (like mortgage insurance) may
+                            be possible in certain cases.</li>
+                    </ul>
+
+                    <h3>What you pay (often overlooked)</h3>
+                    <ul>
+                        <li><strong>Closing costs:</strong> lender fees, third-party fees, title/escrow, and related
+                            costs.</li>
+                        <li><strong>Points:</strong> optional up-front cost to buy down the rate.</li>
+                        <li><strong>Resetting the clock:</strong> refinancing into a new 30-year term can increase total
+                            interest if you don’t counteract it.</li>
+                        <li><strong>Opportunity cost:</strong> cash used for closing costs could have been saved,
+                            invested, or used for prepayment.</li>
+                    </ul>
+
+                    <p>
+                        The big mistake is judging a refinance solely by payment size.
+                        Lower payment can be great, but it can also hide a longer payoff horizon that increases lifetime
+                        interest.
+                        That’s why break-even analysis should look at your expected timeline and total cost, not just
+                        monthly payment.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="prepay">
+                    <h2>How Prepaying Principal Creates Savings</h2>
+                    <p>
+                        Prepaying means making extra payments that reduce your principal balance beyond the scheduled
+                        amortization.
+                        When principal drops, future interest is charged on a smaller balance, which reduces total
+                        interest and often shortens payoff time.
+                    </p>
+
+                    <h3>Why prepaying is powerful</h3>
+                    <ul>
+                        <li><strong>No closing costs:</strong> you don’t pay refinance friction.</li>
+                        <li><strong>Flexibility:</strong> you can increase, decrease, or pause extra payments.</li>
+                        <li><strong>Guaranteed “return”:</strong> avoided interest is roughly your mortgage rate (with
+                            tax nuance).</li>
+                        <li><strong>Behavior-friendly:</strong> small monthly extra payments can be automated.</li>
+                    </ul>
+
+                    <h3>The operational catch: principal-only posting</h3>
+                    <p>
+                        To get the full benefit, extra money must be applied to principal (not treated as “pay ahead”
+                        credit).
+                        Always verify your statement and principal balance after extra payments.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical rule:</strong> If you can’t clearly verify that your principal balance
+                            dropped by the extra amount, fix the payment method first.
+                            Start here: <a href="/mortgage-overpayment/principal-only-payment/">Principal-only
+                                payment</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="breakeven">
+                    <h2>Break-Even: The Core Refinance Test</h2>
+                    <p>
+                        Break-even answers: “How long do I need to keep the new loan for refinancing to pay for itself?”
+                        The simplest break-even estimate is:
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Break-even months ≈ Closing costs ÷ Monthly payment savings</strong></p>
+                    </div>
+
+                    <p>
+                        This formula is not perfect, but it’s a strong first filter.
+                        If you’ll move or refinance again before break-even, refinancing is less likely to be worth it.
+                        If you will keep the loan long after break-even, refinancing becomes more attractive.
+                    </p>
+
+                    <h3>Why “monthly savings” can be misleading</h3>
+                    <p>
+                        Payment savings can come from:
+                        (1) a lower rate, or
+                        (2) a longer term (or both).
+                        Extending the term reduces the payment but can increase lifetime interest.
+                        That’s why you should also compare total interest over the timeline you realistically expect.
+                    </p>
+
+                    <h3>A better lens: compare outcomes over your expected timeline</h3>
+                    <p>
+                        Instead of asking “What’s the payment?” ask:
+                    </p>
+                    <ul>
+                        <li>How much total interest will I pay over the next 3/5/10 years if I keep the current loan?
+                        </li>
+                        <li>How much total interest will I pay over the next 3/5/10 years if I refinance (including
+                            closing costs)?</li>
+                        <li>What happens if I refinance and keep my payment constant (apply savings to principal-only)?
+                        </li>
+                    </ul>
+
+                    <p>
+                        This timeline-based approach handles the reality that most people don’t keep a mortgage for 30
+                        years.
+                        Moves, life changes, and future refinancing can dominate the result.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="timeline">
+                    <h2>Timeline: Staying Put vs Moving Soon</h2>
+                    <p>
+                        Your expected timeline is often more important than the rate difference.
+                        Refinancing is an up-front cost for a stream of future savings.
+                        If you won’t stay long enough to collect those savings, the up-front cost can dominate.
+                    </p>
+
+                    <h3>If you might move in 1–5 years</h3>
+                    <p>
+                        Refinancing can still be worth it in some cases, but it’s very sensitive to closing costs.
+                        In short timelines, prepaying (or simply keeping the current loan) often looks better because it
+                        avoids refinance friction.
+                    </p>
+
+                    <h3>If you expect to stay 7–10+ years</h3>
+                    <p>
+                        Refinancing becomes more likely to pay off, especially if the rate reduction is meaningful.
+                        You can still add prepayments to accelerate payoff if you want.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> If you don’t know your timeline, run multiple cases (3, 5,
+                            10 years).
+                            If the decision flips easily, your choice is timeline-sensitive.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="term">
+                    <h2>Term Choices: 30→30, 30→15, and the “Reset Trap”</h2>
+                    <p>
+                        Refinancing often involves term decisions. The common outcomes:
+                    </p>
+
+                    <h3>Option 1: Refinance into a new 30-year loan</h3>
+                    <p>
+                        Pros: lower payment, potential rate reduction.
+                        Cons: you may “reset the clock” and extend payoff, increasing total interest.
+                    </p>
+                    <p>
+                        A smart workaround if you refinance into a 30-year for flexibility:
+                        keep paying the old payment amount (or close to it) and apply the difference as principal-only.
+                        This preserves flexibility but avoids the reset trap.
+                    </p>
+
+                    <h3>Option 2: Refinance into a 15-year loan</h3>
+                    <p>
+                        Pros: faster payoff, often lower rate, lower total interest.
+                        Cons: higher required payment, less flexibility if income changes.
+                    </p>
+                    <p>
+                        A 15-year refinance can be great if the higher payment is comfortable and stable.
+                        But if the higher payment would stress your budget, a 30-year with voluntary prepayments can be
+                        safer.
+                    </p>
+
+                    <h3>Option 3: Shorten term without refinancing (prepay like a 15-year)</h3>
+                    <p>
+                        If refinancing isn’t attractive (rates higher, high closing costs, uncertain timeline),
+                        you can still achieve a faster payoff by prepaying principal on your current loan.
+                        This can mimic a shorter-term schedule without replacing the loan.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="recast">
+                    <h2>Recast vs Refinance vs Prepay: How They Fit Together</h2>
+                    <p>
+                        A recast (re-amortization) is often misunderstood. It’s not a refinance.
+                        A recast typically recalculates your monthly payment based on a lower principal balance while
+                        keeping:
+                        <strong>the same interest rate</strong> and the same loan (no new loan).
+                    </p>
+
+                    <h3>When recast can be better than refinance</h3>
+                    <ul>
+                        <li>Current market rates are higher than your existing rate.</li>
+                        <li>You made a large lump sum payment (or had a large principal reduction).</li>
+                        <li>You want a lower monthly payment without paying refinance closing costs.</li>
+                        <li>Your loan is eligible (not all loans allow recasting).</li>
+                    </ul>
+
+                    <h3>When refinance is better than recast</h3>
+                    <ul>
+                        <li>You can materially lower your interest rate.</li>
+                        <li>You expect to keep the loan beyond break-even.</li>
+                        <li>You want to change term structure (e.g., 30→15) or remove certain features via a new loan.
+                        </li>
+                    </ul>
+
+                    <h3>How prepaying interacts with both</h3>
+                    <p>
+                        Prepaying can be used regardless:
+                        <strong>prepay the current loan</strong> if you don’t refinance,
+                        or <strong>prepay the refinanced loan</strong> if you do refinance and want a faster payoff.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple ladder:</strong>
+                            If rates are lower and you’ll keep the loan long enough → refinance.
+                            If rates are higher but you want lower payment after a lump sum → recast (if eligible).
+                            If you want faster payoff and flexibility → principal-only prepayments.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="cashout">
+                    <h2>Cash-Out Refinance vs Extra Payments: A Different Decision</h2>
+                    <p>
+                        Cash-out refinancing is not primarily about saving interest—it’s about accessing equity.
+                        Sometimes it can still be smart, but you should treat it as a separate category with different
+                        risks.
+                    </p>
+
+                    <h3>When cash-out refinance can make sense</h3>
+                    <ul>
+                        <li>You need funds for a high-value project (e.g., renovation) and prefer a mortgage rate to
+                            other borrowing options.</li>
+                        <li>You are consolidating high-interest debt (carefully), and have a clear plan to avoid
+                            re-accumulating debt.</li>
+                        <li>The new loan terms are still favorable and you understand the long-term cost.</li>
+                    </ul>
+
+                    <h3>Key risk: turning short-term needs into long-term debt</h3>
+                    <p>
+                        Converting other spending into mortgage debt can lower the monthly payment today but increase
+                        long-term cost.
+                        If the funds are for consumption rather than investment, the decision can be risky.
+                    </p>
+
+                    <p>
+                        If you’re debating cash-out refinance vs keeping the current mortgage and saving up, include:
+                        timeline, interest rate difference, and the discipline factor (will you actually save?).
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="taxes">
+                    <h2>Taxes, Deductions, and After-Tax Thinking</h2>
+                    <p>
+                        Mortgage interest deductions depend on your situation and whether you itemize.
+                        Many households effectively receive little or no marginal benefit from mortgage interest
+                        deductions,
+                        so you shouldn’t assume interest is “cheap” just because it’s deductible.
+                    </p>
+
+                    <h3>How taxes affect the refinance vs prepay choice</h3>
+                    <ul>
+                        <li>If your mortgage interest is not meaningfully deductible for you, then avoiding interest is
+                            closer to a full-rate benefit.</li>
+                        <li>If you do receive a meaningful deduction, the after-tax “cost” of interest may be lower,
+                            which can reduce the effective return of prepaying.</li>
+                        <li>Closing costs can include items that may be treated differently for taxes—keep records and
+                            consult a tax professional for specifics.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical takeaway:</strong> Use conservative assumptions. Don’t let “tax benefits”
+                            decide the whole outcome unless you’ve verified they apply to you.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="pmi">
+                    <h2>PMI/MIP and Equity Thresholds</h2>
+                    <p>
+                        Mortgage insurance (PMI on many conventional loans, MIP on FHA loans) can change the math.
+                        If you can remove mortgage insurance by refinancing or by paying down principal to an equity
+                        threshold,
+                        the “savings” might be larger than rate reduction alone.
+                    </p>
+
+                    <h3>Two ways equity can change your payment</h3>
+                    <ul>
+                        <li><strong>Prepaying:</strong> reduces principal faster, potentially reaching a threshold
+                            sooner.</li>
+                        <li><strong>Refinancing:</strong> may remove PMI if the new loan-to-value qualifies under the
+                            new loan guidelines.</li>
+                    </ul>
+
+                    <p>
+                        Because loan types differ, treat mortgage insurance as a separate line item in your comparison.
+                        Sometimes the biggest win isn’t the rate—it’s eliminating monthly insurance costs.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="strategies">
+                    <h2>Practical Decision Playbook</h2>
+                    <p>
+                        Here’s a simple way to decide without overthinking. Use it like a flow chart.
+                    </p>
+
+                    <h3>Step 1: Define your timeline</h3>
+                    <p>
+                        Choose 3, 5, and 10 years if you’re uncertain. If you’re very confident, pick your expected
+                        holding period.
+                    </p>
+
+                    <h3>Step 2: Get realistic refinance terms</h3>
+                    <p>
+                        Use the rate, points (if any), and total closing costs you’d actually pay.
+                        If costs are rolled into the loan, treat that as a cost too (it’s financed, not free).
+                    </p>
+
+                    <h3>Step 3: Compute break-even (simple filter)</h3>
+                    <p>
+                        Closing costs ÷ monthly payment savings. If break-even is longer than your expected timeline,
+                        refinancing is unlikely to be worth it.
+                    </p>
+
+                    <h3>Step 4: Run two “best practice” scenarios</h3>
+                    <ul>
+                        <li><strong>Refinance + keep payment constant:</strong> refinance to lower rate, but keep paying
+                            roughly what you pay today. Apply difference to principal-only.</li>
+                        <li><strong>No refinance + prepay:</strong> keep the current loan and apply the cash you would
+                            have spent on closing costs (and/or monthly savings) as principal-only payments.</li>
+                    </ul>
+
+                    <h3>Step 5: Choose based on your real goal</h3>
+                    <ul>
+                        <li>If you need lower payment: refinance or recast (depending on rate environment and
+                            eligibility).</li>
+                        <li>If you want faster payoff: prepay (with or without refinance).</li>
+                        <li>If you want flexibility: avoid high closing costs and keep optionality (often favors
+                            prepaying).</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to quantify prepay scenarios fast?</h4>
+                            <p>
+                                Use the Mortgage Overpayment calculator to see how extra principal changes payoff date
+                                and interest.
+                                Then compare that to your refinance break-even timeline.
+                            </p>
+                        </div>
+                        <a href="/mortgage-overpayment/calculator/">Open calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes That Flip the Result</h2>
+
+                    <h3>1) Comparing only the monthly payment</h3>
+                    <p>
+                        A lower payment can be achieved by extending the term. That can increase lifetime interest.
+                        Compare total cost over your expected timeline, not just payment size.
+                    </p>
+
+                    <h3>2) Ignoring closing costs (or pretending rolled-in costs are free)</h3>
+                    <p>
+                        Rolling closing costs into the loan means you finance them, often paying interest on them.
+                        Always include them in your comparison.
+                    </p>
+
+                    <h3>3) Assuming you’ll keep the loan for 30 years</h3>
+                    <p>
+                        Many borrowers move or refinance again. Timeline drives break-even.
+                        If you might move, run short-horizon scenarios.
+                    </p>
+
+                    <h3>4) Not verifying principal-only posting on extra payments</h3>
+                    <p>
+                        If extra payments are treated as “pay ahead,” you may not get the savings you expect.
+                        Verify principal balance movement.
+                    </p>
+
+                    <h3>5) Forgetting mortgage insurance</h3>
+                    <p>
+                        PMI/MIP can dominate the savings. Removing it can make refinancing worthwhile even if rate
+                        savings are modest (or vice versa).
+                    </p>
+
+                    <h3>6) Treating points as automatically good</h3>
+                    <p>
+                        Points can lower your rate but increase up-front cost. They only pay off if you keep the loan
+                        long enough.
+                        Points are break-even math too.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist</h2>
+                    <ul>
+                        <li>✅ Identify your goal (lower payment vs faster payoff)</li>
+                        <li>✅ Estimate realistic timeline (3/5/10 years)</li>
+                        <li>✅ Collect refinance terms: rate + points + total closing costs</li>
+                        <li>✅ Compute break-even months (costs ÷ monthly savings)</li>
+                        <li>✅ Compare total interest/cost over your expected timeline</li>
+                        <li>✅ If prepaying: ensure extra payments are principal-only and verified</li>
+                        <li>✅ Consider recast as a middle option if rates are higher now</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple best practice:</strong>
+                            If you refinance, keep paying close to your old payment and apply the difference as
+                            principal-only.
+                            This avoids the “reset trap” while capturing the lower rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Fast Stress Tests (So You Don’t Overfit One Scenario)</h2>
+
+                    <h3>1) The “move sooner” test</h3>
+                    <p>
+                        If you moved in 3–5 years, would refinancing still pay off after closing costs? If not, the
+                        decision is timeline-sensitive.
+                    </p>
+
+                    <h3>2) The “no behavior change” test</h3>
+                    <p>
+                        If you refinance for a lower payment, will you actually invest or prepay the difference?
+                        Run a conservative case assuming you do not. If that flips the outcome, your plan depends on
+                        behavior.
+                    </p>
+
+                    <h3>3) The “recast alternative” test</h3>
+                    <p>
+                        If your goal is payment reduction and you have cash for a principal reduction, compare refinance
+                        to a lump sum + recast (if eligible).
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Make prepaying concrete</h4>
+                            <p>
+                                If refinancing isn’t clearly worth it, model a monthly extra payment and see the payoff
+                                date and interest saved.
+                            </p>
+                        </div>
+                        <a href="/mortgage-overpayment/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/calculator/">Mortgage Overpayment calculator</a>
+                            <p>Model monthly extra payments and see payoff date + interest saved.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/extra-payments-save-interest/">How extra payments save
+                                interest</a>
+                            <p>Amortization logic and why early principal reduction matters.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/principal-only-payment/">Principal-only payment</a>
+                            <p>Ensure extra payments reduce principal (not pay-ahead credit).</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/one-time-lump-sum/">One-time lump sum payment</a>
+                            <p>When lump sums win and how to avoid liquidity risk.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/biweekly-payments/">Biweekly payments</a>
+                            <p>True biweekly vs monthly extra and program fees.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/investing-vs-paying-off-mortgage/">Investing vs paying off
+                                mortgage</a>
+                            <p>Guaranteed savings vs expected market returns and risk.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Is it better to refinance or make extra mortgage payments?</h4>
+                        <p>
+                            It depends on rate savings versus closing costs, your timeline, and your goal. Refinancing
+                            can lower your rate and payment,
+                            but you must keep the loan long enough to break even. Prepaying principal is flexible,
+                            avoids closing costs, and creates
+                            a guaranteed interest saving at roughly your current rate (with tax nuance).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I calculate refinance break-even?</h4>
+                        <p>
+                            A simple break-even estimate is closing costs divided by monthly payment savings.
+                            If you expect to keep the new loan longer than break-even, refinancing is more likely to be
+                            worth it.
+                            Also compare total interest over your expected timeline, not just payment size.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>If I refinance, should I still prepay my mortgage?</h4>
+                        <p>
+                            Often yes if you want faster payoff. After refinancing to a lower rate, you can keep paying
+                            your old payment amount
+                            and apply the difference as principal-only, accelerating payoff while benefiting from the
+                            lower rate.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is recasting an alternative to refinancing?</h4>
+                        <p>
+                            A recast can lower your monthly payment after a large principal reduction without changing
+                            your interest rate,
+                            usually for a small fee, if your loan is eligible. It can be attractive when current rates
+                            are higher than your existing rate.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the biggest mistake in refinance decisions?</h4>
+                        <p>
+                            Comparing only the new monthly payment. A lower payment can come from extending the term,
+                            which may increase total interest.
+                            Always include closing costs and compare outcomes over the timeline you expect to keep the
+                            loan.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Refinancing can be powerful if it materially lowers your rate and you’ll keep the loan beyond
+                        break-even.
+                        Prepaying is powerful if you want flexibility, want to avoid closing costs, or don’t have a long
+                        enough timeline for refinance savings.
+                        The best approach is often a combination: refinance when it truly pays off, then keep paying
+                        close to your old payment and apply the difference
+                        as principal-only to accelerate payoff.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: if you’re considering prepaying, model your plan in the
+                            <a href="/mortgage-overpayment/calculator/">Mortgage Overpayment calculator</a>
+                            and verify your payments are <a
+                                href="/mortgage-overpayment/principal-only-payment/">principal-only</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Refinance terms, closing costs, lender rules, and loan types vary. Always
+                        compare scenarios over your expected timeline,
+                        include all closing costs (even if rolled into the loan), and verify how extra payments are
+                        applied by your servicer.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

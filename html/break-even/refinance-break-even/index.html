@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Refinance break-even explained (U.S.): learn how to calculate refinance break-even point, break-even timeline in months, and how to include closing costs, points, lender credits, APR vs rate, opportunity cost, taxes, and the chance you move or refinance again. Includes step-by-step methods, multiple scenarios, common mistakes, a checklist, FAQs, and internal links to mortgage and break-even calculators." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/break-even/refinance-break-even/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/break-even/refinance-break-even/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/break-even/refinance-break-even/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Refinance Break-Even (U.S.) — How to Calculate, Closing Costs, Examples | PropertyCost</title>
+
+    <meta property="og:title" content="Refinance Break-Even (U.S.)" />
+    <meta property="og:description"
+        content="A complete guide to refinance break-even: how to calculate break-even months, how to treat closing costs, points vs credits, and when refinancing makes sense. Includes examples and FAQs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/break-even/refinance-break-even/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Refinance Break-Even (U.S.)">
+    <meta name="twitter:description"
+        content="Refinance break-even explained: compute break-even months, model closing costs, points vs credits, and run conservative scenarios.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/break-even/refinance-break-even/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Break-Even","item":"https://mypropertycost.com/break-even/"},
+          {"@type":"ListItem","position":3,"name":"Refinance break-even","item":"https://mypropertycost.com/break-even/refinance-break-even/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/break-even/refinance-break-even/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is refinance break-even?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Refinance break-even is the time (usually in months) it takes for monthly savings from a refinance to recover the refinance closing costs, points, and fees. After break-even, the refinance produces net savings—assuming you keep the loan long enough."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do you calculate refinance break-even months?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A simple approach is: break-even months = total refinance costs ÷ monthly payment savings. A more accurate approach compares cumulative cash flows over time, including how principal and interest change, whether costs are paid upfront or rolled into the loan, and how long you expect to keep the mortgage."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Should I include escrow items in refinance break-even?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Often, prepaid escrow items (like taxes and insurance) are not true refinance costs because you would pay them anyway, and you may receive an escrow refund from the old lender. Break-even should focus on lender fees, title/closing costs, and points—net of any credits."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is it better to pay points to get a lower rate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Points can make sense if you will keep the loan long enough to reach the points break-even timeline. Compare the extra upfront cost of points to the monthly payment reduction. If you may sell or refinance again before that break-even, points are often not worth it."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the biggest mistake in refinance break-even calculations?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Assuming you’ll keep the new loan long enough without considering life changes. If you move or refinance again before break-even, you may not recover the upfront costs—especially if you paid points."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/break-even/">Break-Even</a>
+                <span class="sep">/</span>
+                <span class="current">Refinance break-even</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#what-is">What refinance break-even means</a></li>
+                    <li><a href="#simple-vs-true">Simple vs true break-even</a></li>
+                    <li><a href="#costs">Which costs to include</a></li>
+                    <li><a href="#how-to">How to calculate (step-by-step)</a></li>
+                    <li><a href="#points">Points vs lender credits</a></li>
+                    <li><a href="#term">30-year vs 15-year vs reset term</a></li>
+                    <li><a href="#cashflow">Payment savings vs total interest</a></li>
+                    <li><a href="#scenarios">Scenarios and stress tests</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Mortgage tools">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Model refinance outcomes</div>
+                        <div class="sidebar-cta__sub">Compare payment, interest, and break-even scenarios.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage/">Mortgage calculator →</a>
+                </section>
+
+                <section class="sidebar-cta" aria-label="Open break-even calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Want generic break-even?</div>
+                        <div class="sidebar-cta__sub">Time-to-break-even for any cost vs savings.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/calculator/">Break-Even calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Refinance Break-Even (U.S.)</h1>
+                        <p class="subtitle">
+                            Refinance break-even is the <strong>timeline (usually months)</strong> where the savings
+                            from a lower rate or different loan
+                            structure <strong>recover the refinance costs</strong>.
+                            The simple version is “costs ÷ monthly savings,” but a correct refinance break-even analysis
+                            also considers
+                            how closing costs are paid (cash vs rolled in), points vs credits, escrow refunds, the risk
+                            you sell or refinance again,
+                            and whether you’re resetting the loan term.
+                            This guide is intentionally detailed so it can answer most refinance break-even searches in
+                            one place.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/break-even/" aria-label="Back to Break-Even hub">← Back to
+                                    Break-Even</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~24–32 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#costs">Costs to include</a>
+                    <a href="#how-to">How to calculate</a>
+                    <a href="#points">Points vs credits</a>
+                    <a href="#scenarios">Scenarios</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage/">
+                            <strong>Mortgage calculator</strong>
+                            <span>Payment schedule, principal vs interest.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage-overpayment/">
+                            <strong>Mortgage overpayment</strong>
+                            <span>Extra payments vs refinancing trade-offs.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/calculator/">
+                            <strong>Break-Even calculator</strong>
+                            <span>Time-to-break-even for any cost vs savings.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer: Refinance Break-Even in Plain English</h2>
+                    <div class="callout">
+                        <p>
+                            <strong>Refinance break-even</strong> is the number of months you must keep the new loan for
+                            monthly savings to recover refinance costs.
+                            A basic estimate is <strong>break-even months = total true costs ÷ monthly savings</strong>.
+                            A more accurate estimate compares cumulative cash flows and accounts for points/credits,
+                            escrow refunds, and whether costs are rolled into the loan.
+                        </p>
+                    </div>
+
+                    <p>
+                        Break-even is not the only question. The real decision is:
+                        <strong>Will you keep the loan long enough, and do the savings justify the hassle and
+                            risk?</strong>
+                        If you might move, refinance again, or pay off early, break-even becomes harder to
+                        reach—especially if you pay points.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="what-is">
+                    <h2>What Refinance Break-Even Means (And What It Does Not)</h2>
+
+                    <h3>What break-even answers</h3>
+                    <p>
+                        Break-even answers: <em>“How many months until refinancing stops being a net loss?”</em>
+                        This is a payback-style break-even.
+                    </p>
+
+                    <h3>What break-even does not answer by itself</h3>
+                    <p>
+                        Break-even does not automatically answer:
+                    </p>
+                    <ul>
+                        <li>Whether the refinance is the best option versus extra payments or investing cash.</li>
+                        <li>Whether the new loan is better over the full period you expect to keep it (not just until
+                            break-even).</li>
+                        <li>Whether you’re trading a lower payment for a longer term (which can increase total
+                            interest).</li>
+                        <li>Whether a “no-cost refinance” is truly no cost (it usually means higher rate or financed
+                            costs).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Treat break-even as a screening tool. If you won’t keep the
+                            loan beyond break-even, the refinance is usually not worth it.
+                            If you will, then compare longer-term outcomes (total interest, cash flow flexibility, and
+                            risk).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="simple-vs-true">
+                    <h2>Simple Break-Even vs “True” Refinance Break-Even</h2>
+
+                    <h3>The simple method</h3>
+                    <p>
+                        Most sites give: total costs ÷ monthly payment savings.
+                        It’s useful as a quick estimate, but it can be wrong if costs or savings are defined
+                        incorrectly.
+                    </p>
+
+                    <h3>Why the simple method can be misleading</h3>
+                    <p>
+                        Refinancing changes the composition of your payment and the pace of principal reduction.
+                        Two refinances can have similar payment savings but very different total interest outcomes.
+                        Also, “closing costs” often include items that are not true costs (prepaids) or may be refunded.
+                    </p>
+
+                    <h3>The more accurate method (cumulative cash flow)</h3>
+                    <p>
+                        A more accurate refinance break-even compares your old loan versus new loan month by month:
+                    </p>
+                    <ul>
+                        <li>Compute old loan cash outflows: monthly payment + any ongoing costs that change.</li>
+                        <li>Compute new loan cash outflows: new payment + upfront costs (net of credits/refunds).</li>
+                        <li>Track cumulative difference until the new loan “catches up” and becomes positive net
+                            savings.</li>
+                    </ul>
+                    <p>
+                        This approach can also include opportunity cost (what you could earn by investing upfront cash
+                        instead of paying costs).
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="costs">
+                    <h2>Which Costs to Include in Refinance Break-Even (And Which Not)</h2>
+                    <p>
+                        This is where most refinance break-even calculations go wrong.
+                        The goal is to include the costs that are truly incremental and not double-count items you would
+                        pay anyway.
+                    </p>
+
+                    <h3>Usually true refinance costs</h3>
+                    <ul>
+                        <li><strong>Lender fees</strong> (origination, underwriting, processing, admin)</li>
+                        <li><strong>Third-party closing fees</strong> (title, escrow, recording, notary, appraisal if
+                            required)</li>
+                        <li><strong>Points</strong> (discount points you pay to buy down the rate)</li>
+                        <li><strong>Net of lender credits</strong> (credits reduce your costs; they are not “free” but
+                            they offset cash outlay)</li>
+                    </ul>
+
+                    <h3>Often not true costs (or are offset)</h3>
+                    <ul>
+                        <li><strong>Prepaid interest</strong> (timing issue; you pay interest somewhere regardless)</li>
+                        <li><strong>Escrow deposits</strong> for taxes/insurance (often offset by escrow refund from old
+                            lender)</li>
+                        <li><strong>Property taxes</strong> themselves (you owe them regardless of refinancing)</li>
+                        <li><strong>Homeowners insurance</strong> premiums (not caused by refinance)</li>
+                    </ul>
+
+                    <h3>Escrow refund nuance</h3>
+                    <p>
+                        When you refinance, your old escrow account is typically closed and you may receive an escrow
+                        refund check.
+                        That refund can offset the escrow deposit required for the new loan.
+                        If you count both as “costs,” you’ll overstate refinance break-even time.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical approach:</strong> Estimate break-even using “true costs” = lender +
+                            title/closing + points − credits.
+                            Treat escrow/prepaids as cash-flow timing items unless you know they are net costs.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to">
+                    <h2>How to Calculate Refinance Break-Even (Step-by-Step)</h2>
+
+                    <h3>Step 1: Gather your current loan details</h3>
+                    <ul>
+                        <li>Remaining balance</li>
+                        <li>Current interest rate</li>
+                        <li>Remaining term (months left)</li>
+                        <li>Current monthly principal + interest payment</li>
+                    </ul>
+
+                    <h3>Step 2: Gather the new refinance offer details</h3>
+                    <ul>
+                        <li>New interest rate</li>
+                        <li>New term (30-year, 20-year, 15-year, or custom)</li>
+                        <li>Total closing costs (itemized)</li>
+                        <li>Points (if any) and lender credits (if any)</li>
+                        <li>Whether costs are paid upfront or rolled into the loan</li>
+                    </ul>
+
+                    <h3>Step 3: Compute the monthly payment difference</h3>
+                    <p>
+                        Monthly savings = old payment − new payment (principal + interest).
+                        If your escrow changes, keep escrow separate so you don’t confuse payment changes with
+                        tax/insurance changes.
+                    </p>
+
+                    <h3>Step 4: Compute “true costs”</h3>
+                    <p>
+                        True costs = lender fees + third-party fees + points − lender credits.
+                        Exclude escrow deposits and prepaids unless you are sure they are not offset by refunds.
+                    </p>
+
+                    <h3>Step 5: Compute simple break-even months</h3>
+                    <div class="callout">
+                        <p><strong>Break-even (months) = True costs ÷ Monthly payment savings</strong></p>
+                    </div>
+
+                    <h3>Step 6: Improve accuracy with cumulative cash flow</h3>
+                    <p>
+                        If you want a more realistic answer, model month-by-month cash flow differences and identify
+                        when cumulative savings exceed the upfront cost.
+                        This also allows you to include:
+                        <strong>opportunity cost</strong> (investing the costs instead),
+                        <strong>rate resets</strong> if you refinance again,
+                        and <strong>early payoff</strong> scenarios.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to estimate break-even fast?</h4>
+                            <p>Use the mortgage calculator for payment accuracy, then compute break-even months with
+                                true costs.</p>
+                        </div>
+                        <a href="/mortgage/">Open Mortgage calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="points">
+                    <h2>Points vs Lender Credits (The Trade-Off Behind “No-Cost Refinance”)</h2>
+                    <p>
+                        In refinance offers, you’re often choosing between:
+                        paying points to get a lower rate, or accepting a higher rate with lender credits that reduce
+                        cash costs.
+                        This is the core of refinance break-even decisions.
+                    </p>
+
+                    <h3>Points (buying down the rate)</h3>
+                    <p>
+                        Points increase upfront cost and reduce the rate.
+                        Points can be worth it only if you keep the loan beyond the “points break-even” timeline.
+                    </p>
+
+                    <h3>Lender credits</h3>
+                    <p>
+                        Credits reduce closing costs but usually come with a higher rate.
+                        This can shorten break-even time (less cost) but reduce long-run savings (higher payment over
+                        time).
+                    </p>
+
+                    <h3>How to compare points vs credits</h3>
+                    <p>
+                        Compare two offers:
+                        Offer A: lower rate + higher costs (points).
+                        Offer B: higher rate + lower costs (credits).
+                        Compute break-even months for the extra cost difference:
+                        <strong>(Cost difference) ÷ (Monthly payment difference)</strong>.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule of thumb:</strong> If you’re unsure you’ll keep the loan long (or you expect to
+                            refinance again), lean toward fewer points / more credits.
+                            Paying points is a bet on a long holding period.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="term">
+                    <h2>30-Year vs 15-Year vs “Resetting” the Term</h2>
+                    <p>
+                        Refinancing often resets the clock. If you’ve already paid 7 years on a 30-year loan,
+                        refinancing into a new 30-year can reduce payment
+                        but may increase total interest unless you plan to pay extra.
+                    </p>
+
+                    <h3>Lower payment can be real savings—or just longer amortization</h3>
+                    <p>
+                        A lower monthly payment is valuable for cash flow, but it’s not always “free.”
+                        Extending the term means you pay interest for longer.
+                        That’s why break-even should not be judged only by monthly payment change.
+                    </p>
+
+                    <h3>Strategies to avoid term-reset trap</h3>
+                    <ul>
+                        <li>Choose a shorter term (20-year or 15-year) if affordable.</li>
+                        <li>Or choose a new 30-year but commit to paying at least the old payment amount (treat the
+                            difference as extra principal).</li>
+                        <li>Compare total interest over the period you expect to keep the loan, not over 30 full years.
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key insight:</strong> “Better” refinance outcomes depend on your expected holding
+                            period. A loan that looks best over 30 years may not be best over 3–7 years.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="cashflow">
+                    <h2>Payment Savings vs Total Interest Savings (Two Different Wins)</h2>
+                    <p>
+                        People refinance for at least one of these reasons:
+                        (1) lower monthly payment (cash flow),
+                        (2) lower total interest over the period they keep the loan,
+                        (3) switch to a shorter term to build equity faster.
+                    </p>
+
+                    <h3>Monthly cash flow win</h3>
+                    <p>
+                        If your priority is monthly budget relief, break-even is mainly about how quickly savings
+                        recover costs.
+                        Credits can sometimes be attractive because they reduce upfront cash outlay.
+                    </p>
+
+                    <h3>Total interest win</h3>
+                    <p>
+                        If your priority is minimizing total interest, you need to compare interest paid over your
+                        expected holding period—not necessarily the full term.
+                        A refinance that resets term can lower payment but still lead to higher total interest if you
+                        keep paying for longer.
+                    </p>
+
+                    <h3>Equity-building win</h3>
+                    <p>
+                        A 15-year refinance can build equity faster, but it can have a longer “payment savings
+                        break-even” because payments might rise.
+                        In that case, break-even is not the right framing—your decision is about long-run interest
+                        savings and equity goals.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="scenarios">
+                    <h2>Scenarios and Stress Tests (How to Avoid a Bad Refinance)</h2>
+
+                    <h3>Scenario 1: You might move or sell within 2–4 years</h3>
+                    <p>
+                        In this scenario, break-even must be short. A refinance with points is usually risky because you
+                        may not recover the upfront cost.
+                        A credit-heavy offer (higher rate, lower costs) may be safer—or refinancing may not be worth it
+                        at all.
+                    </p>
+
+                    <h3>Scenario 2: You expect to keep the loan 5–10+ years</h3>
+                    <p>
+                        Longer holding periods can justify higher upfront costs if they meaningfully reduce the rate.
+                        Here you should compare:
+                        break-even months, total interest savings over your expected holding period, and whether you are
+                        extending the term.
+                    </p>
+
+                    <h3>Scenario 3: Rates might fall again and you may refinance twice</h3>
+                    <p>
+                        If you expect another refinance in the future, paying points today can be a bad deal because you
+                        might refinance before reaching the points break-even.
+                        In that case, keep costs low and preserve flexibility.
+                    </p>
+
+                    <h3>Stress test A: “Half the savings”</h3>
+                    <p>
+                        Assume savings are 50% smaller (because you choose a shorter term, escrow changes, or your offer
+                        changes).
+                        If break-even becomes too long, your refinance is fragile.
+                    </p>
+
+                    <h3>Stress test B: “Short hold”</h3>
+                    <p>
+                        Assume you keep the loan for only 36 months. Does it still net save money?
+                        If not, and you’re uncertain about staying, the refinance may not be worth it.
+                    </p>
+
+                    <h3>Stress test C: Opportunity cost</h3>
+                    <p>
+                        If you pay $6,000 upfront, you could invest that money or keep it as an emergency fund.
+                        Even if you don’t do a full discounted cash flow model, treat opportunity cost as a conservative
+                        reason break-even might be longer in real life.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Compare refinance vs extra payments?</h4>
+                            <p>Sometimes extra principal payments can beat refinancing if you can’t reach break-even
+                                soon.</p>
+                        </div>
+                        <a href="/mortgage-overpayment/">Mortgage overpayment →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes in Refinance Break-Even Calculations</h2>
+
+                    <h3>1) Counting escrows and prepaids as true costs</h3>
+                    <p>
+                        Many people overstate costs by counting escrow deposits that will be refunded from the old loan.
+                        Focus on lender + title/closing + points − credits.
+                    </p>
+
+                    <h3>2) Ignoring points vs credit trade-offs</h3>
+                    <p>
+                        A lower rate isn’t always better if you paid points and won’t keep the loan long enough.
+                        Break-even is about time.
+                    </p>
+
+                    <h3>3) Comparing payment only (ignoring term reset)</h3>
+                    <p>
+                        Lower payment can come from stretching the amortization timeline.
+                        Compare interest over your expected holding period.
+                    </p>
+
+                    <h3>4) Assuming you’ll keep the loan long enough</h3>
+                    <p>
+                        The biggest real-world variable is life: job changes, moves, family needs, or refinancing again.
+                        If your break-even is 48 months and you might move in 36, the refinance is a gamble.
+                    </p>
+
+                    <h3>5) Not running at least two scenarios</h3>
+                    <p>
+                        You should always run base and conservative scenarios—especially if costs are high or savings
+                        are small.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Checklist: A Refinance Break-Even You Can Trust</h2>
+                    <ul>
+                        <li>✅ I calculated break-even in months using true costs (fees + points − credits)</li>
+                        <li>✅ I did not double-count escrows/prepaids that may be refunded</li>
+                        <li>✅ I compared at least two offers (points vs credits)</li>
+                        <li>✅ I checked whether refinancing resets the term and affects total interest</li>
+                        <li>✅ I considered my realistic holding period (how long I’ll keep the loan)</li>
+                        <li>✅ I ran a short-hold stress test (36 months)</li>
+                        <li>✅ I considered opportunity cost of paying costs upfront</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision rule:</strong> If you’re not confident you’ll keep the loan beyond
+                            break-even, prioritize lower costs and flexibility—or skip the refinance.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage calculator</a>
+                            <p>Payments, amortization, and interest vs principal.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/">Mortgage overpayment</a>
+                            <p>Extra payments vs refinance: which saves more?</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/calculator/">Break-Even calculator</a>
+                            <p>Time-to-break-even for any cost vs savings.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/payback-period-vs-break-even/">Payback vs break-even</a>
+                            <p>Why refinance “break-even” is a payback problem.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/">Rent vs Buy</a>
+                            <p>Homeownership break-even logic and scenarios.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total cost of ownership</a>
+                            <p>Ownership costs that affect affordability and outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is refinance break-even?</h4>
+                        <p>
+                            Refinance break-even is the time (usually months) it takes for monthly savings to recover
+                            refinance costs (fees, points),
+                            net of credits. After break-even, refinancing produces net savings—if you keep the new loan
+                            long enough.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do you calculate refinance break-even months?</h4>
+                        <p>
+                            Simple method: total true costs ÷ monthly payment savings.
+                            More accurate: compare cumulative cash flows month-by-month, especially if costs are rolled
+                            into the loan or if savings vary.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should I include escrow items in refinance break-even?</h4>
+                        <p>
+                            Usually no. Escrow deposits and prepaids are often timing items and can be offset by escrow
+                            refund from the old lender.
+                            Focus on lender and closing fees plus points, minus credits.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is it better to pay points to get a lower rate?</h4>
+                        <p>
+                            Points can be worth it only if you keep the loan beyond the points break-even time. If you
+                            might sell or refinance again sooner,
+                            points are often not worth it.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the biggest mistake in refinance break-even calculations?</h4>
+                        <p>
+                            Assuming you’ll keep the new loan long enough. If you move or refinance again before
+                            break-even, you may not recover costs—
+                            especially if you paid points.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Refinance break-even is the number of months you need to keep the new loan for savings to exceed
+                        refinance costs.
+                        The simplest calculation is costs ÷ monthly savings, but a strong analysis uses true costs (fees
+                        + points − credits),
+                        avoids double-counting escrows, considers term reset and total interest over your expected
+                        holding period, and runs short-hold scenarios.
+                        If you’re not confident you’ll stay beyond break-even, keep costs low—or skip the refinance.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute your payment difference using the <a href="/mortgage/">Mortgage
+                                calculator</a>, then estimate break-even months using true costs.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Refinance outcomes depend on rate offers, costs, amortization term, and your
+                        holding period. Use true costs (net of credits),
+                        consider escrow refunds, and run conservative scenarios to account for uncertainty.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Common IRR mistakes (U.S.): the errors that make internal rate of return wrong or misleading—bad cash flow timing, missing exit costs, mixing levered vs unlevered, ignoring taxes and reserves, using IRR without NPV/hurdle rates, and confusing IRR with cash-on-cash. Includes a step-by-step IRR checklist, examples, stress tests, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/common-mistakes/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/common-mistakes/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/common-mistakes/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Common IRR Mistakes (U.S.) — Fix Your Internal Rate of Return | PropertyCost</title>
+
+    <meta property="og:title" content="Common IRR Mistakes (U.S.)" />
+    <meta property="og:description"
+        content="The modeling mistakes that make IRR wrong or misleading: timing, exit costs, leverage confusion, missing taxes/reserves, and using IRR without NPV and scenario testing." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/common-mistakes/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Common IRR Mistakes (U.S.)">
+    <meta name="twitter:description"
+        content="Avoid the IRR traps that flip results: bad timing, missing exit costs, leverage confusion, and unrealistic assumptions.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/common-mistakes/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"Common IRR mistakes","item":"https://mypropertycost.com/irr/common-mistakes/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/common-mistakes/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the most common IRR mistake?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"The most common mistake is inconsistent or incomplete cash flows—missing selling costs, taxes, reserves, or mid-hold capital needs. If cash flows are wrong, IRR is wrong."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why do two tools give different IRR for the same deal?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Differences often come from timing assumptions (annual vs monthly vs exact dates), whether cash flows are end-of-period or mid-period, and whether the series has multiple sign changes (multiple IRRs). Use XIRR for dated cash flows and validate with NPV."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Should I use IRR or NPV to make a decision?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use NPV at a hurdle rate for clearer decisions. IRR is a helpful summary percentage, but NPV directly tells you whether the deal creates value above your required return."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How can I sanity-check an IRR quickly?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Run a conservative scenario: include selling costs and taxes, add reserves and lumpy CapEx, haircut the exit price, and delay the sale by a year. If IRR collapses, the deal is fragile."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">Common IRR mistakes</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#foundation">The IRR foundation (what must be true)</a></li>
+                    <li><a href="#mistakes">15 common IRR mistakes</a></li>
+                    <li><a href="#timing">Timing errors (IRR’s biggest weakness)</a></li>
+                    <li><a href="#exit">Exit mistakes: selling costs, taxes, and net proceeds</a></li>
+                    <li><a href="#leverage">Levered vs unlevered confusion</a></li>
+                    <li><a href="#real-estate">Real estate-specific modeling traps</a></li>
+                    <li><a href="#fix">How to fix IRR: a step-by-step checklist</a></li>
+                    <li><a href="#dashboard">Return dashboard (IRR + what else)</a></li>
+                    <li><a href="#stress-tests">Fast stress tests</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Make your IRR honest</div>
+                        <div class="sidebar-cta__sub">Model net cash flows + exit and validate with NPV.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open IRR calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Common IRR Mistakes (U.S.): Why Your IRR Is Wrong (and How to Fix It)</h1>
+                        <p class="subtitle">
+                            IRR (internal rate of return) is a powerful metric—if your cash flows are complete, timed
+                            correctly, and modeled consistently.
+                            The problem is that IRR is extremely sensitive to missing line items and timing assumptions.
+                            A single mistake (selling costs, taxes, a mid-hold capital expense, or a timing shift)
+                            can change IRR by several percentage points—sometimes flipping the “yes/no” decision.
+                            This guide covers the most common IRR mistakes in real estate and investing, plus a
+                            practical checklist you can use
+                            to compute an IRR you can trust.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~20–26 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#mistakes">Mistakes</a>
+                    <a href="#fix">Fix checklist</a>
+                    <a href="#stress-tests">Stress tests</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/calculator/">
+                            <strong>Run the IRR calculator</strong>
+                            <span>Compute IRR, NPV, and compare scenarios consistently.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/hurdle-rate/">
+                            <strong>Hurdle rate</strong>
+                            <span>Use NPV at your minimum return to make decisions clearer.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/when-irr-misleads/">
+                            <strong>When IRR misleads</strong>
+                            <span>Learn the pitfalls that make headline IRR deceptive.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        The #1 reason IRR is wrong is simple:
+                        <strong>the cash flows are wrong or inconsistently timed.</strong>
+                        Missing selling costs, ignoring taxes, forgetting reserves, smoothing lumpy expenses,
+                        or mixing annual and monthly timing can all produce misleading IRR.
+                    </p>
+                    <p>
+                        If you want an IRR you can trust:
+                    </p>
+                    <ul>
+                        <li>Model <strong>net</strong> cash flows (after expenses, reserves, and taxes if included).
+                        </li>
+                        <li>Include <strong>exit costs</strong> (commissions, closing costs, payoff, taxes if relevant).
+                        </li>
+                        <li>Use consistent timing (annual vs monthly vs dated cash flows).</li>
+                        <li>Validate with <strong>NPV at a hurdle rate</strong> and scenario stress tests.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> If you can’t explain every line in the cash flow timeline,
+                            the IRR is just a guess with decimals.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="foundation">
+                    <h2>The IRR Foundation: What Must Be True Before IRR Means Anything</h2>
+                    <p>
+                        IRR is not magic. It’s a calculation on a list of cash flows.
+                        If your cash flows are incomplete or inconsistent, IRR becomes a misleading output.
+                        Before focusing on the IRR number, make sure these foundations are solid:
+                    </p>
+
+                    <h3>1) Define the perspective: whose IRR are you calculating?</h3>
+                    <p>
+                        IRR can be calculated for:
+                    </p>
+                    <ul>
+                        <li><strong>Equity investors</strong> (cash invested and cash received on equity)</li>
+                        <li><strong>The property / asset</strong> (unlevered IRR, before financing)</li>
+                        <li><strong>A sponsor / GP</strong> (after promote / carried interest)</li>
+                        <li><strong>Lender</strong> (yield to lender, different concept)</li>
+                    </ul>
+                    <p>
+                        If you mix perspectives, you can get numbers that look comparable but aren’t.
+                        Always label IRR clearly: “levered equity IRR,” “unlevered IRR,” or “LP net IRR.”
+                    </p>
+
+                    <h3>2) Define the timing convention</h3>
+                    <p>
+                        Are cash flows annual at year-end? Monthly? Exact dates?
+                        IRR is extremely sensitive to timing—so you must define the convention before calculating.
+                        For irregular dates, use XIRR-style dated cash flows (or at least be consistent).
+                    </p>
+
+                    <h3>3) Decide whether taxes are included</h3>
+                    <p>
+                        Some models are pre-tax. Others include after-tax cash flows.
+                        Either approach can be fine—but mixing pre-tax on one deal and after-tax on another makes
+                        comparisons meaningless.
+                        Be consistent and transparent.
+                    </p>
+
+                    <h3>4) Define the exit clearly</h3>
+                    <p>
+                        Many IRR mistakes happen at the exit:
+                        gross sale price gets modeled, but net proceeds are what investors actually receive.
+                        Exit modeling must include: selling costs, debt payoff, and realistic transaction friction.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>15 Common IRR Mistakes (and How to Fix Them)</h2>
+
+                    <h3>1) Missing a cash flow category (the “incomplete timeline” mistake)</h3>
+                    <p>
+                        IRR is only as good as the cash flow series. Common missing items include:
+                        reserves, leasing commissions, tenant improvements, turnover costs, major repairs, and legal/HOA
+                        surprises.
+                        Fix: build a checklist of cash flow categories and never compute IRR without it.
+                    </p>
+
+                    <h3>2) Using gross sale price instead of net sale proceeds</h3>
+                    <p>
+                        Gross sale price is not cash in your pocket.
+                        Fix: subtract broker commissions, closing costs, transfer taxes (if applicable), and any other
+                        sale friction.
+                        Then subtract remaining loan payoff. What remains is net equity proceeds.
+                    </p>
+
+                    <h3>3) Forgetting selling costs entirely</h3>
+                    <p>
+                        Especially in short holds (3–7 years), selling costs can dominate the return.
+                        Fix: include realistic selling costs even in “base case” models. Don’t hide them in optimistic
+                        assumptions.
+                    </p>
+
+                    <h3>4) Confusing principal paydown with cash flow</h3>
+                    <p>
+                        Paying down principal increases equity, but it is not spendable cash flow (unless you refinance
+                        or sell).
+                        Fix: treat principal paydown as equity buildup that shows up at exit, not as operating cash
+                        flow.
+                    </p>
+
+                    <h3>5) Mixing levered and unlevered returns</h3>
+                    <p>
+                        Levered IRR (equity) and unlevered IRR (asset) answer different questions.
+                        Fix: calculate both if needed, but compare deals on the same basis.
+                    </p>
+
+                    <h3>6) Double-counting financing effects</h3>
+                    <p>
+                        A common model error: counting loan proceeds as income and also counting full purchase price as
+                        an equity outflow.
+                        Fix: build the equity cash flow correctly:
+                        equity outflow = down payment + closing costs + initial CapEx (net of financing).
+                    </p>
+
+                    <h3>7) Ignoring mid-hold capital needs (capital calls / big CapEx)</h3>
+                    <p>
+                        Roofs, HVAC, plumbing, and major renovations can require large negative cash flows later.
+                        Fix: include lumpy CapEx. If you ignore it, IRR is inflated and risk is hidden.
+                    </p>
+
+                    <h3>8) Smoothing cash flows unrealistically</h3>
+                    <p>
+                        Models often assume steady rent growth and stable expenses.
+                        Real life has vacancy, turnover, repairs, insurance spikes, and tax reassessments.
+                        Fix: include vacancy assumptions, turnover costs, and reserves.
+                    </p>
+
+                    <h3>9) Using optimistic timing (cash flows earlier than realistic)</h3>
+                    <p>
+                        IRR rewards earlier cash flows. If a model assumes rents increase immediately after renovation
+                        or lease-up is instant, IRR can look artificially high.
+                        Fix: model realistic ramp-up periods and delays.
+                    </p>
+
+                    <h3>10) Calculating IRR on partial cash flows (missing the exit)</h3>
+                    <p>
+                        Some people compute IRR on operating cash flow only, without a sale.
+                        That’s not a complete investment lifecycle return.
+                        Fix: either include the exit or use cash-on-cash for operating yield.
+                    </p>
+
+                    <h3>11) Misusing IRR for deals with multiple sign changes (multiple IRRs possible)</h3>
+                    <p>
+                        If cash flows switch signs more than once (invest → receive → invest again),
+                        IRR can be ambiguous or unstable.
+                        Fix: validate with NPV at a hurdle rate and consider MIRR.
+                    </p>
+
+                    <h3>12) Mixing annual IRR with monthly cash flow assumptions</h3>
+                    <p>
+                        If cash flows are monthly but you calculate IRR annually, you can introduce timing distortion.
+                        Fix: keep frequency consistent (monthly model → monthly IRR, or convert carefully).
+                    </p>
+
+                    <h3>13) Using IRR without a hurdle rate / NPV decision filter</h3>
+                    <p>
+                        A deal can have a “good” IRR but still not beat your alternatives after risk.
+                        Fix: set a hurdle rate and compute NPV at that rate. If NPV is negative, the deal doesn’t clear
+                        your minimum.
+                    </p>
+
+                    <h3>14) Ignoring taxes (or inconsistently including them)</h3>
+                    <p>
+                        Taxes can materially change net returns.
+                        Fix: decide whether your analysis is pre-tax or after-tax and be consistent across deals.
+                        If you include taxes, include them on all scenarios you compare.
+                    </p>
+
+                    <h3>15) Treating IRR as the only metric</h3>
+                    <p>
+                        IRR can be “high” even when profit dollars are small, cash flow is fragile, or the deal is
+                        exit-dependent.
+                        Fix: use a return dashboard: IRR (or MIRR), NPV, equity multiple, profit dollars, and cash-flow
+                        stress tests.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Shortcut:</strong> If the model doesn’t include net sale proceeds after costs + debt
+                            payoff,
+                            your IRR is not a real lifecycle IRR.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="timing">
+                    <h2>Timing Errors: IRR’s Biggest Weakness</h2>
+                    <p>
+                        IRR is highly sensitive to timing because discounting is exponential.
+                        A payment received earlier is worth more today than the same payment received later.
+                        That is correct mathematically—but it means timing assumptions can quietly dominate IRR.
+                    </p>
+
+                    <h3>End-of-year vs mid-year vs exact dates</h3>
+                    <p>
+                        If your spreadsheet assumes all cash flows happen at year-end, but in reality rent arrives
+                        monthly,
+                        the IRR can be slightly distorted. Sometimes it doesn’t matter much; sometimes it
+                        does—especially for shorter holds.
+                        For irregular timing, dated cash flows (XIRR approach) produce more realistic results.
+                    </p>
+
+                    <h3>Renovation timing and lease-up timing</h3>
+                    <p>
+                        Value-add deals often assume you renovate, raise rents, and stabilize quickly.
+                        If that timeline slips, IRR can fall sharply.
+                        A realistic model should include:
+                        renovation duration, vacancy during renovation, leasing time, and rent ramp-up.
+                    </p>
+
+                    <h3>Exit timing assumptions</h3>
+                    <p>
+                        Many investors underestimate how long a sale can take (marketing, inspections, buyer financing).
+                        Pushing the exit by even 6–12 months can change IRR materially.
+                        That’s why timeline stress tests should be standard.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="exit">
+                    <h2>Exit Mistakes: Selling Costs, Taxes, and Net Proceeds</h2>
+                    <p>
+                        The exit is where most “too good to be true” IRRs are born.
+                        In many real estate deals, the sale proceeds are the largest single cash flow.
+                        If that number is inflated, the IRR headline becomes misleading.
+                    </p>
+
+                    <h3>Model exit the same way you’d model reality</h3>
+                    <p>
+                        A disciplined exit model typically starts with an estimated sale price, then subtracts:
+                    </p>
+                    <ul>
+                        <li>Broker commission</li>
+                        <li>Seller closing costs</li>
+                        <li>Transfer taxes (where applicable)</li>
+                        <li>Repair credits / concessions (a buffer)</li>
+                        <li>Loan payoff (remaining principal + payoff fees if any)</li>
+                        <li>Capital gains taxes (if your analysis is after-tax)</li>
+                    </ul>
+                    <p>
+                        What remains is net equity proceeds to the investor. That’s what belongs in the IRR cash flow
+                        series.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>IRR honesty check:</strong> Calculate the “% of total return from the exit.”
+                            If most value comes from the exit, the deal is more speculative than it looks.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="leverage">
+                    <h2>Levered vs Unlevered Confusion (and Why It Breaks Comparisons)</h2>
+                    <p>
+                        Real estate returns can be computed in two ways:
+                    </p>
+                    <ul>
+                        <li><strong>Unlevered (asset-level):</strong> assumes no debt, measures property performance.
+                        </li>
+                        <li><strong>Levered (equity-level):</strong> includes financing, measures investor equity
+                            return.</li>
+                    </ul>
+                    <p>
+                        Both are useful, but they are not interchangeable.
+                        A low unlevered IRR can still produce a high levered IRR if leverage is used aggressively.
+                        But leverage also increases downside.
+                    </p>
+
+                    <h3>Fix: label and compare consistently</h3>
+                    <p>
+                        If you compare two deals, make sure you are comparing the same return type:
+                        levered equity to levered equity, or unlevered to unlevered.
+                        If one deal has different loan terms, leverage changes the return profile.
+                        That’s not “free return”—it’s increased risk.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="real-estate">
+                    <h2>Real Estate-Specific IRR Modeling Traps</h2>
+
+                    <h3>Vacancy and turnover under-modeling</h3>
+                    <p>
+                        Many models assume full occupancy and low turnover.
+                        In reality, vacancy and turnover costs are part of the business.
+                        If you don’t include them, cash flows are too smooth and IRR is inflated.
+                    </p>
+
+                    <h3>Property tax and insurance growth ignored</h3>
+                    <p>
+                        Taxes and insurance can grow faster than inflation.
+                        Ignoring their growth makes long-hold IRR look better than reality.
+                        A conservative model should include rising operating costs.
+                    </p>
+
+                    <h3>Maintenance and CapEx treated as optional</h3>
+                    <p>
+                        Some models include only a small “repairs” line.
+                        But large CapEx events (roof, HVAC, exterior) can dominate returns.
+                        If you don’t model them, your IRR is optimistic and risk-blind.
+                    </p>
+
+                    <h3>Refinance modeled as pure upside</h3>
+                    <p>
+                        A refinance can return capital and boost IRR, but it’s not free money:
+                        it increases leverage and future debt service.
+                        Treat refinance as a risk shift, not a guaranteed benefit.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="fix">
+                    <h2>How to Fix IRR: A Step-by-Step Checklist You Can Reuse</h2>
+
+                    <h3>Step 1: Build the cash flow timeline (every inflow and outflow)</h3>
+                    <ul>
+                        <li>Initial equity outflow (down payment + closing costs + initial CapEx)</li>
+                        <li>Net operating cash flows (after all operating expenses and reserves)</li>
+                        <li>Mid-hold CapEx or capital calls (negative cash flows)</li>
+                        <li>Exit net proceeds (sale price minus costs minus loan payoff)</li>
+                    </ul>
+
+                    <h3>Step 2: Choose timing method</h3>
+                    <p>
+                        If cash flows happen on specific dates, use dated cash flows (XIRR approach).
+                        If using annual, define whether you assume end-of-year or mid-year and stay consistent.
+                    </p>
+
+                    <h3>Step 3: Validate exit math separately</h3>
+                    <p>
+                        Calculate net sale proceeds on a separate line and confirm the numbers make sense.
+                        Many IRR errors are simply exit math mistakes.
+                    </p>
+
+                    <h3>Step 4: Run IRR and validate with NPV at a hurdle rate</h3>
+                    <p>
+                        IRR alone is not a decision filter.
+                        Compute NPV at your hurdle rate: if NPV is positive under conservative assumptions, the deal is
+                        more robust.
+                    </p>
+
+                    <h3>Step 5: Add scenario stress tests</h3>
+                    <p>
+                        Test:
+                        exit price haircut, exit delay, higher expenses, vacancy shock, interest rate/refi shock.
+                        If IRR collapses, the deal is fragile and you need a lower price or more margin of safety.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to compute IRR the right way?</h4>
+                            <p>
+                                Model net cash flows and net sale proceeds, then validate with NPV and stress tests.
+                                A clean IRR is a process, not a button.
+                            </p>
+                        </div>
+                        <a href="/irr/calculator/">Open IRR calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="dashboard">
+                    <h2>Return Dashboard: What to Report With IRR</h2>
+                    <p>
+                        If you want IRR to be useful instead of misleading, always pair it with:
+                    </p>
+                    <ul>
+                        <li><strong>NPV at your hurdle rate</strong> (decision clarity)</li>
+                        <li><strong>Equity multiple</strong> (dollars back per dollar in)</li>
+                        <li><strong>Total profit dollars</strong> (absolute outcome)</li>
+                        <li><strong>Cash-on-cash</strong> and worst-year cash flow (survivability)</li>
+                        <li><strong>% of return from exit</strong> (exit dependence)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple rule:</strong> If someone gives you IRR without equity multiple and net exit
+                            proceeds,
+                            you don’t have enough information to evaluate the deal.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Fast Stress Tests (IRR Sanity Checks)</h2>
+
+                    <h3>1) Exit haircut + delay</h3>
+                    <p>
+                        Reduce sale price and delay sale by one year. If IRR collapses, the deal is exit-dependent.
+                    </p>
+
+                    <h3>2) Expense spike scenario</h3>
+                    <p>
+                        Increase insurance/taxes/maintenance. Many “good IRR” models fail when expenses rise.
+                    </p>
+
+                    <h3>3) Vacancy + repair in the same year</h3>
+                    <p>
+                        Add vacancy and a major repair simultaneously. If cash flow becomes negative, compute required
+                        reserves.
+                    </p>
+
+                    <h3>4) Refinance realism (if applicable)</h3>
+                    <p>
+                        If a refinance drives IRR, test higher refinance rate and lower appraisal value.
+                        If the deal breaks, the refinance assumption is fragile.
+                    </p>
+
+                    <h3>5) Multiple IRR detection</h3>
+                    <p>
+                        Count sign changes in cash flows. If they change sign more than once, prefer NPV/MIRR dashboards
+                        over IRR alone.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Compute IRR, NPV, and scenario outcomes from a cash flow timeline.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/hurdle-rate/">Hurdle rate</a>
+                            <p>Use NPV at your minimum return to evaluate deals cleanly.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/multiple-irrs/">Multiple IRRs</a>
+                            <p>When IRR has more than one answer and becomes unstable.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/when-irr-misleads/">When IRR misleads</a>
+                            <p>The big IRR pitfalls: exit dependence, timing games, and ignoring dollars.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale</a>
+                            <p>Exit math, selling costs, and net proceeds that drive IRR.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash Flow hub</a>
+                            <p>IRR depends on realistic cash flow modeling and reserves.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the most common IRR mistake?</h4>
+                        <p>
+                            Incomplete cash flows—missing selling costs, taxes, reserves, or mid-hold capital needs.
+                            If the cash flow timeline is wrong, IRR is wrong.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do two tools give different IRR for the same deal?</h4>
+                        <p>
+                            Usually because of timing assumptions (annual vs monthly vs exact dates), end-of-period vs
+                            mid-period conventions,
+                            or multiple sign changes (multiple IRRs). Use dated cash flows (XIRR) and validate with NPV.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should I use IRR or NPV to make a decision?</h4>
+                        <p>
+                            Use NPV at a hurdle rate for clearer decisions. IRR is a helpful summary percentage,
+                            but NPV directly tells you whether the deal creates value above your required return.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How can I sanity-check an IRR quickly?</h4>
+                        <p>
+                            Run a conservative scenario: include selling costs and taxes (if relevant), add reserves and
+                            lumpy CapEx,
+                            haircut the exit price, and delay the sale by a year. If IRR collapses, the deal is fragile.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is IRR useless if it has pitfalls?</h4>
+                        <p>
+                            No—IRR is useful as a summary metric when cash flows are complete and “normal” (one sign
+                            change).
+                            The mistake is using IRR alone as a decision tool. Pair it with NPV, equity multiple,
+                            dollars, and stress tests.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        IRR mistakes are rarely about complex math—they’re about missing cash flows and unrealistic
+                        timing.
+                        To compute an IRR you can trust, model net cash flows, include net exit proceeds after selling
+                        costs and debt payoff,
+                        label levered vs unlevered returns, and validate decisions with NPV at a hurdle rate.
+                        Then stress-test the exit and the timeline.
+                        If the deal still works under conservative assumptions, the IRR becomes meaningful instead of
+                        misleading.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: build a full cash flow timeline in the <a href="/irr/calculator/">IRR
+                                calculator</a>,
+                            then add NPV + equity multiple and run exit stress tests.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. IRR depends on the completeness and timing of cash flows. Always include net
+                        sale proceeds,
+                        realistic reserves and CapEx, and scenario stress tests. Use NPV at a hurdle rate for clearer
+                        decisions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

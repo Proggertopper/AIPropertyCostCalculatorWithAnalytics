@@ -47,7 +47,7 @@ form.addEventListener("submit", async (e) => {
         });
 
         if (res.ok) {
-            window.location.href = "/login.html";
+            window.location.href = "/login/";
             return;
         }
 
@@ -69,9 +69,9 @@ form.addEventListener("submit", async (e) => {
         document.getElementById("googleLogin").addEventListener("click", () => {
             window.location.href = "/auth/api/google";
         });
-        document.getElementById("facebookLogin").addEventListener("click", () => {
-            window.location.href = "/auth/api/facebook";
-        });
+        // document.getElementById("facebookLogin").addEventListener("click", () => {
+        //     window.location.href = "/auth/api/facebook";
+        // });
         //  для епл входа
         // document.getElementById("appleLogin").addEventListener("click" , ()=> {
         //     window.location.href="/auth/api/apple";

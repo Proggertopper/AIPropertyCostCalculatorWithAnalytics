@@ -1,18 +1,25 @@
 require("dotenv").config();
+
 const { createClient } = require("redis");
 
 const redisClient = createClient({
-    socket: {
-        host: "127.0.0.1",
-        port: 6379
-    },
-    password: process.env.REDIS_PASSWORD
+    url: process.env.REDIS_URL,
 });
 
-redisClient.on("error", err => {
-    console.error("Redis error", err);
+redisClient.on("error", (err) => {
+    console.error("Redis error:", err);
 });
 
-redisClient.connect();
+if (!process.env.REDIS_URL) {
+    throw new Error("REDIS_URL is not set in environment");
+}
+
+(async () => {
+    try {
+        await redisClient.connect();
+    } catch (e) {
+        console.error("Redis connect failed:", e);
+    }
+})();
 
 module.exports = redisClient;

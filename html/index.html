@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description"
+        content="PropertyCost — online platform with real estate calculators. Estimate home prices, mortgage payments, taxes, and investment returns.">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/">
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/css/main.css">
+    <title>PropertyCost — Real Estate Calculators (Rent vs Buy, Mortgage, IRR, Cash Flow)</title>
+</head>
+
+<body >
+    <div class="mainPage ">
+        <header class="header">
+            <nav class="navbar ">
+
+                <div class="logo">
+                    <a href="/" class="white-color">
+                        <span>PropertyCost</span>
+                    </a>
+                </div>
+
+
+                <!-- BURGER -->
+                <input type="checkbox" id="nav-toggle">
+                <label for="nav-toggle" class="burger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+
+                <!-- MENU -->
+                <div class="nav-menu">
+
+                    <ul class="navbar-nav">
+                        <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                        <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                        <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                    </ul>
+
+                    <div id="userControls" >
+                        <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                        <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+
+                        <div class="user-dropdown" id="userDropdown">
+
+                            <div id="userAccount" class="avatar">A</div>
+
+                            <div class="dropdown-menu">
+                                <a href="/account/" class="dropdown-item">Account</a>
+                                <div class="divider"></div>
+                                <button id="btn-logout" class="dropdown-item danger">
+                                    Log out
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </nav>
+
+        </header>
+
+
+    <main class="home layout">
+        <div class="home-content">
+    
+            <section class="home-hero">
+                <p class="home-eyebrow">Real estate calculators + built-in deal verdicts</p>
+            
+                <h1 class="home-h1">Run the numbers. Get a clear verdict — then stress-test the deal.</h1>
+            
+                <p class="home-lead">
+                    PropertyCost doesn’t just calculate. After each calculation you can generate a
+                    <strong>deal verdict</strong> (good / caution / avoid) with the key reasons,
+                    run <strong>scenarios</strong>, open a <strong>deep dive</strong> for each scenario,
+                    compare deals, export a report, and summarize your portfolio.
+                    <strong>1 Full Analysis is free</strong>.
+                </p>
+            
+                <div class="home-cta">
+                    <a class="home-btn primary" href="/calculators/">Try calculators</a>
+                    <a class="home-btn secondary" href="/signup/">Get 1 free Full Analysis</a>
+                    <a class="home-btn ghost" href="/pricing/">See plans</a>
+                </div>
+            
+                <div class="home-pills" aria-label="Key benefits">
+                    <span class="home-pill">No signup to calculate</span>
+                    <span class="home-pill">1 Full Analysis free</span>
+                    <span class="home-pill">Scenarios + Deep dive</span>
+                    <span class="home-pill">Export PDF</span>
+                </div>
+            </section>
+
+            <section class="home-trust" aria-label="Trust and pricing basics">
+                <div class="home-trustItem">
+                    <h3>No subscription</h3>
+                    <p>Use calculators for free. Pay only when you run advanced analysis features.</p>
+                </div>
+                <div class="home-trustItem">
+                    <h3>Credits never expire</h3>
+                    <p>Buy once and use credits when you actually need verdicts, scenarios, compare, or PDF.</p>
+                </div>
+                <div class="home-trustItem">
+                    <h3>Transparent before you click</h3>
+                    <p>Every paid action shows its credit cost first. <a href="/pricing/">See pricing details</a>.</p>
+                </div>
+            </section>
+
+    
+            <section class="home-popular home-tools">
+                <div class="home-sectionHead">
+                    <h2 class="home-h2">Verdicts & scenarios — more than a calculator</h2>
+                    <p class="home-muted">A structured workflow for real deals: verdict → stress test → next steps.</p>
+                </div>
+            
+                <div class="home-grid home-tools-grid" id="toolsGrid">
+                    <a class="home-card featured" href="/calculators/">
+                        <h3>11 calculators</h3>
+                        <p>Buying decisions, ownership costs, and investing returns — in one place.</p>
+                        <span class="home-card__link">Browse calculators →</span>
+                    </a>
+            
+                    <a class="home-card featured" href="/signup/">
+                        <h3>Full Analysis verdict</h3>
+                        <p>Clear outcome + key drivers + risks + what to change first. <strong>1 free</strong>.</p>
+                        <span class="home-card__link">Get 1 free →</span>
+                    </a>
+            
+                    <a class="home-card" href="/account/">
+                        <h3>Scenario packs</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Quick wins / Optimize deal / Deep search — tested changes to controllable inputs.</p>
+                        <span class="home-card__link">Run scenarios →</span>
+                    </a>
+            
+                    <a class="home-card" href="/account/">
+                        <h3>Deep dive per scenario</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Focused breakdown: what changed, how it moved metrics, and what risks remain.</p>
+                        <span class="home-card__link">Open deep dive →</span>
+                    </a>
+            
+                    <a class="home-card" href="/account/">
+                        <h3>Compare 2 deals</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Compare calculations of the same type and get a clear winner with trade-offs.</p>
+                        <span class="home-card__link">Compare deals →</span>
+                    </a>
+            
+                    <a class="home-card" href="/account/">
+                        <h3>Portfolio summary</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Summarize multiple deals: strongest, weakest, key risks, and next actions.</p>
+                        <span class="home-card__link">Summarize portfolio →</span>
+                    </a>
+            
+                    <a class="home-card" href="/account/">
+                        <h3>Export PDF report</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Generate a shareable report for partners, lenders, or your own archive.</p>
+                        <span class="home-card__link">Export report →</span>
+                    </a>
+            
+                    <a class="home-card" href="/pricing/">
+                        <h3>Credits & packs</h3>
+                        <p>Use credits only when you run Full Analysis, scenarios, comparisons, exports, and summaries.</p>
+                        <span class="home-card__link">See pricing →</span>
+                    </a>
+
+                    <a class="home-card is-extra" href="/account/">
+                        <h3>Regenerate verdict</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Re-run the verdict when assumptions change and compare the reasoning.</p>
+                        <span class="home-card__link">Open account →</span>
+                    </a>
+
+                    <a class="home-card is-extra" href="/account/">
+                        <h3>Ask the Analyst</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Ask questions about your result and assumptions — get a direct answer in context.</p>
+                        <span class="home-card__link">Ask a question →</span>
+                    </a>
+
+                    <a class="home-card is-extra" href="/account/">
+                        <h3>Optimizer</h3>
+                        <span class="home-account-tag">Requires account</span>
+                        <p>Set a target (e.g., cash flow ≥ $300) and get suggested input changes to reach it.</p>
+                        <span class="home-card__link">Run optimizer →</span>
+                    </a>
+                </div>
+
+                <div class="home-toolsActions">
+                    <button id="toolsToggle" class="home-btn ghost home-toolsToggle" type="button" aria-expanded="false">
+                        Show more tools
+                    </button>
+                </div>
+            </section>
+
+    
+            <!-- CHOOSE A PATH -->
+            <section class="home-path">
+                <div class="home-sectionHead">
+                    <h2 class="home-h2">Choose your path</h2>
+                    <p class="home-muted">Different goals → different best starting points.</p>
+                </div>
+    
+                <div class="home-pathGrid">
+                    <a class="home-pathBtn" href="/rent-vs-buy/">
+                        <span class="home-pathBtn__title">I’m deciding to buy</span>
+                        <span class="home-pathBtn__sub">Start: Rent vs Buy → then Full Analysis</span>
+                    </a>
+    
+                    <a class="home-pathBtn" href="/cash-flow/">
+                        <span class="home-pathBtn__title">I’m analyzing a rental deal</span>
+                        <span class="home-pathBtn__sub">Start: Cash Flow / IRR → then Scenarios</span>
+                    </a>
+    
+                    <a class="home-pathBtn" href="/account/">
+                        <span class="home-pathBtn__title">I already have deals saved</span>
+                        <span class="home-pathBtn__sub">Go: Compare deals → Portfolio summary (account required)</span>
+                    </a>
+                </div>
+            </section>
+    
+            <section class="home-how">
+                <h2 class="home-h2">How people use PropertyCost</h2>
+            
+                <div class="home-grid">
+                    <div class="home-card">
+                        <h3>1) Run baseline</h3>
+                        <p>Calculate the deal with realistic assumptions (taxes, vacancy, fees, inflation).</p>
+                        <!-- <a href="/calculators/"><span class="home-card__link">Pick a calculator →</span></a> -->
+                        
+                    </div>
+            
+                    <div class="home-card featured">
+                        <h3>2) Generate a verdict</h3>
+                        <p>Get outcome + key drivers + risks + suggested next steps — then regenerate if needed.</p>
+                        <!-- <a href="/account/"><span class="home-card__link">Full Analysis →</span></a> -->
+                    </div>
+            
+                    <div class="home-card">
+                        <h3>3) Stress-test scenarios</h3>
+                        <p>Run scenario packs that tweak controllable inputs and compare results side-by-side.</p>
+                        <!-- <span class="home-card__link">Scenario packs →</span> -->
+                    </div>
+            
+                    <div class="home-card">
+                        <h3>4) Decide & share</h3>
+                        <p>Deep dive the best scenario, compare deals, export a report, or summarize your portfolio.</p>
+                        <!-- <span class="home-card__link">Account tools →</span> -->
+                    </div>
+                </div>
+            </section>
+
+    
+            <!-- POPULAR -->
+            <section class="home-popular">
+                <div class="home-sectionHead">
+                    <h2 class="home-h2">Most used calculators</h2>
+                    <p class="home-muted">Fast starting points.</p>
+                </div>
+    
+                <div class="home-grid">
+                    <a class="home-card featured" href="/rent-vs-buy/">
+                        <h3>Rent vs Buy</h3>
+                        <p>Best for “should I buy?” decisions over 10–30 years.</p>
+                        <span class="home-card__link">Open →</span>
+                    </a>
+    
+                    <a class="home-card featured" href="/homeownership-cost/">
+                        <h3>Total Cost of Ownership</h3>
+                        <p>Taxes, maintenance, inflation — the real cost beyond mortgage.</p>
+                        <span class="home-card__link">Open →</span>
+                    </a>
+    
+                    <a class="home-card" href="/cash-flow/">
+                        <h3>Cash Flow</h3>
+                        <p>Income vs expenses + stress cash flow.</p>
+                        <span class="home-card__link">Open →</span>
+                    </a>
+    
+                    <a class="home-card" href="/irr/">
+                        <h3>IRR</h3>
+                        <p>Returns over time with inflation, taxes, sale costs.</p>
+                        <span class="home-card__link">Open →</span>
+                    </a>
+                </div>
+            </section>
+    
+            <section class="home-faq">
+                <h2 class="home-h2">FAQ</h2>
+            
+                <details>
+                    <summary>Is PropertyCost free?</summary>
+                    <p>
+                        Calculators are free (no signup needed). You also get <strong>1 Full Analysis free</strong>.
+                        After that, advanced features use credits only when you run them.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>What is “Full Analysis”?</summary>
+                    <p>
+                        It’s our verdict report: <strong>good / caution / avoid</strong> + the key reasons and the best next step
+                        to improve the deal (price, rent, vacancy, expenses, horizon, etc.).
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>Why trust the verdict?</summary>
+                    <p>
+                        The verdict is grounded in the numbers you enter and the calculated metrics (cash flow, real returns,
+                        taxes/fees, inflation impact, stress checks). You always see what drives the result.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>What are scenarios?</summary>
+                    <p>
+                        Scenarios are a fast stress test. They automatically try realistic changes to controllable inputs and show
+                        which ones actually move the outcome.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>What is “Deep dive”?</summary>
+                    <p>
+                        A focused breakdown of one scenario: what changed, how it affected key metrics, and the trade-offs to watch.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>What is “Ask the Analyst”?</summary>
+                    <p>
+                        Ask questions about your deal in context (e.g., “What if vacancy is 12%?” or “Which input matters most?”)
+                        and get a direct, deal-specific answer.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>Can I compare deals or summarize my portfolio?</summary>
+                    <p>
+                        Yes. Compare two deals of the same type to pick a winner, and run a portfolio summary to see strengths,
+                        weaknesses, and next actions across multiple deals.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>Can I export a report?</summary>
+                    <p>
+                        Yes — export a clean PDF report to share or archive.
+                    </p>
+                </details>
+            
+                <details>
+                    <summary>Is this financial advice?</summary>
+                    <p>
+                        No. It’s informational and depends on your inputs. Always verify assumptions and consult professionals when
+                        needed.
+                    </p>
+                </details>
+            </section>
+
+
+    
+            <!-- FINAL CTA -->
+            <section class="home-final">
+                <h2 class="home-h2">Start with a baseline — then stress-test it</h2>
+                <p class="home-muted">Do 1 free Full Analysis, then run scenarios to see what actually moves the deal.</p>
+                <div class="home-cta">
+                    <a class="home-btn primary" href="/calculators/">Browse calculators</a>
+                    <a class="home-btn secondary" href="/signup/">Get 1 free Full Analysis</a>
+                    <a class="home-btn ghost" href="/account/">Open my account</a>
+                </div>
+            </section>
+    
+        </div>
+    </main>
+
+
+
+
+
+        <footer class="pb-3 ">
+            <ul class="footer-links pb-3 justify-content-center mb-3 ">
+                <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+                <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+                <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+                <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+            </ul>
+            <p class="text-center">© 2026 PropertyCost</p>
+        </footer>
+    </div>
+
+
+
+    <script src="/js/mainPage.js" defer></script>
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

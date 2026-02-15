@@ -1,25 +1,18 @@
-let csrfToken;
-window.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/api/csrf" , {credentials:"include"});
-  const data = await res.json();
-  csrfToken = data.csrfToken;
-});
-
 function clearErrors() {
-  document.querySelectorAll(".error").forEach(e => e.textContent = "");
+  document.querySelectorAll(".error").forEach(e => (e.textContent = ""));
 }
 
 function validateNumber({ value, min, max, errorEl, name }) {
-  if (Number.isNaN(value)) {
-    errorEl.textContent = `${name}: invalid number`;
+  if (!Number.isFinite(value)) {
+    if (errorEl) errorEl.textContent = `${name}: invalid number`;
     return false;
   }
   if (value < min) {
-    errorEl.textContent = `${name}: minimum ${min}`;
+    if (errorEl) errorEl.textContent = `${name}: minimum ${min}`;
     return false;
   }
   if (value > max) {
-    errorEl.textContent = `${name}: maximum ${max}`;
+    if (errorEl) errorEl.textContent = `${name}: maximum ${max}`;
     return false;
   }
   return true;
@@ -31,128 +24,139 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-function calculateFutureValue({ initial, annualContribution, annualReturn, years, inflationRate, taxRate }) {
+const percentFormatter = new Intl.NumberFormat("en-US", {
+  style: "percent",
+  maximumFractionDigits: 2
+});
+
+/**
+ * Real (inflation-adjusted) future value simulation.
+ *
+ * Assumptions (simple but consistent):
+ * - annualReturn is nominal %/year on capital
+ * - taxRate is % on *positive yearly gain* (not on the whole capital)
+ * - annualContribution is $/year and is added at end of year (after taxes)
+ * - inflationRate is %/year, applied to convert to "today's dollars" each year
+ */
+function calculateRealFutureValue({
+  initial,
+  annualContribution,
+  annualReturn,
+  years,
+  inflationRate,
+  taxRate
+}) {
   let value = initial;
-  for (let i = 0; i < years; i++) {
-    value += value * (annualReturn / 100);
+
+  const r = annualReturn / 100;
+  const inf = inflationRate / 100;
+  const tax = taxRate / 100;
+
+  for (let y = 0; y < years; y++) {
+    const gain = value * r;
+
+    // tax only on positive gain (income / capital gain tax)
+    const taxOnGain = gain > 0 ? gain * tax : 0;
+
+    value += (gain - taxOnGain);
+
+    // contribution assumed after-tax cash added at end of year
     value += annualContribution;
-    value -= value * (taxRate / 100);   // налог
-    value /= 1 + inflationRate / 100;   // инфляция
+
+    // convert to real value (today's purchasing power)
+    value /= (1 + inf);
   }
+
   return value;
 }
 
-function calculateRealReturnPercent({ initial, finalValue, years }) {
-  return ((Math.pow(finalValue / initial, 1 / years) - 1) * 100);
+function calculateRealCAGRPercent({ initial, finalValue, years }) {
+  if (!Number.isFinite(initial) || initial <= 0) return null;
+  if (!Number.isFinite(finalValue) || finalValue <= 0) return null;
+  if (!Number.isFinite(years) || years <= 0) return null;
+
+  return (Math.pow(finalValue / initial, 1 / years) - 1) * 100;
 }
 
 /* ===== calculation ===== */
-function calculateComparison() {
+function calculateComparison(e) {
+  e?.preventDefault?.();
   clearErrors();
 
-  const propertyInitial = +propertyInitialInput.value;
-  const propertyCashflow = +propertyCashflowInput.value;
-  const propertyGrowth = +propertyGrowthInput.value;
+  // Inputs
+  const propertyInitial = Number(propertyInitialInput.value);
+  const propertyCashflow = Number(propertyCashflowInput.value); // $/year (can be negative)
+  const propertyGrowth = Number(propertyGrowthInput.value);     // %/year
 
-  const altReturn = +altReturnInput.value;
-  const altContribution = +altContributionInput.value;
+  const altReturn = Number(altReturnInput.value);              // %/year
+  const altContribution = Number(altContributionInput.value);  // ✅ $/year (NOT %)
 
-  const propertyInflation = +propertyInflationInput.value;
-  const propertyTaxRate = +propertyTaxInput.value;
+  const propertyInflation = Number(propertyInflationInput.value); // %/year
+  const propertyTaxRate = Number(propertyTaxInput.value);         // % on gain
 
-  const altInflation = +altInflationInput.value;
-  const altTaxRate = +altTaxInput.value;
+  const altInflation = Number(altInflationInput.value);           // %/year
+  const altTaxRate = Number(altTaxInput.value);                   // % on gain
 
-  const years = +yearsInput.value;
+  const years = Number(yearsInput.value);
 
   let valid = true;
 
   valid = valid && validateNumber({
-    value: propertyInitial,
-    min: 1,
-    max: 100_000_000,
-    errorEl: propertyInitialError,
-    name: "Initial Investment"
+    value: propertyInitial, min: 1, max: 100_000_000,
+    errorEl: propertyInitialError, name: "Initial Investment"
   });
 
   valid = valid && validateNumber({
-    value: propertyCashflow,
-    min: -10_000_000,
-    max: 10_000_000,
-    errorEl: propertyCashflowError,
-    name: "Cash Flow"
+    value: propertyCashflow, min: -10_000_000, max: 10_000_000,
+    errorEl: propertyCashflowError, name: "Annual Cash Flow"
   });
 
   valid = valid && validateNumber({
-    value: propertyGrowth,
-    min: -99,
-    max: 2000,
-    errorEl: propertyGrowthError,
-    name: "Property Growth"
+    value: propertyGrowth, min: -99, max: 2000,
+    errorEl: propertyGrowthError, name: "Annual Property Growth"
   });
 
   valid = valid && validateNumber({
-    value: altReturn,
-    min: -99,
-    max: 2000,
-    errorEl: altReturnError,
-    name: "Alternative Return"
+    value: altReturn, min: -99, max: 2000,
+    errorEl: altReturnError, name: "Expected Annual Return"
+  });
+
+  // ✅ Treat as dollars per year (fix mismatch with your HTML label)
+  valid = valid && validateNumber({
+    value: altContribution, min: 0, max: 10_000_000,
+    errorEl: altContributionError, name: "Additional Contribution ($/year)"
   });
 
   valid = valid && validateNumber({
-    value: altContribution,
-    min: 0,
-    max: 10_000_000,
-    errorEl: altContributionError,
-    name: "Additional Contribution"
+    value: years, min: 1, max: 80,
+    errorEl: yearsError, name: "Investment Term"
   });
 
   valid = valid && validateNumber({
-    value: years,
-    min: 1,
-    max: 80,
-    errorEl: yearsError,
-    name: "Investment Term"
-  });
-
-  // валидация новых полей
-  valid = valid && validateNumber({
-    value: propertyInflation,
-    min: 0,
-    max: 100,
-    errorEl: propertyInflationError,
-    name: "Property Inflation Rate"
+    value: propertyInflation, min: 0, max: 100,
+    errorEl: propertyInflationError, name: "Property Inflation Rate"
   });
 
   valid = valid && validateNumber({
-    value: propertyTaxRate,
-    min: 0,
-    max: 100,
-    errorEl: propertyTaxError,
-    name: "Property Tax Rate"
+    value: propertyTaxRate, min: 0, max: 100,
+    errorEl: propertyTaxError, name: "Property Tax Rate"
   });
 
   valid = valid && validateNumber({
-    value: altInflation,
-    min: 0,
-    max: 100,
-    errorEl: altInflationError,
-    name: "Alternative Inflation Rate"
+    value: altInflation, min: 0, max: 100,
+    errorEl: altInflationError, name: "Alternative Inflation Rate"
   });
 
   valid = valid && validateNumber({
-    value: altTaxRate,
-    min: 0,
-    max: 100,
-    errorEl: altTaxError,
-    name: "Alternative Tax Rate"
+    value: altTaxRate, min: 0, max: 100,
+    errorEl: altTaxError, name: "Alternative Tax Rate"
   });
 
   if (!valid) return;
 
   /* ===== logic ===== */
 
-  const propertyValue = calculateFutureValue({
+  const propertyValue = calculateRealFutureValue({
     initial: propertyInitial,
     annualContribution: propertyCashflow,
     annualReturn: propertyGrowth,
@@ -161,7 +165,7 @@ function calculateComparison() {
     taxRate: propertyTaxRate
   });
 
-  const alternativeValue = calculateFutureValue({
+  const alternativeValue = calculateRealFutureValue({
     initial: propertyInitial,
     annualContribution: altContribution,
     annualReturn: altReturn,
@@ -170,20 +174,27 @@ function calculateComparison() {
     taxRate: altTaxRate
   });
 
-  const propertyRealReturnPercent = calculateRealReturnPercent({ initial: propertyInitial, finalValue: propertyValue, years });
-  const alternativeRealReturnPercent = calculateRealReturnPercent({ initial: propertyInitial, finalValue: alternativeValue, years });
+  const propertyRealReturnPercent = calculateRealCAGRPercent({
+    initial: propertyInitial, finalValue: propertyValue, years
+  });
 
-  const difference = alternativeValue - propertyValue;
-  const winner = difference > 0 ? "Alternative Investment" : "Property";
+  const alternativeRealReturnPercent = calculateRealCAGRPercent({
+    initial: propertyInitial, finalValue: alternativeValue, years
+  });
+
+  const difference = propertyValue - alternativeValue;
+
+  // difference = property - alternative: positive means property wins
+  const winner = difference > 0 ? "property" : (difference < 0 ? "alternative" : "tie");
 
   /* ===== output ===== */
   propertyResultEl.textContent = moneyFormatter.format(propertyValue);
   alternativeResultEl.textContent = moneyFormatter.format(alternativeValue);
 
-  if (propertyValue > alternativeValue) {
+  if (winner === "property") {
     winnerEl.textContent = "Property Wins 📈";
     winnerEl.className = "winner property";
-  } else if (alternativeValue > propertyValue) {
+  } else if (winner === "alternative") {
     winnerEl.textContent = "Alternative Investments Win 📊";
     winnerEl.className = "winner alternative";
   } else {
@@ -192,44 +203,46 @@ function calculateComparison() {
   }
 
   /* ===== save ===== */
-  
-  fetch("/api/app/calculation", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": csrfToken
-    },
-    body: JSON.stringify({
-      calculatorType: "alternative_investment",
-      inputData: {
-        propertyInitial,
-        propertyCashflow,
-        propertyGrowth,
-        propertyInflation,
-        propertyTaxRate,
-        altReturn,
-        altContribution,
-        altInflation,
-        altTaxRate,
-        years
+  if (csrfToken) {
+    fetch("/api/app/calculation", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
       },
-      resultData: {
-        propertyValue,
-        alternativeValue,
-        propertyRealReturnPercent,
-        alternativeRealReturnPercent,
-        difference,
-        winner
-      }
-    })
-  }).catch(console.error);
+      body: JSON.stringify({
+        calculatorType: "alternative_investment",
+        inputData: {
+          propertyInitial,
+          propertyCashflow,
+          propertyGrowth,
+          propertyInflation,
+          propertyTaxRate,
+          altReturn,
+          altContribution,   // ✅ $/year
+          altInflation,
+          altTaxRate,
+          years
+        },
+        resultData: {
+          propertyValue,
+          alternativeValue,
+          propertyRealReturnPercent,     // may be null if finalValue <= 0
+          alternativeRealReturnPercent,  // may be null if finalValue <= 0
+          difference,
+          winner
+        }
+      })
+    }).catch(console.error);
+  } else {
+    console.warn("CSRF token not loaded — skip saving.");
+  }
 
-  resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  resultsEl?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 /* ===== aliases ===== */
-
 const propertyInitialInput = document.getElementById("propertyInitial");
 const propertyCashflowInput = document.getElementById("propertyCashflow");
 const propertyGrowthInput = document.getElementById("propertyGrowth");
@@ -266,6 +279,4 @@ const propertyTaxError = document.getElementById("propertyTaxError");
 const altInflationError = document.getElementById("altInflationError");
 const altTaxError = document.getElementById("altTaxError");
 
-document
-  .getElementById("calcBtn")
-  .addEventListener("click", calculateComparison);
+document.getElementById("calcBtn").addEventListener("click", calculateComparison);

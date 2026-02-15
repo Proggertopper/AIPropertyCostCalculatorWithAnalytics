@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Mortgage points explained (U.S.): learn what discount points are, how rate buydowns work, how to calculate points break-even, when points are worth it, and common traps. Includes examples, decision checklist, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://mypropertycost.com/mortgage/points/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/mortgage/points/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/mortgage/points/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Mortgage Points Explained (U.S.) — Should You Buy Down the Rate?</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Mortgage Points Explained (U.S.) — Should You Buy Down the Rate?" />
+    <meta property="og:description"
+        content="Learn what mortgage points are, how rate buydowns work, how to calculate break-even, and when points are worth it." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/mortgage/points/" />
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/mortgage/points/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Mortgage Calculator", "item": "https://mypropertycost.com/mortgage/" },
+          { "@type": "ListItem", "position": 3, "name": "Mortgage Points", "item": "https://mypropertycost.com/mortgage/points/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/mortgage/points/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What are mortgage points?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Mortgage points (discount points) are upfront fees paid at closing to reduce the interest rate. One point typically equals 1% of the loan amount."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do you calculate break-even on points?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Break-even is when the monthly payment savings from the lower rate equals the upfront points cost. Divide points cost by monthly savings to estimate months to break-even."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Are points worth it?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Points can be worth it if you keep the loan long enough to pass the break-even point and you have cash reserves after closing. If you may refinance or move soon, points often don’t pay off."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do points affect APR?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Points increase upfront cost and usually lower the interest rate. APR incorporates that upfront cost, so APR helps compare offers with different points."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span><span></span><span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/mortgage/">Mortgage</a>
+                <span class="sep">/</span>
+                <span class="current">Mortgage points</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#what-are-points">What mortgage points are</a></li>
+                    <li><a href="#discount-vs-origination">Discount points vs origination fees</a></li>
+                    <li><a href="#how-rate-buydown-works">How a rate buydown works</a></li>
+                    <li><a href="#break-even">Break-even: the only number that matters</a></li>
+                    <li><a href="#when-worth-it">When points are worth it</a></li>
+                    <li><a href="#when-not">When points are NOT worth it</a></li>
+                    <li><a href="#points-vs-extra-payments">Points vs extra payments</a></li>
+                    <li><a href="#points-vs-investing">Points vs investing (opportunity cost)</a></li>
+                    <li><a href="#how-to-shop">How to shop points correctly</a></li>
+                    <li><a href="#calculator">How to model points in the calculator</a></li>
+                    <li><a href="#related">Related guides + calculators</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Points break-even</div>
+                        <div class="sidebar-cta__sub">Compare “no points” vs “with points” at 3/5/10 years.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Mortgage Points Explained (U.S.)<br>Should You Buy Down the Rate?</h1>
+                        <p class="subtitle">
+                            Points are the classic mortgage trade-off: pay more upfront to get a lower interest rate.
+                            They can save money — but only if you keep the loan long enough. This guide shows how points
+                            work,
+                            how to calculate break-even, and when points are worth it (or a trap).
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/mortgage/" aria-label="Back to Mortgage hub">← Back to
+                                    Mortgage hub</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~13 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#what-are-points">What points are</a>
+                    <a href="#break-even">Break-even</a>
+                    <a href="#when-worth-it">When worth it</a>
+                    <a href="#points-vs-investing">Points vs investing</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Compare “no points” vs “with points.”</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/apr-vs-interest-rate/">
+                            <strong>APR vs rate</strong>
+                            <span>Why points change APR and how to compare offers.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/refinance-break-even/">
+                            <strong>Refinance break-even</strong>
+                            <span>Points only work if you keep the loan long enough.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="what-are-points">
+                    <h2>What Mortgage Points Are</h2>
+                    <p>
+                        <strong>Mortgage points</strong> (usually “discount points”) are an upfront fee you pay at
+                        closing in exchange
+                        for a <strong>lower interest rate</strong>.
+                        One point typically equals <strong>1% of the loan amount</strong>. For example, on a $400,000
+                        loan:
+                    </p>
+                    <ul>
+                        <li>1 point ≈ $4,000</li>
+                        <li>2 points ≈ $8,000</li>
+                    </ul>
+
+                    <p>
+                        When you pay points, your lender reduces your rate, which reduces your monthly
+                        principal-and-interest payment.
+                        In theory, you “earn back” the points cost through lower payments over time.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Points are a prepayment of interest.</strong> You’re paying interest upfront to
+                            reduce the interest
+                            you pay later.
+                        </p>
+                    </div>
+
+                    <p>
+                        The decision is not “Are points good?” The decision is:
+                        <strong>Will you keep the loan long enough for points to break even?</strong>
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="discount-vs-origination">
+                    <h2>Discount Points vs Origination Fees (Don’t Mix These Up)</h2>
+                    <p>
+                        Not all “points” are the same. In lender paperwork, you might see:
+                    </p>
+                    <ul>
+                        <li><strong>Discount points:</strong> optional, paid to lower the rate.</li>
+                        <li><strong>Origination charges / lender fees:</strong> the cost to create/process the loan.
+                        </li>
+                    </ul>
+
+                    <p>
+                        Discount points can be worth it in the right scenario. Origination charges are more like a price
+                        tag for the
+                        loan.
+                        Both can influence APR, and both matter in total cost — but only discount points are the “rate
+                        buy-down choice.”
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Shopping tip:</strong> If one lender is “low rate” but the fees are huge, you may be
+                            looking at a
+                            points-heavy offer in disguise. Always compare rate <em>and</em> total closing costs.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-rate-buydown-works">
+                    <h2>How a Rate Buydown Works (What You’re Actually Buying)</h2>
+                    <p>
+                        Think of points as buying a stream of small monthly savings. The size of that stream depends on:
+                    </p>
+                    <ul>
+                        <li>loan amount,</li>
+                        <li>term (15 vs 30),</li>
+                        <li>rate reduction you get per point, and</li>
+                        <li>how long you keep the loan.</li>
+                    </ul>
+
+                    <p>
+                        A simple reality check:
+                    </p>
+                    <ul>
+                        <li>If your monthly savings are small, break-even takes longer.</li>
+                        <li>If your points cost is large, break-even takes longer.</li>
+                        <li>If you refinance or sell early, you may never reach break-even.</li>
+                    </ul>
+
+                    <p>
+                        That’s why points can be amazing for “stay put, long horizon” borrowers — and a bad idea for
+                        “move in 3–5 years”
+                        borrowers.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="break-even">
+                    <h2>Break-Even: The Only Number That Matters</h2>
+                    <p>
+                        Points break-even is the moment when the savings you’ve accumulated from the lower payment
+                        equals the upfront
+                        cost you paid.
+                        The simplest approximation is:
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Break-even months</strong> ≈ (Points cost) ÷ (Monthly payment savings)
+                        </p>
+                    </div>
+
+                    <p>
+                        Example logic (not exact numbers, just the decision structure):
+                    </p>
+                    <ul>
+                        <li>If points cost $6,000 and you save $100/month → break-even ≈ 60 months (5 years).</li>
+                        <li>If points cost $6,000 and you save $60/month → break-even ≈ 100 months (~8.3 years).</li>
+                    </ul>
+
+                    <p>
+                        That break-even timeline should be compared to your <strong>realistic holding period</strong>:
+                    </p>
+                    <ul>
+                        <li>If you’ll keep the loan 10+ years and break-even is 5–6 years, points are plausible.</li>
+                        <li>If you might refinance in 3 years and break-even is 7 years, points are probably a mistake.
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Important nuance:</strong> Break-even is not guaranteed. If you refinance early,
+                            sell early, or make
+                            aggressive principal prepayments, your payoff timeline changes.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="when-worth-it">
+                    <h2>When Mortgage Points Are Worth It</h2>
+                    <p>
+                        Points tend to make sense in scenarios where:
+                    </p>
+
+                    <h3>1) You expect to keep the loan long enough</h3>
+                    <p>
+                        If your break-even is 6 years and you’re likely to keep the mortgage for 10–15 years, points can
+                        produce real
+                        savings.
+                        This is the core case.
+                    </p>
+
+                    <h3>2) Your cash reserves remain healthy after closing</h3>
+                    <p>
+                        Buying down the rate shouldn’t drain your emergency fund. A slightly higher payment with solid
+                        reserves is often
+                        safer than a lower payment with no margin.
+                    </p>
+
+                    <h3>3) Rates are high and you value payment stability</h3>
+                    <p>
+                        When rates are high, monthly payments can be stressful. Points can be used as a “payment
+                        management” tool — but
+                        only if you’re not overpaying for the rate reduction.
+                    </p>
+
+                    <h3>4) You compare multiple options (0 points, 1 point, 2 points)</h3>
+                    <p>
+                        Sometimes the “best” choice is not extremes. Running 0 vs 1 vs 2 points can reveal a sweet spot
+                        where you pay
+                        reasonable upfront cost for meaningful savings.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="when-not">
+                    <h2>When Mortgage Points Are NOT Worth It</h2>
+                    <p>
+                        Points often don’t pay off when:
+                    </p>
+
+                    <h3>1) You might refinance soon</h3>
+                    <p>
+                        If you expect rates to fall or you plan to refinance for other reasons (cash-out, term change),
+                        points can be wasted
+                        because you won’t keep the loan long enough.
+                    </p>
+
+                    <h3>2) You might move in 3–7 years</h3>
+                    <p>
+                        Many people move within a decade due to jobs, family, or lifestyle. If your break-even is 8–10
+                        years and your
+                        life plan is uncertain, points are risky.
+                    </p>
+
+                    <h3>3) You’re tight on cash or have high opportunity cost</h3>
+                    <p>
+                        If that cash could cover a needed renovation, pay off high-interest debt, or keep your emergency
+                        fund healthy,
+                        points may be the wrong place to allocate money.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Red flag:</strong> A lender pitches points as “always smart.” Points are
+                            timeline-dependent.
+                            If the lender isn’t discussing break-even, you should.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="points-vs-extra-payments">
+                    <h2>Points vs Extra Payments (Two Ways to Reduce Interest)</h2>
+                    <p>
+                        If you have extra cash, you can either:
+                    </p>
+                    <ul>
+                        <li>pay points to lower the rate (reduce payment), or</li>
+                        <li>make extra principal payments (reduce balance faster).</li>
+                    </ul>
+
+                    <p>
+                        Extra payments generally produce a “return” close to your mortgage rate because you avoid future
+                        interest.
+                        Points can lower your rate and reduce interest too — but you pay for it upfront.
+                    </p>
+
+                    <p>
+                        The better option depends on:
+                    </p>
+                    <ul>
+                        <li>your timeline,</li>
+                        <li>whether you want lower required payment (points), or faster payoff (extra payments),</li>
+                        <li>and your need for flexibility (extra payments can usually be stopped; points cannot be
+                            refunded).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Flexibility advantage:</strong> Extra payments are reversible (you can stop). Points
+                            are not.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="points-vs-investing">
+                    <h2>Points vs Investing (Opportunity Cost)</h2>
+                    <p>
+                        Points decisions are really opportunity cost decisions. That cash could be:
+                    </p>
+                    <ul>
+                        <li>kept as reserves,</li>
+                        <li>invested in other assets,</li>
+                        <li>used for renovations, or</li>
+                        <li>used to increase down payment (possibly reducing PMI).</li>
+                    </ul>
+
+                    <p>
+                        Paying points is a relatively “safe” bet: your savings come from a lower borrowing cost.
+                        Investing can offer a
+                        higher expected return — but with volatility. That’s why there is no universal answer.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision lens:</strong> If you value certainty, points can be appealing (if
+                            break-even fits).
+                            If you value liquidity and flexibility, avoiding points can be the better move.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-shop">
+                    <h2>How to Shop Points Correctly (So You Don’t Get Misled)</h2>
+                    <p>
+                        When you receive quotes, do this:
+                    </p>
+                    <ul>
+                        <li>Ask for at least two versions: <strong>0 points</strong> and <strong>with points</strong>.
+                        </li>
+                        <li>Compare total closing costs (not just the rate).</li>
+                        <li>Check how many months to break-even.</li>
+                        <li>Run a “sell/refi at year 3–5” test and a “keep 10+ years” test.</li>
+                    </ul>
+
+                    <p>
+                        The cleanest way to avoid confusion is to model points as a single upfront cost and compare it
+                        against your
+                        monthly savings at your actual timeline.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="calculator">
+                    <h2>How to Model Points in the Calculator</h2>
+                    <p>
+                        Use this quick workflow:
+                    </p>
+
+                    <h3>Scenario A: No points</h3>
+                    <ul>
+                        <li>Enter the base rate with 0 points</li>
+                        <li>Record monthly P&amp;I and total interest at your horizon (e.g., 5 years)</li>
+                    </ul>
+
+                    <h3>Scenario B: With points</h3>
+                    <ul>
+                        <li>Enter the lower rate</li>
+                        <li>Record monthly P&amp;I</li>
+                        <li>Subtract the monthly savings</li>
+                        <li>Divide points cost by monthly savings to get break-even months</li>
+                    </ul>
+
+                    <p>
+                        Then decide based on your timeline and liquidity.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want the fastest answer?</h4>
+                            <p>Model “0 points” vs “with points” and compare cost at 3, 5, and 10 years.</p>
+                        </div>
+                        <a href="/mortgage/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related guides + calculators</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage/apr-vs-interest-rate/">APR vs interest rate</a>
+                            <p>Points are why APR and rate diverge. Learn how APR helps compare offers.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/refinance-break-even/">Refinance break-even</a>
+                            <p>If you refinance before points break-even, points likely don’t pay off.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/extra-payments/">Extra payments</a>
+                            <p>Compare buying down the rate vs paying principal faster.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/pmi/">PMI explained</a>
+                            <p>Sometimes using cash to reduce PMI beats using cash to buy points.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What are mortgage points?</h4>
+                        <p>
+                            Mortgage points (discount points) are optional upfront fees paid at closing to reduce the
+                            interest rate.
+                            One point typically equals 1% of the loan amount.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do you calculate break-even on points?</h4>
+                        <p>
+                            Break-even is when the monthly payment savings equals the upfront points cost.
+                            Divide points cost by monthly savings to estimate months to break-even.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Are points worth it?</h4>
+                        <p>
+                            Points can be worth it if you keep the loan long enough to pass break-even and you have cash
+                            reserves after closing.
+                            If you may refinance or move soon, points often don’t pay off.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Do points affect APR?</h4>
+                        <p>
+                            Yes. Paying points increases upfront cost and usually lowers the interest rate. APR
+                            incorporates that upfront cost,
+                            which is why APR can help compare offers with different points.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should I use cash for points or a bigger down payment?</h4>
+                        <p>
+                            It depends. A bigger down payment reduces loan amount and may reduce or eliminate PMI.
+                            Points reduce the rate.
+                            Compare break-even and choose the option that fits your timeline and liquidity needs.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom line</h2>
+                    <p>
+                        Mortgage points can reduce your interest rate and payment, but they only save money if you keep
+                        the loan long enough
+                        to reach break-even. If your timeline is uncertain or you expect to refinance, points are often
+                        not worth it.
+                        Always compare “0 points vs points” at 3, 5, and 10 years before deciding.
+                    </p>
+                    <div class="callout">
+                        <p>
+                            Next step: run two scenarios in the <a href="/mortgage/calculator/">mortgage calculator</a>
+                            and calculate your points break-even.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling. Points pricing and rate reductions vary
+                        by lender and market.
+                        For decisions, compare Loan Estimates and confirm points, fees, and expected time horizon with
+                        your lender.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

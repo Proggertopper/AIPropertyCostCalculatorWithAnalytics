@@ -1,0 +1,666 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Avoid the most common rent vs buy calculator mistakes in the U.S.: missing selling costs, counting principal as a cost, underestimating maintenance, ignoring taxes/insurance/HOA growth, wrong opportunity cost, unrealistic appreciation, and more. Includes a checklist and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/common-mistakes/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/common-mistakes/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/common-mistakes/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy Calculator Mistakes (U.S.) — 12 Errors That Flip Results</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy Calculator Mistakes — 12 Errors That Flip Results (U.S.)" />
+    <meta property="og:description"
+        content="The most common rent vs buy mistakes: missing selling costs, counting principal as cost, underestimating maintenance, ignoring taxes/insurance/HOA growth, wrong opportunity cost, unrealistic appreciation, and more. Includes a checklist and FAQs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/common-mistakes/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/common-mistakes/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "Common Mistakes", "item": "https://mypropertycost.com/rent-vs-buy/common-mistakes/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/common-mistakes/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Why do rent vs buy calculators give different answers?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because small assumptions compound and many calculators omit key costs or double-count items. The biggest differences come from selling costs, separating principal vs interest, maintenance reserves, taxes/insurance/HOA growth, and opportunity cost assumptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is the biggest mistake in rent vs buy comparisons?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Ignoring transaction friction—especially selling costs—or counting the full mortgage payment as a cost. Principal becomes equity, while interest is the cost. Omitting selling costs makes buying look unrealistically favorable for short holding periods."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I model maintenance in the U.S.?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a realistic annual reserve for maintenance and capital expenditures (CapEx). The point is to budget for inevitable repairs and replacements over time, not just average monthly upkeep."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should opportunity cost be included in rent vs buy?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. A fair comparison tracks what the renter could earn by investing the down payment and any monthly savings from renting, versus the homeowner’s equity growth. Excluding opportunity cost biases results toward buying."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">Common Mistakes</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-calculators-disagree">Why rent vs buy calculators disagree</a></li>
+                    <li><a href="#mistake-1">Mistake #1: Ignoring selling costs</a></li>
+                    <li><a href="#mistake-2">Mistake #2: Counting principal as a cost</a></li>
+                    <li><a href="#mistake-3">Mistake #3: Underestimating maintenance & CapEx</a></li>
+                    <li><a href="#mistake-4">Mistake #4: Flat taxes & insurance forever</a></li>
+                    <li><a href="#mistake-5">Mistake #5: Unrealistic appreciation assumptions</a></li>
+                    <li><a href="#mistake-6">Mistake #6: Skipping opportunity cost</a></li>
+                    <li><a href="#mistake-7">Mistake #7: Comparing monthly payments only</a></li>
+                    <li><a href="#mistake-8">Mistake #8: Using the wrong time horizon</a></li>
+                    <li><a href="#mistake-9">Mistake #9: Forgetting PMI and escrow effects</a></li>
+                    <li><a href="#mistake-10">Mistake #10: Not modeling rent flexibility</a></li>
+                    <li><a href="#mistake-11">Mistake #11: Ignoring lifestyle and risk</a></li>
+                    <li><a href="#checklist">A clean checklist for accurate comparisons</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Fix your assumptions</div>
+                        <div class="sidebar-cta__sub">Run your scenario with selling costs, maintenance, and opportunity
+                            cost included.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy Calculator Mistakes (U.S.)<br>12 Errors That Flip Results</h1>
+                        <p class="subtitle">
+                            Rent vs buy calculators often disagree because they quietly make different assumptions.
+                            In the U.S., the “winner” is highly sensitive to selling costs, taxes, insurance, HOA,
+                            maintenance, appreciation,
+                            and opportunity cost. This guide shows the most common mistakes that make results misleading
+                            — and how to fix them
+                            so your decision is based on a fair comparison.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~10 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-calculators-disagree">Why calculators disagree</a>
+                    <a href="#mistake-1">Mistake #1</a>
+                    <a href="#mistake-2">Mistake #2</a>
+                    <a href="#mistake-3">Mistake #3</a>
+                    <a href="#mistake-4">Mistake #4</a>
+                    <a href="#mistake-5">Mistake #5</a>
+                    <a href="#mistake-6">Mistake #6</a>
+                    <a href="#mistake-7">Mistake #7</a>
+                    <a href="#mistake-8">Mistake #8</a>
+                    <a href="#mistake-9">Mistake #9</a>
+                    <a href="#mistake-10">Mistake #10</a>
+                    <a href="#mistake-11">Mistake #11</a>
+                    <a href="#checklist">Checklist</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Compare net position with realistic costs included.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/opportunity-cost/">
+                            <strong>Read: Opportunity cost</strong>
+                            <span>The hidden lever that often flips results.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/break-even/">
+                            <strong>Read: Break-even explained</strong>
+                            <span>When buying “catches up” — and why.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <!-- INTRO -->
+                <div class="content-section" id="why-calculators-disagree">
+                    <h2>Why Rent vs Buy Calculators Disagree</h2>
+                    <p>
+                        Two calculators can take the same home price and rent and still produce opposite answers.
+                        That doesn’t mean one is “lying” — it usually means they model different things.
+                        In the U.S., rent vs buy is not a single formula; it’s a timeline model with many inputs that
+                        compound.
+                    </p>
+                    <p>
+                        The biggest disagreement usually comes from:
+                    </p>
+                    <ul>
+                        <li><strong>Transaction costs:</strong> purchase closing costs and selling costs (agent
+                            commission, fees)</li>
+                        <li><strong>Principal vs interest accounting:</strong> whether principal is treated as a cost
+                            (it shouldn’t be)</li>
+                        <li><strong>Ownership expenses:</strong> property taxes, homeowners insurance, HOA, and
+                            maintenance reserves</li>
+                        <li><strong>Growth assumptions:</strong> appreciation, rent growth, and expense inflation</li>
+                        <li><strong>Opportunity cost:</strong> whether renter investment growth is modeled</li>
+                        <li><strong>Time horizon:</strong> 3–7 years vs 10–30 years can change everything</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Goal:</strong> not to find “the answer,” but to build a comparison that stays
+                            reasonable under conservative assumptions.
+                            If your result flips easily, your decision depends on uncertain inputs — not on math
+                            precision.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- MISTAKE 1 -->
+                <div class="content-section" id="mistake-1">
+                    <h2>Mistake #1: Ignoring Selling Costs</h2>
+                    <p>
+                        Selling costs are the fastest way to accidentally make buying look better than it is —
+                        especially over short horizons.
+                        In many U.S. markets, selling can include agent commission plus additional seller-side costs.
+                        If a calculator models buying but does not subtract selling friction at exit, it will often show
+                        an unrealistically early “break-even.”
+                    </p>
+                    <p>
+                        Fix: include selling costs in any horizon where you might move (even if you hope you won’t).
+                        Short holds magnify friction. Long holds dilute it.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 2 -->
+                <div class="content-section" id="mistake-2">
+                    <h2>Mistake #2: Counting Principal as a Cost</h2>
+                    <p>
+                        Your mortgage payment has two core parts: <strong>interest</strong> and
+                        <strong>principal</strong>.
+                        Interest is a cost. Principal is not — it’s a transfer from cash into equity.
+                    </p>
+                    <div class="callout">
+                        <p>
+                            If a calculator treats the entire mortgage payment as “money gone,” it will bias against
+                            buying.
+                            A good model separates costs (interest, taxes, insurance, HOA, maintenance) from equity
+                            building.
+                        </p>
+                    </div>
+                    <p>
+                        Fix: ensure the model measures net position (what you paid versus what you end up with), not
+                        just total paid.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 3 -->
+                <div class="content-section" id="mistake-3">
+                    <h2>Mistake #3: Underestimating Maintenance & CapEx</h2>
+                    <p>
+                        Maintenance is not optional — it’s the price of owning a physical asset.
+                        In real life, the “average month” might look fine, but the “average year” includes at least one
+                        expensive event sooner or later.
+                        Roofs, HVAC, appliances, plumbing, exterior work, and basic wear add up.
+                    </p>
+                    <p>
+                        Fix: use a maintenance reserve that assumes real-world repairs, not perfect luck.
+                        If you’re buying an older property, a higher reserve is often more realistic than the default
+                        numbers most calculators use.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 4 -->
+                <div class="content-section" id="mistake-4">
+                    <h2>Mistake #4: Flat Property Taxes and Insurance Forever</h2>
+                    <p>
+                        Many calculators take year-one property taxes and homeowners insurance and keep them flat for
+                        10–30 years.
+                        That can dramatically distort results. In many U.S. areas, taxes and insurance can change over
+                        time.
+                    </p>
+                    <p>
+                        Fix: allow these expenses to grow with inflation or with a conservative growth assumption.
+                        Even a small growth rate compounds over decades.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 5 -->
+                <div class="content-section" id="mistake-5">
+                    <h2>Mistake #5: Unrealistic Appreciation Assumptions</h2>
+                    <p>
+                        Appreciation is a powerful lever — and an easy way to “force” buying to win.
+                        If a model assumes strong appreciation by default, it may produce an answer that’s more hopeful
+                        than reliable.
+                    </p>
+                    <p>
+                        Fix: run at least one stress test with low or flat appreciation.
+                        If buying only wins when appreciation is high, you’re making a market bet.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 6 -->
+                <div class="content-section" id="mistake-6">
+                    <h2>Mistake #6: Skipping Opportunity Cost (or Modeling It Wrong)</h2>
+                    <p>
+                        Opportunity cost is the return the renter could earn by investing the down payment and any
+                        monthly savings from renting.
+                        Excluding it assumes the renter does nothing with their cash — which is not a fair comparison.
+                    </p>
+                    <p>
+                        Fix: model opportunity cost with a low/base/high return range.
+                        If your decision flips across reasonable return assumptions, your decision is sensitive — and
+                        you should treat results as scenario-based, not absolute.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 7 -->
+                <div class="content-section" id="mistake-7">
+                    <h2>Mistake #7: Comparing Monthly Payments Only</h2>
+                    <p>
+                        “Rent is $2,800 and the mortgage is $2,800, so buying is the same.”
+                        That’s incomplete because ownership cost usually includes taxes, insurance, HOA, and
+                        maintenance.
+                        Also, monthly payment comparisons ignore equity building and transaction friction.
+                    </p>
+                    <p>
+                        Fix: compare full monthly ownership cost and net outcome over time, not just the mortgage
+                        payment.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 8 -->
+                <div class="content-section" id="mistake-8">
+                    <h2>Mistake #8: Using the Wrong Time Horizon</h2>
+                    <p>
+                        The “right” horizon is the one you will actually live through.
+                        A 30-year model is meaningless if you’re likely to move in 3–7 years.
+                        Short horizons are where selling costs and early interest dominate.
+                    </p>
+                    <p>
+                        Fix: run at least two horizons: a realistic near-term (like 5–10 years) and a long-term (like 30
+                        years).
+                        If outcomes differ, your decision depends on timeline certainty.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 9 -->
+                <div class="content-section" id="mistake-9">
+                    <h2>Mistake #9: Forgetting PMI and Escrow Effects</h2>
+                    <p>
+                        In the U.S., many buyers with lower down payments pay PMI (private mortgage insurance).
+                        Also, many loans use escrow for taxes and insurance, which affects monthly cash flow.
+                        Ignoring these can make buying look cheaper than it will feel month-to-month.
+                    </p>
+                    <p>
+                        Fix: include PMI where applicable, and model realistic taxes/insurance cash flow.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 10 -->
+                <div class="content-section" id="mistake-10">
+                    <h2>Mistake #10: Not Modeling Rent Flexibility</h2>
+                    <p>
+                        Renters often have strategic flexibility: they can move to manage rent increases,
+                        choose different neighborhoods, or downsize in tight periods.
+                        Some models assume the renter stays in the same unit forever with a fixed growth path.
+                    </p>
+                    <p>
+                        Fix: if you realistically would move to manage rent, use a more conservative rent growth path.
+                        If you would likely renew and accept increases, model higher growth.
+                    </p>
+                </div>
+
+
+                <!-- MISTAKE 11 -->
+                <div class="content-section" id="mistake-11">
+                    <h2>Mistake #11: Ignoring Lifestyle Value and Risk</h2>
+                    <p>
+                        A purely financial model can’t price everything that matters:
+                        stability, control, ability to customize, school district preferences, or the stress of repairs.
+                        Likewise, it can’t fully price risk: job changes, relocation, health events, or market
+                        volatility.
+                    </p>
+                    <p>
+                        Fix: use the calculator to understand the financial trade-off, then decide whether the lifestyle
+                        value is worth the difference.
+                        A financial “loss” may still be a rational choice if it buys stability you strongly value.
+                    </p>
+                </div>
+
+
+                <!-- CHECKLIST -->
+                <div class="content-section" id="checklist">
+                    <h2>A Clean Checklist for Accurate Rent vs Buy Comparisons</h2>
+                    <p>
+                        If you want a model you can trust, use this checklist before you interpret the result:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Buyer side checklist</h4>
+                            <ul>
+                                <li>Purchase closing costs included</li>
+                                <li>Selling costs included at exit</li>
+                                <li>Mortgage split into principal vs interest</li>
+                                <li>Property taxes modeled (with growth)</li>
+                                <li>Homeowners insurance modeled (with growth)</li>
+                                <li>HOA included (if applicable)</li>
+                                <li>Maintenance/CapEx reserve included</li>
+                                <li>PMI included (if applicable)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Renter side checklist</h4>
+                            <ul>
+                                <li>Rent growth modeled realistically</li>
+                                <li>Down payment invested (opportunity cost)</li>
+                                <li>Monthly savings invested (if renting is cheaper)</li>
+                                <li>Return assumptions tested (low/base/high)</li>
+                                <li>Time horizon matches real plans</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> run conservative + base + optimistic scenarios.
+                            If your decision stays the same, it’s robust. If it flips easily, your decision depends on
+                            uncertainty — plan for flexibility.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- RELATED CALCULATORS -->
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        Use these tools to tighten the assumptions that most often cause mistakes:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Compare net position with opportunity cost, selling costs, and long-horizon scenario
+                                testing.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/break-even/">Break-even Point</a>
+                            <p>See how transaction friction and horizon determine when buying catches up.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/opportunity-cost/">Opportunity Cost</a>
+                            <p>Understand how investing the down payment and monthly differences can flip the outcome.
+                            </p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Taxes, insurance, maintenance, and operating costs — the non-equity costs that drive
+                                results.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- FAQ -->
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Why do rent vs buy calculators give different answers?</h4>
+                        <p>
+                            Because many calculators omit key costs or make different assumptions. The biggest
+                            differences usually come from selling costs,
+                            separating principal vs interest, maintenance reserves, taxes/insurance/HOA growth, and
+                            opportunity cost assumptions.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is the biggest mistake in rent vs buy comparisons?</h4>
+                        <p>
+                            Ignoring transaction friction (especially selling costs) or counting the full mortgage
+                            payment as a cost. Principal becomes equity,
+                            while interest is the cost. Omitting selling costs makes buying look unrealistically
+                            favorable for short holding periods.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I make a rent vs buy comparison more realistic?</h4>
+                        <p>
+                            Include closing and selling costs, separate principal vs interest, include realistic
+                            taxes/insurance/HOA/maintenance, model opportunity cost,
+                            and run conservative/base/optimistic scenarios. Make sure the horizon matches how long
+                            you’ll actually stay.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is it okay to buy even if the calculator says renting wins?</h4>
+                        <p>
+                            Yes. The calculator measures financial trade-offs, not lifestyle value. If stability,
+                            control, or other non-financial benefits matter more,
+                            buying can still be rational. The key is to understand the cost of that preference.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- BOTTOM LINE -->
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: Fix the Model Before You Trust the Answer</h2>
+                    <p>
+                        Rent vs buy is not a single number — it’s a scenario comparison. Most “wrong” answers come from
+                        missing costs, unrealistic assumptions,
+                        or interpreting outputs incorrectly. If you include selling friction, separate principal from
+                        cost, budget maintenance, model rising taxes/insurance,
+                        and include opportunity cost, your result becomes far more trustworthy.
+                    </p>
+                    <p>
+                        Then the decision becomes what it should be: a clear trade-off between flexibility and equity
+                        building — based on your timeline and risk tolerance.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            The fastest way to improve your decision: run a conservative scenario.
+                            If buying still wins, it’s strong. If it doesn’t, buying may still be worth it — but you’re
+                            paying for lifestyle, not guaranteed returns.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions (appreciation, rent growth,
+                        investment returns, taxes, insurance,
+                        HOA, maintenance, and transaction costs). For decisions, run your numbers in the
+                        <a href="/rent-vs-buy/calculator/">calculator</a> and consider local market conditions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

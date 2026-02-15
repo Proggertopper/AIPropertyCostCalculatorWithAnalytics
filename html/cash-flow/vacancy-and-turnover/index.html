@@ -1,0 +1,789 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Vacancy and turnover in rental property (U.S.): how vacancy rate and tenant turnover affect cash flow, NOI, cap rate, and cash-on-cash return. Learn vacancy rate formulas, economic vacancy vs physical vacancy, turnover costs, how to estimate vacancy realistically, how to model vacancy in a cash flow calculator, stress tests, and strategies to reduce vacancy and turnover. Includes examples, checklists, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/vacancy-and-turnover/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/vacancy-and-turnover/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/cash-flow/vacancy-and-turnover/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Vacancy and Turnover (U.S.) — How They Destroy Rental Cash Flow (and How to Model Them) | PropertyCost
+    </title>
+
+    <meta property="og:title" content="Vacancy and Turnover (U.S.)" />
+    <meta property="og:description"
+        content="Vacancy and turnover explained: vacancy rate formulas, turnover costs, economic vs physical vacancy, how to model vacancy in a rental cash flow calculator, and stress tests that reveal fragile deals." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/vacancy-and-turnover/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vacancy and Turnover (U.S.)">
+    <meta name="twitter:description"
+        content="A complete guide to vacancy and turnover: vacancy rate calculation, turnover costs, how to model them in cash flow, and how to reduce them without buying tenant problems.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/vacancy-and-turnover/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"Vacancy and turnover","item":"https://mypropertycost.com/cash-flow/vacancy-and-turnover/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/vacancy-and-turnover/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is vacancy rate in rental property?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Vacancy rate is the percentage of time a unit is vacant (or the percentage of potential rent not collected due to vacancy). A simple approach is Vacancy Rate = Vacant Months ÷ 12, or as a percentage of gross scheduled rent."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is tenant turnover?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Tenant turnover is when a tenant moves out and the property must be re-rented. Turnover usually creates vacancy time and costs like cleaning, repairs, repainting, marketing, screening, and leasing fees."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the difference between physical vacancy and economic vacancy?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Physical vacancy is time a unit is empty. Economic vacancy includes all lost income from vacancy plus collection loss, concessions, and delinquency. Economic vacancy is often the more accurate cash flow input."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do vacancy and turnover affect cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Vacancy reduces rental income while many expenses and the mortgage remain fixed. Turnover adds additional costs and often increases maintenance. Thin cash flow deals are most sensitive to vacancy and turnover shocks."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">Vacancy and turnover</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#why">Why vacancy and turnover matter</a></li>
+                    <li><a href="#definitions">Definitions (vacancy, turnover, collection loss)</a></li>
+                    <li><a href="#vacancy-rate">Vacancy rate formulas</a></li>
+                    <li><a href="#economic">Physical vs economic vacancy</a></li>
+                    <li><a href="#turnover-costs">Turnover costs (the hidden bill)</a></li>
+                    <li><a href="#model">How to model vacancy in cash flow</a></li>
+                    <li><a href="#single-vs-multi">Single-family vs multifamily sensitivity</a></li>
+                    <li><a href="#stress">Stress tests (vacancy shock scenarios)</a></li>
+                    <li><a href="#reduce">How to reduce vacancy and turnover</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Model vacancy realistically</div>
+                        <div class="sidebar-cta__sub">Run a bad-year vacancy + repair scenario.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Vacancy and Turnover (U.S.): How They Impact Rental Cash Flow (and How to Model Them)</h1>
+                        <p class="subtitle">
+                            Vacancy and tenant turnover are the fastest way to turn a “cash flowing” rental into a cash
+                            sink.
+                            The reason is simple: when rent stops, <strong>most expenses don’t</strong>.
+                            You still pay taxes, insurance, HOA, utilities (in many cases), and often the mortgage.
+                            Turnover adds a second hit: cleaning, repairs, repainting, marketing, leasing fees, and the
+                            time cost of re-renting.
+                            In this guide you’ll learn vacancy rate formulas, physical vs economic vacancy, how to
+                            estimate vacancy realistically,
+                            how to model vacancy and turnover in a cash flow calculator, and stress tests that reveal
+                            whether a deal is actually resilient.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–30 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#vacancy-rate">Vacancy rate</a>
+                    <a href="#turnover-costs">Turnover costs</a>
+                    <a href="#model">How to model</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/real-estate-cash-flow/">
+                            <strong>Real estate cash flow</strong>
+                            <span>Cash flow is a survivability metric—vacancy is the stress test.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/rental-cash-flow-calculator-guide/">
+                            <strong>Rental cash flow calculator guide</strong>
+                            <span>Where to put vacancy and how to avoid inflated results.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/noi-net-operating-income/">
+                            <strong>NOI (net operating income)</strong>
+                            <span>Vacancy turns gross rent into effective income.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>Vacancy</strong> reduces income while most expenses stay fixed.
+                        <strong>Turnover</strong> causes vacancy and adds extra costs (repairs, cleaning, marketing,
+                        leasing).
+                        Thin-cash-flow rentals are extremely sensitive: one vacancy month can wipe out a large share of
+                        annual cash flow.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> If a deal breaks with one extra month of vacancy, it isn’t robust.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why Vacancy and Turnover Matter So Much</h2>
+                    <p>
+                        Rental cash flow looks “smooth” on spreadsheets: rent comes in, expenses go out, you keep the
+                        difference.
+                        Real life is lumpy. Vacancy creates zero-income periods, and turnover creates irregular costs.
+                        This lumpy reality is why vacancy and turnover deserve their own modeling attention.
+                    </p>
+
+                    <h3>Vacancy is a double hit</h3>
+                    <ul>
+                        <li><strong>Income drops</strong> — rent stops (or partially stops).</li>
+                        <li><strong>Expenses remain</strong> — taxes, insurance, HOA, and often mortgage keep going.
+                        </li>
+                    </ul>
+
+                    <h3>Turnover is often a triple hit</h3>
+                    <ul>
+                        <li><strong>Vacancy time</strong> (days/weeks/months without a tenant)</li>
+                        <li><strong>Turnover expenses</strong> (repairs, paint, cleaning, landscaping)</li>
+                        <li><strong>Leasing friction</strong> (ads, screening, leasing fees, concessions)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Survivability view:</strong> A rental is “safe” when you can handle vacancy without
+                            forced selling.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Definitions: Vacancy, Turnover, and Collection Loss</h2>
+
+                    <h3>Vacancy</h3>
+                    <p>
+                        Vacancy means the unit is not producing rent for some period.
+                        This can be because it’s empty, under renovation, between tenants, or otherwise unavailable for
+                        rent.
+                    </p>
+
+                    <h3>Tenant turnover</h3>
+                    <p>
+                        Turnover is when a tenant moves out and the unit must be re-rented.
+                        Turnover usually creates vacancy time and often forces “make-ready” work to return the unit to
+                        rentable condition.
+                    </p>
+
+                    <h3>Collection loss (delinquency)</h3>
+                    <p>
+                        Even when a unit is occupied, rent may not be collected fully.
+                        Collection loss includes late payments, partial payments, and write-offs.
+                        This is one reason why <strong>economic vacancy</strong> can be more realistic than only
+                        physical vacancy.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key concept:</strong> What matters to cash flow is not “occupancy pride” but
+                            <em>collected income</em>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="vacancy-rate">
+                    <h2>Vacancy Rate Formulas (Three Practical Ways)</h2>
+                    <p>
+                        There isn’t just one vacancy rate formula. You’ll see different versions depending on whether
+                        someone measures physical vacancy
+                        (empty units) or economic vacancy (lost income).
+                        Here are practical forms you can use.
+                    </p>
+
+                    <h3>1) Time-based vacancy rate (months)</h3>
+                    <p>
+                        For a single unit, the easiest approach is:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Vacancy rate = Vacant months ÷ 12</strong></p>
+                    </div>
+                    <p>
+                        Example: one vacant month per year = 1 ÷ 12 = 8.33% vacancy.
+                    </p>
+
+                    <h3>2) Income-based vacancy rate (rent loss)</h3>
+                    <p>
+                        This approach measures lost rent relative to gross scheduled rent:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Economic vacancy = (Gross scheduled rent − Collected rent) ÷ Gross scheduled
+                                rent</strong></p>
+                    </div>
+
+                    <h3>3) Unit-based vacancy rate (multifamily)</h3>
+                    <p>
+                        For multiple units, you may see:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Physical vacancy = Vacant units ÷ Total units</strong></p>
+                    </div>
+                    <p>
+                        This is often used as an operational snapshot, but for underwriting cash flow, economic vacancy
+                        is usually more relevant.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="economic">
+                    <h2>Physical vs Economic Vacancy (Which One Should You Use?)</h2>
+                    <p>
+                        <strong>Physical vacancy</strong> measures empty space.
+                        <strong>Economic vacancy</strong> measures lost income.
+                        They can be different because you can lose income without being physically vacant (delinquency,
+                        concessions),
+                        and you can have physical vacancy that has smaller income impact in multi-unit properties.
+                    </p>
+
+                    <h3>Physical vacancy: good for operational tracking</h3>
+                    <p>
+                        Physical vacancy is useful if you’re managing property performance month-to-month.
+                        It’s also useful for understanding leasing speed and tenant demand.
+                    </p>
+
+                    <h3>Economic vacancy: better for underwriting cash flow</h3>
+                    <p>
+                        Economic vacancy captures the cash reality: rent not collected.
+                        If your goal is to estimate cash flow and survivability, economic vacancy is usually the better
+                        modeling input.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Underwriting tip:</strong> If you’re doing a simple model, use one conservative
+                            vacancy percentage that implicitly includes collection loss and concessions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="turnover-costs">
+                    <h2>Turnover Costs: The Hidden Bill That “Cash Flow” Calculators Forget</h2>
+                    <p>
+                        Many rental spreadsheets model vacancy as a pure income loss.
+                        But turnover typically creates additional costs that behave like mini-CapEx and maintenance
+                        spikes.
+                        That’s why turnover can be more damaging than vacancy alone.
+                    </p>
+
+                    <h3>Common turnover costs</h3>
+                    <ul>
+                        <li>Cleaning and trash-out</li>
+                        <li>Repainting / patching walls</li>
+                        <li>Flooring repairs or replacement</li>
+                        <li>Minor repairs discovered after move-out</li>
+                        <li>Landscaping / exterior make-ready</li>
+                        <li>Advertising and marketing</li>
+                        <li>Screening and leasing admin</li>
+                        <li>Leasing fees (if using a manager)</li>
+                        <li>Concessions (discounts to fill quickly)</li>
+                        <li>Utilities paid by owner during vacancy</li>
+                    </ul>
+
+                    <h3>Turnover also increases wear and tear</h3>
+                    <p>
+                        High turnover often correlates with more maintenance and a harder-to-manage tenant base.
+                        That can create a compounding problem: more turnover → more repairs → more vacancy → more
+                        turnover.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical view:</strong> Vacancy is rent loss; turnover is rent loss + a
+                            repair/marketing event.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="model">
+                    <h2>How to Model Vacancy and Turnover in a Cash Flow Calculator</h2>
+                    <p>
+                        The goal is to avoid false precision.
+                        You don’t need to predict the exact vacant days next year.
+                        You need a reasonable allowance that protects you from optimistic underwriting.
+                    </p>
+
+                    <h3>Method A: Simple vacancy percentage (recommended for most)</h3>
+                    <p>
+                        Choose a vacancy percentage and apply it to gross rent.
+                        This can implicitly include some collection loss and turnover friction if you set it
+                        conservatively.
+                    </p>
+
+                    <h3>Method B: “One month per year” rule (good for single-family)</h3>
+                    <p>
+                        If you prefer something tangible:
+                        assume one vacant month per year (8.33%) for a single-family rental as a conservative starting
+                        point,
+                        then adjust based on market and tenant profile.
+                    </p>
+
+                    <h3>Method C: Separate vacancy and turnover budgets (best realism)</h3>
+                    <p>
+                        If you want more realism, split the problem:
+                    </p>
+                    <ul>
+                        <li>Vacancy rate (rent loss)</li>
+                        <li>Turnover cost allowance (repairs + leasing + utilities during vacancy)</li>
+                    </ul>
+                    <p>
+                        This approach is especially useful if you expect frequent lease turnover (student markets,
+                        short-term tenants, seasonal areas).
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> If your model includes vacancy but ignores turnover costs, it’s still
+                            optimistic.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="single-vs-multi">
+                    <h2>Single-Family vs Multifamily: Vacancy Sensitivity Is Different</h2>
+
+                    <h3>Single-family rentals (SFR)</h3>
+                    <p>
+                        Vacancy risk is concentrated: one vacancy can drop income to zero.
+                        That means SFR cash flow often needs larger reserves or stronger margins to be resilient.
+                    </p>
+
+                    <h3>Multifamily</h3>
+                    <p>
+                        Vacancy can be diversified across units.
+                        One unit vacant may be a small percentage of total income, so the property’s cash flow can be
+                        more stable.
+                        But multifamily can still experience economic vacancy through concessions or market rent
+                        declines.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Takeaway:</strong> The fewer units you have, the more conservative your vacancy
+                            assumptions should be.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress">
+                    <h2>Stress Tests: Vacancy Shock Scenarios You Should Always Run</h2>
+                    <p>
+                        If you want to know whether cash flow is real, run vacancy shocks.
+                        These take seconds and reveal whether you’re buying a stable income stream or a fragile
+                        spreadsheet result.
+                    </p>
+
+                    <h3>Stress test 1: Add one extra vacancy month</h3>
+                    <p>
+                        Take your base case and add one more vacancy month (or increase vacancy percentage).
+                        If cash flow flips from positive to negative, your deal is thin.
+                    </p>
+
+                    <h3>Stress test 2: Vacancy + repair year</h3>
+                    <p>
+                        Add a vacancy month and a major repair cost (or higher maintenance/CapEx).
+                        This mimics what often happens in reality: vacancy exposes deferred maintenance.
+                    </p>
+
+                    <h3>Stress test 3: Rent drop or slower leasing</h3>
+                    <p>
+                        Reduce rent slightly or extend vacancy time.
+                        This tests whether your deal depends on perfect market conditions.
+                    </p>
+
+                    <h3>Stress test 4: Expense spike during vacancy</h3>
+                    <p>
+                        Include utilities and lawn/snow costs during vacancy if those are owner-paid.
+                        This is often forgotten and can surprise new investors.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> If you can’t survive a bad-year vacancy scenario, you’re depending on
+                            luck, not underwriting.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="reduce">
+                    <h2>How to Reduce Vacancy and Turnover (Without Buying Tenant Problems)</h2>
+                    <p>
+                        Reducing vacancy and turnover is one of the highest ROI “improvements” in rental investing
+                        because it increases effective income
+                        without necessarily raising risk.
+                        But there’s a catch: reducing vacancy by accepting weak tenants can backfire.
+                    </p>
+
+                    <h3>1) Price rent correctly (fast leasing beats top-dollar fantasies)</h3>
+                    <p>
+                        Slightly under-market rent can reduce vacancy and increase annual collected income.
+                        The optimal rent is often the one that maximizes <em>collected</em> rent, not advertised rent.
+                    </p>
+
+                    <h3>2) Improve tenant retention</h3>
+                    <p>
+                        Turnover costs are often larger than small rent increases.
+                        Good communication, responsive maintenance, and fair renewal terms can reduce turnover.
+                    </p>
+
+                    <h3>3) Upgrade “rentability” items (not luxury)</h3>
+                    <p>
+                        The upgrades that reduce vacancy are often practical: clean paint, durable flooring, good
+                        lighting, reliable appliances.
+                        Focus on tenant experience, not vanity renovations.
+                    </p>
+
+                    <h3>4) Streamline the leasing process</h3>
+                    <p>
+                        Fast showings, clear listing photos, and strong screening systems reduce vacancy days.
+                        Delays cost money.
+                    </p>
+
+                    <h3>5) Maintain property condition proactively</h3>
+                    <p>
+                        Deferred maintenance often causes longer vacancy because units require more make-ready work.
+                        Preventive maintenance reduces turnover duration.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tenant quality rule:</strong> Don’t “solve vacancy” by lowering standards. Bad
+                            tenants create hidden vacancy through nonpayment and damage.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes (Why Vacancy Is Underestimated)</h2>
+
+                    <h3>1) Assuming 0% vacancy</h3>
+                    <p>
+                        Fix: include vacancy even in great markets. Treat 0% as an optimistic scenario, not a base case.
+                    </p>
+
+                    <h3>2) Ignoring turnover costs</h3>
+                    <p>
+                        Fix: add a turnover budget or increase maintenance to reflect turnover events.
+                    </p>
+
+                    <h3>3) Using market averages without property context</h3>
+                    <p>
+                        Fix: property type, tenant profile, and neighborhood matter. A “market average vacancy rate” may
+                        be irrelevant to your property.
+                    </p>
+
+                    <h3>4) Underestimating leasing time friction</h3>
+                    <p>
+                        Fix: model at least some time to list, show, screen, and sign.
+                        Even fast markets have process delays.
+                    </p>
+
+                    <h3>5) Confusing physical occupancy with collected rent</h3>
+                    <p>
+                        Fix: use economic vacancy (or a conservative vacancy number) so delinquency and concessions are
+                        not ignored.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist: Vacancy and Turnover Modeling</h2>
+                    <ul>
+                        <li>✅ Vacancy included (not 0%)</li>
+                        <li>✅ Vacancy method chosen (percentage or months) and justified</li>
+                        <li>✅ Turnover costs included (explicitly or implicitly)</li>
+                        <li>✅ Utilities/HOA/insurance/taxes modeled during vacancy (fixed costs continue)</li>
+                        <li>✅ Stress test run (one extra vacancy month)</li>
+                        <li>✅ Bad-year scenario run (vacancy + repair)</li>
+                        <li>✅ Tenant screening standards protect against economic vacancy (nonpayment)</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to see vacancy impact instantly?</h4>
+                            <p>Increase vacancy by 2–3% in the calculator and watch how thin deals flip.</p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash Flow calculator</a>
+                            <p>Model vacancy and turnover impact on net cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/rental-cash-flow-calculator-guide/">Rental cash flow calculator
+                                guide</a>
+                            <p>Where vacancy and reserves belong in your model.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/noi-net-operating-income/">NOI (net operating income)</a>
+                            <p>Vacancy converts gross rent into effective income.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/cash-on-cash-return/">Cash-on-cash return</a>
+                            <p>Vacancy is one of the biggest drivers of CoC.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Homeownership Cost</a>
+                            <p>Maintenance/CapEx interact with turnover and vacancy.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is vacancy rate in rental property?</h4>
+                        <p>
+                            Vacancy rate is the percentage of time a unit is vacant (or the percentage of potential rent
+                            not collected due to vacancy).
+                            Practical versions include vacant months ÷ 12 or lost rent ÷ gross scheduled rent.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is tenant turnover?</h4>
+                        <p>
+                            Turnover is when a tenant moves out and the unit must be re-rented.
+                            Turnover usually creates vacancy time and costs like cleaning, repairs, repainting,
+                            marketing, screening, and leasing fees.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the difference between physical vacancy and economic vacancy?</h4>
+                        <p>
+                            Physical vacancy is time the unit is empty. Economic vacancy includes lost income from
+                            vacancy plus collection loss, concessions, and delinquency.
+                            Economic vacancy is often the better cash flow input.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do vacancy and turnover affect cash flow?</h4>
+                        <p>
+                            Vacancy reduces income while fixed costs continue. Turnover adds extra costs and often
+                            increases repairs.
+                            Thin cash flow deals are most sensitive to vacancy and turnover shocks.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How can I reduce vacancy without lowering tenant standards?</h4>
+                        <p>
+                            Price rent to maximize collected rent, improve tenant retention, maintain the unit
+                            proactively,
+                            and streamline leasing. Don’t fill vacancy by accepting weak tenants—economic vacancy
+                            (nonpayment) can be worse than physical vacancy.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Vacancy and turnover are not “small nuisances”—they’re the main risk to rental cash flow.
+                        They reduce collected income while fixed costs continue, and turnover adds a hidden bill of
+                        repairs and leasing friction.
+                        Model vacancy realistically, include turnover costs (explicitly or implicitly), and always run a
+                        vacancy shock stress test.
+                        If your deal survives a bad-year scenario, you can trust the cash flow a lot more.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run a vacancy + turnover stress test in the <a href="/cash-flow/">Cash Flow
+                                calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Vacancy and turnover vary by market, property type, seasonality, tenant
+                        profile, and management quality.
+                        For underwriting, use economic vacancy or a conservative vacancy allowance, include turnover
+                        costs,
+                        and validate your base case with stress tests rather than relying on perfect occupancy
+                        assumptions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

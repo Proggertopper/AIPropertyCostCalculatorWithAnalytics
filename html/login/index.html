@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Login to PropertyCost to access your saved calculations, personalized real estate tools, and investment analysis dashboards.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <title>Login</title>
+</head>
+<body>
+    <main class="auth-main">
+        <div class="login-page auth-layout">
+            <aside class="auth-brand">
+                <a href="/" class="auth-back-link">Back to PropertyCost</a>
+                <p class="auth-badge">Premium workspace access</p>
+                <h2>Review deals faster with saved analysis and reports.</h2>
+                <p class="auth-copy">
+                    Open your dashboard to continue scenarios, compare runs, optimizer results, and PDF exports in one place.
+                </p>
+                <ul class="auth-points">
+                    <li>Saved verdicts and scenarios per calculation</li>
+                    <li>Credit wallet with transparent tool costs</li>
+                    <li>Portfolio overview across your calculators</li>
+                </ul>
+            </aside>
+
+            <section class="login-card auth-card-wrap" aria-label="Login form">
+                <div class="login-header">
+                    <h1>Welcome back</h1>
+                    <p>Sign in to your PropertyCost account</p>
+                </div>
+
+                <div id="error" class="login-error hidden"></div>
+
+                <form id="loginForm" class="login-form">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" placeholder="you@company.com" required autocomplete="email" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" placeholder="Enter your password" required autocomplete="current-password" />
+                    </div>
+
+                    <button type="submit" class="btn-primary">
+                        Login
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>or continue with</span>
+                </div>
+
+                <div class="social-login">
+                    <button id="googleLogin" class="btn-social google">
+                        Continue with Google
+                    </button>
+                </div>
+
+                <div class="login-footer">
+                    No account yet?
+                    <a href="/signup/">Create one</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="/js/login.js"></script>
+</body>
+</html>

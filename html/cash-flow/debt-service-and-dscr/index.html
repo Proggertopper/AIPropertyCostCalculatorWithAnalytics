@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Debt service and DSCR (U.S.) explained: what debt service means for rental property, how to calculate annual debt service, DSCR formula (NOI ÷ debt service), DSCR vs cash flow, why lenders use DSCR loans, and how DSCR affects rental underwriting and survivability. Includes examples, DSCR ranges, stress tests, common mistakes (escrow double-counting, ignoring CapEx reserves), FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/debt-service-and-dscr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/debt-service-and-dscr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/cash-flow/debt-service-and-dscr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Debt Service and DSCR (U.S.) — Formula, Examples, and Real Estate Cash Flow Impact | PropertyCost</title>
+
+    <meta property="og:title" content="Debt Service and DSCR (U.S.)" />
+    <meta property="og:description"
+        content="Debt service and DSCR explained: DSCR = NOI ÷ debt service. Learn what counts as debt service, DSCR ranges, DSCR vs cash flow, and why ignoring reserves creates fragile deals." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/debt-service-and-dscr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Debt Service and DSCR (U.S.)">
+    <meta name="twitter:description"
+        content="A complete guide to debt service and DSCR: formulas, examples, DSCR loan logic, and stress tests. Understand NOI vs cash flow and avoid double-counting escrow.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/debt-service-and-dscr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"Debt service and DSCR","item":"https://mypropertycost.com/cash-flow/debt-service-and-dscr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/debt-service-and-dscr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is debt service in real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Debt service is the total required loan payments over a period (usually monthly or annually). For a typical mortgage, debt service includes principal and interest (and sometimes escrow depending on how you define it)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is DSCR in real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"DSCR (debt service coverage ratio) is NOI divided by debt service. It measures how comfortably a property’s operating income covers its loan payments."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is the DSCR formula?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"DSCR = NOI ÷ Annual Debt Service. NOI is net operating income (effective income minus operating expenses). Annual debt service is the total annual principal and interest payments on the loan."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does DSCR equal cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. DSCR uses NOI (before financing and usually before CapEx). Cash flow is what is left after debt service (and ideally after reserves/CapEx). A property can have an acceptable DSCR but still have weak owner cash flow."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">Debt service and DSCR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#debt-service">What is debt service?</a></li>
+                    <li><a href="#dscr">What is DSCR?</a></li>
+                    <li><a href="#formula">DSCR formula + debt service formula</a></li>
+                    <li><a href="#noi-vs-cf">DSCR vs cash flow (NOI vs net cash flow)</a></li>
+                    <li><a href="#examples">Worked examples</a></li>
+                    <li><a href="#ranges">What is a good DSCR?</a></li>
+                    <li><a href="#loans">DSCR loans explained (why lenders use DSCR)</a></li>
+                    <li><a href="#leverage">How interest rates and leverage change DSCR</a></li>
+                    <li><a href="#stress">Stress tests (bad-year DSCR)</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Check DSCR fast</div>
+                        <div class="sidebar-cta__sub">DSCR = NOI ÷ debt service. Don’t forget reserves.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Debt Service and DSCR (U.S.): Formulas, Examples, and What Lenders Really Test</h1>
+                        <p class="subtitle">
+                            Debt service is the required loan payment. DSCR (debt service coverage ratio) is the
+                            lender’s quick test for whether a property’s
+                            operating income can cover that payment. But DSCR is not the same as owner cash flow.
+                            DSCR usually uses NOI (before financing and often before CapEx), while owner cash flow is
+                            what’s left after paying the mortgage and funding reserves.
+                            This guide explains debt service and DSCR with formulas, examples, DSCR ranges, how DSCR
+                            loans work, and the most common modeling mistakes
+                            (like double-counting escrow or ignoring CapEx reserves).
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–30 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#formula">Formulas</a>
+                    <a href="#noi-vs-cf">DSCR vs cash flow</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/noi-net-operating-income/">
+                            <strong>NOI (net operating income)</strong>
+                            <span>DSCR starts with NOI—understand what NOI includes.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/expenses-and-capex-reserves/">
+                            <strong>Expenses and CapEx reserves</strong>
+                            <span>DSCR can look fine while true cash flow is weak.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/">
+                            <strong>Mortgage Calculator</strong>
+                            <span>Debt service changes with rate, term, and loan size.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>Debt service</strong> is the required loan payment over a period (monthly or annually).
+                        <strong>DSCR</strong> (debt service coverage ratio) measures how comfortably NOI covers those
+                        payments:
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>DSCR = NOI ÷ Annual Debt Service</strong></p>
+                    </div>
+
+                    <p>
+                        DSCR is a lender coverage metric. It is not the same as owner cash flow.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="debt-service">
+                    <h2>What Is Debt Service in Real Estate?</h2>
+                    <p>
+                        Debt service is the total amount of money you must pay the lender according to your loan
+                        agreement.
+                        For most mortgages, debt service refers to <strong>principal + interest</strong> (P&I) payments.
+                        Some people casually refer to “PITI” (principal, interest, taxes, insurance) as the “payment,”
+                        but in DSCR underwriting, lenders often focus on the loan payment itself (P&I).
+                    </p>
+
+                    <h3>Monthly vs annual debt service</h3>
+                    <p>
+                        DSCR is typically computed annually, so convert your monthly payment into annual debt service:
+                        monthly P&I × 12.
+                    </p>
+
+                    <h3>Debt service is the fixed-cost risk</h3>
+                    <p>
+                        The reason lenders care about debt service is that it’s usually fixed and non-negotiable.
+                        Vacancy or expense spikes don’t pause your mortgage.
+                        Thin DSCR deals have less margin for error.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Survivability rule:</strong> The higher your fixed debt service relative to income,
+                            the more fragile the investment becomes.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="dscr">
+                    <h2>What Is DSCR (Debt Service Coverage Ratio)?</h2>
+                    <p>
+                        DSCR measures the relationship between operating income and required debt payments.
+                        It answers: <strong>“How many times does this property cover its debt service?”</strong>
+                    </p>
+
+                    <h3>Interpreting DSCR</h3>
+                    <ul>
+                        <li><strong>DSCR = 1.00</strong> → NOI equals debt service (no cushion).</li>
+                        <li><strong>DSCR &gt; 1.00</strong> → NOI exceeds debt service (coverage cushion).</li>
+                        <li><strong>DSCR &lt; 1.00</strong> → NOI cannot cover debt service (deal depends on outside
+                            cash).</li>
+                    </ul>
+
+                    <p>
+                        Lenders like DSCR because it’s a fast indicator of repayment risk.
+                        Investors like DSCR because it’s a fast indicator of cash-flow resilience.
+                        But DSCR can mislead if you confuse NOI with true owner cash flow.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>DSCR Formula + Debt Service Formula</h2>
+
+                    <h3>DSCR formula</h3>
+                    <div class="callout">
+                        <p><strong>DSCR = NOI ÷ Annual Debt Service</strong></p>
+                    </div>
+
+                    <h3>NOI formula (simplified)</h3>
+                    <p>
+                        NOI is net operating income:
+                    </p>
+                    <div class="callout">
+                        <p><strong>NOI = Effective Gross Income − Operating Expenses</strong></p>
+                    </div>
+                    <p>
+                        Effective gross income is rent collected after vacancy/collection loss, plus other income.
+                        Operating expenses include taxes, insurance, maintenance, management, utilities, HOA, etc.
+                        NOI usually excludes debt service and often excludes CapEx.
+                    </p>
+
+                    <h3>Debt service (annual)</h3>
+                    <div class="callout">
+                        <p><strong>Annual Debt Service = Monthly Principal &amp; Interest × 12</strong></p>
+                    </div>
+
+                    <h3>Important modeling note: escrow and double-counting</h3>
+                    <p>
+                        If your monthly payment includes escrow (taxes and insurance), be careful:
+                        you can accidentally subtract taxes and insurance as expenses and also include them inside “debt
+                        service” if you use a PITI payment.
+                        For DSCR, use a consistent definition:
+                        <strong>either (a) use P&amp;I as debt service and model taxes/insurance as operating expenses,
+                            or (b) use PITI as debt service and remove those expenses from NOI.</strong>
+                        Most DSCR discussions use P&amp;I.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Consistency rule:</strong> DSCR is meaningless if you double-count expenses.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="noi-vs-cf">
+                    <h2>DSCR vs Cash Flow (NOI vs Net Cash Flow)</h2>
+                    <p>
+                        This is where many investors get confused.
+                        DSCR uses NOI, which is an operating metric.
+                        Cash flow is an owner metric.
+                    </p>
+
+                    <h3>Why DSCR can look fine while cash flow is weak</h3>
+                    <p>
+                        A property can have a DSCR above 1.0 while producing minimal owner cash flow because:
+                    </p>
+                    <ul>
+                        <li>NOI excludes debt service (cash flow subtracts it)</li>
+                        <li>NOI often excludes CapEx (real cash flow should fund reserves)</li>
+                        <li>NOI may not reflect realistic vacancy/turnover assumptions</li>
+                    </ul>
+
+                    <h3>Think in layers</h3>
+                    <ul>
+                        <li><strong>NOI layer:</strong> property operating strength (before financing).</li>
+                        <li><strong>Debt service layer:</strong> financing burden.</li>
+                        <li><strong>Reserves layer:</strong> sustainability (CapEx will happen).</li>
+                        <li><strong>Owner net cash flow:</strong> what you can withdraw safely.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Investor rule:</strong> Use DSCR to test loan safety, but use net cash flow after
+                            reserves to test whether the deal is truly “cash flowing.”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Worked Examples: DSCR and Debt Service</h2>
+                    <p>
+                        Here are simplified examples to show how DSCR behaves.
+                        The goal is intuition, not perfect accounting.
+                    </p>
+
+                    <h3>Example 1: DSCR = 1.25</h3>
+                    <div class="callout">
+                        <p>
+                            NOI: $50,000/year<br>
+                            Annual debt service (P&amp;I): $40,000/year<br>
+                            <strong>DSCR = 50,000 ÷ 40,000 = 1.25</strong>
+                        </p>
+                    </div>
+                    <p>
+                        Interpretation: the property produces 25% more NOI than required debt payments.
+                        That cushion helps absorb vacancy and expense increases.
+                    </p>
+
+                    <h3>Example 2: DSCR = 1.00 (no cushion)</h3>
+                    <div class="callout">
+                        <p>
+                            NOI: $50,000/year<br>
+                            Annual debt service: $50,000/year<br>
+                            <strong>DSCR = 1.00</strong>
+                        </p>
+                    </div>
+                    <p>
+                        Interpretation: operations barely cover the loan.
+                        Any negative shock can force you to inject cash.
+                        Some lenders won’t approve this; some may with compensating factors.
+                    </p>
+
+                    <h3>Example 3: DSCR &lt; 1.00 (negative coverage)</h3>
+                    <div class="callout">
+                        <p>
+                            NOI: $45,000/year<br>
+                            Annual debt service: $50,000/year<br>
+                            <strong>DSCR = 0.90</strong>
+                        </p>
+                    </div>
+                    <p>
+                        Interpretation: the property does not cover the loan payment from operations.
+                        The deal depends on you subsidizing the payment, or on future rent growth/refinance.
+                        That can be a strategy, but it is not “safe cash flow.”
+                    </p>
+
+                    <h3>Example 4: DSCR can be fine while owner cash flow is thin</h3>
+                    <p>
+                        Suppose NOI covers debt service with DSCR 1.20, but the property is older and needs heavy CapEx
+                        reserves.
+                        If you reserve properly, owner cash flow might be close to zero.
+                        The loan might be “safe” from a lender’s viewpoint, but the deal may not meet an investor’s
+                        income goals.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="ranges">
+                    <h2>What Is a Good DSCR?</h2>
+                    <p>
+                        DSCR requirements vary by lender, loan program, property type, and market conditions.
+                        Instead of memorizing one number, use DSCR as a risk dial: higher DSCR generally means more
+                        cushion.
+                    </p>
+
+                    <h3>Practical DSCR interpretation bands</h3>
+                    <ul>
+                        <li><strong>&lt; 1.00:</strong> does not cover debt service (high risk / requires outside cash)
+                        </li>
+                        <li><strong>1.00–1.10:</strong> minimal cushion (fragile)</li>
+                        <li><strong>1.10–1.25:</strong> moderate cushion (more resilient)</li>
+                        <li><strong>1.25+:</strong> stronger cushion (more lender-friendly)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Investor view:</strong> The “best” DSCR is one that survives a bad-year scenario,
+                            not just the base case.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="loans">
+                    <h2>DSCR Loans Explained (Why Lenders Use DSCR)</h2>
+                    <p>
+                        A DSCR loan is commonly described as a loan underwritten primarily on the property’s income
+                        rather than the borrower’s personal income.
+                        The lender wants to see that the rental property can cover the debt payment.
+                    </p>
+
+                    <h3>Why DSCR underwriting exists</h3>
+                    <ul>
+                        <li>Rental investors often have complex tax returns</li>
+                        <li>Property income can be easier to evaluate than borrower DTI</li>
+                        <li>DSCR provides a standardized coverage metric</li>
+                    </ul>
+
+                    <h3>What DSCR underwriting focuses on</h3>
+                    <ul>
+                        <li>Rental income (actual leases or market rent assumptions)</li>
+                        <li>Operating expenses (sometimes standardized)</li>
+                        <li>Loan payment (based on rate/term)</li>
+                        <li>Coverage cushion (DSCR threshold)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Important:</strong> A lender’s DSCR calculation may not equal your personal “real
+                            cash flow” calculation. Lenders may not reserve for CapEx the way conservative investors do.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="leverage">
+                    <h2>How Interest Rates and Leverage Change DSCR</h2>
+                    <p>
+                        DSCR is sensitive to the debt service denominator.
+                        Higher interest rates increase the mortgage payment and reduce DSCR.
+                        Higher leverage (bigger loan) also increases debt service.
+                    </p>
+
+                    <h3>Why DSCR shrinks when rates rise</h3>
+                    <p>
+                        NOI doesn’t automatically rise when rates rise.
+                        So the loan payment grows while NOI stays similar, and DSCR declines.
+                        This is why high-rate environments often make DSCR constraints binding.
+                    </p>
+
+                    <h3>How to improve DSCR (conceptually)</h3>
+                    <ul>
+                        <li>Increase NOI (higher rent, lower vacancy, lower operating costs)</li>
+                        <li>Reduce debt service (smaller loan, lower rate, longer amortization)</li>
+                        <li>Buy at a lower price (increases NOI relative to loan payment)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> Improving DSCR often requires either better deal pricing or
+                            less aggressive leverage.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress">
+                    <h2>Stress Tests: “Bad-Year DSCR”</h2>
+                    <p>
+                        DSCR in the base case can look fine.
+                        What matters is whether the coverage survives predictable shocks.
+                    </p>
+
+                    <h3>Stress test 1: vacancy shock</h3>
+                    <p>
+                        Increase vacancy or add one extra vacancy month. Recompute NOI and DSCR.
+                    </p>
+
+                    <h3>Stress test 2: expense spike</h3>
+                    <p>
+                        Increase taxes and insurance. In many markets, these rise faster than expected.
+                    </p>
+
+                    <h3>Stress test 3: rent softness</h3>
+                    <p>
+                        Reduce achievable rent slightly or include concessions.
+                    </p>
+
+                    <h3>Stress test 4: “true cash flow” overlay</h3>
+                    <p>
+                        Add CapEx reserves and see what owner cash flow looks like after debt service.
+                        Even if DSCR passes, your owner cash flow might be thin.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> If DSCR falls below 1.0 under mild stress, you’re buying a deal that
+                            depends on stable conditions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes</h2>
+
+                    <h3>1) Confusing DSCR with cash flow</h3>
+                    <p>
+                        Fix: DSCR uses NOI; cash flow subtracts debt service and should include reserves.
+                    </p>
+
+                    <h3>2) Double-counting escrow (taxes/insurance)</h3>
+                    <p>
+                        Fix: if you use a PITI payment as debt service, don’t also subtract taxes/insurance in NOI. Keep
+                        a consistent definition.
+                    </p>
+
+                    <h3>3) Using inflated NOI (ignoring vacancy/turnover)</h3>
+                    <p>
+                        Fix: model economic vacancy and turnover costs realistically.
+                    </p>
+
+                    <h3>4) Ignoring CapEx reserves</h3>
+                    <p>
+                        Fix: DSCR can pass while the property is still financially stressful. Add reserves to test
+                        sustainability.
+                    </p>
+
+                    <h3>5) Assuming DSCR will improve “automatically”</h3>
+                    <p>
+                        Fix: DSCR improves if NOI rises or debt service falls (rate refi or principal reduction).
+                        Neither is guaranteed on your timeline.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist: Debt Service and DSCR</h2>
+                    <ul>
+                        <li>✅ NOI calculated from effective income (after vacancy)</li>
+                        <li>✅ Operating expenses fully included (tax, insurance, maintenance, management, utilities,
+                            HOA)</li>
+                        <li>✅ Debt service definition consistent (P&amp;I vs PITI—no double-counting)</li>
+                        <li>✅ DSCR computed annually</li>
+                        <li>✅ Stress test run (vacancy + expense increase)</li>
+                        <li>✅ “True cash flow” overlay includes CapEx reserves</li>
+                        <li>✅ Deal survives mild stress without DSCR collapsing below 1.0</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to compute DSCR and cash flow together?</h4>
+                            <p>Model NOI, debt service, and reserves in one place.</p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/noi-net-operating-income/">NOI (net operating income)</a>
+                            <p>NOI is the numerator of DSCR—understand what’s inside it.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/expenses-and-capex-reserves/">Expenses and CapEx reserves</a>
+                            <p>DSCR can pass while owner cash flow is thin if CapEx is ignored.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/vacancy-and-turnover/">Vacancy and turnover</a>
+                            <p>Vacancy is the fastest way to destroy DSCR and cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage Calculator</a>
+                            <p>Debt service changes with interest rate, term, and loan size.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/cash-on-cash-return/">Cash-on-cash return</a>
+                            <p>Owner cash yield depends on net cash flow after reserves.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is debt service in real estate?</h4>
+                        <p>
+                            Debt service is the total required loan payments over a period.
+                            For a typical mortgage, it usually means principal and interest payments (P&amp;I), summed
+                            monthly or annually.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is DSCR in real estate?</h4>
+                        <p>
+                            DSCR (debt service coverage ratio) is NOI divided by debt service.
+                            It measures how comfortably a property’s operating income covers its loan payments.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is the DSCR formula?</h4>
+                        <p>
+                            <strong>DSCR = NOI ÷ Annual Debt Service</strong>.
+                            NOI is net operating income (effective income minus operating expenses).
+                            Annual debt service is total annual principal and interest payments.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does DSCR equal cash flow?</h4>
+                        <p>
+                            No. DSCR uses NOI (before financing and usually before CapEx).
+                            Cash flow is what remains after debt service, and realistic cash flow should also include
+                            reserves/CapEx.
+                            A property can have acceptable DSCR but still have weak owner cash flow.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Can DSCR loans ignore my personal income?</h4>
+                        <p>
+                            DSCR loans often emphasize the property’s income and coverage rather than personal DTI, but
+                            requirements vary by lender and program.
+                            Always compare the lender’s DSCR math to your own conservative cash flow model.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        DSCR is a useful coverage metric: it shows whether NOI can cover the mortgage payment.
+                        But DSCR is not the same as owner cash flow.
+                        For real underwriting, compute DSCR consistently (avoid escrow double-counting),
+                        then overlay a “true cash flow” view that includes CapEx reserves and realistic vacancy.
+                        If your DSCR and your net cash flow both survive stress tests, you can trust the deal’s
+                        resilience far more.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute NOI, DSCR, and net cash flow (with reserves) in the <a
+                                href="/cash-flow/">Cash Flow calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. DSCR definitions and requirements vary by lender and program.
+                        DSCR commonly uses NOI and annual principal+interest debt service; escrow handling differs.
+                        For investment decisions, pair DSCR with net cash flow after reserves/CapEx and stress-test
+                        vacancy and expenses.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

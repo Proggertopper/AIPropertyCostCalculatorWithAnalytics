@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Premium PropertyCost account dashboard with full verdicts, scenario analysis, and calculator history.">
+    <meta name="robots" content="noindex, nofollow">
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/account.css">
+    <title>Account - PropertyCost</title>
+</head>
+<body class="account-page">
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/account/" class="current">Account</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="account-premium">
+        <section class="premium-hero reveal">
+            <div class="premium-hero__copy">
+                <div class="kicker">Premium workspace</div>
+                <h1>Make better deal decisions</h1>
+                <p>Track results, generate full verdicts, compare scenarios, and validate assumptions—fast and clearly.</p>
+            </div>
+            <aside class="wallet-panel">
+                <div class="wallet-panel__title"> Wallet</div>
+                <div class="wallet-panel__grid">
+                    <div class="wallet-chip" id="walletCredits">Credits: 0</div>
+                    <div class="wallet-chip wallet-chip--alt" id="walletFree">Free verdict: available</div>
+                </div>
+                <a class="wallet-link" href="/pricing/">Top up credits</a>
+            </aside>
+        </section>
+
+        <section class="premium-stats reveal" aria-label="Account metrics">
+            <article class="metric-card">
+                <div class="metric-card__label">Total calculations</div>
+                <span class="metric-card__value" id="totalCalcs">-</span>
+                <div class="metric-card__foot">All time</div>
+            </article>
+            <article class="metric-card">
+                <div class="metric-card__label">Last activity</div>
+                <span class="metric-card__value metric-card__value--small" id="lastCalc">-</span>
+                <div class="metric-card__foot">Your local time</div>
+            </article>
+            <article class="metric-card">
+                <div class="metric-card__label">Profile email</div>
+                <span class="metric-card__value metric-card__value--small" id="user">-</span>
+                <div class="metric-card__foot">Verified account</div>
+            </article>
+            <article class="metric-card">
+                <div class="metric-card__label">Mode</div>
+                <div class="metric-card__value metric-card__value--small">Analysis</div>
+                <div class="metric-card__foot">Verdicts + scenarios</div>
+            </article>
+        </section>
+
+        <section class="account-shell reveal">
+            <aside class="side-panel">
+                <h2>Workspace guide</h2>
+                <p class="muted">Use Open for input/result checks and PDF export. Use Full Analysis for scenarios, optimizer, and compare decisions.</p>
+
+                <ul class="feature-list">
+                    <li>Risk-level verdict cards</li>
+                    <li>Key metrics with clear positive/negative cues</li>
+                    <li>Scenario packs: quick, optimize, deep</li>
+                    <li>Ask Analyst, compare deals, export PDF</li>
+                </ul>
+
+                <div class="hint-box">
+                    <strong>Tip:</strong> use search to quickly filter by calculator type or date.
+                </div>
+
+                <div id="dealDeskTools" class="deal-desk" aria-label="Portfolio and deal tools">
+                    <div class="muted">Portfolio tools</div>
+                </div>
+            </aside>
+
+            <section class="work-panel" aria-label="Calculations workspace">
+                <div class="work-panel__head">
+                    <div>
+                        <h2>Your calculations</h2>
+                        <p class="muted">Everything below is interactive and connected to your current account data.</p>
+                    </div>
+                    <label class="search-box">
+                        <span>Search</span>
+                        <input id="calcSearch" type="search" placeholder="Type calculator name or date">
+                    </label>
+                </div>
+
+                <div id="calculations" class="calculations-stack">
+                    <!--SSR_CALCS-->
+                </div>
+
+                <div class="work-panel__foot muted">Buttons inside each card: Open, Full Analysis, Delete. Open shows verdict, data tables, and PDF export; Full Analysis unlocks scenarios and advanced tools.</div>
+            </section>
+        </section>
+
+        <div id="deleteModal" class="modal">
+            <div class="modal-content">
+                <p>Are you sure you want to delete this calculation?</p>
+                <button id="confirmDelete" class="btn btn-danger">Yes, delete</button>
+                <button id="cancelDelete" class="btn">Cancel</button>
+            </div>
+        </div>
+
+        <div id="actionModal" class="modal" aria-hidden="true">
+            <div class="modal-content">
+                <h3 id="actionModalTitle">Confirm action</h3>
+                <p id="actionModalMessage">Please confirm to continue.</p>
+                <button id="actionModalConfirm" class="btn">Confirm</button>
+                <button id="actionModalCancel" class="btn">Cancel</button>
+            </div>
+        </div>
+    </main>
+
+    <footer class="pb-3">
+        <ul class="footer-links pb-3 justify-content-center mb-3">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+    <script src="/js/account.js" defer></script>
+</body>
+</html>

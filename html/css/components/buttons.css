@@ -7,14 +7,14 @@
 }
 
 .btn-signup {
-    background-color: #C9A227;
-    color: #111;
+    background: rgba(255, 255, 255, .08);
+    color: rgba(255, 255, 255, .90);
+    border: 1px solid rgba(255, 255, 255, .12);
     padding: 5px;
-    /* margin-right: .5rem; */
 }
-.btn-signin:hover {
-    text-decoration: underline;
-    background-color:  #e6bb31;
+
+.btn-signup:hover {
+    background: rgba(255, 255, 255, .12);
 }
 
 .bg-body-signup{
@@ -47,6 +47,29 @@
     border-radius: 0.5rem;
     cursor:pointer;
 }
+.btn-secondary {
+    
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background: #464a51;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor:pointer;
+}
+
+/* Ghost button (outline / transparent) */
+.btn-ghost {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    font-size: 1rem;
+    background: #a1a4aa;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
 
 .back-btn {
     position: absolute;
@@ -61,6 +84,61 @@
 
 .back-btn:hover {
     color: #0f172a;
+}
+
+.btn-ai {
+    border: 1px solid rgba(37, 99, 235, .35);
+    color: #0F172A;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 9px 6px;
+    cursor: pointer;
+    transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+    white-space: nowrap;
+}
+
+.btn-ai:hover {
+    transform: translateY(-1px);
+    border-color: rgba(37, 99, 235, .55);
+    box-shadow: 0 10px 22px rgba(15, 23, 42, .08);
+}
+
+.btn-ai:active {
+    transform: translateY(0);
+}
+
+.btn-ai:disabled {
+    opacity: .6;
+    cursor: not-allowed;
+}
+
+/* ссылка “купить” внутри details */
+.btn-ai-buy {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 2px;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(37, 99, 235, .35);
+    background: linear-gradient(135deg, #2563EB, #1E40AF);
+    color: #fff;
+    font-weight: 800;
+    text-decoration: none;
+}
+
+/* вывод AI */
+.ai-output {
+    margin: 10px 0 0;
+    padding: 12px;
+    border-radius: 14px;
+    border: 1px solid #E6EAF2;
+    background: #F8FAFC;
+    white-space: pre-wrap;
+    line-height: 1.6;
+    color: #0F172A;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 13px;
 }
 
 

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Why users trust PropertyCost: transparent logic, scenario stress tests, and secure account workflows for real estate decisions.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/about/">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/AboutProject.css">
+    <title>About PropertyCost | User-Trusted Real Estate Intelligence</title>
+</head>
+<body class="auth-loading">
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" class="white-color">
+                <span>PropertyCost</span>
+            </a>
+        </div>
+
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-menu">
+            <ul class="navbar-nav">
+                <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+            </ul>
+
+            <div id="userControls">
+                <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                <div class="user-dropdown" id="userDropdown">
+                    <div id="userAccount" class="avatar">A</div>
+
+                    <div class="dropdown-menu">
+                        <a href="/account/" class="dropdown-item">Account</a>
+                        <div class="divider"></div>
+                        <button id="btn-logout" class="dropdown-item danger">
+                            Log out
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="crumbs-row">
+        <div class="crumbs-inner">
+            <a href="/">Home</a>
+            <span class="sep">/</span>
+            <a href="/about/" class="current">About</a>
+        </div>
+    </div>
+</header>
+
+<main id="main-content" class="about-page">
+    <section class="hero reveal">
+        <div class="bg-orb orb-a" aria-hidden="true"></div>
+        <div class="bg-orb orb-b" aria-hidden="true"></div>
+
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">User-Trusted By Design</p>
+                <h1>Built for people who need decisions they can defend</h1>
+                <p class="lead">
+                    PropertyCost combines transparent math, stress-tested scenarios, and account-level history so users can understand not only the result, but why it happened and what to change next.
+                </p>
+                <div class="hero-actions">
+                    <a class="cta cta-primary" href="/calculators/">Explore Calculators</a>
+                    <a class="cta cta-ghost" href="/pricing/">See Pricing</a>
+                </div>
+            </div>
+
+            <div class="trust-panel">
+                <h2>Trust Signals</h2>
+                <ul>
+                    <li><span>Transparent formulas</span><strong>No black-box verdicts</strong></li>
+                    <li><span>Scenario contrast</span><strong>Meaningful input deltas</strong></li>
+                    <li><span>Personal workspace</span><strong>Saved baseline + history</strong></li>
+                    <li><span>Risk-first framing</span><strong>Stress and downside visible</strong></li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Live Product Signals</p>
+                <h2>Your trust dashboard on this page</h2>
+                <p class="subtext">If you are logged in, these blocks pull your latest activity in real time. If not, you see guest mode values.</p>
+            </div>
+
+            <div class="signals-grid" id="trustSignals">
+                <article class="signal-card">
+                    <p class="signal-label">Saved calculations</p>
+                    <strong class="signal-value" id="sig-calcs">--</strong>
+                    <p class="signal-note" id="sig-calcs-note">Waiting for session</p>
+                </article>
+
+                <article class="signal-card">
+                    <p class="signal-label">Calculator coverage</p>
+                    <strong class="signal-value" id="sig-coverage">--</strong>
+                    <p class="signal-note" id="sig-coverage-note">Across all supported models</p>
+                </article>
+
+                <article class="signal-card">
+                    <p class="signal-label">Last activity</p>
+                    <strong class="signal-value" id="sig-last">--</strong>
+                    <p class="signal-note" id="sig-last-note">Most recent run timestamp</p>
+                </article>
+
+                <article class="signal-card">
+                    <p class="signal-label">Scenario pack quality</p>
+                    <strong class="signal-value" id="sig-scenarios">--</strong>
+                    <p class="signal-note" id="sig-scenarios-note">Generated vs requested in latest pack</p>
+                </article>
+
+                <article class="signal-card">
+                    <p class="signal-label">Decision readiness</p>
+                    <strong class="signal-value" id="sig-readiness">--</strong>
+                    <p class="signal-note" id="sig-readiness-note">Data depth for compare/optimizer</p>
+                </article>
+
+                <article class="signal-card">
+                    <p class="signal-label">Account mode</p>
+                    <strong class="signal-value" id="sig-mode">Guest</strong>
+                    <p class="signal-note" id="sig-mode-note">Login unlocks personalized trust signals</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section tinted reveal">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Methodology</p>
+                <h2>How a result becomes a trusted recommendation</h2>
+            </div>
+
+            <div class="method-flow">
+                <article class="flow-step">
+                    <span class="step-id">01</span>
+                    <h3>Deterministic compute layer</h3>
+                    <p>Every calculator uses explicit formula logic by type, with strict input validation and stable output fields.</p>
+                </article>
+
+                <article class="flow-step">
+                    <span class="step-id">02</span>
+                    <h3>Scenario and stress exploration</h3>
+                    <p>The engine probes user-controlled levers, applies stress cases, and removes weak or duplicate outcomes.</p>
+                </article>
+
+                <article class="flow-step">
+                    <span class="step-id">03</span>
+                    <h3>Decision narrative layer</h3>
+                    <p>Verdicts and deep dives are anchored to payload metrics, not freeform speculation, and always map to next runs.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Trust Architecture</p>
+                <h2>Security, data handling, and operational accountability</h2>
+            </div>
+
+            <div class="pillar-grid">
+                <article class="pillar-card">
+                    <h3>Security</h3>
+                    <ul>
+                        <li>Server-side session checks for protected endpoints.</li>
+                        <li>Role and ownership checks before returning account data.</li>
+                        <li>Rate limits on premium actions to reduce abuse.</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <h3>Data Handling</h3>
+                    <ul>
+                        <li>Calculation payloads are stored per user with clear ownership boundaries.</li>
+                        <li>Cached premium outputs use scoped keys by user and context hash.</li>
+                        <li>Export/report generation uses the same trusted result source.</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <h3>Method Integrity</h3>
+                    <ul>
+                        <li>Primary metric by calculator type drives compare and optimizer decisions.</li>
+                        <li>Derived metrics and missing checklists are generated consistently per model.</li>
+                        <li>Scenario ranking balances impact, simplicity, and baseline improvement.</li>
+                    </ul>
+                </article>
+
+                <article class="pillar-card">
+                    <h3>Roadmap</h3>
+                    <ul>
+                        <li>Stronger benchmark packs for edge-case markets.</li>
+                        <li>More visual explanation layers in Account deep dive.</li>
+                        <li>Expanded reliability telemetry for user-facing trust diagnostics.</li>
+                    </ul>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container split">
+            <div>
+                <p class="eyebrow">What Users Can Verify</p>
+                <h2>Nothing is hidden behind "just trust us"</h2>
+                <ul class="checklist">
+                    <li>Input changes are displayed next to each scenario.</li>
+                    <li>Result deltas are shown against the baseline run.</li>
+                    <li>Mini-verdict and deep-dive stay consistent with the same payload.</li>
+                    <li>Portfolio and compare views reuse the same calculator logic.</li>
+                </ul>
+            </div>
+            <aside class="audit-card">
+                <h3>Decision Quality Standard</h3>
+                <p>Every premium output should answer three questions:</p>
+                <ol>
+                    <li>What moved?</li>
+                    <li>How much did it move?</li>
+                    <li>What should I run next?</li>
+                </ol>
+            </aside>
+        </div>
+    </section>
+
+    <section class="section disclaimer2 reveal">
+        <div class="container">
+            <div class="section-head">
+                <p class="eyebrow">Important Note</p>
+                <h2>Responsible use</h2>
+            </div>
+            <p>
+                PropertyCost provides analytical support, not legal, tax, or financial advice. Final decisions should include professional review and local market due diligence.
+            </p>
+        </div>
+    </section>
+</main>
+
+<footer class="pb-3">
+    <ul class="footer-links pb-3 justify-content-center mb-3">
+        <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+        <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+        <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+        <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+    </ul>
+    <p class="text-center">© 2026 PropertyCost</p>
+</footer>
+
+<script src="/js/about.js" defer></script>
+<script src="/js/logout.js" defer></script>
+</body>
+</html>

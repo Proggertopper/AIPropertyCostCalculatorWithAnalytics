@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Common rental cash flow mistakes (U.S.): the modeling errors that inflate cash flow—ignoring vacancy and turnover, missing operating expenses, skipping CapEx reserves, double-counting escrow, confusing NOI with cash flow, using unrealistic rent growth, and forgetting taxes/fees. Learn a complete cash flow checklist, stress tests, break-even rent, DSCR pitfalls, and fixes. Includes examples, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/common-mistakes/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/common-mistakes/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/cash-flow/common-mistakes/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Common Rental Cash Flow Mistakes (U.S.) — Fix Your Model and Stop Fake Cash Flow | PropertyCost</title>
+
+    <meta property="og:title" content="Common Rental Cash Flow Mistakes (U.S.)" />
+    <meta property="og:description"
+        content="The mistakes that inflate rental cash flow: vacancy, turnover, CapEx reserves, missing expenses, escrow double-counting, and confusing NOI with net cash. Includes stress tests and checklists." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/common-mistakes/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Common Rental Cash Flow Mistakes (U.S.)">
+    <meta name="twitter:description"
+        content="Avoid fake cash flow: vacancy/turnover, expenses, CapEx reserves, DSCR pitfalls, and break-even rent. A big checklist + stress tests.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/common-mistakes/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"Common mistakes","item":"https://mypropertycost.com/cash-flow/common-mistakes/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/common-mistakes/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What’s the most common cash flow mistake for rental properties?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Ignoring vacancy and turnover and assuming 100% collected rent. A single vacancy month can erase a large share of annual cash flow, especially in single-family rentals."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why do rental cash flow calculations look better than reality?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Because many models exclude CapEx reserves, underestimate maintenance, omit management costs, and forget expense growth. That produces “fake cash flow” that disappears when repairs and turnover happen."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does NOI equal cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. NOI is before debt service and usually before CapEx. Net cash flow is what remains after vacancy, operating expenses, reserves/CapEx, and debt service."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I sanity-check a rental cash flow model?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Run a conservative scenario: higher vacancy, higher maintenance/CapEx reserves, higher taxes/insurance, and include management. If the deal only works with optimistic assumptions, it’s fragile."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">Common mistakes</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why">Why cash flow results flip</a></li>
+                    <li><a href="#mistakes">15 common cash flow mistakes</a></li>
+                    <li><a href="#framework">A correct cash flow framework</a></li>
+                    <li><a href="#stress">Fast stress tests</a></li>
+                    <li><a href="#checklist">Cash flow checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Sanity-check your model</div>
+                        <div class="sidebar-cta__sub">Add reserves + vacancy and see what survives.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Common Rental Cash Flow Mistakes (U.S.): Stop Fake Cash Flow and Fix Your Model</h1>
+                        <p class="subtitle">
+                            Rental cash flow is simple in concept and easy to get wrong in practice.
+                            A spreadsheet can look “cash flowing” because it quietly assumes perfect occupancy, low
+                            expenses, zero big repairs, and no management cost.
+                            Then real life happens: vacancy, turnover, taxes go up, insurance spikes, a water heater
+                            dies, or the roof starts leaking.
+                            The result is the same: the “cash flow” disappears.
+                            This guide covers the biggest mistakes that inflate rental cash flow, how to fix them, and
+                            how to stress-test your model so you can trust it.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~28–40 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#mistakes">Mistakes</a>
+                    <a href="#framework">Framework</a>
+                    <a href="#stress">Stress tests</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/how-to-calculate-cash-flow/">
+                            <strong>How to calculate cash flow</strong>
+                            <span>A clean formula with the right input order.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/expenses-and-capex-reserves/">
+                            <strong>Expenses + CapEx reserves</strong>
+                            <span>The biggest missing line item in many “cash flow” spreadsheets.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/vacancy-and-turnover/">
+                            <strong>Vacancy and turnover</strong>
+                            <span>The fastest way to flip cash flow negative.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why Cash Flow Results Flip So Easily</h2>
+                    <p>
+                        Cash flow is the leftover money after all costs. That sounds stable.
+                        But rentals have a lot of moving parts, and several of them are “lumpy” or uncertain:
+                        vacancy happens in chunks, turnover produces sudden repairs, property taxes can jump after
+                        purchase,
+                        insurance can spike, and major CapEx shows up every few years.
+                    </p>
+                    <p>
+                        When a model assumes “smooth” reality (perfect occupancy, stable expenses, no repairs),
+                        it will almost always overstate cash flow.
+                        A single missing category can flip the sign from positive to negative.
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Rule:</strong> If your model assumes 0% vacancy or $0 reserves, it’s not a model—it’s
+                            marketing.</p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>15 Common Rental Cash Flow Mistakes (And How to Fix Them)</h2>
+
+                    <h3>1) Assuming 0% vacancy (100% collected rent)</h3>
+                    <p>
+                        This is the most common mistake because it makes deals look better instantly.
+                        In real life, you have at least some vacancy: between tenants, during repairs, or during market
+                        slowdowns.
+                        Fix: include an economic vacancy allowance that reflects your property type and market.
+                    </p>
+
+                    <h3>2) Ignoring turnover costs</h3>
+                    <p>
+                        Vacancy is not just “lost rent.” Turnover also costs money: paint, cleaning, minor repairs,
+                        marketing, leasing fees, utilities during vacancy.
+                        Fix: include a turnover budget or increase maintenance/reserves to reflect it.
+                    </p>
+
+                    <h3>3) Missing CapEx reserves (roof, HVAC, water heater)</h3>
+                    <p>
+                        Many models treat big-ticket replacements as if they won’t happen because they don’t happen
+                        every month.
+                        But they are inevitable over time.
+                        Fix: include a monthly CapEx reserve so your cash flow is sustainable.
+                    </p>
+
+                    <h3>4) Underestimating maintenance (because the property “looks fine”)</h3>
+                    <p>
+                        A property can look fine and still have aging systems.
+                        Deferred maintenance often appears after you own it.
+                        Fix: assume higher maintenance for older properties and run a repair-year stress test.
+                    </p>
+
+                    <h3>5) Forgetting property management (or assuming self-management is free)</h3>
+                    <p>
+                        Even if you self-manage, there is time cost and “non-passive” burden.
+                        Fix: include management as a real cost or a shadow cost to measure true return.
+                    </p>
+
+                    <h3>6) Double-counting escrow (taxes/insurance)</h3>
+                    <p>
+                        Many people subtract taxes and insurance as expenses and also include a mortgage payment that
+                        already includes escrow.
+                        Fix: use a consistent definition (P&amp;I payment + expenses, or PITI payment without
+                        double-counting taxes/insurance).
+                    </p>
+
+                    <h3>7) Confusing NOI with cash flow</h3>
+                    <p>
+                        NOI is an operating metric and does not include debt service.
+                        A property can have strong NOI and still have weak owner cash flow if the mortgage is large.
+                        Fix: compute NOI, then compute net cash flow after debt service and reserves.
+                    </p>
+
+                    <h3>8) Using “market rent” that isn’t realistic for your unit</h3>
+                    <p>
+                        Market rent depends on condition, photos, layout, parking, and timing.
+                        Fix: compare to truly comparable listings and assume slightly conservative rent unless you have
+                        proof.
+                    </p>
+
+                    <h3>9) Ignoring seasonality</h3>
+                    <p>
+                        Many rental markets have stronger seasons. Leasing in slow months can increase vacancy.
+                        Fix: include a little extra vacancy buffer if your property is seasonal or tenant demand is
+                        cyclical.
+                    </p>
+
+                    <h3>10) Forgetting utilities and “owner-paid” costs during vacancy</h3>
+                    <p>
+                        Even if tenants usually pay utilities, owners often pay something during vacancy
+                        (water/sewer/trash, lawn care, minimal electric).
+                        Fix: include an allowance or incorporate it into vacancy/turnover costs.
+                    </p>
+
+                    <h3>11) Not modeling expense growth (taxes, insurance, HOA)</h3>
+                    <p>
+                        Expenses rarely stay flat. Taxes can rise, insurance can jump, HOA can increase.
+                        Fix: include growth assumptions or at least run a higher-expense scenario.
+                    </p>
+
+                    <h3>12) Relying on aggressive rent growth to justify thin cash flow</h3>
+                    <p>
+                        Rent growth is uncertain and local. If your deal only works if rent grows fast every year, it’s
+                        fragile.
+                        Fix: run a slow rent-growth scenario and see if you can survive.
+                    </p>
+
+                    <h3>13) Ignoring loan terms that change payments</h3>
+                    <p>
+                        Adjustable rates, balloon payments, recasts—these can change debt service.
+                        Fix: model worst-case payment scenarios if the loan isn’t stable.
+                    </p>
+
+                    <h3>14) Treating all repairs as “optional” or “later”</h3>
+                    <p>
+                        Deferring repairs can increase vacancy and worsen tenant quality.
+                        Fix: treat maintenance and make-ready work as necessary to protect income.
+                    </p>
+
+                    <h3>15) Forgetting transaction and holding costs in “year 1” analysis</h3>
+                    <p>
+                        Some deals look positive only because you ignore lease-up time, initial repairs, and
+                        stabilization.
+                        Fix: model a realistic first-year “messy” period and see if you can absorb it.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Most common combo:</strong> 0% vacancy + $0 reserves + no management = fake cash
+                            flow.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="framework">
+                    <h2>A Correct Cash Flow Framework (Use This Order)</h2>
+                    <p>
+                        To avoid mistakes, use a consistent ordering.
+                        Start with income, subtract vacancy to get collected income, subtract operating expenses,
+                        subtract reserves, then subtract debt service.
+                        This prevents you from hiding big costs and helps you see which layer is causing the problem.
+                    </p>
+
+                    <h3>Step 1: Gross scheduled rent</h3>
+                    <p>
+                        Start with the rent you’d collect at full occupancy.
+                        Do not assume this is what you actually collect.
+                    </p>
+
+                    <h3>Step 2: Vacancy and collection loss</h3>
+                    <p>
+                        Subtract an economic vacancy allowance to represent vacancy and imperfect collection.
+                        This turns gross rent into effective collected income.
+                    </p>
+
+                    <h3>Step 3: Operating expenses</h3>
+                    <p>
+                        Subtract taxes, insurance, HOA, routine maintenance, management, utilities paid by owner, and
+                        admin.
+                        The result (before debt) is related to NOI.
+                    </p>
+
+                    <h3>Step 4: CapEx reserves</h3>
+                    <p>
+                        Subtract a monthly reserve so big-ticket items do not surprise you later.
+                    </p>
+
+                    <h3>Step 5: Debt service</h3>
+                    <p>
+                        Subtract principal and interest payments.
+                        What remains is net cash flow (before income taxes, which vary by situation).
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Core formula:</strong><br>
+                            Net Cash Flow = (Rent + Other Income − Vacancy) − Operating Expenses − CapEx Reserves − Debt
+                            Service
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress">
+                    <h2>Fast Stress Tests (Do These Before You Trust Any Cash Flow)</h2>
+                    <p>
+                        Stress tests are the fastest way to expose fake cash flow.
+                        They take minutes and often reveal more than hours of “perfect” modeling.
+                    </p>
+
+                    <h3>Stress test 1: Add one extra vacancy month</h3>
+                    <p>
+                        Increase vacancy to represent a slower lease-up or an unexpected move-out.
+                        If your cash flow flips negative, your deal is thin.
+                    </p>
+
+                    <h3>Stress test 2: Repair-year scenario</h3>
+                    <p>
+                        Add a major repair event (HVAC, roof, plumbing, water heater) or increase reserves.
+                        If that breaks the model, you’re not funding the property’s lifecycle.
+                    </p>
+
+                    <h3>Stress test 3: Taxes and insurance up</h3>
+                    <p>
+                        Increase taxes and insurance. Many owners underestimate how much these can rise after purchase
+                        or after claims.
+                    </p>
+
+                    <h3>Stress test 4: Rent softness</h3>
+                    <p>
+                        Reduce rent slightly or assume you need a concession to fill the unit.
+                        If the deal only works at top-of-market rent, you’re relying on perfect conditions.
+                    </p>
+
+                    <h3>Stress test 5: Management added</h3>
+                    <p>
+                        Add management cost even if you plan to self-manage.
+                        This measures whether the deal is truly “passive income” or a job with risk.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> A rental that only works in the base case is not robust—it’s
+                            optimistic underwriting.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Cash Flow Checklist (Use This Before Buying or Assessing a Property)</h2>
+                    <ul>
+                        <li>✅ Rent is realistic for the unit (not generic “market rent”)</li>
+                        <li>✅ Vacancy and turnover are included (economic vacancy)</li>
+                        <li>✅ Operating expenses are complete (taxes, insurance, HOA, utilities, maintenance,
+                            management)</li>
+                        <li>✅ CapEx reserves are included (roof/HVAC/water heater/flooring/appliances)</li>
+                        <li>✅ Escrow is not double-counted (P&amp;I vs PITI consistency)</li>
+                        <li>✅ NOI is not confused with net cash flow</li>
+                        <li>✅ Expense growth scenario tested (tax/insurance/HOA up)</li>
+                        <li>✅ Repair-year stress test run</li>
+                        <li>✅ Vacancy shock stress test run</li>
+                        <li>✅ Management included as real or shadow cost</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to see if your cash flow is “real”?</h4>
+                            <p>Run a conservative scenario: higher vacancy, higher reserves, and include management.</p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/how-to-calculate-cash-flow/">How to calculate cash flow</a>
+                            <p>A clean step-by-step method with correct inputs.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/vacancy-and-turnover/">Vacancy and turnover</a>
+                            <p>Vacancy and turnover are the fastest cash flow killers.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/expenses-and-capex-reserves/">Expenses and CapEx reserves</a>
+                            <p>The biggest “missing line” behind fake cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/noi-net-operating-income/">NOI (net operating income)</a>
+                            <p>Understand NOI so you don’t confuse it with cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/debt-service-and-dscr/">Debt service and DSCR</a>
+                            <p>Coverage ratios, lender constraints, and why DSCR ≠ cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/when-cash-flow-is-negative/">When cash flow is negative</a>
+                            <p>How to diagnose and fix negative cash flow (and when it’s a red flag).</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What’s the most common cash flow mistake for rental properties?</h4>
+                        <p>
+                            Ignoring vacancy and turnover and assuming 100% collected rent.
+                            Even one vacancy month can erase a large share of annual cash flow—especially in
+                            single-family rentals.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do rental cash flow calculations look better than reality?</h4>
+                        <p>
+                            Because many models exclude CapEx reserves, underestimate maintenance, omit management
+                            costs, and ignore expense growth.
+                            That creates “fake cash flow” that disappears when repairs, turnover, or expense spikes
+                            happen.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does NOI equal cash flow?</h4>
+                        <p>
+                            No. NOI is before debt service and usually before CapEx.
+                            Net cash flow is what remains after vacancy, operating expenses, reserves/CapEx, and debt
+                            service.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I sanity-check a rental cash flow model?</h4>
+                        <p>
+                            Run a conservative scenario: higher vacancy, higher maintenance/CapEx reserves, higher
+                            taxes/insurance, and include management.
+                            If the deal only works with optimistic assumptions, it’s fragile.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Most rental cash flow mistakes have the same root cause: ignoring reality to make the
+                        spreadsheet look better.
+                        The fix is not complicated—include vacancy, turnover, full operating expenses, CapEx reserves,
+                        and a consistent mortgage/payment definition.
+                        Then stress-test the result with higher vacancy, higher reserves, and a repair-year scenario.
+                        If your cash flow survives those tests, you can trust it much more.
+                        If it doesn’t, you didn’t “fail”—you just discovered the truth before buying the problem.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run a conservative scenario in the <a href="/cash-flow/">Cash Flow
+                                calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Cash flow depends on market rent, vacancy, property condition, financing
+                        terms, and local operating costs.
+                        NOI conventions may exclude CapEx; owner-level net cash flow should include reserves for
+                        sustainable results.
+                        Use ranges and stress tests; treat any “perfect” scenario as optimistic.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

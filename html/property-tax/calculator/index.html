@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description"
+        content="Property tax calculator with inflation: calculate annual taxes for your US property using PropertyCost online tools.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/property-tax/calculator/">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Property Tax Calculator (U.S.) | PropertyCost</title>
+</head>
+
+<body class="calc-page">
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/property-tax/">Property tax</a>
+                <span class="sep">/</span>
+                <span class="current">Calculator</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="main-content">
+        
+        <div class="hero">
+                <h1>Property Taxes and Fees</h1>
+                <p class="subtitle">
+                    Real calculation of tax burden considering future years
+                </p>
+                <div class="benefits-bar">
+                    <div class="benefit-item">Cumulative cost tracking</div>
+                    <div class="benefit-item">Transaction cost inclusion</div>
+                    <div class="benefit-item">Geographic comparison</div>
+                    <div class="benefit-item">Net return impact</div>
+                </div>
+            </div>
+            
+        <section class="calculator">
+            <div class="grid">
+
+                <!-- PROPERTY DETAILS -->
+                <div class="card">
+                    <h3>Property Details</h3>
+
+                    <label>
+                        Property Price ($)
+                        <input type="number" id="price" placeholder="400000" />
+                        <div class="error" id="priceError"></div>
+                    </label>
+
+                    <label>
+                        Annual Rent ($)
+                        <input type="number" id="rentIncome" placeholder="36000" />
+                        <div class="error" id="rentIncomeError"></div>
+                    </label>
+
+                    <label>
+                        Ownership Period (years)
+                        <input type="number" id="years" placeholder="10" />
+                        <div class="error" id="yearsError"></div>
+                    </label>
+
+                    <label>
+                        Price Growth (%)
+                        <input type="number" id="priceGrowth" placeholder="3" />
+                        <div class="error" id="priceGrowthError"></div>
+                    </label>
+
+                    <label>
+                        Inflation Rate (%)
+                        <input type="number" id="inflationRate" placeholder="2.5" />
+                        <div class="error" id="inflationRateError"></div>
+                    </label>
+                </div>
+
+                <!-- TAXES & FEES -->
+                <div class="card">
+                    <h3>Taxes & Fees</h3>
+
+                    <label>
+                        Property Tax (%)
+                        <input type="number" id="propertyTax" placeholder="1.2" />
+                        <div class="error" id="propertyTaxError"></div>
+                    </label>
+
+                    <label>
+                        Rental Tax (%)
+                        <input type="number" id="rentTax" placeholder="22" />
+                        <div class="error" id="rentTaxError"></div>
+                    </label>
+
+                    <label>
+                        Annual Fees ($)
+                        <input type="number" id="annualFees" placeholder="4500" />
+                        <div class="error" id="annualFeesError"></div>
+                    </label>
+
+                    <label>
+                        Fee Growth (%)
+                        <input type="number" id="feeGrowth" placeholder="3" />
+                        <div class="error" id="feeGrowthError"></div>
+                    </label>
+                </div>
+
+                <!-- SALE -->
+                <div class="card">
+                    <h3>Sale</h3>
+
+                    <label>
+                        Sale Tax (%)
+                        <input type="number" id="saleTax" placeholder="15" />
+                        <div class="error" id="saleTaxError"></div>
+                    </label>
+
+                    <label>
+                        Agent Commission (%)
+                        <input type="number" id="agentFee" placeholder="5" />
+                        <div class="error" id="agentFeeError"></div>
+                    </label>
+
+                    <button id="calcBtn">Calculate</button>
+                </div>
+
+                <!-- RESULTS -->
+                <div id="results" class="card result">
+                    <h3>Results</h3>
+
+                    <div class="row">
+                        <span>Total Taxes</span>
+                        <strong id="totalTaxes">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Total Fees</span>
+                        <strong id="totalFees">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Net Profit</span>
+                        <strong id="netProfit">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Profit After Sale</span>
+                        <strong id="finalProfit">—</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guest-promo" class="hidden playful-blob">
+                <div class="blob-content">
+                        <span class="blob-emoji">🚀</span>
+                        <div class="blob-title">Ready to make smarter decisions?</div>
+                        <div class="blob-text">Join our community and get access to your personal calculation dashboard
+                            with full history and insights</div>
+                        <a href="/signup/" class="blob-btn">Create Free Account</a>
+                </div>
+            </div>
+
+            <div id="user-promo" class="hidden compact-teaser">
+                <span class="teaser-emoji ">💡</span>
+                <div class="teaser-content">
+                    <div class="teaser-title-small">Saved in your workspace</div>
+                    <div class="teaser-text-small">Open your workspace to review saved calculations, comparisons, and verdicts
+                    </div>
+                </div>
+                <a href="/account/" class="teaser-btn">Open account</a>
+            </div>
+
+            <div class="disclaimer">
+                Estimates only, not financial advice.
+                <a href="/disclaimer/">Read full disclaimer</a>
+            </div>
+        </section>
+
+        <section class="guide-layout" aria-label="Guide">
+            <aside class="guide-nav" aria-label="Jump to">
+                <details class="jump" open>
+                    <summary class="jump-summary">
+                        Jump to
+                        <span class="jump-caret" aria-hidden="true"></span>
+                    </summary>
+        
+                    <nav class="jump-links">
+                        <a href="#intro">Introduction</a>
+                        <a href="#what-shows">What it helps you understand</a>
+                        <a href="#how-works">How it works</a>
+                        <a href="#included-costs">Costs included</a>
+                        <a href="#why-matters">Why it matters</a>
+                        <a href="#geo">Geographic variation</a>
+                        <a href="#transaction">Transaction costs</a>
+                        <a href="#how-to-use">How to use</a>
+                        <a href="#mistakes">Common mistakes</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#who">Who this is for</a>
+                        <a href="#bottom-line">Bottom line</a>
+                    </nav>
+                </details>
+            </aside>
+        
+            <div class="guide-content">
+
+            <!-- Introduction -->
+            <div class="content-section" id="intro">
+                <h2>Taxes and Fees Calculator: The Hidden Costs of Property Ownership</h2>
+
+                <p>Most buyers focus on the purchase price and monthly mortgage payment while treating taxes and fees as
+                    minor
+                    details. This often leads to underestimating the true cost of ownership by 20-40% over time.</p>
+
+                <p>A property that appears affordable at $2,500 per month can easily cost $3,200 once property taxes,
+                    transaction
+                    costs, and recurring fees are fully accounted for.</p>
+
+                <p>The Taxes and Fees Calculator helps you estimate the real financial impact of ownership-related taxes
+                    and
+                    fees
+                    across the entire holding period. These costs do not build equity, do not appreciate, and cannot be
+                    recovered — they directly reduce your net returns.</p>
+            </div>
+
+            <!-- What Calculator Shows -->
+            <div class="content-section" id="what-shows">
+                <h2>What This Calculator Helps You Understand</h2>
+
+                <p>Taxes and fees are easy to underestimate because they appear at different times and in different
+                    forms.</p>
+
+                <ul>
+                    <li>How much property taxes will cost over 10, 20, or 30 years</li>
+                    <li>How purchase and selling transaction costs affect total returns</li>
+                    <li>How taxes differ dramatically between locations</li>
+                    <li>How HOA fees and mandatory charges impact long-term affordability</li>
+                </ul>
+
+                <p>The calculator aggregates these fragmented expenses into a single, comprehensive cost breakdown.</p>
+            </div>
+
+            <!-- How Calculator Works -->
+            <div class="content-section" id="how-works">
+                <h2>How the Taxes and Fees Calculator Works</h2>
+
+                <p>This calculator models both recurring and one-time ownership costs over your selected holding period.
+                </p>
+
+                <p>It includes:</p>
+
+                <ul>
+                    <li>Annual property taxes with optional growth assumptions</li>
+                    <li>One-time purchase closing costs</li>
+                    <li>One-time selling costs at exit</li>
+                    <li>Recurring HOA fees and special assessments</li>
+                </ul>
+
+                <p>All costs are summed and categorized so you can clearly see which expenses consume the most capital
+                    over
+                    time.</p>
+            </div>
+
+            <!-- Costs Breakdown -->
+            <div class="content-section" id="included-costs">
+                <h2>What Taxes and Fees Are Included?</h2>
+
+                <div class="two-col">
+                    <div class="cost-box">
+                        <h4>Recurring Ownership Costs</h4>
+                        <ul>
+                            <li>Property taxes</li>
+                            <li>HOA or condo fees</li>
+                            <li>Special assessments</li>
+                            <li>Local mandatory fees</li>
+                        </ul>
+                        <p>These costs compound over time and often exceed what buyers expect over long holding periods.
+                        </p>
+                    </div>
+
+                    <div class="cost-box">
+                        <h4>Transaction Costs</h4>
+                        <ul>
+                            <li>Purchase closing costs (2–5%)</li>
+                            <li>Selling costs and agent commissions (7–9%)</li>
+                            <li>Transfer taxes and escrow fees</li>
+                        </ul>
+                        <p>Transaction costs are especially impactful in short holding periods.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Taxes Matter -->
+            <div class="content-section" id="why-matters">
+                <h2>Why Taxes and Fees Matter More Than Most Realize</h2>
+
+                <p>Taxes and fees consume capital without creating value. Over time, they can fully offset appreciation
+                    gains.
+                </p>
+
+                <div class="highlight-box">
+                    <p>A property that appreciates by $140,000 can still lose money once taxes, fees, and transaction
+                        costs are
+                        included.</p>
+                </div>
+
+                <p>Ignoring these costs leads to overstated returns, flawed affordability analysis, and unrealistic
+                    financial
+                    expectations.</p>
+            </div>
+
+            <!-- Geographic Variation -->
+            <div class="content-section" id="geo">
+                <h2>Geographic Variation in Property Taxes</h2>
+
+                <p>Property tax rates vary widely across the United States and have a massive impact on long-term
+                    ownership
+                    costs.</p>
+
+                <ul>
+                    <li><strong>High-tax states:</strong> New Jersey, Illinois, Texas</li>
+                    <li><strong>Low-tax states:</strong> Hawaii, Alabama, Louisiana</li>
+                    <li><strong>Capped growth states:</strong> California (Proposition 13)</li>
+                </ul>
+
+                <p>Two identical homes can have radically different ownership costs purely due to location.</p>
+            </div>
+
+            <!-- Transaction Costs -->
+            <div class="content-section" id="transaction">
+                <h2>Transaction Costs: The Entry and Exit Toll</h2>
+
+                <p>Buying and selling real estate involves substantial friction costs.</p>
+
+                <p>Even a 10% price increase may not cover transaction expenses if the holding period is short.</p>
+
+                <p>This is why real estate typically favors longer holding periods — time helps amortize entry and exit
+                    costs.
+                </p>
+            </div>
+
+            <!-- How to Use -->
+            <div class="content-section" id="how-to-use">
+                <h2>How to Use This Calculator Effectively</h2>
+
+                <div class="highlight-box">
+                    <p>Test different property tax rates to see how location affects cost</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Compare short vs long holding periods to understand transaction impact</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Model different HOA fee levels to reveal hidden long-term expenses</p>
+                </div>
+
+                <p>Small changes in assumptions often lead to dramatically different conclusions.</p>
+            </div>
+
+            <!-- Common Mistakes -->
+            <div class="content-section" id="mistakes">
+                <h2>Common Mistakes When Estimating Taxes and Fees</h2>
+
+                <ul>
+                    <li>Assuming property taxes remain constant</li>
+                    <li>Ignoring special assessments</li>
+                    <li>Underestimating selling costs</li>
+                    <li>Excluding transaction costs from return calculations</li>
+                </ul>
+
+                <p>Accurate analysis requires including every cost — not just the obvious ones.</p>
+            </div>
+
+            <!-- FAQ -->
+            <div class="content-section" id="faq">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h4>Are property taxes included for the entire ownership period?</h4>
+                    <p>Yes. Property taxes are modeled annually over the full holding period and can increase over time.
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Does this include buying and selling costs?</h4>
+                    <p>Yes. Both purchase closing costs and selling costs are included.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Are income taxes included?</h4>
+                    <p>No. This calculator focuses on property-related taxes and fees, not personal income taxes.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Can this be used for investment properties?</h4>
+                    <p>Yes. Taxes and fees directly affect cash flow and net operating income.</p>
+                </div>
+            </div>
+
+            <!-- Who This Is For -->
+            <div class="content-section" id="who">
+                <h2>Who This Calculator Is For</h2>
+
+                <ul>
+                    <li>Homebuyers estimating true ownership cost</li>
+                    <li>Investors analyzing net returns</li>
+                    <li>People comparing properties across locations</li>
+                    <li>Anyone budgeting for long-term housing costs</li>
+                </ul>
+            </div>
+
+            <!-- Bottom Line -->
+            <div class="content-section" id="bottom-line">
+                <h2>Bottom Line: Know the Real Cost</h2>
+
+                <p>Taxes and fees represent pure cost — capital that does not build equity or appreciation.</p>
+
+                <p>This calculator helps you understand where your money actually goes, allowing you to make decisions
+                    based on
+                    total economic reality rather than incomplete assumptions.</p>
+
+                <p>Use it alongside mortgage, maintenance, and total cost calculators for a complete ownership analysis.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/propertyTax.js"></script>
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

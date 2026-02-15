@@ -1,0 +1,881 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="NOI (net operating income) explained (U.S.): definition, formula, and how to calculate NOI for rental property. Learn effective gross income, vacancy, operating expenses, what counts as NOI vs what doesn’t (mortgage, CapEx, depreciation), NOI vs cash flow, NOI vs cap rate, and common mistakes. Includes examples, checklists, stress tests, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/noi-net-operating-income/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/noi-net-operating-income/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/cash-flow/noi-net-operating-income/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>NOI (Net Operating Income) (U.S.) — Definition, Formula, and Rental Property Examples | PropertyCost</title>
+
+    <meta property="og:title" content="NOI (Net Operating Income) (U.S.)" />
+    <meta property="og:description"
+        content="NOI explained with formulas and examples: effective gross income minus operating expenses. Learn what counts, what doesn’t (mortgage, CapEx), and how NOI connects to cap rate and cash flow." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/noi-net-operating-income/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="NOI (Net Operating Income) (U.S.)">
+    <meta name="twitter:description"
+        content="A complete NOI guide: definition, calculation steps, what counts as operating expense, NOI vs cash flow, and common mistakes.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/noi-net-operating-income/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"NOI (net operating income)","item":"https://mypropertycost.com/cash-flow/noi-net-operating-income/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/noi-net-operating-income/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is NOI (net operating income)?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"NOI is a property's net income from operations before financing and income taxes. It is calculated as Effective Gross Income (rent and other income minus vacancy) minus Operating Expenses (taxes, insurance, maintenance, management, utilities paid by owner, HOA, etc.)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is the NOI formula?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"NOI = Effective Gross Income − Operating Expenses. Effective Gross Income equals Gross Scheduled Income minus vacancy/collection loss, plus other income."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is NOI the same as cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"No. NOI excludes debt service (mortgage payments) and often excludes CapEx reserves. Cash flow is what’s left after reserves and debt, so it’s usually lower than NOI for financed properties."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How does NOI relate to cap rate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Cap rate is NOI divided by property value or purchase price: Cap Rate = NOI ÷ Price. It measures the property's operating yield before financing."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">NOI (net operating income)</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#what">What is NOI?</a></li>
+                    <li><a href="#formula">NOI formula (with definitions)</a></li>
+                    <li><a href="#calculate">How to calculate NOI (step-by-step)</a></li>
+                    <li><a href="#counts">What counts as operating expenses?</a></li>
+                    <li><a href="#not">What does NOT count in NOI?</a></li>
+                    <li><a href="#noi-vs-cf">NOI vs cash flow</a></li>
+                    <li><a href="#caprate">NOI and cap rate</a></li>
+                    <li><a href="#dscr">NOI and DSCR (lender view)</a></li>
+                    <li><a href="#example">Worked example (NOI calculation)</a></li>
+                    <li><a href="#improve">How to improve NOI</a></li>
+                    <li><a href="#mistakes">Common NOI mistakes</a></li>
+                    <li><a href="#stress-tests">Stress tests</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Convert NOI to cash flow</div>
+                        <div class="sidebar-cta__sub">Add reserves + debt service to get net cash flow.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>NOI (Net Operating Income) (U.S.): Definition, Formula, and How to Calculate It</h1>
+                        <p class="subtitle">
+                            NOI is one of the most important metrics in real estate because it isolates the property’s
+                            <strong>operating performance</strong> from the owner’s financing choices.
+                            But NOI is also one of the most misunderstood numbers online—especially when people treat it
+                            like “profit” or “cash flow.”
+                            In this guide you’ll learn what NOI means, how to calculate it step-by-step,
+                            what counts as an operating expense, what does not (mortgage payments, depreciation, most
+                            CapEx),
+                            and how to use NOI to evaluate cap rate, DSCR, and ultimately net rental cash flow.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–30 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#formula">Formula</a>
+                    <a href="#calculate">How to calculate</a>
+                    <a href="#noi-vs-cf">NOI vs cash flow</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/how-to-calculate-cash-flow/">
+                            <strong>How to calculate cash flow</strong>
+                            <span>Convert NOI into owner cash flow (after reserves and debt).</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/real-estate-cash-flow/">
+                            <strong>Real estate cash flow</strong>
+                            <span>Why cash flow is a survivability metric.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage/">
+                            <strong>Mortgage Calculator</strong>
+                            <span>Debt service turns NOI into net cash flow.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>NOI (net operating income)</strong> is a property’s net income from operations
+                        <strong>before</strong> financing and income taxes.
+                        It is calculated as:
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>NOI = Effective Gross Income − Operating Expenses</strong>
+                        </p>
+                    </div>
+
+                    <p>
+                        NOI is not the same as cash flow because NOI excludes mortgage payments and often excludes CapEx
+                        reserves.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="what">
+                    <h2>What Is NOI?</h2>
+                    <p>
+                        NOI is designed to answer one core question:
+                        <strong>How much income does the property generate from operations, independent of how you
+                            finance it?</strong>
+                    </p>
+                    <p>
+                        That makes NOI useful because two buyers can purchase the same property with different down
+                        payments and different loan terms.
+                        Their cash flow might be different, but the property’s operating performance is the same.
+                        NOI is the “apples-to-apples” operating number.
+                    </p>
+
+                    <h3>Why NOI exists (the point of the metric)</h3>
+                    <ul>
+                        <li><strong>Comparability:</strong> compare properties without mixing financing choices.</li>
+                        <li><strong>Valuation:</strong> income properties are often valued as a multiple of NOI (cap
+                            rate logic).</li>
+                        <li><strong>Lender view:</strong> DSCR uses NOI to evaluate debt coverage.</li>
+                        <li><strong>Operating improvement:</strong> NOI shows whether rent increases or expense cuts
+                            actually improve performance.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Think of NOI as:</strong> “property engine output” before the owner chooses a
+                            transmission (financing).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>NOI Formula (With Definitions)</h2>
+
+                    <h3>Step 1: Gross Scheduled Income (GSI)</h3>
+                    <p>
+                        Gross Scheduled Income is the rent you’d collect at full occupancy (plus predictable other
+                        income).
+                    </p>
+
+                    <h3>Step 2: Vacancy and collection loss</h3>
+                    <p>
+                        Subtract vacancy and collection loss to get <strong>Effective Gross Income (EGI)</strong>.
+                        Vacancy is not optional—NOI uses effective income because it reflects real collection.
+                    </p>
+
+                    <h3>Step 3: Operating expenses</h3>
+                    <p>
+                        Subtract operating expenses to get NOI.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>NOI = (Gross Rent + Other Income − Vacancy/Collection Loss) − Operating
+                                Expenses</strong>
+                        </p>
+                    </div>
+
+                    <p>
+                        The most common NOI errors happen because people disagree about what counts as “operating
+                        expenses.”
+                        We’ll break that down next.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="calculate">
+                    <h2>How to Calculate NOI (Step-by-Step)</h2>
+                    <p>
+                        This is the process you can use for a single-family rental, a duplex, or a multi-family
+                        property.
+                        The structure is the same; the line items change.
+                    </p>
+
+                    <h3>Step 1: List all income sources</h3>
+                    <p>
+                        Start with rent per unit. Add other income only if it’s recurring and collectible:
+                        parking, laundry, storage, pet fees, etc.
+                        Be conservative with one-time fees.
+                    </p>
+
+                    <h3>Step 2: Apply vacancy and loss</h3>
+                    <p>
+                        Choose a vacancy assumption (percentage or months per year).
+                        For single-unit rentals, vacancy is more concentrated risk.
+                        For multi-unit, vacancy can be smoother.
+                    </p>
+
+                    <h3>Step 3: Compile operating expenses</h3>
+                    <p>
+                        Operating expenses are the recurring costs to run the property.
+                        Verify what you can (taxes, insurance, HOA).
+                        Use a realistic maintenance line even if it’s uncertain.
+                    </p>
+
+                    <h3>Step 4: Subtract expenses from effective income</h3>
+                    <p>
+                        The result is NOI. NOI is typically shown annually, but you can compute it monthly too.
+                    </p>
+
+                    <h3>Step 5: Sanity-check NOI</h3>
+                    <p>
+                        Two fast checks:
+                        (1) does the expense list look complete, and
+                        (2) does your vacancy assumption match reality and turnover?
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tip:</strong> If the property is older, maintenance and expense creep are more
+                            likely—be conservative.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="counts">
+                    <h2>What Counts as Operating Expenses in NOI?</h2>
+                    <p>
+                        Operating expenses are costs required to operate and maintain the property’s income-producing
+                        ability.
+                        In most underwriting, common operating expenses include:
+                    </p>
+
+                    <h3>Typical operating expenses</h3>
+                    <ul>
+                        <li>Property taxes</li>
+                        <li>Insurance</li>
+                        <li>Repairs and maintenance (ongoing)</li>
+                        <li>Property management</li>
+                        <li>Utilities paid by owner (water/sewer/trash, common electric, etc.)</li>
+                        <li>HOA / condo fees</li>
+                        <li>Landscaping/snow removal</li>
+                        <li>Pest control</li>
+                        <li>Licenses/permits (if applicable)</li>
+                        <li>Advertising/leasing costs (sometimes included here, sometimes in vacancy/turnover bucket)
+                        </li>
+                    </ul>
+
+                    <h3>Why maintenance is tricky</h3>
+                    <p>
+                        Maintenance is uncertain, which makes it tempting to understate.
+                        But understating maintenance inflates NOI and makes the property look more valuable than it is.
+                        A conservative placeholder is usually better than a “perfect” guess that’s too low.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical rule:</strong> If you’re not sure whether an expense belongs, include it
+                            in a conservative scenario and test sensitivity.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="not">
+                    <h2>What Does NOT Count in NOI?</h2>
+                    <p>
+                        NOI is before financing and income taxes, so these typically do not belong in NOI:
+                    </p>
+
+                    <h3>Not included in NOI</h3>
+                    <ul>
+                        <li><strong>Mortgage payments (debt service)</strong> — principal and interest are financing
+                            choices.</li>
+                        <li><strong>Depreciation</strong> — non-cash accounting, not an operating outflow.</li>
+                        <li><strong>Income taxes</strong> — depends on the owner’s tax situation.</li>
+                        <li><strong>Capital expenditures (CapEx)</strong> — often excluded from NOI (but should be
+                            modeled separately for cash flow).</li>
+                        <li><strong>One-time major improvements</strong> — renovations are usually capital items, not
+                            operating.</li>
+                    </ul>
+
+                    <h3>But what about CapEx?</h3>
+                    <p>
+                        This is where confusion happens.
+                        Many NOI definitions exclude CapEx entirely.
+                        Some underwriting uses “NOI after reserves” or “adjusted NOI” where a reserve is included.
+                        Either approach is fine if clearly labeled, but be consistent.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Keep NOI “clean” (operating performance) and then subtract
+                            reserves and debt to get cash flow.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="noi-vs-cf">
+                    <h2>NOI vs Cash Flow (Why They’re Different)</h2>
+                    <p>
+                        NOI is a property-level operating number.
+                        Cash flow is an owner-level number.
+                        Cash flow depends on financing and reserves.
+                    </p>
+
+                    <h3>Convert NOI to cash flow</h3>
+                    <div class="callout">
+                        <p>
+                            <strong>Cash Flow ≈</strong> NOI − Reserves/CapEx − Debt Service
+                        </p>
+                    </div>
+
+                    <p>
+                        This matters because many listings quote NOI and make properties look “profitable,”
+                        but your cash flow after debt might be thin or negative.
+                    </p>
+
+                    <h3>Why NOI is still useful</h3>
+                    <p>
+                        Even though cash flow matters more for your monthly life, NOI remains essential because it:
+                        helps compare properties, supports valuation (cap rate), and feeds DSCR calculations.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="caprate">
+                    <h2>NOI and Cap Rate (Valuation Connection)</h2>
+                    <p>
+                        Cap rate connects NOI to price:
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Cap Rate = NOI ÷ Purchase Price (or Value)</strong></p>
+                    </div>
+
+                    <p>
+                        Cap rate is a quick way to compare operating yield across properties.
+                        But cap rate doesn’t tell you owner cash flow—financing can turn a high-cap-rate property into
+                        low cash flow if debt is expensive,
+                        and it can turn a low-cap-rate property into acceptable cash flow if debt is cheap and/or down
+                        payment is large.
+                    </p>
+
+                    <h3>Why inflated NOI inflates value</h3>
+                    <p>
+                        Because NOI is the numerator in cap rate valuation, overstating NOI can lead to overpaying.
+                        If you forget a recurring expense, you’re not just wrong about cash flow—you’re wrong about
+                        valuation.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="dscr">
+                    <h2>NOI and DSCR (The Lender View)</h2>
+                    <p>
+                        DSCR (Debt Service Coverage Ratio) uses NOI to measure whether the property can cover debt
+                        payments:
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>DSCR = NOI ÷ Annual Debt Service</strong></p>
+                    </div>
+
+                    <p>
+                        DSCR is a safety metric. A higher DSCR generally means the property has more margin.
+                        Low DSCR means small shocks (vacancy, expense increases) can push the property into negative
+                        cash flow.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Insight:</strong> A property can have positive cash flow but still be risky if DSCR
+                            is thin and reserves are small.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="example">
+                    <h2>Worked Example: NOI Calculation</h2>
+                    <p>
+                        Here’s an illustrative example to show the mechanics.
+                        The point is structure, not the exact numbers.
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Assumptions (monthly):</strong> Rent $2,650; other income $0; vacancy 5%;
+                            taxes $320; insurance $135; maintenance $175; management 8%; HOA/utilities $80.</p>
+                    </div>
+
+                    <table class="table" aria-label="NOI example table" style="width:100%; border-collapse:collapse;">
+                        <thead>
+                            <tr>
+                                <th
+                                    style="text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.12);">
+                                    Line item</th>
+                                <th
+                                    style="text-align:right; padding:10px; border-bottom:1px solid rgba(255,255,255,.12);">
+                                    Monthly</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Gross rent</td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    $2,650</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Less vacancy
+                                    (5%)</td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$133</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    <strong>Effective Gross Income</strong></td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    <strong>$2,517</strong></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Property taxes
+                                </td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$320</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Insurance</td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$135</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Maintenance
+                                    (ongoing)</td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$175</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Management (8%)
+                                </td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$201</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    HOA/utilities/other</td>
+                                <td
+                                    style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                    −$80</td>
+                            </tr>
+                            <tr>
+                                <td style="padding:10px;"><strong>NOI (monthly)</strong></td>
+                                <td style="padding:10px; text-align:right;"><strong>$1,606</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <p style="margin-top:14px;">
+                        Annual NOI in this example is roughly $1,606 × 12 = $19,272.
+                        But that’s not your cash flow.
+                        To estimate cash flow, you’d subtract CapEx reserves and mortgage payments.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Convert to cash flow:</strong> Cash Flow ≈ NOI − Reserves/CapEx − Debt Service.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="improve">
+                    <h2>How to Improve NOI</h2>
+                    <p>
+                        NOI improves when you increase effective income or reduce operating expenses.
+                        The most reliable NOI improvements are usually operational rather than “hope-based.”
+                    </p>
+
+                    <h3>Increase effective income</h3>
+                    <ul>
+                        <li>Raise rent to market (without increasing vacancy excessively)</li>
+                        <li>Reduce vacancy through tenant retention and better turnover processes</li>
+                        <li>Add legitimate ancillary income (parking, storage, laundry)</li>
+                    </ul>
+
+                    <h3>Reduce operating expenses</h3>
+                    <ul>
+                        <li>Shop insurance and review coverage</li>
+                        <li>Preventive maintenance to reduce emergency repairs</li>
+                        <li>Vendor optimization and utility savings</li>
+                        <li>Challenge incorrect property tax assessments where applicable</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Warning:</strong> Cutting expenses that reduce tenant quality or maintenance can
+                            raise vacancy and hurt NOI long-run.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common NOI Mistakes</h2>
+
+                    <h3>1) Using gross rent instead of effective income</h3>
+                    <p>
+                        Fix: subtract vacancy and collection loss. NOI uses what you actually collect, not what you wish
+                        you collected.
+                    </p>
+
+                    <h3>2) Missing recurring operating expenses</h3>
+                    <p>
+                        Fix: use a checklist and verify taxes, insurance, HOA, and utilities paid by owner.
+                    </p>
+
+                    <h3>3) Treating CapEx like an operating expense (or ignoring it entirely)</h3>
+                    <p>
+                        Fix: keep NOI clean, then model CapEx separately as reserves.
+                        Or label your number as “NOI after reserves” if you include it.
+                    </p>
+
+                    <h3>4) Mixing owner expenses with property expenses</h3>
+                    <p>
+                        Fix: NOI should reflect property operations, not the owner’s personal financial choices.
+                    </p>
+
+                    <h3>5) Believing NOI equals profit</h3>
+                    <p>
+                        Fix: remember that financing and reserves exist. NOI is a starting point, not the finish line.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Fast fix:</strong> If your NOI feels “too good,” you probably missed vacancy or
+                            understated expenses.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Stress Tests (NOI Sensitivity Checks)</h2>
+
+                    <h3>1) Vacancy stress test</h3>
+                    <p>
+                        Increase vacancy. If NOI drops sharply, the property is tenant-demand sensitive.
+                    </p>
+
+                    <h3>2) Expense creep test</h3>
+                    <p>
+                        Increase taxes and insurance. These often rise over time and can compress NOI.
+                    </p>
+
+                    <h3>3) Maintenance stress test</h3>
+                    <p>
+                        Raise maintenance assumptions or add a bad-year repair.
+                        NOI that survives only under low maintenance is fragile.
+                    </p>
+
+                    <h3>4) Rent growth realism test</h3>
+                    <p>
+                        Hold rent flat while expenses rise.
+                        This tests whether your NOI depends on immediate rent growth.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick NOI Checklist</h2>
+                    <ul>
+                        <li>✅ Rent and other income listed</li>
+                        <li>✅ Vacancy/collection loss included</li>
+                        <li>✅ Operating expenses complete (taxes, insurance, maintenance, management, HOA/utilities)
+                        </li>
+                        <li>✅ Mortgage payment excluded from NOI</li>
+                        <li>✅ CapEx handled consistently (excluded or labeled if included as reserves)</li>
+                        <li>✅ NOI calculated monthly and annually</li>
+                        <li>✅ Stress tests run (vacancy + taxes/insurance + maintenance)</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to translate NOI into real cash flow?</h4>
+                            <p>Use the cash flow calculator and subtract reserves + debt from NOI.</p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash Flow calculator</a>
+                            <p>Compute net cash flow after reserves and debt service.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/how-to-calculate-cash-flow/">How to calculate cash flow</a>
+                            <p>Step-by-step cash flow formulas and examples.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/real-estate-cash-flow/">Real estate cash flow</a>
+                            <p>How rental cash flow works and why survivability matters.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage Calculator</a>
+                            <p>Debt service turns NOI into owner cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Homeownership Cost</a>
+                            <p>Taxes, insurance, maintenance, and CapEx that shape NOI and cash flow.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is NOI (net operating income)?</h4>
+                        <p>
+                            NOI is a property’s net income from operations before financing and income taxes.
+                            It equals effective gross income (income minus vacancy) minus operating expenses.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is the NOI formula?</h4>
+                        <p>
+                            NOI = Effective Gross Income − Operating Expenses.
+                            Effective Gross Income = Gross Scheduled Income − Vacancy/Collection Loss + Other Income.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is NOI the same as cash flow?</h4>
+                        <p>
+                            No. NOI excludes mortgage payments and usually excludes CapEx reserves.
+                            Cash flow is what’s left after reserves and debt, so it’s usually lower than NOI for
+                            financed properties.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How does NOI relate to cap rate?</h4>
+                        <p>
+                            Cap rate equals NOI divided by price: Cap Rate = NOI ÷ Purchase Price (or value).
+                            It measures operating yield before financing.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does NOI include property management?</h4>
+                        <p>
+                            Typically yes—management is an operating expense because it’s a recurring cost of operating
+                            the property
+                            (even if the current owner self-manages).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        NOI is the property’s operating engine output: effective income minus operating expenses, before
+                        financing.
+                        It’s essential for comparing properties, understanding cap rate valuation, and measuring debt
+                        coverage (DSCR).
+                        But NOI is not cash flow.
+                        To understand what you’ll actually keep each month, convert NOI into cash flow by subtracting
+                        reserves/CapEx and debt service,
+                        then stress-test the result with vacancy and expense increases.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: convert NOI to net cash flow using the <a href="/cash-flow/">Cash Flow
+                                calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. NOI definitions can vary by analyst and institution.
+                        The key is consistency: use effective income (after vacancy), include recurring operating
+                        expenses, keep NOI separate from financing,
+                        and model CapEx reserves explicitly when translating NOI to owner cash flow.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

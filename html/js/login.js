@@ -25,7 +25,7 @@ form.addEventListener("submit", async e => {
         const data = await res.json();
 
         if (res.ok) {
-            window.location.href = "/mainPage.html";
+            window.location.href = "/";
         } else {
             errorBox.innerText = data.error || "Failed to log in. Check your input."
             errorBox.classList.remove("hidden")

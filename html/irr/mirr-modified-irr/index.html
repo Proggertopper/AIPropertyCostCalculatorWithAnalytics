@@ -1,0 +1,849 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="MIRR (Modified Internal Rate of Return) explained: what MIRR is, why MIRR fixes IRR’s reinvestment assumption and multiple-IRR problems, and how to calculate MIRR in Excel and Google Sheets step-by-step. Includes MIRR vs IRR vs XIRR vs NPV, finance and reinvestment rates, real estate examples, private deal examples, common mistakes, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/mirr-modified-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/mirr-modified-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/mirr-modified-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>MIRR (Modified IRR) — Better Than IRR? Full Guide + Examples | PropertyCost</title>
+
+    <meta property="og:title" content="MIRR (Modified IRR) — Better Than IRR?" />
+    <meta property="og:description"
+        content="MIRR fixes IRR’s reinvestment assumption and helps when cash flows cause multiple IRRs. Learn MIRR, how to calculate it, and when to use it." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/mirr-modified-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="MIRR (Modified IRR) — Better Than IRR?">
+    <meta name="twitter:description"
+        content="Step-by-step MIRR in Excel/Sheets, finance vs reinvestment rates, real estate examples, and pitfalls.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/mirr-modified-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"MIRR (modified IRR)","item":"https://mypropertycost.com/irr/mirr-modified-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/mirr-modified-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is MIRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"MIRR (Modified Internal Rate of Return) is an annualized return metric that modifies IRR by using a realistic reinvestment rate for positive cash flows and a finance rate for negative cash flows. It avoids IRR’s assumption that interim cash flows are reinvested at the IRR itself."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why use MIRR instead of IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"MIRR can be more realistic than IRR because it uses explicit reinvestment and financing assumptions, and it often produces a unique answer even when IRR can have multiple solutions for non-standard cash flows."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I calculate MIRR in Excel or Google Sheets?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use MIRR(values, finance_rate, reinvest_rate). Values are periodic cash flows. finance_rate is the cost of funds for negative cash flows; reinvest_rate is the rate earned on positive cash flows. For irregular dates, you typically build a DCF with actual dates or use XIRR plus NPV checks."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What finance rate and reinvestment rate should I use for MIRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Finance rate is often your borrowing rate or opportunity cost of capital for cash outflows. Reinvestment rate is what you realistically earn on interim distributions—often closer to a hurdle rate or conservative reinvestment assumption rather than the headline IRR."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does MIRR work for real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Yes. MIRR is useful when deals have early distributions that inflate IRR, or when cash flows change sign more than once. You still need realistic net sale proceeds and scenario testing; MIRR is a summary metric, not a substitute for a full DCF."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">MIRR (modified IRR)</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#why">Why IRR can mislead</a></li>
+                    <li><a href="#what">What MIRR is (plain English)</a></li>
+                    <li><a href="#inputs">MIRR inputs: finance rate + reinvest rate</a></li>
+                    <li><a href="#formula">How MIRR works (intuition)</a></li>
+                    <li><a href="#irr-vs-mirr">MIRR vs IRR vs XIRR vs NPV</a></li>
+                    <li><a href="#choose">How to choose finance and reinvest rates</a></li>
+                    <li><a href="#examples">Examples (simple + real estate)</a></li>
+                    <li><a href="#excel">Excel MIRR step-by-step</a></li>
+                    <li><a href="#sheets">Google Sheets MIRR step-by-step</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#multiple">Multiple IRRs: why MIRR helps</a></li>
+                    <li><a href="#practice">How pros use MIRR</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Compare metrics</div>
+                        <div class="sidebar-cta__sub">IRR/XIRR + NPV + MIRR.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>MIRR (Modified IRR): The Return Metric That Fixes IRR’s Biggest Problems</h1>
+                        <p class="subtitle">
+                            IRR is popular because it compresses messy cash flows into one annualized percentage.
+                            But IRR has two big weaknesses that show up constantly in real deals:
+                            (1) it assumes you can reinvest interim cash flows at the IRR itself, and
+                            (2) it can produce multiple answers (or no meaningful answer) when cash flows change sign
+                            more than once.
+                            <strong>MIRR</strong> (Modified Internal Rate of Return) is designed to fix both.
+                            It uses a realistic reinvestment rate for positive cash flows and a financing rate for
+                            negative cash flows,
+                            often producing a cleaner, more decision-useful metric—especially for real estate and
+                            private investments.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~26–40 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#what">What is MIRR</a>
+                    <a href="#choose">Choose rates</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#excel">Excel</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/what-is-irr/">
+                            <strong>What is IRR?</strong>
+                            <span>Definition + intuition + pitfalls.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/xirr-irregular-cash-flows/">
+                            <strong>XIRR (irregular cash flows)</strong>
+                            <span>Use dates when timing is irregular.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/discount-rate-vs-irr/">
+                            <strong>Discount rate vs IRR</strong>
+                            <span>Hurdle rates and required return.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>MIRR</strong> (Modified Internal Rate of Return) is an annualized return metric that
+                        modifies IRR by making two assumptions explicit:
+                        <strong>(1) a finance rate</strong> for cash outflows (what it costs you to fund negative cash
+                        flows) and
+                        <strong>(2) a reinvestment rate</strong> for interim cash inflows (what you can realistically
+                        earn on distributions before the end).
+                        MIRR often produces a more realistic return than IRR when IRR is inflated by early cash flows or
+                        when cash flows create multiple IRR solutions.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule of thumb:</strong> If an investment has big early distributions, weird cash
+                            flow sign changes, or “too good to be true” IRR,
+                            compute MIRR (and NPV) before you trust the headline.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why IRR Can Mislead (The Two Problems MIRR Fixes)</h2>
+
+                    <h3>Problem #1: IRR assumes reinvestment at the IRR</h3>
+                    <p>
+                        IRR treats interim cash flows like they can be reinvested at the same rate as the deal’s IRR.
+                        If IRR is 35%, that assumption means you can repeatedly earn ~35% on distributed cash until the
+                        end of the project.
+                        In many real-world situations, that’s not realistic.
+                    </p>
+                    <p>
+                        This is why some deals with early cash-outs or refinancing can show very high IRRs:
+                        the math rewards early cash return because it implicitly assumes you can reinvest it at the same
+                        high rate.
+                    </p>
+
+                    <h3>Problem #2: IRR can have multiple answers (or none)</h3>
+                    <p>
+                        When cash flows change sign more than once (negative → positive → negative → positive),
+                        IRR can produce multiple solutions, and spreadsheets may return one based on guess/convergence.
+                        That’s not “a bug” so much as a mathematical reality: the equation can have multiple roots.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            MIRR reduces both problems by forcing realistic reinvestment assumptions and often producing
+                            a single, stable result.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="what">
+                    <h2>What MIRR Is (Plain English)</h2>
+                    <p>
+                        MIRR asks a simpler, more realistic question than IRR:
+                    </p>
+                    <p>
+                        <strong>If I fund all negative cash flows at a specified finance rate, and I reinvest all
+                            positive cash flows at a specified reinvestment rate,
+                            what constant annual return connects the total money I put in to the total money I end up
+                            with at the end?</strong>
+                    </p>
+                    <p>
+                        MIRR “moves” all cash flows to either the start or the end of the project:
+                    </p>
+                    <ul>
+                        <li>Negative cash flows are discounted back to the start at the <strong>finance rate</strong>.
+                        </li>
+                        <li>Positive cash flows are compounded forward to the end at the <strong>reinvestment
+                                rate</strong>.</li>
+                        <li>Then MIRR solves for the annual growth rate that links those two totals over the project
+                            duration.</li>
+                    </ul>
+                    <p>
+                        This creates a return metric that matches a more realistic reinvestment story:
+                        you don’t assume you can reinvest distributions at some sky-high IRR—only at what you think you
+                        can actually earn.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="inputs">
+                    <h2>MIRR Inputs: Finance Rate and Reinvestment Rate</h2>
+
+                    <h3>Finance rate</h3>
+                    <p>
+                        The finance rate is the rate used for funding negative cash flows.
+                        Think of it as the cost of money for cash out:
+                    </p>
+                    <ul>
+                        <li>If you borrow to fund the project, the finance rate might be your borrowing rate.</li>
+                        <li>If you pay cash, the finance rate might be your opportunity cost (what that cash could earn
+                            elsewhere at low risk).</li>
+                        <li>In corporate finance, the finance rate is often related to the company’s cost of capital for
+                            funding investments.</li>
+                    </ul>
+
+                    <h3>Reinvestment rate</h3>
+                    <p>
+                        The reinvestment rate is what you can realistically earn on interim positive cash flows until
+                        the end of the project.
+                        Examples:
+                    </p>
+                    <ul>
+                        <li>A conservative reinvestment rate (e.g., a modest market return or safe reinvestment
+                            assumption)</li>
+                        <li>Your hurdle rate (required return) if you believe you can redeploy cash into similar-return
+                            opportunities</li>
+                        <li>A lower “parking cash” return if distributions would mostly sit in cash</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            MIRR is only as honest as your reinvestment rate assumption. The point is to be explicit and
+                            realistic.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>How MIRR Works (Intuition Without Math Pain)</h2>
+                    <p>
+                        MIRR is easiest to understand as a three-step process:
+                    </p>
+
+                    <h3>Step 1: Bring all negatives to “today”</h3>
+                    <p>
+                        Add up all negative cash flows, discounting any later negatives back to the start at the finance
+                        rate.
+                        This gives you a single “present value of money invested.”
+                    </p>
+
+                    <h3>Step 2: Bring all positives to the end</h3>
+                    <p>
+                        Add up all positive cash flows, compounding them forward to the end at the reinvestment rate.
+                        This gives you a single “future value of money returned.”
+                    </p>
+
+                    <h3>Step 3: Solve for the annual growth rate</h3>
+                    <p>
+                        MIRR is the constant annual rate that turns the Step 1 total into the Step 2 total over the
+                        project duration.
+                        Conceptually it behaves like: “If I invested X today and ended with Y in N years, what’s the
+                        annualized rate?”
+                    </p>
+
+                    <p>
+                        That’s why MIRR often feels more “real” than IRR. It behaves like a disciplined compounding
+                        story with explicit reinvestment assumptions.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="irr-vs-mirr">
+                    <h2>MIRR vs IRR vs XIRR vs NPV: When Each Metric Wins</h2>
+
+                    <h3>IRR</h3>
+                    <p>
+                        Best for: simple, periodic cash flows with one sign change (negative upfront, positives later).
+                        Weakness: reinvestment at IRR assumption and multiple IRRs in complex cash flow patterns.
+                    </p>
+
+                    <h3>XIRR</h3>
+                    <p>
+                        Best for: irregular dates (real estate, private deals, irregular contributions/withdrawals).
+                        Weakness: still inherits IRR’s reinvestment logic and still can face multiple solution issues
+                        when sign changes occur multiple times.
+                    </p>
+
+                    <h3>MIRR</h3>
+                    <p>
+                        Best for: when you want a single annualized rate but with realistic reinvestment assumptions.
+                        Strong when: early distributions inflate IRR, or cash flows are complex.
+                        Weakness: requires choosing two rates (finance and reinvest), which adds subjectivity—but also
+                        transparency.
+                    </p>
+
+                    <h3>NPV</h3>
+                    <p>
+                        Best for: making a decision at a specified required return (hurdle rate). Robust with weird cash
+                        flows.
+                        Weakness: depends on the discount rate choice—but that’s often a feature.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            A practical stack: <strong>XIRR</strong> for timing accuracy, <strong>MIRR</strong> for
+                            realistic reinvestment, and <strong>NPV</strong> for decision-making at a hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="choose">
+                    <h2>How to Choose Finance Rate and Reinvestment Rate (Practical, Not Academic)</h2>
+
+                    <h3>Finance rate: what does it cost you to fund outflows?</h3>
+                    <p>
+                        Ask: if I need money for negative cash flows, where does it come from?
+                    </p>
+                    <ul>
+                        <li>If you borrow: use an approximate borrowing cost (or blended rate if multiple funding
+                            sources).</li>
+                        <li>If you use cash: use your opportunity cost baseline (what that cash could earn with similar
+                            risk and liquidity).</li>
+                        <li>If this is a corporate project: finance rate often ties to the cost of capital for funding.
+                        </li>
+                    </ul>
+
+                    <h3>Reinvestment rate: what will you actually do with distributions?</h3>
+                    <p>
+                        Many deals assume distributions can be reinvested at the IRR itself. MIRR forces you to choose:
+                    </p>
+                    <ul>
+                        <li>If you can redeploy into similar deals reliably: reinvestment rate might be near your hurdle
+                            rate.</li>
+                        <li>If distributions will sit in cash: use a low reinvestment rate.</li>
+                        <li>If you’ll invest in public markets: use a conservative expected return assumption.</li>
+                    </ul>
+
+                    <h3>Use ranges (because reality isn’t one number)</h3>
+                    <p>
+                        Like discount rates, reinvestment rates can be estimated. Run MIRR with a conservative reinvest
+                        rate and a base reinvest rate.
+                        If the “headline story” changes wildly, the deal’s attractiveness depends heavily on
+                        reinvestment opportunity.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If you choose an unrealistically high reinvestment rate, MIRR becomes “IRR in disguise.”
+                            Keep it grounded.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Examples (Simple + Real Estate)</h2>
+
+                    <h3>Example 1: Why MIRR is often lower than IRR when distributions are early</h3>
+                    <p>
+                        Consider a deal with a big early distribution. IRR often jumps because cash comes back quickly.
+                        But can you reinvest that cash at the same high IRR? Maybe not.
+                    </p>
+                    <p>
+                        MIRR typically reduces the implied return by assuming reinvestment at your chosen reinvestment
+                        rate (say 8% or 10%),
+                        not at a 30%+ implied IRR.
+                    </p>
+                    <p>
+                        The lesson is not “IRR is wrong.” The lesson is: IRR’s reinvestment assumption is hidden; MIRR’s
+                        reinvestment assumption is explicit.
+                    </p>
+
+                    <h3>Example 2: Real estate with refinance cash-out (IRR inflation pattern)</h3>
+                    <p>
+                        A common real estate pattern:
+                    </p>
+                    <ul>
+                        <li>Big negative upfront: down payment + renovation</li>
+                        <li>Stabilize rents</li>
+                        <li>Refinance and pull cash out early (positive mid-hold cash flow)</li>
+                        <li>Hold for cash flow, then sell later</li>
+                    </ul>
+                    <p>
+                        IRR can look extremely high because some capital returns early.
+                        But that doesn’t mean the deal is “as good as” a true 30% compounding machine.
+                        MIRR can be more realistic because it assumes the refinance cash-out is reinvested at a
+                        reasonable rate, not at the high IRR.
+                    </p>
+
+                    <h3>Example 3: Multiple IRR scenario (MIRR gives one answer)</h3>
+                    <p>
+                        If a project has:
+                    </p>
+                    <ul>
+                        <li>negative upfront</li>
+                        <li>positive distributions</li>
+                        <li>a large negative later (major CapEx or balloon payment)</li>
+                        <li>positive exit</li>
+                    </ul>
+                    <p>
+                        IRR can have multiple solutions. MIRR often produces a single answer because it structures the
+                        problem as “present value of negatives” vs “future value of positives.”
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="excel">
+                    <h2>How to Calculate MIRR in Excel (Step-by-Step)</h2>
+
+                    <h3>Step 1: Put periodic cash flows in a column</h3>
+                    <p class="mini-note">
+                        MIRR in Excel assumes cash flows are periodic (e.g., yearly or monthly). If you have irregular
+                        dates, you typically build a dated DCF,
+                        use XIRR for timing, and use NPV checks. MIRR is still useful as a summary when your model uses
+                        periods.
+                    </p>
+
+                    <h3>Step 2: Use the formula</h3>
+                    <p>
+                        <strong>=MIRR(values, finance_rate, reinvest_rate)</strong>
+                    </p>
+
+                    <h3>Step 3: Example</h3>
+                    <p>
+                        If cash flows are in A1:A10:
+                        <br><strong>=MIRR(A1:A10, 0.07, 0.09)</strong>
+                    </p>
+                    <ul>
+                        <li>0.07 = finance rate (7%)</li>
+                        <li>0.09 = reinvestment rate (9%)</li>
+                    </ul>
+
+                    <h3>Step 4: Interpret</h3>
+                    <p>
+                        MIRR is an annualized return. If MIRR is 11%, it means “given my finance and reinvest
+                        assumptions, this project behaves like an 11% annual compounder.”
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Debug tip: Make sure you have at least one negative and one positive value in the range—same
+                            rule as IRR.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="sheets">
+                    <h2>How to Calculate MIRR in Google Sheets</h2>
+                    <p>
+                        Google Sheets supports MIRR with the same structure:
+                        <br><strong>=MIRR(values, finance_rate, reinvest_rate)</strong>
+                    </p>
+
+                    <h3>Common Sheets issue: periodic assumption</h3>
+                    <p>
+                        Like Excel, MIRR in Sheets assumes equal spacing between cash flows.
+                        If your deal is irregular by dates, MIRR can still be used if you bucket into months/years
+                        consistently,
+                        but XIRR is the timing-accurate metric.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes (That Make MIRR Useless)</h2>
+
+                    <h3>1) Using unrealistic reinvestment rates</h3>
+                    <p>
+                        If you set reinvestment rate equal to a very high IRR, MIRR loses its purpose.
+                        Pick a rate you can actually earn on interim distributions.
+                    </p>
+
+                    <h3>2) Confusing finance rate with discount rate</h3>
+                    <p>
+                        Finance rate is specifically about outflows and funding cost.
+                        Discount rate (for NPV) is about required return for the project’s risk.
+                        They can be related, but they’re not identical.
+                    </p>
+
+                    <h3>3) Using gross sale proceeds in real estate cash flows</h3>
+                    <p>
+                        MIRR is still only as good as your cash flows. Sale should be net of selling costs and loan
+                        payoff if you’re modeling equity returns.
+                    </p>
+
+                    <h3>4) Treating MIRR as a decision metric without NPV</h3>
+                    <p>
+                        MIRR is a summary return. For decision-making across different sized projects, NPV at a hurdle
+                        rate often ranks projects better.
+                    </p>
+
+                    <h3>5) Ignoring scenario sensitivity</h3>
+                    <p>
+                        If your deal’s exit assumption changes a lot, MIRR can swing too.
+                        Run conservative/base/optimistic cases for exit price, vacancy, and expenses.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="multiple">
+                    <h2>Multiple IRRs: The Classic Case Where MIRR Shines</h2>
+                    <p>
+                        If a cash flow stream has multiple sign changes, IRR can produce:
+                    </p>
+                    <ul>
+                        <li>multiple IRR answers</li>
+                        <li>a weird answer that depends on guess</li>
+                        <li>or a failure to converge</li>
+                    </ul>
+
+                    <h3>Why MIRR helps</h3>
+                    <p>
+                        MIRR effectively forces cash flows into one negative “bucket” (present value of costs) and one
+                        positive “bucket” (future value of returns).
+                        That creates a single growth rate linking them, which is why MIRR tends to be stable.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If IRR/XIRR fails or gives different answers depending on the guess, compute MIRR and NPV
+                            instead of arguing with the spreadsheet.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="practice">
+                    <h2>How Pros Use MIRR (Without Overcomplicating It)</h2>
+                    <p>
+                        In practice, professionals rarely rely on MIRR alone. They use it as one view in a “return
+                        dashboard”:
+                    </p>
+                    <ul>
+                        <li><strong>XIRR</strong> (or IRR) as the headline rate</li>
+                        <li><strong>MIRR</strong> as the “realistic reinvestment” rate</li>
+                        <li><strong>NPV</strong> as the value creation metric at a hurdle rate</li>
+                        <li><strong>Equity multiple</strong> to sanity-check total dollars returned</li>
+                    </ul>
+
+                    <h3>A clean workflow</h3>
+                    <ol>
+                        <li>Build realistic cash flows (net sale proceeds, fees, real CapEx timing)</li>
+                        <li>Compute IRR/XIRR</li>
+                        <li>Compute MIRR with grounded finance + reinvest assumptions</li>
+                        <li>Compute NPV at a hurdle rate range</li>
+                        <li>Run conservative scenarios</li>
+                    </ol>
+
+                    <div class="callout">
+                        <p>
+                            MIRR helps you avoid one of the most common errors in investing: treating a high IRR as if
+                            it compounds at that rate in real life.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Checklist</h2>
+                    <ul>
+                        <li>✅ Use MIRR when interim cash flows are large or early (IRR inflation risk)</li>
+                        <li>✅ Use MIRR when IRR can have multiple answers (multiple sign changes)</li>
+                        <li>✅ Choose a realistic reinvestment rate (often lower than IRR)</li>
+                        <li>✅ Finance rate reflects funding cost/opportunity cost for outflows</li>
+                        <li>✅ Keep cash flows realistic (net sale proceeds, fees included)</li>
+                        <li>✅ Use MIRR alongside XIRR and NPV (don’t rely on one metric)</li>
+                        <li>✅ Run conservative and base scenarios (exit value matters)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR/XIRR and compare to MIRR in the <a href="/irr/calculator/">IRR
+                                calculator</a>, then decide using NPV at your hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/what-is-irr/">What is IRR?</a>
+                            <p>Definition, intuition, and pitfalls.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/xirr-irregular-cash-flows/">XIRR (irregular cash flows)</a>
+                            <p>Use dates for real-world timing.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/irr-vs-npv/">IRR vs NPV</a>
+                            <p>Why higher IRR isn’t always better.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/discount-rate-vs-irr/">Discount rate vs IRR</a>
+                            <p>Hurdle rates and required returns.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash flow</a>
+                            <p>Timing and distributions drive returns.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is MIRR?</h4>
+                        <p>
+                            MIRR is Modified Internal Rate of Return: an annualized return metric that assumes negative
+                            cash flows are funded at a finance rate and positive cash flows are reinvested at a
+                            reinvestment rate, producing a more realistic return than IRR in many cases.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why use MIRR instead of IRR?</h4>
+                        <p>
+                            MIRR makes reinvestment assumptions explicit and realistic, and it often avoids multiple IRR
+                            solutions when cash flows are non-standard.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I calculate MIRR in Excel or Google Sheets?</h4>
+                        <p>
+                            Use <strong>=MIRR(values, finance_rate, reinvest_rate)</strong>. Values must include at
+                            least one negative and one positive cash flow.
+                            finance_rate is the cost/opportunity cost for outflows; reinvest_rate is what you
+                            realistically earn on interim inflows.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What finance rate and reinvestment rate should I use?</h4>
+                        <p>
+                            Finance rate often matches your borrowing cost or cash opportunity cost; reinvestment rate
+                            matches what you can realistically earn on interim distributions (often near a hurdle rate
+                            or conservative reinvestment assumption).
+                            Many analysts test a range.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does MIRR work for real estate?</h4>
+                        <p>
+                            Yes. MIRR can be especially useful in deals with early distributions/refinance cash-outs
+                            that inflate IRR, or where cash flows change sign multiple times. Still run NPV and scenario
+                            tests because real estate results are sensitive to exit assumptions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        MIRR exists because IRR is easy to quote but easy to misinterpret. IRR’s reinvestment assumption
+                        is often unrealistic,
+                        and complex cash flow patterns can produce multiple IRRs. MIRR fixes both by using explicit
+                        finance and reinvestment rates,
+                        producing a more stable and often more realistic annualized return—especially for real estate
+                        and private deals.
+                        Use MIRR as a companion metric: compute XIRR for timing, MIRR for realistic reinvestment, and
+                        NPV for decision-making at your hurdle rate.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compare IRR/XIRR and MIRR, then decide with NPV (see <a
+                                href="/irr/irr-vs-npv/">IRR vs NPV</a>).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. MIRR depends on chosen finance and reinvestment rates and assumes periodic
+                        cash flow spacing in common spreadsheet implementations.
+                        For irregular dated cash flows, use XIRR and NPV checks; use MIRR as a complementary,
+                        assumption-explicit summary metric.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,813 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="IRR vs NPV: which metric should you trust? Learn the difference between Internal Rate of Return and Net Present Value, why higher IRR isn’t always better, how to choose using hurdle rates and capital constraints, and how to apply IRR/NPV to real estate and investing decisions. Includes examples, decision rules, common pitfalls (multiple IRRs, reinvestment assumption), and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/irr-vs-npv/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/irr-vs-npv/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/irr-vs-npv/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>IRR vs NPV — Which Metric Matters More? (With Examples) | PropertyCost</title>
+
+    <meta property="og:title" content="IRR vs NPV — Which Metric Matters More?" />
+    <meta property="og:description"
+        content="A practical guide: why higher IRR isn’t always better, when NPV should win, and how to make decisions with hurdle rates and capital constraints." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/irr-vs-npv/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IRR vs NPV — Which Metric Matters More?">
+    <meta name="twitter:description"
+        content="Understand the real difference between IRR and NPV, and learn when each metric is the right decision tool.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/irr-vs-npv/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"IRR vs NPV","item":"https://mypropertycost.com/irr/irr-vs-npv/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/irr-vs-npv/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the difference between IRR and NPV?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR is the discount rate that makes NPV equal to zero (a percentage return). NPV is the dollar value created at a chosen discount rate (your hurdle rate). IRR is a rate; NPV is value in dollars."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why is a higher IRR not always better?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR can be higher for smaller or shorter projects even if they create fewer dollars. IRR can also be inflated by early cash flows and can be misleading when projects have different sizes, timelines, or non-standard cash flow patterns."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"When should I use NPV instead of IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use NPV when you have a specific required return (hurdle rate), when projects differ in size, when capital is constrained, or when cash flows can produce multiple IRRs. NPV directly answers: how many dollars does this decision create at our required return?"
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"When is IRR most useful?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR is useful for communicating a time-weighted annualized rate and comparing investments with similar size and risk, especially when cash flow timing differs. It’s best used alongside NPV and an equity multiple."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Do real estate investors use IRR or NPV?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Both. IRR is widely quoted in real estate because cash flows are irregular. NPV is the stronger decision tool when you have a defined hurdle rate and want to maximize value in dollars—especially when deals differ in leverage, timeline, or size."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">IRR vs NPV</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#definitions">Definitions (plain English)</a></li>
+                    <li><a href="#why">Why IRR and NPV can disagree</a></li>
+                    <li><a href="#example1">Example: smaller deal wins IRR but loses NPV</a></li>
+                    <li><a href="#example2">Example: timing and reinvestment assumptions</a></li>
+                    <li><a href="#capital">Capital constraints and value maximization</a></li>
+                    <li><a href="#hurdle">Hurdle rates: how to choose a discount rate</a></li>
+                    <li><a href="#realestate">Real estate: levered IRR vs NPV</a></li>
+                    <li><a href="#multiple">Multiple IRRs and non-standard cash flows</a></li>
+                    <li><a href="#practice">How pros use both metrics</a></li>
+                    <li><a href="#checklist">Decision checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Compute IRR/XIRR fast</div>
+                        <div class="sidebar-cta__sub">Cash flows + dates → IRR.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>IRR vs NPV: Which Metric Matters More?</h1>
+                        <p class="subtitle">
+                            IRR (Internal Rate of Return) is popular because it turns a complicated stream of cash flows
+                            into one annualized percentage.
+                            NPV (Net Present Value) is powerful because it turns the same cash flows into one dollar
+                            number: how much value you create at a required return.
+                            The catch: <strong>IRR and NPV can rank projects differently</strong>. A deal can have a
+                            higher IRR but create fewer dollars.
+                            Another deal can have a lower IRR but create more wealth. This guide explains exactly why
+                            that happens and gives you a clear decision framework,
+                            including real estate examples (levered vs unlevered returns), capital constraints, and the
+                            most common traps (multiple IRRs and reinvestment assumptions).
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–32 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why">Why they disagree</a>
+                    <a href="#example1">Example</a>
+                    <a href="#realestate">Real estate</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/what-is-irr/">
+                            <strong>What is IRR?</strong>
+                            <span>Definition, intuition, and pitfalls.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/how-to-calculate-irr/">
+                            <strong>How to calculate IRR</strong>
+                            <span>IRR vs XIRR, examples, troubleshooting.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/calculator/">
+                            <strong>IRR calculator</strong>
+                            <span>Compute IRR/XIRR from cash flows.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>IRR is a percentage; NPV is dollars.</strong> IRR tells you the annualized rate implied
+                        by the cash flows.
+                        NPV tells you how many dollars of value those cash flows create at a chosen discount rate (your
+                        hurdle rate).
+                        If you must choose one metric for decision-making across projects of different size or timeline,
+                        <strong>NPV is usually the better “maximize value” tool</strong>.
+                        IRR is still useful as a communication metric and for comparing similar projects, but it can
+                        mislead when:
+                        deal sizes differ, timelines differ, cash flow patterns are non-standard, or reinvestment
+                        assumptions are unrealistic.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Use IRR to summarize the deal, use NPV to decide between
+                            deals (at your hurdle rate),
+                            and always sanity-check with at least one additional metric like equity multiple.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Definitions in Plain English</h2>
+
+                    <h3>What is IRR?</h3>
+                    <p>
+                        IRR (Internal Rate of Return) is the discount rate that makes the NPV of a set of cash flows
+                        equal to zero.
+                        In human terms: it’s the single annual rate that “fits” the investment’s cash flow timing.
+                        IRR answers: <strong>“What annualized rate would make these cash flows break even in present
+                            value?”</strong>
+                    </p>
+
+                    <h3>What is NPV?</h3>
+                    <p>
+                        NPV (Net Present Value) discounts every cash flow back to today using a discount rate (your
+                        required return).
+                        Then it sums them. NPV answers: <strong>“How many dollars of value do these cash flows create at
+                            my required return?”</strong>
+                    </p>
+
+                    <h3>The key difference</h3>
+                    <ul>
+                        <li><strong>IRR is a rate</strong> (percent per year).</li>
+                        <li><strong>NPV is value</strong> (dollars today).</li>
+                        <li>IRR can be easier to quote; NPV can be easier to decide with.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If someone says “Deal A has a 22% IRR,” ask: “At our hurdle rate, how much value does it
+                            create? What’s the NPV?”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why IRR and NPV Can Disagree (Even With the Same Cash Flows)</h2>
+                    <p>
+                        IRR and NPV are computed from the same cash flows, so it feels like they should always point to
+                        the same choice.
+                        Often they do—but not always. The disagreements come from the fact that they answer different
+                        questions.
+                    </p>
+
+                    <h3>1) Different project sizes</h3>
+                    <p>
+                        IRR does not care if a project is small or large. It only cares about the rate.
+                        NPV cares about dollars. A smaller deal can produce a higher IRR while creating fewer dollars
+                        than a larger deal with a lower IRR.
+                    </p>
+
+                    <h3>2) Different timelines</h3>
+                    <p>
+                        IRR is sensitive to how quickly cash comes back. A fast payback can boost IRR dramatically.
+                        NPV can favor longer projects if they produce more value in total dollars—especially if your
+                        hurdle rate isn’t extremely high.
+                    </p>
+
+                    <h3>3) Reinvestment assumptions</h3>
+                    <p>
+                        IRR implicitly assumes interim cash flows are reinvested at the IRR itself.
+                        That can be unrealistic when IRR is very high. NPV doesn’t embed that same assumption in the
+                        same way—
+                        it simply discounts at your chosen hurdle rate.
+                    </p>
+
+                    <h3>4) Non-standard cash flows (multiple sign changes)</h3>
+                    <p>
+                        Some cash flow patterns produce multiple IRRs (or no meaningful IRR).
+                        NPV still works as long as you choose a discount rate. That’s one reason many analysts treat NPV
+                        as the “more robust” metric.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="example1">
+                    <h2>Example: Smaller Deal Wins on IRR, Bigger Deal Wins on NPV</h2>
+                    <p>
+                        Here’s the classic conflict that explains why “highest IRR wins” can be a trap.
+                        Suppose your hurdle rate (required return) is 10%.
+                    </p>
+
+                    <h3>Deal A (small but fast)</h3>
+                    <ul>
+                        <li>Invest $10,000 today</li>
+                        <li>Receive $12,000 in one year</li>
+                    </ul>
+                    <p>
+                        This is roughly a 20% IRR (because it’s basically a one-year 20% gain).
+                        At a 10% discount rate, the present value of $12,000 received in a year is about $10,909.
+                        NPV ≈ $10,909 - $10,000 = <strong>$909</strong>.
+                    </p>
+
+                    <h3>Deal B (bigger, slightly lower rate)</h3>
+                    <ul>
+                        <li>Invest $100,000 today</li>
+                        <li>Receive $118,000 in one year</li>
+                    </ul>
+                    <p>
+                        This is roughly an 18% IRR. It’s “worse” than Deal A by IRR.
+                        But NPV at 10%: present value of $118,000 in a year is about $107,273.
+                        NPV ≈ $107,273 - $100,000 = <strong>$7,273</strong>.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Conclusion:</strong> Deal A has the higher IRR (20% vs 18%), but Deal B creates more
+                            value in dollars ($7,273 vs $909).
+                            If your goal is maximizing wealth and you can fund either, NPV points to Deal B.
+                        </p>
+                    </div>
+
+                    <h3>So which deal is “better”?</h3>
+                    <p>
+                        It depends on your constraint:
+                    </p>
+                    <ul>
+                        <li>If you have only $10,000 available, Deal A may be your only option (IRR matters, but capital
+                            limits matter more).</li>
+                        <li>If you have $100,000 available and want to maximize value, Deal B is stronger at your hurdle
+                            rate.</li>
+                        <li>If you can do both, you’d do both (both have positive NPV at 10%).</li>
+                    </ul>
+
+                    <p>
+                        This example shows the real role of IRR: it’s a “rate” summary, not a “value created” metric.
+                        When the goal is value creation, NPV is often the correct ranking tool.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="example2">
+                    <h2>Example: Timing Effects and the “Reinvestment” Trap</h2>
+                    <p>
+                        IRR can be “won” by pulling cash forward—even if total dollars returned don’t improve.
+                        That’s not necessarily bad (getting paid earlier is real value), but it can create misleading
+                        comparisons when the “early cash”
+                        can’t realistically be reinvested at the same high rate.
+                    </p>
+
+                    <h3>Deal C (early distribution)</h3>
+                    <ul>
+                        <li>Invest $100,000 today</li>
+                        <li>Receive $60,000 at the end of Year 1</li>
+                        <li>Receive $60,000 at the end of Year 2</li>
+                    </ul>
+
+                    <h3>Deal D (later distribution)</h3>
+                    <ul>
+                        <li>Invest $100,000 today</li>
+                        <li>Receive $0 at the end of Year 1</li>
+                        <li>Receive $130,000 at the end of Year 2</li>
+                    </ul>
+
+                    <p>
+                        These deals can produce different IRRs because Deal C returns cash sooner. But which creates
+                        more value depends on:
+                        your hurdle rate, your ability to redeploy the Year 1 cash, and your risk.
+                    </p>
+
+                    <h3>Why NPV helps</h3>
+                    <p>
+                        If your hurdle rate is 10%, you discount those cash flows at 10%. NPV gives you a dollar
+                        decision tool.
+                        If Deal C’s early $60,000 is valuable because you can redeploy it at or above 10%, NPV will show
+                        that.
+                        If you can’t redeploy it (or you’ll spend it), the practical advantage of “early cash” can be
+                        smaller than the IRR suggests.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key idea:</strong> IRR assumes interim cash flows are reinvested at the IRR itself.
+                            NPV discounts at your hurdle rate.
+                            If you can’t reinvest at a high rate, NPV is often the more realistic decision metric.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="capital">
+                    <h2>Capital Constraints: The Real Reason People Overuse IRR</h2>
+                    <p>
+                        In the real world, you often have limited capital: time, cash, borrowing capacity, attention, or
+                        deal flow.
+                        When capital is constrained, it’s tempting to choose the highest IRR because it feels like the
+                        “best efficiency.”
+                        Sometimes that logic is correct—but not always.
+                    </p>
+
+                    <h3>When “highest IRR” is a useful rule</h3>
+                    <ul>
+                        <li>You can only do one deal and you truly can recycle capital repeatedly at similar rates.</li>
+                        <li>The deals are similar in size, risk, and structure (apples-to-apples).</li>
+                        <li>Your goal is rapid capital turnover (short-hold strategies, flips, some value-add projects).
+                        </li>
+                    </ul>
+
+                    <h3>When NPV should dominate</h3>
+                    <ul>
+                        <li>Deals are different sizes (one is much larger).</li>
+                        <li>Deals have different timelines (one is much longer).</li>
+                        <li>Risk differs materially (leverage, market risk, execution risk).</li>
+                        <li>You have a defined hurdle rate and want to maximize value at that required return.</li>
+                    </ul>
+
+                    <p>
+                        In other words: if you can reliably reinvest capital at high returns, IRR can be a useful
+                        “speed” metric.
+                        If you can’t reliably reinvest or deal flow is limited, NPV often describes real wealth creation
+                        better.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="hurdle">
+                    <h2>Hurdle Rates: How to Choose a Discount Rate for NPV</h2>
+                    <p>
+                        NPV requires a discount rate. That’s not a flaw—it’s a feature.
+                        NPV forces you to be explicit about what return you require for the risk you’re taking.
+                    </p>
+
+                    <h3>What is a hurdle rate?</h3>
+                    <p>
+                        A hurdle rate is your required return. It reflects:
+                    </p>
+                    <ul>
+                        <li>Risk-free-ish alternatives (like safe bonds or savings) as a baseline</li>
+                        <li>Risk premium for uncertainty (market volatility, leverage, tenant risk, renovation risk)
+                        </li>
+                        <li>Illiquidity and complexity (your time and effort have value)</li>
+                        <li>Your personal situation (cash needs, timeline, diversification)</li>
+                    </ul>
+
+                    <h3>Practical approach: use a range, not a single perfect number</h3>
+                    <p>
+                        Many people get stuck because they want the “one correct discount rate.”
+                        Instead, run NPV at a few rates: conservative, base, aggressive.
+                        If a deal only works at an unrealistically low discount rate, you’ve learned something important
+                        about risk or fragility.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            A strong deal usually stays attractive across a reasonable range of discount rates (or at
+                            least you can clearly see the break-even rate).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="realestate">
+                    <h2>Real Estate: Levered IRR vs NPV (Where People Get Misled)</h2>
+                    <p>
+                        Real estate analysis often quotes IRR because cash flows are irregular: renovations, vacancy,
+                        rent growth, refinance events, and a sale.
+                        But real estate also adds complications that make IRR easier to inflate:
+                        leverage, optimistic exit assumptions, and ignoring friction (selling costs, fees, CapEx).
+                    </p>
+
+                    <h3>Levered IRR can look amazing (and still be fragile)</h3>
+                    <p>
+                        Leverage can boost equity returns because you’re using borrowed money to control an asset.
+                        If the asset rises in value, equity can see a large percentage return.
+                        But leverage also increases risk: small disappointments (rent down, vacancy up, rate resets,
+                        exit cap rates widening) can crush equity outcomes.
+                    </p>
+
+                    <h3>Why NPV adds clarity</h3>
+                    <p>
+                        If you choose a risk-appropriate discount rate, NPV asks:
+                        “Given this risk profile, how many dollars of value are we creating?”
+                        A levered deal with a high IRR but small equity dollars might be less valuable than a steadier
+                        deal with slightly lower IRR but higher NPV.
+                    </p>
+
+                    <h3>Real estate “must include” items for both IRR and NPV</h3>
+                    <ul>
+                        <li>Purchase closing costs (cash out)</li>
+                        <li>Renovation / CapEx timing (cash out at actual dates)</li>
+                        <li>Vacancy and turnover costs (cash out)</li>
+                        <li>Net operating cash flow (cash in/out)</li>
+                        <li>Selling costs + loan payoff (cash out at sale)</li>
+                        <li>Net sale proceeds (cash in)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If you calculate IRR on gross sale proceeds (without selling costs and loan payoff), the IRR
+                            is inflated and comparisons will be wrong.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="multiple">
+                    <h2>Multiple IRRs and Non-Standard Cash Flows (Why NPV Is More Robust)</h2>
+                    <p>
+                        One of the biggest technical weaknesses of IRR is that it can produce <strong>multiple</strong>
+                        answers
+                        when cash flows change sign more than once (negative → positive → negative → positive).
+                        In those cases, “the IRR” might not be unique.
+                    </p>
+
+                    <h3>When does this happen?</h3>
+                    <ul>
+                        <li>Big mid-project reinvestments (major CapEx later)</li>
+                        <li>Projects with cleanup costs or balloon payments</li>
+                        <li>Deals where cash-out refinance changes the sign pattern</li>
+                    </ul>
+
+                    <h3>What to do instead</h3>
+                    <p>
+                        When IRR is ambiguous, NPV usually remains clear. You can also use:
+                    </p>
+                    <ul>
+                        <li><strong>MIRR</strong> (Modified IRR) with realistic reinvestment and finance rates</li>
+                        <li><strong>NPV at a hurdle rate</strong> as the primary decision metric</li>
+                        <li><strong>Equity multiple</strong> to sanity-check dollars returned</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If IRR behaves strangely or returns errors, calculate NPV at your hurdle rate and decide
+                            based on value created.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="practice">
+                    <h2>How Pros Use IRR and NPV Together (A Practical Workflow)</h2>
+                    <p>
+                        The goal isn’t to “pick a winner metric.” The goal is to make a decision that holds up under
+                        real constraints:
+                        limited time, uncertain assumptions, and the fact that you don’t know future interest rates,
+                        rents, or exit prices.
+                    </p>
+
+                    <h3>Step 1: Build realistic cash flows</h3>
+                    <p>
+                        This is the real work. If the cash flows are fantasy, IRR and NPV will be fantasy.
+                        In real estate: don’t ignore vacancy, maintenance, CapEx, property taxes, insurance increases,
+                        and selling costs.
+                    </p>
+
+                    <h3>Step 2: Compute IRR/XIRR</h3>
+                    <p>
+                        IRR gives you a headline rate to communicate and compare. Use <a
+                            href="/irr/how-to-calculate-irr/">XIRR</a> when dates are irregular.
+                    </p>
+
+                    <h3>Step 3: Compute NPV at your hurdle rate</h3>
+                    <p>
+                        This converts the deal into “value created today” at your required return. This is the most
+                        decision-useful number when deals differ.
+                    </p>
+
+                    <h3>Step 4: Add a third metric (equity multiple or total profit)</h3>
+                    <p>
+                        A third metric prevents you from getting hypnotized by one number.
+                        Equity multiple answers “how many times my money back?” and helps you understand whether IRR is
+                        being boosted mostly by timing.
+                    </p>
+
+                    <h3>Step 5: Run scenarios</h3>
+                    <p>
+                        Run conservative/base/optimistic scenarios. If the deal only works in the optimistic case, it’s
+                        not “wrong”—but you should label it as fragile.
+                        If it stays positive NPV under conservative assumptions, it’s more robust.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Tools: calculate IRR quickly with the <a href="/irr/calculator/">IRR calculator</a>, then
+                            decide with NPV at your hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Decision Checklist: IRR vs NPV</h2>
+                    <ul>
+                        <li><strong>1)</strong> Are the deals similar size and risk? If not, prefer NPV for ranking.
+                        </li>
+                        <li><strong>2)</strong> Do you have a clear hurdle rate? If yes, compute NPV and use it as the
+                            decision anchor.</li>
+                        <li><strong>3)</strong> Are cash flows irregular? Use XIRR for IRR and use NPV with actual
+                            dates.</li>
+                        <li><strong>4)</strong> Could cash flows produce multiple IRRs? If yes, rely more on NPV (or
+                            MIRR).</li>
+                        <li><strong>5)</strong> Are you capital constrained and able to reinvest quickly? IRR can matter
+                            more, but still check NPV.</li>
+                        <li><strong>6)</strong> Did you include all friction and fees (closing, selling, CapEx)? If not,
+                            fix the cash flows first.</li>
+                        <li><strong>7)</strong> Did you run conservative scenarios? If not, your ranking may be fragile.
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>If you want one sentence:</strong> Use IRR to describe the deal, use NPV (at a
+                            hurdle rate) to choose the deal.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/what-is-irr/">What is IRR?</a>
+                            <p>Definition, intuition, and common pitfalls.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/how-to-calculate-irr/">How to calculate IRR</a>
+                            <p>IRR vs XIRR, setup rules, and troubleshooting.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Compute IRR/XIRR quickly from cash flows.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash flow</a>
+                            <p>Why timing and distributions change outcomes.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/">Break-even</a>
+                            <p>Timeline thinking for decisions.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the difference between IRR and NPV?</h4>
+                        <p>
+                            IRR is a percentage return: the discount rate that makes NPV equal to zero.
+                            NPV is a dollar measure: value created today at a chosen discount rate (your hurdle rate).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why is a higher IRR not always better?</h4>
+                        <p>
+                            Because IRR can be higher for smaller or shorter projects even if they create fewer dollars.
+                            IRR can also be boosted by early cash flows and can be misleading when project sizes,
+                            timelines, or cash flow patterns differ.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>When should I use NPV instead of IRR?</h4>
+                        <p>
+                            Use NPV when you have a specific hurdle rate, when projects differ in size, when capital is
+                            constrained,
+                            or when cash flows produce multiple IRRs. NPV directly answers how many dollars of value you
+                            create at your required return.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>When is IRR most useful?</h4>
+                        <p>
+                            IRR is useful as a communication metric and for comparing similar projects when timing
+                            differs.
+                            It’s best used alongside NPV and an equity multiple.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Do real estate investors use IRR or NPV?</h4>
+                        <p>
+                            Both. IRR is commonly quoted because real estate cash flows are irregular, but NPV is often
+                            the stronger decision tool when you have a defined hurdle rate and want to maximize value in
+                            dollars.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        IRR and NPV are not enemies—they answer different questions.
+                        IRR tells you the annualized “rate” implied by a cash flow stream. NPV tells you how many
+                        dollars of value that stream creates at your required return.
+                        When investments are similar in size and risk, IRR is a helpful summary. When investments differ
+                        in size, timeline, or cash flow patterns, NPV is usually the better ranking tool.
+                        The best workflow is simple: build realistic cash flows, compute IRR/XIRR, compute NPV at your
+                        hurdle rate, sanity-check with equity multiple, and run conservative scenarios.
+                        That approach prevents you from chasing a high IRR that looks great but doesn’t actually
+                        maximize wealth.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR in the <a href="/irr/calculator/">IRR calculator</a>, then decide
+                            using NPV at your hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. IRR and NPV depend on cash flow assumptions and timing. Use XIRR for irregular
+                        cash flow dates,
+                        include real-world fees and friction, and use scenario ranges rather than a single “perfect”
+                        forecast.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

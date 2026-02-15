@@ -2,7 +2,7 @@ require("dotenv").config();
 const db = require("./db");
 const rateLimit = require('express-rate-limit');
 const crypto = require("crypto");
-
+	
 const {RedisStore} = require("rate-limit-redis");
 const redisClient = require("./redis");
 
@@ -46,13 +46,13 @@ function registerGoogleRoutes(app){
         
         // 🔐 STATE CHECK (CSRF protection)
         if (!req.query.state || req.query.state !== req.session.googleState) {
-            return res.redirect("/login.html?error=oauth_state_invalid");
+            return res.redirect("/login/?error=oauth_state_invalid");
         }
         delete req.session.googleState;
 
         const code = req.query.code;
         if (!code) {
-            return res.redirect("/login.html?error=oauth_no_code");
+            return res.redirect("/login/?error=oauth_no_code");
         }
 
         // ====== TOKEN EXCHANGE ======
@@ -71,17 +71,17 @@ function registerGoogleRoutes(app){
             });
         } catch (err) {
             console.error("Google token fetch failed:", err);
-            return res.redirect("/login.html?error=google_unavailable");
+            return res.redirect("/login/?error=google_unavailable");
         }
 
         if (!tokenRes.ok) {
             console.error("Google token error:", await tokenRes.text());
-            return res.redirect("/login.html?error=token_exchange_failed");
+            return res.redirect("/login/?error=token_exchange_failed");
         }
 
         const tokenData = await tokenRes.json();
         if (!tokenData.access_token) {
-            return res.redirect("/login.html?error=token_exchange_failed");
+            return res.redirect("/login/?error=token_exchange_failed");
         }
 
         // ====== GET PROFILE ======
@@ -94,18 +94,18 @@ function registerGoogleRoutes(app){
             });
         } catch (err) {
             console.error("Google profile fetch failed:", err);
-            return res.redirect("/login.html?error=google_unavailable");
+            return res.redirect("/login/?error=google_unavailable");
         }
 
         if (!userRes.ok) {
             console.error("Google profile error:", await userRes.text());
-            return res.redirect("/login.html?error=profile_fetch_failed");
+            return res.redirect("/login/?error=profile_fetch_failed");
         }
 
         const profile = await userRes.json();
 
         if (!profile.email) {
-            return res.redirect("/login.html?error=no_email");
+            return res.redirect("/login/?error=no_email");
         }
 
         //  DB LOGIC 
@@ -136,19 +136,19 @@ function registerGoogleRoutes(app){
             }
         } catch (err) {
             console.error("DB error:", err);
-            return res.redirect("/login.html?error=internal_error");
+            return res.redirect("/login/?error=internal_error");
         }
 
         //  SESSION FIXATION PROTECTION 
         req.session.regenerate(err => {
             if (err) {
                 console.error("Session regenerate failed:", err);
-                return res.redirect("/login.html?error=internal_error");
+                return res.redirect("/login/?error=internal_error");
             }
 
             req.session.userId = user.rows[0].id;
 
-            res.redirect("/mainPage.html");
+            res.redirect("/");
         });
     });
 }

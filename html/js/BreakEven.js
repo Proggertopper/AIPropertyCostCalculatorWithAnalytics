@@ -1,17 +1,11 @@
-let csrfToken;
-window.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/api/csrf" , {credentials:"include"});
-  const data = await res.json();
-  csrfToken = data.csrfToken;
-});
 
 
 function clearErrors() {
-  document.querySelectorAll(".error").forEach(e => e.textContent = "");
+  document.querySelectorAll(".error").forEach(e => (e.textContent = ""));
 }
 
 function validateNumber({ value, min, max, errorEl, name }) {
-  if (Number.isNaN(value)) {
+  if (!Number.isFinite(value)) {
     errorEl.textContent = `${name}: invalid number`;
     return false;
   }
@@ -32,84 +26,114 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-/* ===== calculation ===== */
-function calculateBreakEven() {
+function calculateBreakEven(e) {
+  e?.preventDefault?.();
   clearErrors();
 
-  const price = +priceInput.value;
-  const downPayment = +downPaymentInput.value;
-  const mortgage = +mortgageInput.value;
-  const expenses = +expensesInput.value;
-  const taxes = +taxesInput.value;
-  const vacancy = +vacancyInput.value;
+  // inputs (всё в МЕСЯЦ кроме %)
+  const price = Number(priceInput.value);
+  const downPayment = Number(downPaymentInput.value);
+
+  const marketRent = Number(marketRentInput.value); // ✅ НОВОЕ: реальная аренда рынка
+
+  const mortgage = Number(mortgageInput.value);
+  const expenses = Number(expensesInput.value);
+  const taxes = Number(taxesInput.value); // здесь это $/month
+  const vacancy = Number(vacancyInput.value);
 
   let valid = true;
 
   valid = valid && validateNumber({ value: price, min: 1, max: 500_000_000, errorEl: priceError, name: "Purchase Price" });
   valid = valid && validateNumber({ value: downPayment, min: 0, max: price, errorEl: downPaymentError, name: "Down Payment" });
+
+  valid = valid && validateNumber({ value: marketRent, min: 0, max: 100_000_000, errorEl: marketRentError, name: "Market Rent" });
+
   valid = valid && validateNumber({ value: mortgage, min: 0, max: 20_000_000, errorEl: mortgageError, name: "Mortgage" });
   valid = valid && validateNumber({ value: expenses, min: 0, max: 10_000_000, errorEl: expensesError, name: "Expenses" });
   valid = valid && validateNumber({ value: taxes, min: 0, max: 100_000_000, errorEl: taxesError, name: "Taxes & Insurance" });
-  valid = valid && validateNumber({ value: vacancy, min: 0, max: 99, errorEl: vacancyError, name: "Vacancy %" });
+  valid = valid && validateNumber({ value: vacancy, min: 0, max: 95, errorEl: vacancyError, name: "Vacancy %" });
 
   if (!valid) return;
-
-  /* ===== logic ===== */
 
   const vacancyRate = vacancy / 100;
   const totalMonthlyCosts = mortgage + expenses + taxes;
 
-  // 1️⃣ Минимальная аренда (cash flow = 0)
+  // 1) Required rent to break even (CF = 0)
   const breakEvenRent =
-    totalMonthlyCosts / (1 - vacancyRate);
+    (1 - vacancyRate) > 0
+      ? totalMonthlyCosts / (1 - vacancyRate)
+      : Infinity;
 
-  // 2️⃣ Максимальная цена покупки
-  // допущение: ипотека ≈ 0.6% от цены в месяц
-  const mortgageRateMonthly = 0.006;
-  const maxMortgage =
-    breakEvenRent * (1 - vacancyRate) - expenses - taxes;
+  // 2) Max mortgage you can afford given MARKET rent (важно!)
+  const netMarketIncome = marketRent * (1 - vacancyRate);
+  const maxMortgage = netMarketIncome - expenses - taxes;
 
-  const breakEvenPrice =
-    maxMortgage / mortgageRateMonthly;
+  // 3) Max price (грубая оценка) через "payment factor"
+  // ⚠️ Т.к. у нас нет rate/term, берём "коэффициент платежа" из твоего текущего кейса:
+  // paymentFactor = mortgage / loanAmount (если loanAmount > 0).
+  const loanAmount = Math.max(price - downPayment, 0);
+  // If loan payment is missing, use a conservative amortization factor (30y @ 6.5%)
+  // instead of a hardcoded magic number.
+  const assumedRate = 0.065 / 12;
+  const assumedMonths = 30 * 12;
+  const assumedFactor = assumedRate / (1 - Math.pow(1 + assumedRate, -assumedMonths));
+  const paymentFactorRaw = (loanAmount > 0 && mortgage > 0)
+    ? (mortgage / loanAmount)
+    : assumedFactor;
+  const paymentFactor = (Number.isFinite(paymentFactorRaw) && paymentFactorRaw > 0)
+    ? paymentFactorRaw
+    : assumedFactor;
 
-  /* ===== output ===== */
+  const breakEvenPrice = maxMortgage > 0
+    ? downPayment + (maxMortgage / paymentFactor)
+    : 0;
 
-  breakEvenRentEl.textContent = moneyFormatter.format(breakEvenRent) + " / month";
-  breakEvenPriceEl.textContent = moneyFormatter.format(breakEvenPrice);
+  // verdict (для сохранения и UI)
+  const winner = marketRent >= breakEvenRent ? "property" : "rent";
 
-  /* ===== save ===== */
+  // output
+  breakEvenRentEl.textContent = Number.isFinite(breakEvenRent)
+    ? `${moneyFormatter.format(breakEvenRent)} / month`
+    : "—";
 
-  fetch("/api/app/calculation", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": csrfToken
-    },
-    body: JSON.stringify({
-      calculatorType: "break_even",
-      inputData: {
-        price,
-        downPayment,
-        mortgage,
-        expenses,
-        taxes,
-        vacancy
+  breakEvenPriceEl.textContent = moneyFormatter.format(Math.max(breakEvenPrice, 0));
+
+  // save
+  if (csrfToken) {
+    fetch("/api/app/calculation", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
       },
-      resultData: {
-        breakEvenRent,
-        breakEvenPrice
-      }
-    })
-  }).catch(console.error);
+      body: JSON.stringify({
+        calculatorType: "break_even",
+        inputData: {
+          price,
+          downPayment,
+          marketRent,
+          mortgage,
+          expenses,
+          taxes,
+          vacancy
+        },
+        resultData: {
+          breakEvenRent,
+          breakEvenPrice,
+          winner
+        }
+      })
+    }).catch(console.error);
+  }
 
-  resultsEl.scrollIntoView({ behavior: "smooth", block: "start" });
+  resultsEl?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-/* ===== aliases ===== */
-
+/* aliases */
 const priceInput = document.getElementById("price");
 const downPaymentInput = document.getElementById("downPayment");
+const marketRentInput = document.getElementById("marketRent"); 
 const mortgageInput = document.getElementById("mortgage");
 const expensesInput = document.getElementById("expenses");
 const taxesInput = document.getElementById("taxes");
@@ -122,11 +146,10 @@ const resultsEl = document.getElementById("results");
 /* errors */
 const priceError = document.getElementById("priceError");
 const downPaymentError = document.getElementById("downPaymentError");
+const marketRentError = document.getElementById("marketRentError"); 
 const mortgageError = document.getElementById("mortgageError");
 const expensesError = document.getElementById("expensesError");
 const taxesError = document.getElementById("taxesError");
 const vacancyError = document.getElementById("vacancyError");
 
-document
-  .getElementById("calcBtn")
-  .addEventListener("click", calculateBreakEven);
+document.getElementById("calcBtn")?.addEventListener("click", calculateBreakEven);

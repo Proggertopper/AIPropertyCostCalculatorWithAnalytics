@@ -1,0 +1,713 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent-or-invest scenarios (U.S.): run conservative, base, and optimistic cases plus stress tests like high rent growth, flat home prices, high rates, inflation, and early move. Learn which assumptions drive results and how to interpret net position." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/rent-or-invest/scenarios/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-or-invest/scenarios/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-or-invest/scenarios/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent or Invest Scenarios (U.S.) — Conservative, Base, Optimistic + Stress Tests | PropertyCost</title>
+
+    <meta property="og:title" content="Rent or Invest Scenarios (U.S.) — Stress-Test Your Decision" />
+    <meta property="og:description"
+        content="Run conservative/base/optimistic scenarios plus high rent growth, flat home prices, high rates, inflation, and early move tests. Compare net position, not just total paid." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-or-invest/scenarios/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Rent or Invest Scenarios (U.S.)">
+    <meta name="twitter:description"
+        content="A practical scenario library for rent + invest vs buy: ranges, stress tests, and interpretation.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/rent-or-invest/scenarios/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Rent or Invest","item":"https://mypropertycost.com/rent-or-invest/"},
+          {"@type":"ListItem","position":3,"name":"Scenarios","item":"https://mypropertycost.com/rent-or-invest/scenarios/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/rent-or-invest/scenarios/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What scenarios should I run for rent or invest vs buy?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Run at least three: conservative, base, and optimistic. Then add stress tests that match your risk: high rent growth, flat home prices early, high interest rates, higher maintenance/taxes, and an early move (5–7 years)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why do scenario results flip so easily?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Small percentage assumptions compound over time (rent growth, appreciation, returns). Short timelines are dominated by transaction costs and early interest; long timelines are dominated by compounding."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What output should I trust most?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Net position (net worth impact) is the most useful. It compares owner equity after costs versus renter-investor portfolio value after rent. Total paid alone can be misleading."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-or-invest/">Rent or Invest</a>
+                <span class="sep">/</span>
+                <span class="current">Scenarios</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-scenarios">Why scenarios beat “one perfect estimate”</a></li>
+                    <li><a href="#outputs">What outputs to compare (net position)</a></li>
+                    <li><a href="#setup">Baseline setup: the fair comparison</a></li>
+                    <li><a href="#core-3">The core 3 scenarios</a></li>
+                    <li><a href="#stress-tests">Stress tests that reveal fragility</a></li>
+                    <li><a href="#timeline">Timeline scenarios: 5 vs 10 vs 30 years</a></li>
+                    <li><a href="#behavior">Behavior scenarios: “do you actually invest?”</a></li>
+                    <li><a href="#how-to-run">How to run scenarios fast</a></li>
+                    <li><a href="#interpret">How to interpret scenario spread</a></li>
+                    <li><a href="#related">Related guides</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Run scenarios</div>
+                        <div class="sidebar-cta__sub">Start with conservative/base/optimistic, then add one stress test.
+                        </div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-or-invest/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent or Invest Scenarios (U.S.)<br>Conservative, Base, Optimistic + Stress Tests</h1>
+                        <p class="subtitle">
+                            The rent + invest vs buy decision is not one number. It’s a range of outcomes.
+                            This page gives you a practical scenario library you can run in minutes:
+                            three core scenarios plus stress tests for rent growth, investment returns, home price risk,
+                            rates, inflation,
+                            and an early move.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-or-invest/" aria-label="Back to Rent or Invest hub">←
+                                    Back to Rent or Invest</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~12 min read</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#core-3">Core scenarios</a>
+                    <a href="#stress-tests">Stress tests</a>
+                    <a href="#interpret">Interpret results</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-or-invest/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Save 3 scenarios and compare net position.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-or-invest/common-mistakes/">
+                            <strong>Common mistakes</strong>
+                            <span>Missing one input can flip results—use the checklist.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-or-invest/rent-growth-vs-returns/">
+                            <strong>Rent growth vs returns</strong>
+                            <span>These two assumptions drive most outcomes.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why-scenarios">
+                    <h2>Why Scenarios Beat “One Perfect Estimate”</h2>
+                    <p>
+                        If you try to find the “correct” rent growth, appreciation, and investment return for the next
+                        10–30 years,
+                        you’ll end up guessing. And the truth is: you don’t need a perfect forecast to make a smart
+                        decision.
+                        What you need is a decision that stays reasonable across realistic futures.
+                    </p>
+                    <p>
+                        Scenarios solve this by turning uncertainty into a decision tool. Instead of asking,
+                        “What will rent growth be?” you ask “What happens if rent grows slowly vs quickly?”
+                        Instead of “What return will I get?” you ask “What if returns are conservative vs strong?”
+                    </p>
+                    <div class="callout">
+                        <p>
+                            <strong>Scenario mindset:</strong> You’re not trying to predict the future.
+                            You’re identifying which strategy is robust if the future is messy.
+                        </p>
+                    </div>
+                    <p>
+                        This is especially important because rent-or-invest comparisons are sensitive:
+                        a 1–2% change in assumptions can compound into a big difference over 20–30 years.
+                        That sensitivity is not a bug. It’s a signal telling you what actually matters.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="outputs">
+                    <h2>What Outputs to Compare (Net Position, Not Just “Total Paid”)</h2>
+                    <p>
+                        A lot of tools default to comparing “how much you paid” in rent vs mortgage costs.
+                        That’s not the real decision. The real decision is what you end up with.
+                    </p>
+                    <ul>
+                        <li><strong>Buying:</strong> you pay ownership costs and you end with <strong>equity</strong>
+                            (after selling costs).</li>
+                        <li><strong>Rent + invest:</strong> you pay rent and you end with <strong>invested
+                                savings</strong>.</li>
+                    </ul>
+                    <p>
+                        That’s why <strong>net position</strong> (net worth impact) is the most useful output:
+                        it compares owner equity after costs to renter-investor portfolio value after rent.
+                        If you only compare “total paid,” you can accidentally penalize the buyer for principal payments
+                        (which become equity) and accidentally ignore the renter’s potential investment growth.
+                    </p>
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Treat principal as a transfer into equity, not a consumption
+                            cost.
+                            Focus on interest, taxes, insurance, maintenance, and friction costs as “real costs.”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="setup">
+                    <h2>Baseline Setup: The Fair Comparison</h2>
+                    <p>
+                        Before you run scenarios, make sure the comparison is fair. A fair rent-or-invest model does
+                        three things:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Rent + invest side</h4>
+                            <ul>
+                                <li>Invest the down payment + closing costs you didn’t spend</li>
+                                <li>Optionally invest the monthly difference (if you would actually do it)</li>
+                                <li>Model rent increases (rent growth)</li>
+                            </ul>
+                            <p class="mini-note">
+                                If you know you won’t invest monthly, don’t assume you will. Run a “behavior-realistic”
+                                scenario.
+                            </p>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Buy side</h4>
+                            <ul>
+                                <li>Include taxes, insurance, HOA, and maintenance</li>
+                                <li>Include closing costs on entry and selling costs on exit</li>
+                                <li>Track equity: principal paydown + price change</li>
+                            </ul>
+                            <p class="mini-note">
+                                Short timelines are dominated by friction: closing + selling costs and early interest.
+                            </p>
+                        </div>
+                    </div>
+
+                    <p>
+                        If your model is missing opportunity cost, selling costs, or maintenance, your scenario results
+                        can be biased.
+                        If you want a quick sanity check, use the checklist in
+                        <a href="/rent-or-invest/common-mistakes/">Common mistakes</a>.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="core-3">
+                    <h2>The Core 3 Scenarios (Run These First)</h2>
+                    <p>
+                        These three scenarios give you a baseline range without overwhelming complexity.
+                        The goal is not to argue about exact percentages—it's to see whether your decision is robust.
+                    </p>
+
+                    <h3>Scenario 1: Conservative (stress-tested reality)</h3>
+                    <p>
+                        Conservative doesn’t mean pessimistic. It means you refuse to rely on perfect conditions.
+                        Use assumptions that protect you from common surprises: higher costs, moderate growth, and
+                        reasonable returns.
+                    </p>
+                    <ul>
+                        <li><strong>Rent growth:</strong> modest (not zero)</li>
+                        <li><strong>Investment returns:</strong> conservative (after-tax proxy if needed)</li>
+                        <li><strong>Home appreciation:</strong> modest</li>
+                        <li><strong>Ownership costs:</strong> realistic (maintenance + taxes + insurance rising over
+                            time)</li>
+                        <li><strong>Selling costs:</strong> included</li>
+                    </ul>
+                    <div class="callout">
+                        <p>
+                            <strong>Interpretation:</strong> If buying still wins in conservative assumptions, it’s a
+                            stronger case.
+                            If renting still wins, it suggests ownership is expensive relative to rent or your investing
+                            path is strong.
+                        </p>
+                    </div>
+
+                    <h3>Scenario 2: Base (most-likely planning case)</h3>
+                    <p>
+                        Base is where you place your “reasonable expectation” inputs. It should feel plausible, not
+                        optimistic.
+                        If you’re unsure, make the base closer to conservative rather than closer to best-case.
+                    </p>
+                    <ul>
+                        <li>Rent growth and appreciation at reasonable, middle-of-the-road levels</li>
+                        <li>Investment returns that reflect your actual investing style (and your risk tolerance)</li>
+                        <li>Ownership costs modeled honestly (taxes/insurance increases, maintenance)</li>
+                    </ul>
+
+                    <h3>Scenario 3: Optimistic (best-case conditions)</h3>
+                    <p>
+                        Optimistic is not for making the decision. It’s for understanding upside and sensitivity.
+                        If one strategy only wins in optimistic conditions, that’s not a plan—it’s a bet.
+                    </p>
+                    <ul>
+                        <li>Higher investment returns and/or strong home appreciation</li>
+                        <li>Lower cost surprises (maintenance and insurance behave nicely)</li>
+                        <li>Stable timeline (you actually hold long enough)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key takeaway:</strong> Decisions that require the optimistic scenario are fragile.
+                            Decisions that hold in conservative + base are robust.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Stress Tests That Reveal Fragility</h2>
+                    <p>
+                        After the core 3, run 1–3 stress tests that match your risk. Stress tests answer:
+                        “What breaks this decision?” That is often more valuable than finding the best-case outcome.
+                    </p>
+
+                    <h3>Stress test A: Early move (5–7 years)</h3>
+                    <p>
+                        This is the most important stress test for most people. If there’s any chance you move for work,
+                        family,
+                        or lifestyle, run a short timeline. Buying can look great at 30 years and still be a poor
+                        decision if you exit early.
+                    </p>
+                    <ul>
+                        <li>Set the horizon to 5–7 years</li>
+                        <li>Include selling costs and potential repair/concession costs on exit</li>
+                        <li>Use conservative appreciation (or flat prices) for the early years</li>
+                    </ul>
+
+                    <h3>Stress test B: High rent growth</h3>
+                    <p>
+                        If your market has tight rental supply or you’re in a high-demand city, higher rent growth is a
+                        real risk.
+                        This test explores whether renting becomes less attractive as rent compounds.
+                    </p>
+                    <ul>
+                        <li>Increase rent growth</li>
+                        <li>Keep returns conservative (don’t assume both high rent growth and perfect investment
+                            returns)</li>
+                        <li>Check whether the monthly difference disappears over time</li>
+                    </ul>
+
+                    <h3>Stress test C: Lower investment returns (after-tax proxy)</h3>
+                    <p>
+                        Many comparisons assume a high long-term return without acknowledging taxes, fees, or real-life
+                        behavior.
+                        This stress test simply reduces the return assumption to see how dependent your outcome is on
+                        investing performance.
+                    </p>
+                    <ul>
+                        <li>Reduce returns to a conservative after-tax proxy</li>
+                        <li>Keep rent growth and costs reasonable</li>
+                        <li>Watch how quickly the rent + invest advantage shrinks</li>
+                    </ul>
+
+                    <h3>Stress test D: Flat home prices early (sequence risk for housing)</h3>
+                    <p>
+                        Home prices don’t move in a smooth line. A common risk is buying and then seeing flat or weak
+                        prices for several years.
+                        If you might move, this is a major vulnerability because transaction costs still exist even when
+                        appreciation doesn’t show up.
+                    </p>
+                    <ul>
+                        <li>Model low or flat appreciation for the first 3–5 years</li>
+                        <li>Include selling costs if exiting within that window</li>
+                        <li>Compare net position, not “payment vs rent”</li>
+                    </ul>
+
+                    <h3>Stress test E: Higher ownership costs (insurance + maintenance reality)</h3>
+                    <p>
+                        Ownership costs are where “spreadsheet wins” often break in real life.
+                        Repairs, insurance, and taxes tend to rise over time, and a decade often includes at least one
+                        big-ticket event.
+                    </p>
+                    <ul>
+                        <li>Increase maintenance and insurance growth assumptions</li>
+                        <li>Keep appreciation modest</li>
+                        <li>See if buying still wins without relying on price growth</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want the fastest truth test?</h4>
+                            <p>Run 5 years + selling costs + flat prices early. If buying still wins, it’s a strong
+                                case.</p>
+                        </div>
+                        <a href="/rent-or-invest/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="timeline">
+                    <h2>Timeline Scenarios: 5 vs 10 vs 30 Years</h2>
+                    <p>
+                        Time horizon changes which forces dominate the outcome:
+                    </p>
+                    <ul>
+                        <li><strong>5 years:</strong> dominated by transaction costs, early interest, and timing risk
+                        </li>
+                        <li><strong>10 years:</strong> still sensitive to friction, but equity can start to matter</li>
+                        <li><strong>30 years:</strong> dominated by compounding (rent growth, appreciation, and returns)
+                        </li>
+                    </ul>
+                    <p>
+                        Many people accidentally let the 30-year case drive the decision while planning to move in 5–10
+                        years.
+                        If you’re not sure how long you’ll stay, your priority should be the short-horizon stress test,
+                        not the long-horizon best case.
+                    </p>
+                    <p>
+                        A clean workflow is to run 5, 10, and 30 years using the same assumptions.
+                        If your conclusion flips across horizons, the real variable isn’t math—it’s timeline certainty.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="behavior">
+                    <h2>Behavior Scenarios: “Do You Actually Invest the Difference?”</h2>
+                    <p>
+                        Rent + invest strategies often assume you invest the monthly difference between renting and
+                        owning.
+                        That’s valid only if you will actually do it consistently. If you won’t, you should not give the
+                        rent scenario that advantage.
+                    </p>
+                    <p>
+                        Run at least two behavior scenarios:
+                    </p>
+                    <ul>
+                        <li><strong>Behavior-realistic:</strong> invest only the upfront cash (down payment not spent)
+                        </li>
+                        <li><strong>Behavior-optimized:</strong> invest upfront cash + monthly difference</li>
+                    </ul>
+                    <p>
+                        If rent + invest only wins in the behavior-optimized scenario, then the strategy is fragile:
+                        it depends on discipline that many people don’t maintain during life changes.
+                        That doesn’t make it wrong—it just tells you what you must commit to for it to work.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Honesty rule:</strong> The best scenario is the one you’ll follow.
+                            A “perfect” plan you won’t execute is not a plan.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-run">
+                    <h2>How to Run Scenarios Fast (Without Spreadsheet Overload)</h2>
+                    <p>
+                        Here’s a simple sequence you can repeat:
+                    </p>
+                    <ol>
+                        <li><strong>Start with base</strong> at 10 years and 30 years.</li>
+                        <li><strong>Clone to conservative:</strong> lower appreciation/returns, raise costs, keep rent
+                            growth reasonable.</li>
+                        <li><strong>Clone to optimistic:</strong> higher appreciation/returns, keep costs controlled.
+                        </li>
+                        <li><strong>Add one stress test:</strong> 5-year early move + selling costs (or high rent growth
+                            if that’s your market).</li>
+                    </ol>
+                    <p>
+                        In 10 minutes, you now have a meaningful range of outcomes.
+                        The decision becomes: Which choice is still acceptable in conservative and stress-tested
+                        futures?
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="interpret">
+                    <h2>How to Interpret Scenario Spread</h2>
+                    <p>
+                        Scenario spread means how far outcomes vary across cases. The wider the spread, the more
+                        uncertain (and assumption-sensitive)
+                        your decision is. This is how to use that information:
+                    </p>
+
+                    <h3>If one strategy wins in almost every scenario</h3>
+                    <p>
+                        That’s a robust decision. You’re less dependent on being “right” about the future.
+                        It doesn’t remove lifestyle considerations, but financially the choice is strong.
+                    </p>
+
+                    <h3>If results flip between conservative and optimistic</h3>
+                    <p>
+                        Your decision is a bet on the assumptions that changed. Identify what caused the flip:
+                        was it rent growth? returns? appreciation? costs? timeline? That “flip variable” is where your
+                        risk lives.
+                    </p>
+
+                    <h3>If buying wins only at 30 years but loses at 5–10</h3>
+                    <p>
+                        You are seeing a classic friction problem: transaction costs and early interest dominate short
+                        horizons.
+                        The decision now depends on whether you can commit to staying long enough.
+                    </p>
+
+                    <h3>If rent + invest wins only when returns are high</h3>
+                    <p>
+                        Your strategy depends on investment performance and discipline.
+                        That can be fine, but you should recognize the risk:
+                        markets don’t deliver consistent returns every decade, and behavior matters.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision rule:</strong> Prefer the option that remains “okay” if the future is
+                            mediocre.
+                            Avoid options that require the future to be perfect.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related guides</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/opportunity-cost/">Opportunity cost</a>
+                            <p>Why investing the down payment can flip outcomes.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/market-risk/">Market risk</a>
+                            <p>Volatility and sequence risk: what happens if returns are weak early?</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/inflation/">Inflation</a>
+                            <p>How inflation changes rent growth, costs, and real payment burden.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/liquidity/">Liquidity</a>
+                            <p>Why “house rich, cash poor” matters in uncertain timelines.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/leverage/">Leverage</a>
+                            <p>Leverage boosts returns—and boosts downside risk.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/rent-or-invest/common-mistakes/">Common mistakes</a>
+                            <p>The checklist that prevents biased comparisons.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What scenarios should I run for rent or invest vs buy?</h4>
+                        <p>
+                            Run conservative, base, and optimistic first. Then add a stress test that matches your risk:
+                            high rent growth, flat home prices early, lower investment returns, higher
+                            maintenance/taxes, and a short timeline (5–7 years).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do scenario results flip so easily?</h4>
+                        <p>
+                            Small percentage assumptions compound over time: rent growth, appreciation, and returns.
+                            Short timelines are dominated by transaction costs and early interest.
+                            Long timelines are dominated by compounding. If your results flip, that’s a signal you’re
+                            sensitive to a specific variable.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What output should I trust most?</h4>
+                        <p>
+                            Net position (net worth impact). Compare homeowner equity after selling costs versus
+                            renter-investor portfolio value after rent.
+                            “Total paid” alone can be misleading because principal becomes equity.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the most important stress test?</h4>
+                        <p>
+                            An early move (5–7 years) with selling costs and flat/low appreciation. This reveals whether
+                            buying depends on staying long enough to overcome friction.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        A good rent-or-invest decision doesn’t come from one forecast. It comes from a range.
+                        Run the core 3 scenarios, then apply one stress test that matches your biggest risk (timeline,
+                        rent growth, returns, or costs).
+                        If one strategy stays strong across conservative and stress-tested cases, you can trust it more.
+                        If it only wins in optimistic conditions, treat it as a bet—and decide if you want that bet.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: open the <a href="/rent-or-invest/calculator/">Rent or Invest calculator</a>,
+                            run conservative/base/optimistic, then add the 5-year early move stress test.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Outcomes depend on local rent dynamics, home prices, taxes/insurance,
+                        investment returns, and behavior.
+                        Use conservative assumptions and scenario ranges instead of a single-point forecast.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

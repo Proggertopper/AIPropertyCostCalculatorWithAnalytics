@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="How to calculate cash flow (U.S.): step-by-step formulas for real estate and personal finance. Learn gross vs net cash flow, NOI to cash flow, vacancy, operating expenses, CapEx reserves, debt service, and cash-on-cash + DSCR. Includes examples, checklists, common mistakes, stress tests, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>How to Calculate Cash Flow (U.S.) — Formula, Steps, and Real Estate Example | PropertyCost</title>
+
+    <meta property="og:title" content="How to Calculate Cash Flow (U.S.)" />
+    <meta property="og:description"
+        content="A step-by-step guide to calculating cash flow (especially for rental properties): vacancy, operating expenses, NOI, CapEx reserves, and mortgage payments—plus common mistakes and stress tests." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to Calculate Cash Flow (U.S.)">
+    <meta name="twitter:description"
+        content="Use the correct cash flow formula: rent − vacancy − expenses − reserves − debt. Includes NOI, DSCR, cash-on-cash, examples, and checklists.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Cash Flow","item":"https://mypropertycost.com/cash-flow/"},
+          {"@type":"ListItem","position":3,"name":"How to calculate cash flow","item":"https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/cash-flow/how-to-calculate-cash-flow/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the simplest cash flow formula?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"The simplest formula is Cash Flow = Cash In − Cash Out. For rental real estate, a practical formula is: Cash Flow = Rent + Other Income − Vacancy − Operating Expenses − Reserves/CapEx − Debt Service."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do you calculate cash flow from NOI?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Start with NOI (income minus operating expenses). Then subtract CapEx/reserves and subtract debt service (mortgage principal + interest). Cash Flow ≈ NOI − Reserves/CapEx − Debt Service."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Should CapEx be included in cash flow?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Yes, if you want a realistic, sustainable cash flow number. CapEx is lumpy, but it is real. Many investors model CapEx as a monthly reserve (sinking fund) so cash flow doesn’t look artificially high."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why does my cash flow look good on paper but bad in real life?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"The usual causes are missing vacancy, missing reserves/CapEx, underestimating taxes/insurance, double-counting or miscounting escrowed items, and using optimistic rent or expense assumptions. Stress tests and a full expense checklist fix most issues."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/cash-flow/">Cash Flow</a>
+                <span class="sep">/</span>
+                <span class="current">How to calculate cash flow</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#formula">Cash flow formulas (general + real estate)</a></li>
+                    <li><a href="#noivscf">NOI vs cash flow (and how to convert)</a></li>
+                    <li><a href="#steps">Step-by-step: rental cash flow calculation</a></li>
+                    <li><a href="#lineitems">Expense checklist (what to include)</a></li>
+                    <li><a href="#example">Worked example (monthly + annual)</a></li>
+                    <li><a href="#frequency">Monthly vs annual vs dated cash flows</a></li>
+                    <li><a href="#metrics">Cash flow metrics (CoC, DSCR, cap rate)</a></li>
+                    <li><a href="#good">What counts as “good” cash flow?</a></li>
+                    <li><a href="#mistakes">Common mistakes that inflate cash flow</a></li>
+                    <li><a href="#stress-tests">Fast stress tests</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate cash flow correctly</div>
+                        <div class="sidebar-cta__sub">Include vacancy, reserves, CapEx, and debt service.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/cash-flow/">Open cash flow calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>How to Calculate Cash Flow (U.S.): The Real Formula Investors Use</h1>
+                        <p class="subtitle">
+                            “Cash flow” sounds simple—money in minus money out—but most cash flow mistakes come from
+                            <strong>missing line items</strong> (vacancy, repairs, CapEx) and
+                            <strong>double-counting</strong>
+                            (escrowed taxes/insurance inside the mortgage payment).
+                            In real estate, the goal is not a flattering number; it’s a reliable one that survives
+                            reality:
+                            vacancies, repairs, insurance increases, and big-ticket replacements.
+                            This guide walks you through a step-by-step cash flow calculation for rental property (plus
+                            a general cash flow framework),
+                            shows how to convert NOI into cash flow, and gives you checklists and stress tests to keep
+                            your estimate honest.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/cash-flow/" aria-label="Back to Cash Flow hub">← Back to Cash
+                                    Flow</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–30 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#steps">Step-by-step</a>
+                    <a href="#example">Example</a>
+                    <a href="#mistakes">Mistakes</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/cash-flow/">
+                            <strong>Run the cash flow calculator</strong>
+                            <span>Model vacancy, expenses, reserves, and debt service.</span>
+                        </a>
+                        <a class="start-here__card" href="/cash-flow/what-is-cash-flow/">
+                            <strong>What is cash flow?</strong>
+                            <span>Definitions: cash flow vs profit, NOI, and why reserves matter.</span>
+                        </a>
+                        <a class="start-here__card" href="/homeownership-cost/">
+                            <strong>Homeownership costs</strong>
+                            <span>Taxes, insurance, and CapEx that drive real cash flow.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        The simplest cash flow formula is:
+                        <strong>Cash Flow = Cash In − Cash Out</strong>.
+                    </p>
+                    <p>
+                        For rental property, a realistic “investor-grade” formula is:
+                    </p>
+                    <div class="callout">
+                        <p>
+                            <strong>Rental Cash Flow =</strong>
+                            Rent + Other Income − Vacancy/Collection Loss − Operating Expenses − Reserves/CapEx − Debt
+                            Service
+                        </p>
+                    </div>
+                    <p>
+                        If your cash flow ignores vacancy and reserves, it will usually look good on paper and
+                        disappoint in real life.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="formula">
+                    <h2>Cash Flow Formulas (General + Real Estate)</h2>
+
+                    <h3>General cash flow formula</h3>
+                    <p>
+                        For a person or a business, cash flow starts as:
+                        <strong>Cash Flow = Total Cash Received − Total Cash Paid</strong>.
+                        The key is defining what counts as “received” and “paid” (and the time period you’re measuring).
+                    </p>
+
+                    <h3>Rental property cash flow formula (practical version)</h3>
+                    <p>
+                        Rental property cash flow is best calculated from the property’s income statement-like
+                        structure:
+                        income → vacancy → operating expenses → reserves → debt.
+                        A practical monthly cash flow formula looks like this:
+                    </p>
+                    <ul>
+                        <li><strong>Income:</strong> rent + other income (parking, laundry, pet fees, storage)</li>
+                        <li><strong>Less vacancy:</strong> vacancy + collection loss (and/or credit loss)</li>
+                        <li><strong>Less operating expenses:</strong> taxes, insurance, maintenance, management,
+                            utilities paid by owner, HOA, etc.</li>
+                        <li><strong>Less reserves/CapEx:</strong> a sinking fund for roof/HVAC/exterior and big
+                            replacements</li>
+                        <li><strong>Less debt service:</strong> principal + interest (plus mortgage insurance if
+                            applicable)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Important:</strong> Some investors report “cash flow before CapEx” (similar to
+                            operating cash flow),
+                            and “cash flow after CapEx” (similar to free cash flow). Both can be useful—just label them
+                            clearly.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="noivscf">
+                    <h2>NOI vs Cash Flow (and How to Convert One Into the Other)</h2>
+                    <p>
+                        NOI (Net Operating Income) is one of the most common real estate terms, and it’s often confused
+                        with cash flow.
+                        Think of NOI as “property performance before financing.”
+                    </p>
+
+                    <h3>NOI definition</h3>
+                    <p>
+                        <strong>NOI = Effective Gross Income − Operating Expenses</strong>
+                    </p>
+                    <p>
+                        NOI excludes:
+                        mortgage payment (debt service),
+                        income taxes,
+                        and often excludes major CapEx (depending on how it’s defined in the analysis).
+                    </p>
+
+                    <h3>How to calculate cash flow from NOI</h3>
+                    <p>
+                        A practical conversion is:
+                    </p>
+                    <div class="callout">
+                        <p>
+                            <strong>Cash Flow ≈</strong> NOI − Reserves/CapEx − Debt Service
+                        </p>
+                    </div>
+                    <p>
+                        If you’re analyzing a cash purchase (no mortgage), debt service is zero, so cash flow roughly
+                        equals NOI minus reserves/CapEx.
+                        That’s why “NOI-only” views can overstate how much cash you truly keep.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="steps">
+                    <h2>Step-by-Step: How to Calculate Rental Property Cash Flow</h2>
+                    <p>
+                        This is the process you can follow in a spreadsheet, calculator, or underwriting template.
+                        The goal is to compute a realistic monthly and annual cash flow, then stress-test it.
+                    </p>
+
+                    <h3>Step 1: Estimate gross scheduled income</h3>
+                    <p>
+                        Start with the rent you expect to collect at full occupancy.
+                        If it’s a multi-unit, list each unit rent and sum them.
+                        If there are additional income sources (parking, storage, laundry), include them.
+                    </p>
+
+                    <h3>Step 2: Subtract vacancy and collection loss</h3>
+                    <p>
+                        Vacancy is not a “maybe.” It’s a cost of doing business.
+                        Even a great property experiences turnover, repairs, and occasional nonpayment.
+                        Modeling 0% vacancy is one of the most common ways cash flow gets inflated.
+                    </p>
+                    <p>
+                        A simple approach is a vacancy percentage.
+                        A more detailed approach is to model a month of vacancy per year (or per lease turnover) and
+                        convert to a percentage.
+                    </p>
+
+                    <h3>Step 3: Subtract operating expenses</h3>
+                    <p>
+                        Operating expenses are everything you pay to keep the property running (excluding the mortgage).
+                        This typically includes property taxes, insurance, maintenance, management, utilities paid by
+                        owner, HOA, and other recurring costs.
+                        Don’t forget costs that feel “small” monthly—those often add up.
+                    </p>
+
+                    <h3>Step 4: Subtract reserves and CapEx (sinking fund)</h3>
+                    <p>
+                        This is where “paper cash flow” becomes “survivable cash flow.”
+                        If you don’t set aside money for big replacements, you aren’t generating true free cash
+                        flow—you’re borrowing from the future.
+                    </p>
+                    <p>
+                        Practical method: allocate a monthly CapEx reserve (a sinking fund).
+                        Even though the roof replacement happens every 15–25 years, you can still budget for it monthly.
+                    </p>
+
+                    <h3>Step 5: Subtract debt service (mortgage payment)</h3>
+                    <p>
+                        Debt service is the mortgage principal + interest (and sometimes mortgage insurance).
+                        A critical accounting note:
+                        if your mortgage payment includes escrowed taxes and insurance, don’t also subtract taxes and
+                        insurance separately.
+                        (Double-counting is a classic “why is my cash flow negative?” mistake.)
+                    </p>
+
+                    <h3>Step 6: The result is your net cash flow</h3>
+                    <p>
+                        Compute:
+                        <strong>monthly cash flow</strong> and <strong>annual cash flow</strong>.
+                        Monthly helps budgeting; annual helps comparing investments and computing return metrics.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Shortcut check:</strong>
+                            If your cash flow is “high” but you have no vacancy and no CapEx reserve, the number is
+                            probably inflated.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="lineitems">
+                    <h2>Expense Checklist: What to Include in Cash Flow</h2>
+                    <p>
+                        A complete checklist prevents the most common cash flow errors: missing line items.
+                        Not every property has every expense, but you should deliberately choose “yes/no” rather than
+                        forgetting.
+                    </p>
+
+                    <h3>Income</h3>
+                    <ul>
+                        <li>Rent (by unit)</li>
+                        <li>Parking/storage</li>
+                        <li>Laundry/pet fees</li>
+                        <li>Other income (application fees, rubs reimbursements—be conservative)</li>
+                    </ul>
+
+                    <h3>Vacancy and losses</h3>
+                    <ul>
+                        <li>Vacancy allowance</li>
+                        <li>Credit/collection loss (if relevant)</li>
+                        <li>Turnover/leasing costs (some treat these as operating, some as reserves)</li>
+                    </ul>
+
+                    <h3>Operating expenses (typical)</h3>
+                    <ul>
+                        <li>Property taxes</li>
+                        <li>Insurance</li>
+                        <li>Repairs & maintenance (ongoing)</li>
+                        <li>Property management</li>
+                        <li>HOA / condo fees</li>
+                        <li>Utilities paid by owner (water/sewer/trash, common electric, gas)</li>
+                        <li>Landscaping/snow removal</li>
+                        <li>Pest control</li>
+                        <li>Licenses/permits (if applicable)</li>
+                        <li>Accounting/legal (small allowance if relevant)</li>
+                    </ul>
+
+                    <h3>Reserves / CapEx (big-ticket, lumpy)</h3>
+                    <ul>
+                        <li>Roof</li>
+                        <li>HVAC</li>
+                        <li>Water heater</li>
+                        <li>Exterior (paint/siding)</li>
+                        <li>Windows</li>
+                        <li>Major plumbing/electrical</li>
+                        <li>Appliances replacement</li>
+                    </ul>
+
+                    <h3>Debt service and financing-related</h3>
+                    <ul>
+                        <li>Mortgage principal + interest</li>
+                        <li>Mortgage insurance (if applicable)</li>
+                        <li>Loan servicing/other lender fees (rare but possible)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tip:</strong> If you’re unsure about an expense line,
+                            run a conservative scenario with a buffer rather than forcing a precise guess.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="example">
+                    <h2>Worked Example: Cash Flow Calculation (Monthly + Annual)</h2>
+                    <p>
+                        Let’s walk through a simplified example. The numbers are illustrative, not a recommendation.
+                        The point is to show the structure and where people commonly forget expenses.
+                    </p>
+
+                    <div class="content-section" style="padding:0; margin-top:16px;">
+                        <div class="callout">
+                            <p><strong>Assumptions (monthly):</strong> Rent $2,600, other income $0, vacancy 5%,
+                                management 8%,
+                                plus taxes/insurance/maintenance/utilities/reserves, and a mortgage payment.</p>
+                        </div>
+
+                        <table class="table" aria-label="Cash flow example table"
+                            style="width:100%; border-collapse:collapse;">
+                            <thead>
+                                <tr>
+                                    <th
+                                        style="text-align:left; padding:10px; border-bottom:1px solid rgba(255,255,255,.12);">
+                                        Line item</th>
+                                    <th
+                                        style="text-align:right; padding:10px; border-bottom:1px solid rgba(255,255,255,.12);">
+                                        Monthly</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Gross rent
+                                    </td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        $2,600</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Less
+                                        vacancy (5%)</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$130</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        <strong>Effective income</strong></td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        <strong>$2,470</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Property
+                                        tax</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$320</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Insurance
+                                    </td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$130</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Maintenance
+                                        (ongoing)</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$170</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        Utilities/other</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$80</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Management
+                                        (8% of collected rent)</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$198</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);"><strong>NOI
+                                            (approx.)</strong></td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        <strong>$1,572</strong></td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">CapEx
+                                        reserve (sinking fund)</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$160</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px; border-bottom:1px solid rgba(255,255,255,.08);">Mortgage
+                                        (P&amp;I)</td>
+                                    <td
+                                        style="padding:10px; text-align:right; border-bottom:1px solid rgba(255,255,255,.08);">
+                                        −$1,350</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:10px;"><strong>Net cash flow</strong></td>
+                                    <td style="padding:10px; text-align:right;"><strong>$62 / month</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p style="margin-top:14px;">
+                        Annualized, $62/month is about $744/year.
+                        That doesn’t mean the deal is “bad” or “good”—it means it’s close to breakeven on net cash flow.
+                        Many deals that look great at first glance become breakeven once you include vacancy,
+                        management, and reserves.
+                        That’s not pessimism. That’s reality budgeting.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> A single repair can wipe out a year of small cash flow.
+                            That’s why reserves and stress tests matter.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="frequency">
+                    <h2>Monthly vs Annual vs Dated Cash Flows (Why Frequency Matters)</h2>
+                    <p>
+                        Cash flow can be measured at different frequencies:
+                        monthly (budgeting), annual (returns), or exact dates (investment modeling).
+                        The most common mistake is mixing them inconsistently.
+                    </p>
+
+                    <h3>Monthly cash flow</h3>
+                    <p>
+                        Monthly cash flow helps you answer: “Can I carry this property comfortably?”
+                        It’s a survivability number.
+                        If monthly cash flow is thin, you need larger reserves.
+                    </p>
+
+                    <h3>Annual cash flow</h3>
+                    <p>
+                        Annual cash flow is useful for computing metrics like cash-on-cash return.
+                        But annual totals can hide volatility: you might have 10 “good” months and 2 catastrophic
+                        months.
+                        That’s why you should still look at worst-case months/years.
+                    </p>
+
+                    <h3>Dated cash flows</h3>
+                    <p>
+                        If you’re computing IRR or comparing investment opportunities precisely, dated cash flows are
+                        ideal.
+                        In practice, for many rental decisions, consistent monthly modeling with conservative buffers is
+                        enough.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="metrics">
+                    <h2>Cash Flow Metrics: Cash-on-Cash, DSCR, and Cap Rate</h2>
+
+                    <h3>Cash-on-cash return (CoC)</h3>
+                    <p>
+                        Cash-on-cash return connects cash flow to the cash you invested.
+                        A practical formula is:
+                        <strong>CoC = Annual Pre-Tax Cash Flow ÷ Cash Invested</strong>.
+                        Cash invested usually includes down payment, closing costs, and initial repairs/CapEx.
+                    </p>
+                    <p>
+                        CoC is popular because it answers a common question:
+                        “What cash yield do I get on my cash?”
+                        Just be careful: CoC can look higher if you under-budget reserves or assume low vacancy.
+                    </p>
+
+                    <h3>DSCR (Debt Service Coverage Ratio)</h3>
+                    <p>
+                        DSCR measures how safely NOI covers the mortgage:
+                        <strong>DSCR = NOI ÷ Annual Debt Service</strong>.
+                        A higher DSCR generally means the property can survive stress.
+                        DSCR is especially useful if cash flow is thin—because thin cash flow often means low coverage.
+                    </p>
+
+                    <h3>Cap rate</h3>
+                    <p>
+                        Cap rate uses NOI and price:
+                        <strong>Cap Rate = NOI ÷ Purchase Price</strong>.
+                        Cap rate compares property performance before financing.
+                        It does not directly tell you your net cash flow after debt and reserves.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Use all three:</strong>
+                            Cap rate (property performance), DSCR (debt safety), and cash-on-cash (your cash yield).
+                            Then, if you model an exit, use IRR/NPV for lifecycle returns.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="good">
+                    <h2>What Counts as “Good” Cash Flow?</h2>
+                    <p>
+                        “Good” depends on your goals and risk tolerance.
+                        Some investors prioritize stable monthly income. Others accept low cash flow for potential
+                        appreciation.
+                        The more you rely on appreciation and exit value, the more important it is to manage
+                        survivability risk with reserves.
+                    </p>
+
+                    <h3>Ask these questions</h3>
+                    <ul>
+                        <li>Do you need income now, or can you hold a low-cash-flow property?</li>
+                        <li>How many months of reserves do you have for vacancy and repairs?</li>
+                        <li>How sensitive is the property to taxes/insurance increases?</li>
+                        <li>How much return comes from cash flow vs exit appreciation?</li>
+                        <li>Is the property in a market where rents can realistically rise, or is rent growth capped?
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical rule:</strong> If cash flow is thin, insist on stronger reserves and
+                            better DSCR.
+                            Thin cash flow can be okay—fragile cash flow is not.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes That Inflate Cash Flow (and How to Fix Them)</h2>
+
+                    <h3>1) No vacancy allowance</h3>
+                    <p>
+                        Fix: add vacancy/collection loss. Even a conservative vacancy allowance is better than
+                        pretending it won’t happen.
+                    </p>
+
+                    <h3>2) No CapEx reserve</h3>
+                    <p>
+                        Fix: create a monthly sinking fund. Roof and HVAC are inevitable; pretending they’re not is not
+                        “conservative.”
+                    </p>
+
+                    <h3>3) Underestimating taxes and insurance</h3>
+                    <p>
+                        Fix: verify taxes and insurance, then test higher scenarios. These costs often rise over time.
+                    </p>
+
+                    <h3>4) Double-counting escrow</h3>
+                    <p>
+                        Fix: if your mortgage payment includes escrowed taxes and insurance, don’t subtract them again
+                        as separate expenses.
+                        If your mortgage payment is P&amp;I only, then you must include taxes/insurance separately.
+                    </p>
+
+                    <h3>5) Ignoring management or valuing it at $0 forever</h3>
+                    <p>
+                        Fix: even if you self-manage, consider modeling management as a cost so the cash flow reflects
+                        reality if your time becomes scarce.
+                    </p>
+
+                    <h3>6) Assuming perfect rent growth and no expense growth</h3>
+                    <p>
+                        Fix: run a conservative scenario. If the deal only works with aggressive rent growth, it’s
+                        fragile.
+                    </p>
+
+                    <h3>7) Ignoring turnover and leasing costs</h3>
+                    <p>
+                        Fix: include turnover costs (cleaning, paint, minor repairs, leasing fees) as part of
+                        vacancy/operating assumptions.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Most common pattern:</strong> cash flow looks great until you add vacancy +
+                            reserves.
+                            If you add those two items, many “amazing” deals become average—and average deals become
+                            obviously risky.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Fast Stress Tests (Cash Flow Reality Checks)</h2>
+
+                    <h3>1) Vacancy shock test</h3>
+                    <p>
+                        Add one additional month of vacancy in a year (or increase vacancy percentage).
+                        If cash flow goes negative, compute the cash reserves needed to survive comfortably.
+                    </p>
+
+                    <h3>2) “Bad year” test</h3>
+                    <p>
+                        Combine: vacancy + a major repair + higher insurance in the same year.
+                        This is a realistic stress scenario, not a doomsday one.
+                    </p>
+
+                    <h3>3) Expense growth test</h3>
+                    <p>
+                        Increase taxes and insurance. If cash flow depends on them staying flat, the deal is fragile.
+                    </p>
+
+                    <h3>4) Rate/refinance sensitivity test</h3>
+                    <p>
+                        If your plan assumes refinancing or adjustable rates, test worse terms.
+                        If cash flow breaks, the financing plan is a risk lever.
+                    </p>
+
+                    <h3>5) CapEx timeline test</h3>
+                    <p>
+                        Add a roof/HVAC replacement on a realistic schedule.
+                        If that “destroys” cash flow, you didn’t have true free cash flow—you had deferred maintenance
+                        risk.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist: Calculate Cash Flow the Right Way</h2>
+                    <ul>
+                        <li>✅ Rent and other income included</li>
+                        <li>✅ Vacancy/collection loss included</li>
+                        <li>✅ Operating expenses included (taxes, insurance, maintenance, management, utilities/HOA)
+                        </li>
+                        <li>✅ Reserves/CapEx sinking fund included</li>
+                        <li>✅ Debt service included (and escrow not double-counted)</li>
+                        <li>✅ Monthly cash flow computed (budget survivability)</li>
+                        <li>✅ Annual cash flow computed (return metrics)</li>
+                        <li>✅ DSCR and cash-on-cash calculated for context</li>
+                        <li>✅ Stress tests run (vacancy + repair + expense spike)</li>
+                    </ul>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want a fast, realistic number?</h4>
+                            <p>
+                                Use the calculator and include vacancy + reserves.
+                                Then run one “bad year” scenario before you trust the result.
+                            </p>
+                        </div>
+                        <a href="/cash-flow/">Open cash flow calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash Flow calculator</a>
+                            <p>Model rental cash flow with vacancy, expenses, reserves, and debt service.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/what-is-cash-flow/">What is cash flow?</a>
+                            <p>Definitions: cash flow vs profit, operating vs free cash flow, and why it matters.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage/">Mortgage Calculator</a>
+                            <p>Debt service is often the biggest lever on cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Homeownership Cost</a>
+                            <p>Taxes, insurance, maintenance, and CapEx that shape real cash flow.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/property-tax/">Property Tax</a>
+                            <p>Tax surprises can erase cash flow—model them conservatively.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/">IRR hub</a>
+                            <p>Cash flow is only one piece of lifecycle return.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the simplest cash flow formula?</h4>
+                        <p>
+                            The simplest formula is Cash Flow = Cash In − Cash Out.
+                            For rental real estate, a practical formula is:
+                            Rent + Other Income − Vacancy − Operating Expenses − Reserves/CapEx − Debt Service.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do you calculate cash flow from NOI?</h4>
+                        <p>
+                            Start with NOI (income minus operating expenses).
+                            Then subtract CapEx/reserves and subtract debt service (mortgage principal + interest).
+                            In short: Cash Flow ≈ NOI − Reserves/CapEx − Debt Service.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should CapEx be included in cash flow?</h4>
+                        <p>
+                            Yes, if you want a realistic, sustainable cash flow number.
+                            CapEx is lumpy, but it’s real. A common approach is to model CapEx as a monthly reserve
+                            (sinking fund).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does my cash flow look good on paper but bad in real life?</h4>
+                        <p>
+                            Usually because the estimate missed vacancy, missed reserves/CapEx, underestimated
+                            taxes/insurance,
+                            double-counted escrowed costs, or used optimistic rent/expense assumptions.
+                            A full checklist and stress tests fix most problems quickly.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is cash flow the same as profit?</h4>
+                        <p>
+                            Not always. Cash flow tracks actual cash movement. Profit can include non-cash items and
+                            unrealized gains.
+                            In real estate, you can build equity even when cash flow is low, and you can have cash flow
+                            even when long-run profit disappoints.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        To calculate cash flow correctly, you don’t need complicated math—you need complete, realistic
+                        inputs.
+                        Use the rental formula (income − vacancy − expenses − reserves − debt), avoid double-counting
+                        escrow,
+                        and treat CapEx as a monthly sinking fund so cash flow reflects sustainability.
+                        Then run quick stress tests (vacancy + repair + expense spike).
+                        If the cash flow survives those, you’re looking at a number you can actually trust.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: calculate net cash flow in the <a href="/cash-flow/">Cash Flow calculator</a> and
+                            run a vacancy + repair stress test.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Cash flow varies by location, property condition, financing terms, management
+                        style, and tenant quality.
+                        Use conservative assumptions, include vacancy and CapEx reserves, and rely on scenario stress
+                        tests rather than one “perfect” number.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

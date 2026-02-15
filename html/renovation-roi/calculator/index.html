@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description"
+        content="Renovation cost calculator with inflation: estimate home renovation expenses and impact on property value with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/renovation-roi/calculator/">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Renovation ROI Calculator | PropertyCost</title>
+</head>
+
+<body class="calc-page">
+
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/renovation-roi/">Renovation ROI</a>
+                <span class="sep">/</span>
+                <span class="current">Calculator</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main >
+        <div class="hero">
+            <h1>Renovation Calculator</h1>
+            <p class="subtitle">
+                Estimate renovation payback and its impact on investment returns
+            </p>
+            <div class="benefits-bar">
+                <div class="benefit-item">Comprehensive ROI analysis</div>
+                <div class="benefit-item">Payback period assessment</div>
+                <div class="benefit-item">Scenario testing and comparison</div>
+                <div class="benefit-item">Integration with broader financial planning</div>
+            </div>
+        </div>
+        <section class="calculator">
+            <div class="grid">
+
+                <!-- PROPERTY DETAILS -->
+                <div class="card">
+                    <h3>Property</h3>
+
+                    <label for="priceBefore">Price before renovation ($)</label>
+                    <input type="number" id="priceBefore" placeholder="300000" required />
+                    <div class="error" id="priceBeforeError"></div>
+
+                    <label for="rentBefore">Rent before renovation ($)</label>
+                    <input type="number" id="rentBefore" placeholder="2200" required />
+                    <div class="error" id="rentBeforeError"></div>
+
+                    <label for="renovationCost">Renovation cost ($)</label>
+                    <input type="number" id="renovationCost" placeholder="45000" required />
+                    <div class="error" id="renovationCostError"></div>
+
+                    <label for="priceIncrease">Expected price increase (%)</label>
+                    <input type="number" id="priceIncrease" placeholder="8" />
+                    <div class="error" id="priceIncreaseError"></div>
+
+                    <label for="rentIncrease">Expected rent increase (%)</label>
+                    <input type="number" id="rentIncrease" placeholder="6" />
+                    <div class="error" id="rentIncreaseError"></div>
+
+                    <label for="inflationRate">Expected inflation (%)</label>
+                    <input type="number" id="inflationRate" placeholder="2.5" />
+                    <div class="error" id="inflationRateError"></div>
+
+                    <label for="discountRate">Discount rate (%)</label>
+                    <input type="number" id="discountRate" placeholder="7" />
+                    <div class="error" id="discountRateError"></div>
+                </div>
+
+                <!-- SALE -->
+                <div class="card">
+                    <h3>Sale</h3>
+
+                    <label for="agentFee">Agent fee (%)</label>
+                    <input type="number" id="agentFee" placeholder="5" />
+                    <div class="error" id="agentFeeError"></div>
+
+                    <label for="saleTax">Sale tax (%)</label>
+                    <input type="number" id="saleTax" placeholder="15" />
+                    <div class="error" id="saleTaxError"></div>
+
+                    <label for="years">Holding period (years)</label>
+                    <input type="number" id="years" placeholder="8" required />
+                    <div class="error" id="yearsError"></div>
+
+                    <button id="calcBtn" type="button">
+                        Calculate
+                    </button>
+                </div>
+
+                <!-- RESULTS -->
+                <div id="results" class="card result">
+                    <h3>Results</h3>
+
+                    <div class="row">
+                        <span>Price after renovation</span>
+                        <strong id="priceAfter">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Rent after renovation</span>
+                        <strong id="rentAfter">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Additional rental income</span>
+                        <strong id="extraRent">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Net renovation profit</span>
+                        <strong id="netProfit">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Renovation ROI</span>
+                        <strong id="roi">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Payback period</span>
+                        <strong id="payback">—</strong>
+                    </div>
+
+                    <div class="row">
+                        <span>Real ROI (adjusted for inflation)</span>
+                        <strong id="roiPV">—</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div id="guest-promo" class="hidden playful-blob">
+                <div class="blob-content">
+                        <span class="blob-emoji">🚀</span>
+                        <div class="blob-title">Ready to make smarter decisions?</div>
+                        <div class="blob-text">Join our community and get access to your personal calculation dashboard
+                            with full history and insights</div>
+                        <a href="/signup/" class="blob-btn">Create Free Account</a>
+                </div>
+            </div>
+
+            <div id="user-promo" class="hidden compact-teaser">
+                <span class="teaser-emoji ">💡</span>
+                <div class="teaser-content">
+                    <div class="teaser-title-small">Saved in your workspace</div>
+                    <div class="teaser-text-small">Open your workspace to review saved calculations, comparisons, and verdicts
+                    </div>
+                </div>
+                <a href="/account/" class="teaser-btn">Open account</a>
+            </div>
+
+            <div class="disclaimer">
+                Estimates only, not financial advice.
+                <a href="/disclaimer/">Read full disclaimer</a>
+            </div>
+        </section>
+
+        <section class="guide-layout" aria-label="Guide">
+            <aside class="guide-nav" aria-label="Jump to">
+                <details class="jump" open>
+                    <summary class="jump-summary">
+                        Jump to
+                        <span class="jump-caret" aria-hidden="true"></span>
+                    </summary>
+        
+                    <nav class="jump-links">
+                        <a href="#intro">Introduction</a>
+                        <a href="#what-reveals">What ROI reveals</a>
+                        <a href="#how-calculated">How it’s calculated</a>
+                        <a href="#example">Example</a>
+                        <a href="#scenarios">Scenarios</a>
+                        <a href="#mistakes">Common mistakes</a>
+                        <a href="#how-to-use">How to use</a>
+                        <a href="#faq">FAQ</a>
+                        <a href="#who">Who this is for</a>
+                        <a href="#key-takeaways">Key takeaways</a>
+                    </nav>
+                </details>
+            </aside>
+
+        <div class="guide-content">
+
+            <!-- Introduction -->
+            <div class="content-section" id="intro">
+                <h2>Renovation ROI Calculator: Does Renovation Actually Add Value?</h2>
+
+                <p>
+                    Should you renovate before selling, or sell as-is? Will a kitchen upgrade increase rent
+                    enough to justify the cost? These questions determine whether renovation adds value or
+                    just consumes capital.
+                </p>
+
+                <p>
+                    Most property owners base renovation decisions on gut feeling, contractor promises,
+                    or design preferences rather than financial analysis. This consistently leads to
+                    overcapitalization—spending more on improvements than they add in value.
+                </p>
+
+                <p>
+                    Renovation ROI (Return on Investment) measures whether a renovation makes economic sense
+                    by comparing financial benefits to costs. This calculator evaluates how renovations
+                    affect rental income and resale value across your holding period.
+                </p>
+
+                <p>
+                    This isn’t about whether a renovation looks good — it’s about whether it makes financial
+                    sense given your timeline and market conditions.
+                </p>
+            </div>
+
+            <!-- What ROI Reveals -->
+            <div class="content-section" id="what-reveals">
+                <h2>What Renovation ROI Reveals Beyond Contractor Estimates</h2>
+
+                <p>
+                    Contractors tell you what renovations cost. Real estate agents offer vague assurances
+                    about “adding value.” Neither tells you whether spending $60,000 will actually return
+                    $60,000 or more.
+                </p>
+
+                <p>The Renovation ROI Calculator answers three critical questions:</p>
+
+                <ul>
+                    <li>
+                        <strong>How much total value does the renovation create?</strong><br>
+                        A $45,000 kitchen renovation might increase property value by $35,000 and rent by
+                        $200 per month. Over 5 years, that’s $47,000 in benefits — barely breaking even
+                        after selling costs.
+                    </li>
+
+                    <li>
+                        <strong>How efficient is the renovation compared to alternatives?</strong><br>
+                        The same $45,000 spent on a duplex conversion might generate $130,800 in net benefit —
+                        a 191% ROI.
+                    </li>
+
+                    <li>
+                        <strong>How long does it take to recover the cost from rent alone?</strong><br>
+                        A $30,000 renovation increasing rent by $300/month has an 8.3-year payback period.
+                        Shorter holding periods depend entirely on appreciation.
+                    </li>
+                </ul>
+
+                <p>
+                    These questions reveal whether a renovation is a true investment or expensive
+                    personalization.
+                </p>
+            </div>
+
+            <!-- How ROI Is Calculated -->
+            <div class="content-section" id="how-calculated">
+                <h2>How Renovation ROI Is Calculated</h2>
+
+                <p>The calculator uses the following inputs:</p>
+
+                <ul>
+                    <li><strong>Price before renovation</strong> — baseline market value</li>
+                    <li><strong>Rent before renovation</strong> — current income</li>
+                    <li><strong>Renovation cost</strong> — materials, labor, permits, contingencies</li>
+                    <li><strong>Expected price increase (%)</strong></li>
+                    <li><strong>Expected rent increase (%)</strong></li>
+                    <li><strong>Agent fee (%)</strong></li>
+                    <li><strong>Sale tax (%)</strong></li>
+                    <li><strong>Holding period (years)</strong></li>
+                </ul>
+
+                <p>From these inputs, the calculator determines:</p>
+
+                <ul>
+                    <li>Price after renovation</li>
+                    <li>Rent after renovation</li>
+                    <li>Total additional rental income</li>
+                    <li>Net profit from sale</li>
+                    <li>Net renovation profit</li>
+                    <li>Renovation ROI (%)</li>
+                    <li>Payback period (years)</li>
+                </ul>
+            </div>
+
+            <!-- Example -->
+            <div class="content-section" id="example">
+                <h2>Example: When Renovation Looks Good but Loses Money</h2>
+
+                <p>
+                    A $55,000 renovation increases property value by $34,200 and rent by $3,456 annually.
+                    Over 5 years, additional rent totals $17,280.
+                </p>
+
+                <p>
+                    After selling costs and taxes, net sale profit is $26,260.
+                    Total benefit: $43,540. Net loss after renovation cost: $11,460.
+                </p>
+
+                <div class="highlight-box">
+                    <p>
+                        A renovation can increase rent and value — and still destroy capital.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Scenarios -->
+            <div class="content-section" id="scenarios">
+                <h2>When Renovations Work — And When They Don’t</h2>
+
+                <h4>Scenario 1: Value-Add Conversion</h4>
+                <p>ROI: 221% • Payback: 3.7 years</p>
+
+                <h4>Scenario 2: Cosmetic Update</h4>
+                <p>ROI: −65% • Payback: 27.8 years</p>
+
+                <h4>Scenario 3: Kitchen & Bath Upgrade</h4>
+                <p>ROI: −9% • Payback: 14.4 years</p>
+
+                <p>
+                    Renovation success depends on cost, rent impact, appreciation, and holding period —
+                    not aesthetics.
+                </p>
+            </div>
+
+            <!-- Mistakes -->
+            <div class="content-section" id="mistakes">
+                <h2>Common Renovation Mistakes That Destroy Returns</h2>
+
+                <ul>
+                    <li>Overcapitalizing relative to neighborhood value</li>
+                    <li>Confusing personal taste with market value</li>
+                    <li>Ignoring holding period</li>
+                    <li>Underestimating renovation costs by 30–40%</li>
+                    <li>Overestimating rent increases</li>
+                    <li>Ignoring vacancy during renovation</li>
+                </ul>
+            </div>
+
+            <!-- How to Use -->
+            <div class="content-section" id="how-to-use">
+                <h2>How to Use the Calculator Effectively</h2>
+
+                <div class="highlight-box">
+                    <p>Test optimistic, moderate, and conservative rent increases</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Vary holding periods to find break-even timelines</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Compare multiple renovation scopes</p>
+                </div>
+
+                <div class="highlight-box">
+                    <p>Model realistic selling costs</p>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="content-section" id="faq">
+                <h2>Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <h4>Can a renovation with negative ROI still make sense?</h4>
+                    <p>Only if it is required to make the property marketable.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>What is a good renovation ROI?</h4>
+                    <p>50–100% is solid. Over 100% is excellent.</p>
+                </div>
+
+                <div class="faq-item">
+                    <h4>Should I renovate before selling?</h4>
+                    <p>Only if ROI is strong and payback fits your timeline.</p>
+                </div>
+            </div>
+
+            <!-- Who This Is For -->
+            <div class="content-section" id="who">
+                <h2>Who This Calculator Is For</h2>
+
+                <ul>
+                    <li>Property owners deciding whether to renovate</li>
+                    <li>Value-add real estate investors</li>
+                    <li>Landlords planning rental upgrades</li>
+                    <li>Anyone comparing renovation vs alternative investments</li>
+                </ul>
+            </div>
+
+            <!-- Key Takeaways -->
+            <div class="content-section" id="key-takeaways">
+                <h2>Key Takeaways</h2>
+
+                <ul>
+                    <li>Most renovations are expenses, not investments</li>
+                    <li>Holding period determines renovation success</li>
+                    <li>The market sets value, not your costs</li>
+                    <li>Rental income matters as much as appreciation</li>
+                    <li>Conservative assumptions prevent losses</li>
+                </ul>
+
+                <p>
+                    Renovation decisions should be financial decisions first and aesthetic decisions
+                    second. This calculator enforces that discipline.
+                </p>
+            </div>
+
+        </div>
+    </section>
+
+    </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/renovationCalc.js"></script>
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

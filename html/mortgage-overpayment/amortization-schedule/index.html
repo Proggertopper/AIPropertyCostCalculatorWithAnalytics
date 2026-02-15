@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Mortgage amortization schedule (U.S.): what it is, how to read it, why early payments are mostly interest, how extra principal changes payoff and interest, and how to use an amortization table to plan prepayment, refinancing, and break-even decisions. Includes examples, key terms, checklists, FAQs, and internal links." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/mortgage-overpayment/amortization-schedule/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/mortgage-overpayment/amortization-schedule/" />
+    <link rel="alternate" hreflang="x-default"
+        href="https://mypropertycost.com/mortgage-overpayment/amortization-schedule/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Mortgage Amortization Schedule (U.S.) — How It Works + How to Use It | PropertyCost</title>
+
+    <meta property="og:title" content="Mortgage Amortization Schedule (U.S.)" />
+    <meta property="og:description"
+        content="Learn what an amortization schedule is, why early payments are mostly interest, and how extra principal changes payoff and interest saved." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/mortgage-overpayment/amortization-schedule/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Mortgage Amortization Schedule (U.S.)">
+    <meta name="twitter:description"
+        content="How to read an amortization table, why interest dominates early, and how extra payments affect payoff and interest saved.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/mortgage-overpayment/amortization-schedule/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Mortgage Overpayment","item":"https://mypropertycost.com/mortgage-overpayment/"},
+          {"@type":"ListItem","position":3,"name":"Amortization schedule","item":"https://mypropertycost.com/mortgage-overpayment/amortization-schedule/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/mortgage-overpayment/amortization-schedule/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is a mortgage amortization schedule?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A mortgage amortization schedule is a table that shows every payment over the life of the loan, breaking each payment into interest and principal and showing the remaining balance after each payment."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why are mortgage payments mostly interest at the beginning?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Interest is calculated on the remaining balance. Early in the loan, the balance is highest, so the interest portion is larger. As the balance falls, interest decreases and more of each payment goes to principal."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do extra payments change the amortization schedule?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Extra payments applied to principal reduce the balance faster, which reduces future interest and shortens the payoff timeline. The earlier you reduce principal, the more interest you typically save."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Does extra principal reduce my monthly payment?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Usually no. Principal-only extra payments usually shorten the loan term rather than reducing the required monthly payment. To lower the payment you typically need a refinance or a recast (if eligible)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the best way to use an amortization schedule?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use it to see how much interest you’ll pay over your expected timeline, identify when principal starts to dominate, and test how extra payments, biweekly payments, or a lump sum changes payoff date and total interest."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/mortgage-overpayment/">Mortgage Overpayment</a>
+                <span class="sep">/</span>
+                <span class="current">Amortization schedule</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#basics">Amortization basics</a></li>
+                    <li><a href="#read">How to read an amortization schedule</a></li>
+                    <li><a href="#why-interest">Why early payments are mostly interest</a></li>
+                    <li><a href="#terms">Key terms: principal, interest, escrow, PMI</a></li>
+                    <li><a href="#extra">How extra payments change the schedule</a></li>
+                    <li><a href="#timing">Why timing matters (early vs late prepayment)</a></li>
+                    <li><a href="#biweekly">Biweekly payments and “extra payment hacks”</a></li>
+                    <li><a href="#lump">Lump sum payments</a></li>
+                    <li><a href="#refi">Using the schedule for refinance decisions</a></li>
+                    <li><a href="#mistakes">Common mistakes and misunderstandings</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#stress-tests">Fast stress tests</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Generate an amortization table</div>
+                        <div class="sidebar-cta__sub">See principal, interest, and payoff date with extras.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/mortgage-overpayment/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Mortgage Amortization Schedule (U.S.): How It Works + How to Use It</h1>
+                        <p class="subtitle">
+                            An amortization schedule is the “truth table” of your mortgage: it shows exactly how each
+                            payment is split between
+                            interest and principal, and how your remaining balance drops over time. It also explains the
+                            confusing part of mortgages:
+                            why early payments feel like “all interest,” and why extra principal payments made early
+                            save much more than the same extra
+                            payments made later. If you’re planning extra payments, refinancing, or comparing a 15-year
+                            vs 30-year mortgage,
+                            you’ll make better decisions when you can read and interpret the schedule.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/mortgage-overpayment/"
+                                    aria-label="Back to Mortgage Overpayment hub">← Back to Mortgage Overpayment</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~15–20 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#read">How to read</a>
+                    <a href="#extra">Extra payments</a>
+                    <a href="#refi">Refinance</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/mortgage-overpayment/calculator/">
+                            <strong>Mortgage Overpayment calculator</strong>
+                            <span>Create a schedule and see payoff changes with extras.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage-overpayment/extra-payments-save-interest/">
+                            <strong>How extra payments save interest</strong>
+                            <span>Why early principal reduction matters.</span>
+                        </a>
+                        <a class="start-here__card" href="/mortgage-overpayment/principal-only-payment/">
+                            <strong>Principal-only payment</strong>
+                            <span>Make sure extra payments reduce principal.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        A mortgage amortization schedule is a table that lists each payment and shows:
+                        your payment date, payment amount, interest portion, principal portion, and remaining balance.
+                        Early in the loan, payments are mostly interest because interest is calculated on a high
+                        balance.
+                        As the balance falls, interest decreases and more of the payment goes to principal.
+                        Extra principal payments reduce the balance faster, saving interest and shortening the term.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Fast takeaway:</strong> If you’re going to prepay, it usually helps most when done
+                            early,
+                            and only if the extra money is applied to principal (not “pay ahead” credit).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="basics">
+                    <h2>Amortization Basics</h2>
+                    <p>
+                        “Amortization” is just a fancy word for “paying down a loan over time with scheduled payments.”
+                        Most U.S. mortgages use <strong>fully amortizing</strong> fixed payments: the monthly
+                        principal+interest payment is the same each month,
+                        but the split between interest and principal changes over time.
+                    </p>
+
+                    <h3>What the schedule tells you</h3>
+                    <ul>
+                        <li>How much interest you pay each month</li>
+                        <li>How much principal you pay each month</li>
+                        <li>How fast your balance declines</li>
+                        <li>Your payoff date (if you make only scheduled payments)</li>
+                        <li>Total interest paid over a chosen horizon</li>
+                    </ul>
+
+                    <h3>What the schedule does NOT include (by default)</h3>
+                    <p>
+                        Many amortization tables focus on principal and interest only. They may not include:
+                    </p>
+                    <ul>
+                        <li>Escrow (property taxes and homeowners insurance)</li>
+                        <li>PMI (private mortgage insurance)</li>
+                        <li>HOA dues</li>
+                        <li>Maintenance/repairs</li>
+                    </ul>
+                    <p>
+                        Those costs matter for your housing budget, but they don’t change the principal/interest
+                        amortization math.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="read">
+                    <h2>How to Read an Amortization Schedule</h2>
+                    <p>
+                        An amortization schedule typically has columns like:
+                    </p>
+
+                    <h3>1) Payment number / date</h3>
+                    <p>
+                        The schedule lists each month or payment number (1 to 360 for a 30-year loan).
+                        Some tables show exact dates; others show payment count.
+                    </p>
+
+                    <h3>2) Payment amount (P&amp;I)</h3>
+                    <p>
+                        For a fixed-rate mortgage, the principal+interest payment is constant.
+                        (Your total monthly payment may change if escrow or PMI changes.)
+                    </p>
+
+                    <h3>3) Interest portion</h3>
+                    <p>
+                        This is the interest charged for that period, based on your remaining balance and interest rate.
+                    </p>
+
+                    <h3>4) Principal portion</h3>
+                    <p>
+                        This is what reduces your loan balance. In early years, it’s usually smaller than interest.
+                    </p>
+
+                    <h3>5) Remaining balance</h3>
+                    <p>
+                        This is the key number. If you make an extra principal-only payment, you should see this balance
+                        drop by that amount (plus scheduled principal).
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> If your “extra payment” did not reduce the remaining
+                            balance,
+                            it didn’t accelerate amortization. Fix posting issues before you keep overpaying.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why-interest">
+                    <h2>Why Early Mortgage Payments Are Mostly Interest</h2>
+                    <p>
+                        The reason is simple: interest is calculated on the outstanding balance.
+                        Early in the loan, the balance is high, so interest is high.
+                        Later, the balance is lower, so interest is lower.
+                    </p>
+
+                    <h3>“Front-loaded interest” is not a scam—it’s math</h3>
+                    <p>
+                        People sometimes say interest is “front-loaded.” What they mean is:
+                        the interest portion is bigger early. That’s a consequence of:
+                    </p>
+                    <ul>
+                        <li>High initial balance</li>
+                        <li>Interest calculated monthly on that balance</li>
+                        <li>Fixed total payment (so principal is whatever is left after interest)</li>
+                    </ul>
+
+                    <h3>Why this matters for extra payments</h3>
+                    <p>
+                        Because early interest is high, reducing the balance early reduces the base on which interest is
+                        charged for many future months.
+                        That’s why a small early principal reduction can save a surprisingly large amount of interest
+                        over time.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="terms">
+                    <h2>Key Terms That Cause Confusion</h2>
+
+                    <h3>Principal</h3>
+                    <p>
+                        The amount you borrowed (minus what you’ve already repaid). Principal reduction is what changes
+                        the remaining balance.
+                    </p>
+
+                    <h3>Interest</h3>
+                    <p>
+                        The cost of borrowing, charged on the remaining balance.
+                    </p>
+
+                    <h3>Escrow</h3>
+                    <p>
+                        Money collected for property taxes and homeowners insurance. Escrow does not reduce your loan
+                        balance.
+                        It’s part of your monthly payment but not part of amortization.
+                    </p>
+
+                    <h3>PMI</h3>
+                    <p>
+                        Private mortgage insurance is a fee (not interest) that may apply when you put down less than
+                        20%.
+                        PMI affects your monthly cost but not the amortization schedule of principal and interest.
+                    </p>
+
+                    <h3>Paying ahead vs principal-only</h3>
+                    <p>
+                        If you send extra money, the servicer may treat it as “pay ahead” (credit toward future
+                        payments) unless you specify principal-only.
+                        “Pay ahead” can move your due date but may not reduce principal as you expect.
+                        See: <a href="/mortgage-overpayment/principal-only-payment/">Principal-only payment</a>.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="extra">
+                    <h2>How Extra Payments Change the Amortization Schedule</h2>
+                    <p>
+                        Extra principal payments change the schedule by reducing the balance faster than planned.
+                        This has two main effects:
+                    </p>
+                    <ul>
+                        <li><strong>Lower future interest</strong> (because interest is charged on a smaller balance)
+                        </li>
+                        <li><strong>Shorter term</strong> (you reach zero sooner)</li>
+                    </ul>
+
+                    <h3>Do extra payments reduce the monthly payment?</h3>
+                    <p>
+                        Usually no. Most mortgages keep the required payment the same, and extra principal shortens the
+                        payoff date.
+                        If your goal is to lower the required monthly payment, you typically need:
+                    </p>
+                    <ul>
+                        <li>A refinance (new loan terms and possibly new rate)</li>
+                        <li>A recast (re-amortize after principal reduction, if eligible)</li>
+                    </ul>
+
+                    <h3>How to verify extra payments are working</h3>
+                    <p>
+                        Look at the remaining balance in your statement or amortization schedule.
+                        After a principal-only extra payment posts, the balance should drop more than scheduled.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Related: <a href="/mortgage-overpayment/extra-payments-save-interest/">How extra payments
+                                save interest</a>
+                            (why early principal reduction matters).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="timing">
+                    <h2>Why Timing Matters: Early vs Late Prepayment</h2>
+                    <p>
+                        The earlier you reduce principal, the more months you benefit from a smaller balance.
+                        That’s why:
+                    </p>
+                    <ul>
+                        <li>$100/month extra in year 1 can save much more interest than $100/month extra in year 20.
+                        </li>
+                        <li>A lump sum early can reduce interest dramatically, compared to the same lump sum late.</li>
+                    </ul>
+
+                    <h3>But timing depends on your real life</h3>
+                    <p>
+                        Don’t sacrifice liquidity or retirement savings to “optimize” interest savings.
+                        The best plan is the plan you can sustain.
+                        If aggressive extra payments make you cash-poor, that’s a problem even if your schedule looks
+                        great.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="biweekly">
+                    <h2>Biweekly Payments and “Extra Payment Hacks”</h2>
+                    <p>
+                        Biweekly payments are popular because they feel like a hack.
+                        True biweekly means you pay half the monthly payment every two weeks, which results in 26
+                        half-payments per year,
+                        or 13 full payments. That extra payment can shorten the loan.
+                    </p>
+                    <p>
+                        But there’s nothing magical: it’s basically an extra payment method.
+                        You can often replicate the effect by making a monthly principal-only extra payment.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            See: <a href="/mortgage-overpayment/biweekly-payments/">Biweekly payments</a>
+                            (true biweekly vs “twice per month” and fee pitfalls).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="lump">
+                    <h2>Lump Sum Payments and the Schedule</h2>
+                    <p>
+                        A lump sum principal-only payment can make a visible “jump” down in the remaining balance.
+                        After that, the interest portion in subsequent payments declines because interest is charged on
+                        a smaller balance.
+                    </p>
+
+                    <h3>When lump sums make sense</h3>
+                    <ul>
+                        <li>You have excess cash after emergency reserves.</li>
+                        <li>You want guaranteed interest savings (like a risk-free return near your mortgage rate).</li>
+                        <li>You want to shorten payoff time quickly.</li>
+                    </ul>
+
+                    <h3>What to watch out for</h3>
+                    <ul>
+                        <li>Prepayment penalties (some loans have them)</li>
+                        <li>Posting issues (principal-only vs pay-ahead)</li>
+                        <li>Liquidity risk (cash becomes equity)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Related: <a href="/mortgage-overpayment/one-time-lump-sum/">One-time lump sum</a>
+                            and <a href="/mortgage-overpayment/prepayment-penalty/">Prepayment penalty</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="refi">
+                    <h2>Using the Amortization Schedule for Refinance Decisions</h2>
+                    <p>
+                        Refinancing decisions are often made with “monthly payment savings,” but your schedule shows a
+                        deeper truth:
+                        how much interest you will actually pay over your expected timeline.
+                    </p>
+
+                    <h3>Refinance break-even meets amortization reality</h3>
+                    <p>
+                        If you refinance into a new 30-year loan, you may lower the rate but reset the schedule.
+                        That can be good or bad depending on your timeline and goals.
+                    </p>
+
+                    <h3>What your schedule helps you answer</h3>
+                    <ul>
+                        <li>How much interest remains if you keep the current loan for 5/10/15 years</li>
+                        <li>How quickly principal is falling now versus after refinance</li>
+                        <li>Whether extra payments might beat refinancing (or vice versa)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Related: <a href="/mortgage-overpayment/refinance-vs-prepay/">Refinance vs prepay</a>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes and Misunderstandings</h2>
+
+                    <h3>1) Confusing “total monthly payment” with amortization</h3>
+                    <p>
+                        Escrow and PMI can change your total monthly payment. The amortization schedule focuses on
+                        principal and interest.
+                    </p>
+
+                    <h3>2) Believing “interest is front-loaded by design”</h3>
+                    <p>
+                        It’s math based on balance. The schedule makes it transparent.
+                    </p>
+
+                    <h3>3) Sending extra money without specifying principal-only</h3>
+                    <p>
+                        This can lead to pay-ahead credit instead of principal reduction. Always verify your balance
+                        change.
+                    </p>
+
+                    <h3>4) Using the schedule without a realistic timeline</h3>
+                    <p>
+                        Many borrowers refinance or move. Use 5/10/15-year slices, not only full 30-year totals.
+                    </p>
+
+                    <h3>5) Overpaying and eliminating liquidity</h3>
+                    <p>
+                        Interest savings are great, but not at the cost of becoming financially fragile.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist</h2>
+                    <ul>
+                        <li>✅ Identify principal vs interest vs escrow on your statement</li>
+                        <li>✅ Confirm your amortization schedule matches your note rate and payment</li>
+                        <li>✅ Verify principal balance declines as expected each month</li>
+                        <li>✅ If making extra payments: ensure they are principal-only</li>
+                        <li>✅ Compare early vs late prepayment impact (timing matters)</li>
+                        <li>✅ Use realistic timelines (5/10/15 years) for decisions</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Make one small extra principal payment, then verify the
+                            principal balance change.
+                            Once you trust the posting behavior, scale up.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Fast Stress Tests</h2>
+
+                    <h3>1) Posting test</h3>
+                    <p>
+                        After an “extra payment,” did your remaining balance drop by the extra amount? If not, fix
+                        posting.
+                    </p>
+
+                    <h3>2) Timeline test</h3>
+                    <p>
+                        If you sold or refinanced in 5 years, how much interest would you pay? The schedule answers
+                        this.
+                    </p>
+
+                    <h3>3) Liquidity test</h3>
+                    <p>
+                        If you prepay aggressively, would you still have a comfortable emergency fund? Don’t trade
+                        savings for fragility.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Generate your schedule and test scenarios</h4>
+                            <p>
+                                Use the calculator to create an amortization table and see how extra payments change
+                                payoff and interest.
+                            </p>
+                        </div>
+                        <a href="/mortgage-overpayment/calculator/">Open calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/calculator/">Mortgage Overpayment calculator</a>
+                            <p>Generate a schedule and compare payoff strategies.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/extra-payments-save-interest/">How extra payments save
+                                interest</a>
+                            <p>Why early principal reduction matters most.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/principal-only-payment/">Principal-only payment</a>
+                            <p>Ensure extra money reduces principal.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/biweekly-payments/">Biweekly payments</a>
+                            <p>How biweekly affects payoff (and what isn’t magic).</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/one-time-lump-sum/">One-time lump sum</a>
+                            <p>How lump sums change the schedule and risks to watch.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/mortgage-overpayment/refinance-vs-prepay/">Refinance vs prepay</a>
+                            <p>Use schedules to compare real timeline costs.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is a mortgage amortization schedule?</h4>
+                        <p>
+                            It’s a table that lists each payment over the life of the loan, showing the split between
+                            interest and principal and the remaining balance after each payment.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why are mortgage payments mostly interest at the beginning?</h4>
+                        <p>
+                            Because interest is calculated on the remaining balance, and the balance is highest early in
+                            the loan. As the balance declines, interest declines and principal portion increases.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do extra payments change the amortization schedule?</h4>
+                        <p>
+                            Extra payments applied to principal reduce the balance faster, which reduces future interest
+                            and shortens payoff time. The earlier you do it, the more interest you typically save.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Does extra principal reduce my monthly payment?</h4>
+                        <p>
+                            Usually no. Extra principal typically shortens the loan term. To lower the required payment,
+                            you usually need a refinance or recast (if eligible).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the best way to use an amortization schedule?</h4>
+                        <p>
+                            Use it to understand interest vs principal over time, plan extra payments, estimate interest
+                            over realistic timelines (5/10/15 years), and compare refinance vs prepay strategies.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        An amortization schedule turns mortgage confusion into clarity: it shows exactly how each
+                        payment reduces your balance and how much interest you’re paying.
+                        Early payments are mostly interest because the balance is highest early, not because of a trick.
+                        Extra principal payments work by reducing that balance sooner, which cuts future interest and
+                        shortens payoff time—especially when done early.
+                        Use your schedule to make smarter decisions about extra payments, lump sums, and refinancing,
+                        and always verify principal-only posting.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: generate a schedule and test extra payments in the
+                            <a href="/mortgage-overpayment/calculator/">Mortgage Overpayment calculator</a>.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Schedules are based on fixed-rate, fully amortizing mortgages unless stated
+                        otherwise. Escrow, PMI, fees, and servicer posting rules can affect your real-world results.
+                        Always verify payment application and principal balance changes on your statement.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

@@ -19,12 +19,31 @@ function getResend() {
     return resend;
 }
 
+function cleanString(v) {
+    return typeof v === "string" ? v.trim() : "";
+}
+
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i.test(email);
+}
+
 router.post("/api/contact", async (req, res) => {
     try {
-        const { name, email, message } = req.body;
+        const name = cleanString(req.body?.name);
+        const email = cleanString(req.body?.email).toLowerCase();
+        const message = cleanString(req.body?.message);
 
         if (!name || !email || !message) {
             return res.status(400).json({ error: "All fields are required" });
+        }
+        if (name.length < 2 || name.length > 80) {
+            return res.status(400).json({ error: "Name must be 2-80 characters." });
+        }
+        if (email.length > 254 || !isValidEmail(email)) {
+            return res.status(400).json({ error: "Invalid email format." });
+        }
+        if (message.length < 10 || message.length > 5000) {
+            return res.status(400).json({ error: "Message must be 10-5000 characters." });
         }
 
         const userId = req.session ? req.session.userId : null;

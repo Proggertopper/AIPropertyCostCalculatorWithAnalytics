@@ -1,0 +1,907 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Real estate IRR explained: how to calculate IRR and XIRR for rental properties and flips, what cash flows to include (down payment, closing costs, CapEx, NOI, debt service, refinance, sale proceeds), levered vs unlevered IRR, IRR vs cap rate vs cash-on-cash vs equity multiple, common mistakes that inflate IRR, and a step-by-step template for Excel/Google Sheets. Includes examples, scenario testing, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/real-estate-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/real-estate-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/real-estate-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Real Estate IRR (Rental Property & Flip) — How to Calculate It | PropertyCost</title>
+
+    <meta property="og:title" content="Real Estate IRR (Rental Property & Flip) — How to Calculate It" />
+    <meta property="og:description"
+        content="A complete, practical guide to real estate IRR/XIRR: cash flow setup, levered vs unlevered, refinance and sale proceeds, and common mistakes." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/real-estate-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Real Estate IRR (Rental Property & Flip) — How to Calculate It">
+    <meta name="twitter:description"
+        content="Step-by-step IRR/XIRR for real estate: what to include, refinance and sale proceeds, levered vs unlevered, plus templates and pitfalls.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/real-estate-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"Real estate IRR","item":"https://mypropertycost.com/irr/real-estate-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/real-estate-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is IRR in real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Real estate IRR is the annualized return implied by a property’s cash flows—purchase costs, operating cash flow, financing, and net sale proceeds. It’s the rate that makes the net present value (NPV) of all cash flows equal to zero."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Should I use IRR or XIRR for real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use XIRR when cash flow dates are irregular—which is common in real estate (purchase date, renovations, delayed rent start, refinance, and sale). Use IRR only when cash flows are evenly spaced by period."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What cash flows should be included in a real estate IRR calculation?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Include all real dollars in and out: down payment, closing costs, renovations/CapEx, net operating cash flow (NOI minus debt service and reserves if modeling equity returns), refinance proceeds (net of fees), and net sale proceeds (sale price minus selling costs minus loan payoff)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the difference between levered and unlevered IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Unlevered IRR ignores financing and measures return at the property level. Levered IRR includes debt service and measures return to equity. Levered IRR can be higher or lower depending on financing terms and risk."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why does real estate IRR often look inflated?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR gets inflated when analysts use gross sale price instead of net sale proceeds, omit selling costs and CapEx, assume overly aggressive rent growth or exit value, or treat refinance proceeds incorrectly. Small changes to exit assumptions can dramatically change IRR."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">Real estate IRR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#why">Why IRR matters in real estate</a></li>
+                    <li><a href="#irr-vs-other">IRR vs cap rate vs cash-on-cash vs equity multiple</a></li>
+                    <li><a href="#levered">Levered vs unlevered IRR</a></li>
+                    <li><a href="#cashflows">What cash flows to include (full checklist)</a></li>
+                    <li><a href="#xirr">IRR vs XIRR (dates vs periods)</a></li>
+                    <li><a href="#template">Real estate IRR/XIRR template (structure)</a></li>
+                    <li><a href="#example">Worked example (rental property)</a></li>
+                    <li><a href="#flip">Fix-and-flip IRR example</a></li>
+                    <li><a href="#refi">Refinance and cash-out: how to model it</a></li>
+                    <li><a href="#exit">Exit assumptions: why IRR is so sensitive</a></li>
+                    <li><a href="#stress">Stress tests and scenario analysis</a></li>
+                    <li><a href="#mistakes">Common mistakes that inflate IRR</a></li>
+                    <li><a href="#interpret">How to interpret IRR (what’s “good”?)</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Compute IRR/XIRR</div>
+                        <div class="sidebar-cta__sub">Use real cash flows + dates.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Real Estate IRR: How to Calculate IRR/XIRR for Rental Properties and Flips</h1>
+                        <p class="subtitle">
+                            “What’s the IRR?” is the most common question in real estate investing because IRR
+                            compresses a messy timeline into one annualized rate.
+                            But real estate IRR is easy to inflate by accident: missing selling costs, using gross sale
+                            price, ignoring CapEx, or assuming a perfect exit.
+                            This guide gives you a <strong>complete, audit-proof</strong> approach: exactly which cash
+                            flows to include, when to use XIRR,
+                            levered vs unlevered IRR, refinance modeling, and stress tests so you can trust the result.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~28–42 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#cashflows">Cash flows</a>
+                    <a href="#example">Example</a>
+                    <a href="#refi">Refinance</a>
+                    <a href="#mistakes">Mistakes</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/what-is-irr/">
+                            <strong>What is IRR?</strong>
+                            <span>Definition + intuition + pitfalls.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/xirr-irregular-cash-flows/">
+                            <strong>XIRR (irregular cash flows)</strong>
+                            <span>Use dates for real-world timing.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/mirr-modified-irr/">
+                            <strong>MIRR (modified IRR)</strong>
+                            <span>Fix reinvestment assumptions.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        Real estate IRR is the annualized return implied by <strong>all</strong> property cash flows:
+                        money you put in (down payment, closing costs, renovations/CapEx),
+                        money you receive during ownership (net operating cash flow after expenses and, for equity IRR,
+                        after debt service),
+                        and money you receive at exit (<strong>net sale proceeds</strong> after selling costs and loan
+                        payoff).
+                        Use <strong>XIRR</strong> when dates are irregular (typical in real estate).
+                    </p>
+                    <div class="callout">
+                        <p>
+                            <strong>Non-negotiable:</strong> Use <strong>net sale proceeds</strong>, not gross sale
+                            price. This single mistake inflates most “amazing IRRs.”
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why IRR Matters in Real Estate (And What It Actually Measures)</h2>
+                    <p>
+                        Real estate returns come from multiple sources:
+                    </p>
+                    <ul>
+                        <li><strong>Cash flow:</strong> rent minus expenses (and minus debt service if levered).</li>
+                        <li><strong>Equity build:</strong> loan principal paydown (if amortizing).</li>
+                        <li><strong>Appreciation:</strong> value changes over time (often modeled via NOI growth and
+                            exit cap rate).</li>
+                        <li><strong>Timing:</strong> receiving money earlier boosts annualized returns.</li>
+                    </ul>
+                    <p>
+                        IRR combines all of that into a single annualized rate.
+                        It answers: “What constant annual rate makes the present value of money in equal money out?”
+                        The key is that IRR is heavily influenced by timing—early cash flows can boost IRR even if total
+                        profit is modest.
+                    </p>
+
+                    <h3>Why investors like IRR</h3>
+                    <ul>
+                        <li>It’s a single number that includes the whole timeline (not just year 1).</li>
+                        <li>It lets you compare strategies with different timing (flip vs long-term hold).</li>
+                        <li>It incorporates the exit, which is where many real estate profits occur.</li>
+                    </ul>
+
+                    <h3>Why IRR can mislead in real estate</h3>
+                    <ul>
+                        <li>It can be inflated by optimistic exit assumptions.</li>
+                        <li>It can be inflated by refinance cash-outs (early return of capital).</li>
+                        <li>It can “favor” shorter projects even when they create fewer dollars.</li>
+                        <li>It hides key assumptions (vacancy, repairs, rent growth, exit cap rate).</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="irr-vs-other">
+                    <h2>IRR vs Cap Rate vs Cash-on-Cash vs Equity Multiple</h2>
+
+                    <h3>Cap rate</h3>
+                    <p>
+                        Cap rate is typically <strong>NOI ÷ price</strong>.
+                        It’s a snapshot yield at a point in time and usually ignores financing and growth.
+                        Cap rate is useful for comparing stabilized properties, but it’s not a full return metric.
+                    </p>
+
+                    <h3>Cash-on-cash return</h3>
+                    <p>
+                        Cash-on-cash is typically <strong>annual pre-tax cash flow ÷ cash invested</strong>.
+                        It focuses on current income, often year 1.
+                        It can ignore appreciation and equity build unless you explicitly model those separately.
+                    </p>
+
+                    <h3>Equity multiple</h3>
+                    <p>
+                        Equity multiple is <strong>total cash returned ÷ total cash invested</strong>.
+                        It tells you the size of the win in dollars, but ignores timing.
+                        A 2.0x multiple over 2 years is very different from 2.0x over 12 years—IRR captures that.
+                    </p>
+
+                    <h3>IRR</h3>
+                    <p>
+                        IRR uses the entire cash flow stream and includes timing.
+                        It’s best used alongside at least one “dollars-based” metric like equity multiple or NPV.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            A clean return dashboard for real estate: <strong>IRR/XIRR + equity multiple + cash-on-cash
+                                + sensitivity</strong>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="levered">
+                    <h2>Levered vs Unlevered IRR (This Is Where People Get Apples-to-Oranges)</h2>
+
+                    <h3>Unlevered IRR (property-level)</h3>
+                    <p>
+                        Unlevered IRR ignores financing and looks at the property itself.
+                        Cash flows are typically:
+                    </p>
+                    <ul>
+                        <li>negative: purchase price + closing costs + CapEx (property-level)</li>
+                        <li>positive: NOI (rent minus operating expenses)</li>
+                        <li>positive at exit: sale proceeds net of selling costs (but no loan payoff because there is no
+                            loan)</li>
+                    </ul>
+                    <p>
+                        Unlevered IRR is often used to compare property quality and operations without the noise of
+                        financing.
+                    </p>
+
+                    <h3>Levered IRR (equity-level)</h3>
+                    <p>
+                        Levered IRR includes debt and measures return to equity.
+                        Cash flows are:
+                    </p>
+                    <ul>
+                        <li>negative: down payment + closing costs + equity-funded CapEx</li>
+                        <li>positive/negative: cash flow after debt service (and reserves if you model them)</li>
+                        <li>positive at exit: <strong>net sale proceeds to equity</strong> (sale price minus selling
+                            costs minus remaining loan payoff)</li>
+                    </ul>
+                    <p>
+                        Levered IRR can be higher or lower than unlevered IRR depending on interest rates, amortization,
+                        and risk.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Consistency rule:</strong> If you include loan payments, you must also include loan
+                            payoff at sale. Otherwise the IRR is fantasy.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="cashflows">
+                    <h2>What Cash Flows to Include in Real Estate IRR (Full Checklist)</h2>
+                    <p>
+                        The quality of your IRR is 90% cash flow integrity.
+                        Here’s what to include to avoid inflated results.
+                    </p>
+
+                    <h3>Upfront acquisition costs (usually negative)</h3>
+                    <ul>
+                        <li>Down payment (equity)</li>
+                        <li>Closing costs (title, escrow, lender fees, etc.)</li>
+                        <li>Initial inspections, appraisal, due diligence costs (if material)</li>
+                        <li>Upfront repairs/renovation to make it rentable (CapEx)</li>
+                        <li>Upfront leasing costs (if applicable)</li>
+                    </ul>
+
+                    <h3>Operating cash flows during the hold</h3>
+                    <p>
+                        Decide whether you model at the NOI level or equity level:
+                    </p>
+                    <ul>
+                        <li><strong>Unlevered model:</strong> use NOI (rent - operating expenses).</li>
+                        <li><strong>Levered model:</strong> use cash flow after debt service (NOI - mortgage payments),
+                            plus any reserve contributions if you treat them as cash out.</li>
+                    </ul>
+
+                    <h4>Common operating items to model</h4>
+                    <ul>
+                        <li>Gross rent</li>
+                        <li>Vacancy and credit loss (a % or fixed assumption)</li>
+                        <li>Property taxes</li>
+                        <li>Insurance</li>
+                        <li>Repairs and maintenance</li>
+                        <li>Property management</li>
+                        <li>HOA (if applicable)</li>
+                        <li>Utilities paid by owner</li>
+                        <li>Turnover/leasing costs (if high-turnover property)</li>
+                        <li>Capital expenditure reserves (roof, HVAC, etc., if you model them as cash out)</li>
+                    </ul>
+
+                    <h3>Capital expenditures during the hold (negative)</h3>
+                    <p>
+                        Big-ticket costs are not “optional.” Ignoring them is how bad IRRs happen.
+                        Examples:
+                    </p>
+                    <ul>
+                        <li>roof replacement</li>
+                        <li>HVAC replacement</li>
+                        <li>major plumbing/electrical</li>
+                        <li>unit turns and remodeling</li>
+                        <li>exterior paint, parking lot</li>
+                    </ul>
+
+                    <h3>Refinance proceeds (if applicable)</h3>
+                    <ul>
+                        <li>Cash-out proceeds (positive) on the refinance date</li>
+                        <li>Refinance fees (negative) on the refinance date</li>
+                        <li>Update debt service going forward</li>
+                    </ul>
+
+                    <h3>Exit cash flows (sale) — net proceeds only</h3>
+                    <p>
+                        At sale, you should include:
+                    </p>
+                    <ul>
+                        <li>Sale price (gross)</li>
+                        <li>minus selling costs (agent commissions, transfer taxes, closing fees)</li>
+                        <li>minus remaining loan payoff (for levered IRR)</li>
+                        <li>minus any modeled taxes (if you include them)</li>
+                        <li>equals <strong>net sale proceeds to equity</strong> (positive)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If your model uses gross sale price as the final cash flow, your IRR is inflated. Always use
+                            net.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="xirr">
+                    <h2>IRR vs XIRR for Real Estate: Use Dates (Usually)</h2>
+                    <p>
+                        Real estate cash flows are rarely perfectly periodic:
+                        the purchase might happen mid-month, renovations might be paid on irregular days,
+                        rent might start later, and the sale will happen on a specific closing date.
+                    </p>
+                    <p>
+                        That’s why <strong>XIRR</strong> is often the correct tool for real estate: it uses actual
+                        dates.
+                        See: <a href="/irr/xirr-irregular-cash-flows/">XIRR for irregular cash flows</a>.
+                    </p>
+
+                    <h3>When IRR is acceptable</h3>
+                    <p>
+                        If you model everything monthly and assume one cash flow per month at the same spacing, IRR can
+                        be used as an approximation.
+                        But if you have major irregular events (renovations, refi, sale mid-month), XIRR is more
+                        accurate.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="template">
+                    <h2>Real Estate IRR/XIRR Template (Structure You Can Copy)</h2>
+                    <p>
+                        The simplest reliable structure is a cash flow table with three columns:
+                    </p>
+                    <ul>
+                        <li><strong>Date</strong></li>
+                        <li><strong>Cash flow</strong> (negative out, positive in)</li>
+                        <li><strong>Description</strong> (purchase, reno, rent, mortgage, refi, sale)</li>
+                    </ul>
+
+                    <h3>Minimum required lines</h3>
+                    <ul>
+                        <li>Purchase date: down payment + closing costs (negative)</li>
+                        <li>Operating cash flows (monthly/quarterly)</li>
+                        <li>Sale date: net sale proceeds (positive)</li>
+                    </ul>
+
+                    <h3>Typical additional lines</h3>
+                    <ul>
+                        <li>Renovation costs (negative) on their payment dates</li>
+                        <li>CapEx events (negative)</li>
+                        <li>Refinance proceeds/fees (positive/negative)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Pro move: keep the table “raw” and auditable. Don’t bury key cash flows in assumptions tabs
+                            you forget to update.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="example">
+                    <h2>Worked Example: Rental Property IRR (Levered)</h2>
+                    <p>
+                        Let’s outline a realistic levered rental property scenario (numbers simplified for clarity).
+                        Assume:
+                    </p>
+                    <ul>
+                        <li>Purchase: $400,000</li>
+                        <li>Down payment (20%): $80,000</li>
+                        <li>Closing costs: $10,000</li>
+                        <li>Initial renovation: $15,000 (paid across two months)</li>
+                        <li>Net monthly cash flow after expenses and debt service: $350 starting in month 3</li>
+                        <li>Hold period: 5 years</li>
+                        <li>Sale price: $470,000</li>
+                        <li>Selling costs: 7% of sale price (commission + closing)</li>
+                        <li>Remaining loan payoff at sale: $290,000 (illustrative)</li>
+                    </ul>
+
+                    <h3>Cash flow lines (conceptual)</h3>
+                    <ul>
+                        <li>Day 0: -$90,000 (down payment + closing)</li>
+                        <li>Month 1: -$7,500 (reno)</li>
+                        <li>Month 2: -$7,500 (reno)</li>
+                        <li>Months 3–60: +$350 per month (net cash flow)</li>
+                        <li>Sale date: +[net sale proceeds]</li>
+                    </ul>
+
+                    <h3>Compute net sale proceeds</h3>
+                    <p>
+                        Sale price: $470,000
+                        <br>Minus selling costs (7%): -$32,900
+                        <br>Net before debt: $437,100
+                        <br>Minus loan payoff: -$290,000
+                        <br><strong>Net sale proceeds to equity: $147,100</strong>
+                    </p>
+
+                    <p>
+                        That final $147,100 is the cash flow you include at sale in an equity IRR model (plus the last
+                        month’s operating cash flow if it’s separate).
+                        If you accidentally used $470,000 as the final cash flow, your IRR would explode upward and be
+                        meaningless.
+                    </p>
+
+                    <h3>Interpretation</h3>
+                    <p>
+                        Once you compute XIRR/IRR, sanity-check:
+                    </p>
+                    <ul>
+                        <li>Does the result feel plausible relative to total profit?</li>
+                        <li>Is the exit line net of costs and loan payoff?</li>
+                        <li>Does a small change in sale price change IRR a lot? (It often does.)</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="flip">
+                    <h2>Fix-and-Flip IRR Example (Why Short Holds Can Show Huge IRRs)</h2>
+                    <p>
+                        Flips often show very high IRRs because the timeline is short: even a modest dollar profit can
+                        annualize to a high percentage.
+                        That doesn’t mean flips are “better” than long-term holds—just different.
+                    </p>
+
+                    <h3>Flip cash flow structure</h3>
+                    <ul>
+                        <li>Purchase + closing + rehab: big negatives upfront</li>
+                        <li>No operating cash flow (usually)</li>
+                        <li>Sale proceeds: one big positive at exit</li>
+                    </ul>
+
+                    <h3>Why IRR can be misleading here</h3>
+                    <ul>
+                        <li>IRR doesn’t tell you if the deal is scalable (can you do 10 flips at once?).</li>
+                        <li>IRR doesn’t capture operational bandwidth, permit delays, contractor risk.</li>
+                        <li>IRR is extremely sensitive to timeline: a 2-month delay can crush annualized return.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            For flips, always pair IRR with: total profit, time-to-close risk, and a conservative
+                            schedule scenario.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="refi">
+                    <h2>Refinance and Cash-Out: How to Model It Without Lying to Yourself</h2>
+                    <p>
+                        Refinancing can change IRR dramatically because it can return capital earlier.
+                        The math rewards early cash return. But you must model it correctly.
+                    </p>
+
+                    <h3>Cash-out refinance modeling</h3>
+                    <ul>
+                        <li>On the refinance date, include the cash-out proceeds as a <strong>positive</strong> cash
+                            flow.</li>
+                        <li>Include refinance costs/fees as <strong>negative</strong> cash flows.</li>
+                        <li>Update debt service going forward based on the new loan.</li>
+                        <li>At sale, pay off the new remaining loan balance.</li>
+                    </ul>
+
+                    <h3>Why this inflates IRR (not necessarily “bad,” but needs context)</h3>
+                    <p>
+                        If you recover most of your initial equity through a refinance, the remaining equity in the deal
+                        may be small.
+                        Any later cash flows on a small remaining equity base can generate a high IRR.
+                        That doesn’t mean risk vanished—it often means leverage increased.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            High IRR after a cash-out refi can reflect “return of capital,” not pure profit. Check
+                            equity multiple and risk.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="exit">
+                    <h2>Exit Assumptions: Why Real Estate IRR Is So Sensitive</h2>
+                    <p>
+                        In many real estate deals, a large portion of total value comes from the exit sale.
+                        That means IRR can be dominated by terminal assumptions:
+                    </p>
+                    <ul>
+                        <li>sale price / appreciation</li>
+                        <li>exit cap rate</li>
+                        <li>NOI growth assumptions</li>
+                        <li>selling costs</li>
+                        <li>loan payoff at exit</li>
+                    </ul>
+
+                    <h3>Exit cap rate sensitivity</h3>
+                    <p>
+                        Small changes in exit cap rate can materially change valuation.
+                        A “half-cap” (e.g., from 5.0% to 5.5%) can move your terminal value enough to swing IRR
+                        meaningfully.
+                    </p>
+
+                    <h3>What to do about it</h3>
+                    <p>
+                        Don’t bet the deal on one exit number. Run a conservative exit scenario:
+                        higher exit cap rate, slower rent growth, and full selling costs.
+                        If IRR collapses, the deal is fragile.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="stress">
+                    <h2>Stress Tests and Scenario Analysis (How to Trust Your IRR)</h2>
+                    <p>
+                        IRR is a model output. Models are wrong in predictable ways.
+                        The best defense is fast stress testing.
+                    </p>
+
+                    <h3>Stress test #1: Conservative exit</h3>
+                    <ul>
+                        <li>Lower sale price (or higher exit cap rate)</li>
+                        <li>Higher selling costs</li>
+                        <li>Slower NOI growth</li>
+                    </ul>
+
+                    <h3>Stress test #2: Expense shock</h3>
+                    <ul>
+                        <li>Higher maintenance</li>
+                        <li>Higher property taxes/insurance</li>
+                        <li>Vacancy increase</li>
+                    </ul>
+
+                    <h3>Stress test #3: Timeline delay</h3>
+                    <ul>
+                        <li>Lease-up takes longer</li>
+                        <li>Renovation takes longer</li>
+                        <li>Sale takes longer</li>
+                    </ul>
+
+                    <h3>Stress test #4: Interest rate/refi risk</h3>
+                    <ul>
+                        <li>Higher refinance rate</li>
+                        <li>No refinance available</li>
+                        <li>Debt service increases on adjustable terms</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If a deal only looks good in the “perfect” scenario, it’s not a good deal—it’s a fragile
+                            assumption stack.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes That Inflate Real Estate IRR (Audit This List)</h2>
+
+                    <h3>1) Using gross sale price instead of net sale proceeds</h3>
+                    <p>
+                        The classic mistake. Always subtract selling costs and loan payoff.
+                    </p>
+
+                    <h3>2) Ignoring CapEx and big-ticket replacements</h3>
+                    <p>
+                        If you don’t model roof/HVAC/turnover reserves (or real CapEx events), your IRR is too high.
+                    </p>
+
+                    <h3>3) Treating principal payments as a “cost” in unlevered models</h3>
+                    <p>
+                        In equity models, principal paydown is not a cost—it becomes equity. But you must reflect it
+                        correctly in cash flows and exit payoff.
+                    </p>
+
+                    <h3>4) Overly aggressive rent growth</h3>
+                    <p>
+                        Small rent growth changes compound and boost terminal value. Stress-test modest growth.
+                    </p>
+
+                    <h3>5) Exit cap rate optimism</h3>
+                    <p>
+                        Assuming a lower exit cap than going-in is a bullish bet. Test a higher exit cap.
+                    </p>
+
+                    <h3>6) Not modeling vacancy and credit loss realistically</h3>
+                    <p>
+                        0% vacancy is not realistic. Even “good” properties have turnover and collections friction.
+                    </p>
+
+                    <h3>7) Incorrect refinance treatment</h3>
+                    <p>
+                        Cash-out proceeds are not “profit.” They are borrowed money. Model increased debt and payoff at
+                        exit.
+                    </p>
+
+                    <h3>8) Ignoring taxes/fees inconsistently</h3>
+                    <p>
+                        If you model taxes in one deal, model them in others, or at least be consistent in comparisons.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If your IRR is exceptional, assume it’s wrong until you can explain it with a clean cash
+                            flow story.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="interpret">
+                    <h2>How to Interpret Real Estate IRR (What’s “Good”?)</h2>
+                    <p>
+                        There is no universal “good IRR” because risk varies widely:
+                    </p>
+                    <ul>
+                        <li>A stabilized, low-risk property should have a lower required return than a heavy rehab in a
+                            volatile market.</li>
+                        <li>Higher leverage can raise IRR but also raise downside risk.</li>
+                        <li>Short-horizon projects can show high IRR even with moderate profit.</li>
+                    </ul>
+
+                    <h3>Use a hurdle rate mindset</h3>
+                    <p>
+                        Instead of chasing a number, compare IRR to your required return for the risk.
+                        That required return is effectively your “discount rate” or hurdle rate. See: <a
+                            href="/irr/discount-rate-vs-irr/">Discount rate vs IRR</a>.
+                    </p>
+
+                    <h3>Pair IRR with other metrics</h3>
+                    <ul>
+                        <li><strong>Equity multiple:</strong> how many dollars returned per dollar invested</li>
+                        <li><strong>NPV:</strong> value created at your hurdle rate</li>
+                        <li><strong>Downside scenarios:</strong> what happens if the exit is weaker or timeline slips
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            A “good” IRR is one that stays acceptable under conservative assumptions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is IRR in real estate?</h4>
+                        <p>
+                            It’s the annualized return implied by all property cash flows: money invested, operating
+                            cash flow, financing effects (for equity IRR), and net sale proceeds at exit.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should I use IRR or XIRR for real estate?</h4>
+                        <p>
+                            Usually XIRR, because real estate cash flows occur on specific dates. IRR is fine only if
+                            you model cash flows in perfectly equal periods.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What cash flows should I include?</h4>
+                        <p>
+                            Down payment, closing costs, renovations/CapEx, net operating cash flow, refinance
+                            proceeds/fees (if applicable), and net sale proceeds (sale price minus selling costs minus
+                            loan payoff).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the difference between levered and unlevered IRR?</h4>
+                        <p>
+                            Unlevered IRR measures return at the property level without debt. Levered IRR measures
+                            return to equity after debt service and includes loan payoff at exit.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does my real estate IRR look unusually high?</h4>
+                        <p>
+                            Most often because of one of these: gross sale price used instead of net proceeds, missing
+                            selling costs, missing CapEx, overly optimistic exit assumptions, or refinance proceeds
+                            modeled as “profit” without reflecting higher debt and payoff at exit.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Real estate IRR is powerful because it compresses a multi-year property story into one
+                        annualized return.
+                        But it’s also easy to inflate. The fix is simple: build an auditable cash flow table with
+                        correct signs and dates,
+                        include all real costs (closing, selling, CapEx), and use <strong>net sale proceeds</strong>
+                        after loan payoff.
+                        Use XIRR when dates are irregular, and never trust a single base-case output—run conservative
+                        exit and timeline scenarios.
+                        If the IRR still holds up under stress tests, you can trust it much more.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute your property’s IRR/XIRR in the <a href="/irr/calculator/">IRR
+                                calculator</a>, then sanity-check with NPV (see <a href="/irr/irr-vs-npv/">IRR vs
+                                NPV</a>).
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. IRR/XIRR are sensitive to cash flow assumptions—especially exit value, selling
+                        costs, and timing.
+                        Use realistic net sale proceeds (after fees and loan payoff), include CapEx, and run scenario
+                        analysis (conservative/base/optimistic) to avoid overfitting.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

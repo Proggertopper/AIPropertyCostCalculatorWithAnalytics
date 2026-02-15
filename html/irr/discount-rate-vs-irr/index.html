@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Discount rate vs IRR: learn the difference between a discount rate (hurdle rate/required return) and IRR (internal rate of return), how to choose a discount rate for NPV, why IRR alone can mislead, and how to apply both in real estate and investing. Includes examples, rules of thumb, risk premiums, WACC vs hurdle rate, levered vs unlevered, sensitivity tables, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/discount-rate-vs-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/discount-rate-vs-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/discount-rate-vs-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Discount Rate vs IRR — What’s the Difference? | PropertyCost</title>
+
+    <meta property="og:title" content="Discount Rate vs IRR — What’s the Difference?" />
+    <meta property="og:description"
+        content="A practical guide: discount rate (hurdle rate/required return) vs IRR, how to choose a discount rate for NPV, and when IRR misleads." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/discount-rate-vs-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Discount Rate vs IRR — What’s the Difference?">
+    <meta name="twitter:description"
+        content="Learn how to choose a discount rate, how it relates to NPV, and how to interpret IRR without being misled.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/discount-rate-vs-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"Discount rate vs IRR","item":"https://mypropertycost.com/irr/discount-rate-vs-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/discount-rate-vs-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the difference between a discount rate and IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A discount rate (hurdle rate/required return) is the rate you choose to discount cash flows for NPV—what you demand for the risk. IRR is the rate implied by the investment’s cash flows (the rate that makes NPV = 0). Discount rate is your requirement; IRR is the deal’s output."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do I choose a discount rate for NPV?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Start with a baseline alternative (risk-free-ish rate), add a risk premium for uncertainty, and adjust for leverage, illiquidity, and complexity. Many analysts use a range (conservative/base/aggressive) and test sensitivity rather than relying on one perfect number."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"If IRR is higher than the discount rate, is it a good investment?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Often yes—if the cash flows are realistic and risk is comparable. If IRR exceeds your hurdle rate, NPV at that rate is typically positive. But IRR can mislead when deals differ in size, timeline, or have non-standard cash flows—so confirm with NPV and scenario tests."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What discount rate should I use for real estate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"There’s no universal rate. It depends on property type, market risk, leverage, tenant risk, and your alternatives. Use a risk-appropriate hurdle rate and run sensitivity across a range (e.g., 8%–15% depending on strategy and risk)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is WACC and is it the same as a discount rate?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"WACC is a company’s weighted average cost of capital, often used as a discount rate for corporate projects. For personal investing or real estate, you typically use a hurdle rate that reflects your required return for the project’s risk—not necessarily WACC."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">Discount rate vs IRR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#definitions">Definitions</a></li>
+                    <li><a href="#relationship">How discount rate and IRR relate</a></li>
+                    <li><a href="#choose">How to choose a discount rate</a></li>
+                    <li><a href="#range">Use a range: sensitivity analysis</a></li>
+                    <li><a href="#realestate">Real estate: discount rate vs cap rate vs IRR</a></li>
+                    <li><a href="#levered">Levered vs unlevered discount rates</a></li>
+                    <li><a href="#common">Common mistakes</a></li>
+                    <li><a href="#workflow">A practical workflow (step-by-step)</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate IRR/XIRR</div>
+                        <div class="sidebar-cta__sub">Then compare to your hurdle rate.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Discount Rate vs IRR: What’s the Difference (and Which One Matters)?</h1>
+                        <p class="subtitle">
+                            People confuse discount rate and IRR because they both look like percentages. But they play
+                            opposite roles.
+                            A <strong>discount rate</strong> (also called a <strong>hurdle rate</strong> or
+                            <strong>required return</strong>) is what you demand for the risk.
+                            <strong>IRR</strong> (internal rate of return) is what the deal’s cash flows imply.
+                            In other words: discount rate is your input; IRR is the deal’s output.
+                            This guide shows the exact relationship between the two, how to choose a discount rate for
+                            NPV,
+                            and how to apply these concepts in real estate and investing without getting misled by a
+                            single “high IRR” number.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~22–34 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#relationship">Relationship</a>
+                    <a href="#choose">Choose a rate</a>
+                    <a href="#realestate">Real estate</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/what-is-irr/">
+                            <strong>What is IRR?</strong>
+                            <span>Definition, intuition, and pitfalls.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/irr-vs-npv/">
+                            <strong>IRR vs NPV</strong>
+                            <span>Why higher IRR isn’t always better.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/how-to-calculate-irr/">
+                            <strong>How to calculate IRR</strong>
+                            <span>IRR vs XIRR, examples, troubleshooting.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        <strong>Discount rate</strong> is the return you require to take a risk (your hurdle rate). You
+                        choose it to compute NPV.
+                        <strong>IRR</strong> is the return implied by the deal’s cash flows (the rate that makes NPV =
+                        0).
+                        If a deal’s IRR is above your discount rate, its NPV at that discount rate is usually positive.
+                        If a deal’s IRR is below your discount rate, its NPV at that rate is usually negative.
+                        But IRR can still mislead when deals differ in size or timeline, or have unusual cash flows—so
+                        use IRR + NPV together.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>One-line summary:</strong> Discount rate = your required return (input). IRR =
+                            deal’s implied return (output).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Definitions (No Jargon)</h2>
+
+                    <h3>Discount rate (required return / hurdle rate)</h3>
+                    <p>
+                        A discount rate is the rate you use to translate future money into today’s money.
+                        It reflects two things:
+                    </p>
+                    <ul>
+                        <li><strong>Time value of money:</strong> a dollar today is worth more than a dollar later.</li>
+                        <li><strong>Risk:</strong> future cash flows might not happen as expected, so you demand extra
+                            return.</li>
+                    </ul>
+                    <p>
+                        When you run NPV, you are asking: “After compensating me at this required return, is there value
+                        left over?”
+                    </p>
+
+                    <h3>IRR (Internal Rate of Return)</h3>
+                    <p>
+                        IRR is the single annualized rate that makes the present value of cash inflows equal to the
+                        present value of cash outflows.
+                        It’s the break-even discount rate for the deal: at that rate, NPV equals zero.
+                    </p>
+
+                    <h3>NPV (Net Present Value)</h3>
+                    <p>
+                        NPV is the sum of all cash flows discounted to today at your chosen discount rate.
+                        It’s expressed in dollars. If NPV is positive, the deal creates value above your required
+                        return.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="relationship">
+                    <h2>How Discount Rate and IRR Relate (The Mental Model That Solves the Confusion)</h2>
+                    <p>
+                        Think of IRR as a dial and NPV as a meter.
+                        For any deal, if you change the discount rate, the NPV changes.
+                        At low discount rates, the deal usually looks better (higher present value).
+                        As the discount rate rises, the present value of future cash flows shrinks, so NPV falls.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>IRR is the discount rate where NPV crosses zero.</strong>
+                        </p>
+                    </div>
+
+                    <h3>What happens when your discount rate is lower than the IRR?</h3>
+                    <p>
+                        If your required return is <em>below</em> the deal’s IRR, the deal usually has positive NPV at
+                        your rate.
+                        In plain English: the deal “beats your requirement,” so you have surplus value.
+                    </p>
+
+                    <h3>What happens when your discount rate is higher than the IRR?</h3>
+                    <p>
+                        If your required return is <em>above</em> the deal’s IRR, NPV is usually negative at your rate.
+                        In plain English: the deal doesn’t compensate you enough for the risk, so it destroys value
+                        relative to your requirement.
+                    </p>
+
+                    <h3>So why not just use IRR?</h3>
+                    <p>
+                        Because IRR does not tell you how many dollars you create, and it can rank projects incorrectly
+                        when:
+                    </p>
+                    <ul>
+                        <li>Deal sizes differ (small high-IRR deal vs large slightly lower-IRR deal)</li>
+                        <li>Timelines differ (short deal can look better by IRR even if it creates fewer dollars)</li>
+                        <li>Cash flows are non-standard (multiple IRRs or no meaningful IRR)</li>
+                    </ul>
+
+                    <p>
+                        That’s why pros often treat NPV (at a hurdle rate) as the “decision metric” and IRR as the
+                        “communication metric.”
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="choose">
+                    <h2>How to Choose a Discount Rate (Hurdle Rate) for NPV</h2>
+                    <p>
+                        Choosing a discount rate is not about finding the one perfect number.
+                        It’s about being consistent and realistic about risk.
+                        Your discount rate should reflect what you need to earn to justify the risk compared to other
+                        options.
+                    </p>
+
+                    <h3>Step 1: Start with an alternative baseline</h3>
+                    <p>
+                        Ask: if I didn’t do this deal, where would the money go?
+                        Possibilities include:
+                    </p>
+                    <ul>
+                        <li>paying down debt (a “guaranteed return” near the interest rate)</li>
+                        <li>diversified stock index investing (higher expected return, higher volatility)</li>
+                        <li>safer instruments (lower return, less risk)</li>
+                    </ul>
+                    <p>
+                        This baseline is not your final discount rate, but it anchors the opportunity cost.
+                    </p>
+
+                    <h3>Step 2: Add a risk premium</h3>
+                    <p>
+                        The risk premium depends on uncertainty:
+                    </p>
+                    <ul>
+                        <li>How stable are cash flows?</li>
+                        <li>How reliable is the exit value?</li>
+                        <li>How much can expenses spike?</li>
+                        <li>How sensitive is the project to interest rates or vacancy?</li>
+                    </ul>
+                    <p>
+                        The more uncertain the cash flows, the higher the discount rate should be.
+                    </p>
+
+                    <h3>Step 3: Adjust for liquidity and complexity</h3>
+                    <p>
+                        Private deals and real estate are often illiquid.
+                        Illiquidity is a real cost: you can’t instantly sell to rebalance or cover emergencies without
+                        friction.
+                        Complexity also matters: if a project consumes time, attention, or operational risk, your
+                        required return should usually be higher.
+                    </p>
+
+                    <h3>Step 4: Match the discount rate to the cash flow type (unlevered vs levered)</h3>
+                    <p>
+                        This is where many people go wrong:
+                    </p>
+                    <ul>
+                        <li>If you discount <strong>unlevered</strong> cash flows (before debt), your discount rate
+                            should reflect asset-level risk.</li>
+                        <li>If you discount <strong>levered</strong> cash flows (to equity), your discount rate should
+                            reflect equity-level risk (often higher).</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Consistency rule:</strong> Levered cash flows → equity hurdle rate. Unlevered cash
+                            flows → asset hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="range">
+                    <h2>Use a Range: Sensitivity Analysis Beats “One Perfect Discount Rate”</h2>
+                    <p>
+                        A common beginner mistake is to argue for hours about the “correct” discount rate.
+                        In reality, discount rates are estimates. A better method is to run a small range and observe
+                        sensitivity:
+                    </p>
+                    <ul>
+                        <li><strong>Conservative rate:</strong> higher discount rate (harder to satisfy)</li>
+                        <li><strong>Base rate:</strong> your best estimate of required return</li>
+                        <li><strong>Optimistic rate:</strong> lower discount rate (easier to satisfy)</li>
+                    </ul>
+
+                    <h3>What sensitivity tells you</h3>
+                    <ul>
+                        <li>If NPV stays positive even at a higher discount rate, the deal is more robust.</li>
+                        <li>If NPV flips from positive to negative with a small rate change, the deal is fragile and
+                            highly assumption-dependent.</li>
+                        <li>If IRR is only slightly above your hurdle rate, you have a thin margin of safety.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            A robust deal doesn’t require perfect precision. A fragile deal demands it—and that’s a
+                            warning.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="realestate">
+                    <h2>Real Estate: Discount Rate vs Cap Rate vs IRR (Common Confusion)</h2>
+                    <p>
+                        Real estate adds two more “rates” that people confuse: cap rate and yield.
+                        Here’s the clean separation:
+                    </p>
+
+                    <h3>Cap rate</h3>
+                    <p>
+                        Cap rate is typically NOI ÷ price (or NOI ÷ value). It’s a snapshot yield on a property at a
+                        point in time.
+                        It ignores financing structure and often ignores growth.
+                    </p>
+
+                    <h3>Discount rate (hurdle rate)</h3>
+                    <p>
+                        A discount rate is what you require to discount future cash flows for NPV.
+                        It reflects risk and opportunity cost.
+                        In discounted cash flow (DCF) real estate models, the discount rate is how you translate future
+                        NOI/cash flows into present value.
+                    </p>
+
+                    <h3>IRR</h3>
+                    <p>
+                        IRR is the annualized return implied by the entire cash flow stream, including growth and exit.
+                        In real estate, IRR is highly influenced by:
+                    </p>
+                    <ul>
+                        <li>exit price assumptions (terminal value / exit cap rate)</li>
+                        <li>renovation timing and lease-up timing</li>
+                        <li>leverage terms (rate, amortization, interest-only periods)</li>
+                        <li>selling costs and fees</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Cap rate is a snapshot. IRR is a timeline metric. Discount rate is your required return for
+                            NPV.
+                            Mixing them causes bad decisions.
+                        </p>
+                    </div>
+
+                    <h3>Practical real estate takeaway</h3>
+                    <p>
+                        Use IRR to summarize. Use NPV at a hurdle rate to decide. And be skeptical of IRR that depends
+                        heavily on optimistic exit value.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="levered">
+                    <h2>Levered vs Unlevered Discount Rates: Don’t Mix Levels</h2>
+                    <p>
+                        In deal analysis you might see:
+                    </p>
+                    <ul>
+                        <li><strong>Unlevered cash flows:</strong> before debt service (property-level)</li>
+                        <li><strong>Levered cash flows:</strong> after debt service (equity-level)</li>
+                    </ul>
+
+                    <h3>Why this matters</h3>
+                    <p>
+                        Equity is riskier than the underlying asset because debt magnifies outcomes.
+                        That means the required return for equity (your equity discount rate) is often higher than the
+                        asset discount rate.
+                    </p>
+
+                    <h3>Common mistake</h3>
+                    <p>
+                        People discount levered equity cash flows at a low asset-level discount rate, which inflates NPV
+                        and makes the deal look better than it is.
+                        Or they compare an unlevered IRR to an equity hurdle rate (apples to oranges).
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If the cash flows are to equity, compare to an equity hurdle rate.
+                            If the cash flows are unlevered, compare to an asset hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="common">
+                    <h2>Common Mistakes (And How to Fix Them)</h2>
+
+                    <h3>1) Treating IRR as the “required return”</h3>
+                    <p>
+                        IRR is not your requirement. It’s the deal’s implied outcome.
+                        Your requirement is the discount rate (hurdle rate) you choose.
+                    </p>
+
+                    <h3>2) Using one discount rate for every investment</h3>
+                    <p>
+                        Risk changes by strategy and market. A stable, diversified investment deserves a different
+                        hurdle rate than a risky, leveraged, illiquid project.
+                    </p>
+
+                    <h3>3) Ignoring reinvestment assumptions</h3>
+                    <p>
+                        IRR can imply reinvesting interim cash flows at the IRR itself. That’s often unrealistic at high
+                        IRRs.
+                        Fix by using NPV at a hurdle rate and/or MIRR.
+                    </p>
+
+                    <h3>4) Optimistic exit value dominates the result</h3>
+                    <p>
+                        Many DCFs and IRR models are driven by the terminal sale price.
+                        Fix by running conservative exit assumptions (higher exit cap rate, lower appreciation) and
+                        include selling costs.
+                    </p>
+
+                    <h3>5) Failing to run sensitivity</h3>
+                    <p>
+                        If the deal only works at one exact discount rate and one exact exit assumption, it’s fragile.
+                        Fix by running a grid of discount rates and key assumptions.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="workflow">
+                    <h2>A Practical Workflow (Step-by-Step)</h2>
+                    <p>
+                        Here’s a simple way to use discount rate and IRR correctly—without getting lost in theory:
+                    </p>
+
+                    <h3>Step 1: Build realistic cash flows</h3>
+                    <p>
+                        Include every real dollar in or out: closing costs, fees, CapEx, vacancy, operating expenses,
+                        taxes/insurance changes (if modeled), and selling costs.
+                    </p>
+
+                    <h3>Step 2: Compute IRR/XIRR</h3>
+                    <p>
+                        Use IRR for periodic flows and XIRR for irregular dates. This gives you a summary rate.
+                        See: <a href="/irr/how-to-calculate-irr/">How to calculate IRR</a>.
+                    </p>
+
+                    <h3>Step 3: Choose a hurdle rate range</h3>
+                    <p>
+                        Pick a reasonable range for the risk level (conservative/base/optimistic). Don’t aim for
+                        “perfect.”
+                    </p>
+
+                    <h3>Step 4: Compute NPV at each hurdle rate</h3>
+                    <p>
+                        Now you can see how many dollars of value the deal creates at your required return.
+                    </p>
+
+                    <h3>Step 5: Decide using NPV, sanity-check with IRR and equity multiple</h3>
+                    <p>
+                        If NPV is strongly positive at your base hurdle rate and stays positive under conservative
+                        assumptions, it’s robust.
+                        If it’s barely positive and fragile, treat it accordingly.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Tools: use the <a href="/irr/calculator/">IRR calculator</a> to compute IRR/XIRR quickly,
+                            then evaluate NPV at your hurdle rate.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Checklist</h2>
+                    <ul>
+                        <li>✅ Discount rate = required return (input); IRR = implied return (output)</li>
+                        <li>✅ If IRR &gt; hurdle rate → NPV is usually positive (assuming realistic cash flows)</li>
+                        <li>✅ Use NPV for ranking when deal sizes or timelines differ</li>
+                        <li>✅ Use XIRR when dates are irregular (common in real estate)</li>
+                        <li>✅ Match discount rate level to cash flow level (levered vs unlevered)</li>
+                        <li>✅ Run sensitivity: discount rate range + conservative exit assumptions</li>
+                        <li>✅ Don’t let optimistic terminal value dominate the story</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR/XIRR in the <a href="/irr/calculator/">IRR calculator</a>, then
+                            compare to your chosen hurdle rate range.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/what-is-irr/">What is IRR?</a>
+                            <p>Definition, intuition, and pitfalls.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/irr-vs-npv/">IRR vs NPV</a>
+                            <p>When a higher IRR can be a worse decision.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/how-to-calculate-irr/">How to calculate IRR</a>
+                            <p>IRR vs XIRR, examples, troubleshooting.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Compute IRR/XIRR from cash flows.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash flow</a>
+                            <p>Why timing and distributions change returns.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the difference between a discount rate and IRR?</h4>
+                        <p>
+                            Discount rate is the return you require (hurdle rate) and choose to discount cash flows for
+                            NPV. IRR is the deal’s implied return—the rate that makes NPV equal to zero.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do I choose a discount rate for NPV?</h4>
+                        <p>
+                            Start with your best alternative (opportunity cost), add a risk premium for uncertainty,
+                            adjust for leverage and illiquidity, and use a range with sensitivity analysis instead of
+                            one perfect number.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>If IRR is higher than the discount rate, is it a good investment?</h4>
+                        <p>
+                            Often yes: IRR above your hurdle rate usually means positive NPV at that rate. But confirm
+                            cash flow realism, risk comparability, and run conservative scenarios—IRR can mislead when
+                            deal size, timeline, or cash flow patterns differ.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What discount rate should I use for real estate?</h4>
+                        <p>
+                            There’s no universal number. It depends on strategy and risk. Use a risk-appropriate hurdle
+                            rate, match levered vs unlevered correctly, and test sensitivity across a range rather than
+                            relying on one rate.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is WACC and is it the same as a discount rate?</h4>
+                        <p>
+                            WACC is a company’s weighted average cost of capital and is often used as a discount rate
+                            for corporate projects. For personal investing or real estate, you usually use a hurdle rate
+                            that reflects your required return for the project’s risk.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Discount rate and IRR are two sides of the same decision. The discount rate is your required
+                        return—what you demand for the risk.
+                        IRR is the deal’s implied return—what the cash flows “earn” in annualized terms. If IRR beats
+                        your hurdle rate, the deal usually creates value (positive NPV).
+                        But IRR alone can mislead when projects differ in size, timeline, leverage, or cash flow
+                        patterns. The clean approach is:
+                        build realistic cash flows, compute IRR/XIRR, then compute NPV at a sensible hurdle rate range
+                        and decide based on dollars of value created.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR in the <a href="/irr/calculator/">IRR calculator</a>, then choose a
+                            hurdle-rate range and evaluate NPV.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Discount rates and hurdle rates are subjective and depend on opportunity cost,
+                        risk, leverage, illiquidity, and strategy.
+                        Use ranges and sensitivity analysis, and ensure cash flow level (levered/unlevered) matches the
+                        discount rate level used.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

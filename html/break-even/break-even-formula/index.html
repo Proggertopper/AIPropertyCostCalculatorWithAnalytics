@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Break-even formula explained (U.S.): learn the break-even point formula in units and dollars, contribution margin, fixed vs variable costs, time-to-break-even (payback), and how to build a simple break-even model. Includes examples, checklists, stress tests, FAQs, and internal links to the Break-Even calculator." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/break-even/break-even-formula/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/break-even/break-even-formula/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/break-even/break-even-formula/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Break-Even Formula (U.S.) — Point, Analysis, and Examples | PropertyCost</title>
+
+    <meta property="og:title" content="Break-Even Formula (U.S.)" />
+    <meta property="og:description"
+        content="Break-even formula explained step by step: units, dollars, contribution margin, fixed vs variable costs, and time-to-break-even. Examples, checklist, and FAQs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/break-even/break-even-formula/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Break-Even Formula (U.S.)">
+    <meta name="twitter:description"
+        content="Learn break-even formulas in units, revenue, and time—with examples, checklist, and FAQs.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/break-even/break-even-formula/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Break-Even","item":"https://mypropertycost.com/break-even/"},
+          {"@type":"ListItem","position":3,"name":"Break-even formula","item":"https://mypropertycost.com/break-even/break-even-formula/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/break-even/break-even-formula/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the break-even point formula?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A common formula for break-even point in units is fixed costs divided by contribution margin per unit: Fixed costs ÷ (Price − Variable cost per unit). Break-even in revenue can be calculated as fixed costs ÷ contribution margin ratio. For time-to-break-even, it is often upfront cost ÷ monthly net benefit."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is contribution margin in break-even analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Contribution margin is how much each unit sold contributes toward covering fixed costs and profit. It equals price minus variable cost per unit. Contribution margin ratio is contribution margin divided by price."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do fixed and variable costs affect break-even?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Higher fixed costs increase the break-even point because you need more contribution margin to cover them. Higher variable costs reduce contribution margin, which also increases break-even. Lower fixed costs and higher contribution margin reduce break-even."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Is break-even formula the same for multiple products?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Not exactly. With multiple products, you need a weighted average contribution margin based on your expected sales mix. If the mix changes, the break-even point changes too."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What are common mistakes using break-even formulas?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Common mistakes include misclassifying costs, using gross instead of net benefit, ignoring fees and friction costs, assuming stable prices/margins forever, and relying on a single scenario instead of base and conservative cases."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/break-even/">Break-Even</a>
+                <span class="sep">/</span>
+                <span class="current">Break-even formula</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick formulas</a></li>
+                    <li><a href="#definitions">Key definitions</a></li>
+                    <li><a href="#units">Break-even formula (units)</a></li>
+                    <li><a href="#revenue">Break-even formula (revenue)</a></li>
+                    <li><a href="#time">Time-to-break-even formula</a></li>
+                    <li><a href="#examples">Step-by-step examples</a></li>
+                    <li><a href="#multi">Multiple products (sales mix)</a></li>
+                    <li><a href="#sensitivity">Sensitivity and scenario testing</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Compute break-even fast</div>
+                        <div class="sidebar-cta__sub">Units, revenue, or time—then stress-test assumptions.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Break-Even Formula (U.S.)</h1>
+                        <p class="subtitle">
+                            Break-even formulas are simple, but they’re easy to misuse. The math only works if you
+                            define costs
+                            correctly (fixed vs variable) and use net benefits. This guide gives the core break-even
+                            point
+                            formulas (units and revenue), the time-to-break-even formula used in personal finance, and
+                            step-by-step examples you can copy.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/break-even/" aria-label="Back to Break-Even hub">← Back to
+                                    Break-Even</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~12–16 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#units">Units</a>
+                    <a href="#revenue">Revenue</a>
+                    <a href="#time">Time</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/break-even/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Compute break-even and test scenarios.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/what-is-break-even/">
+                            <strong>What is break-even?</strong>
+                            <span>Meaning and use cases before the formulas.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/fixed-vs-variable-costs/">
+                            <strong>Fixed vs variable costs</strong>
+                            <span>The most common source of break-even errors.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Break-Even Formulas (Copy/Paste)</h2>
+
+                    <div class="callout">
+                        <p><strong>Break-even units = Fixed costs ÷ (Price − Variable cost per unit)</strong></p>
+                        <p><strong>Break-even revenue = Fixed costs ÷ Contribution margin ratio</strong></p>
+                        <p><strong>Time-to-break-even (months) = Upfront cost ÷ Monthly net benefit</strong></p>
+                    </div>
+
+                    <p>
+                        These formulas work when your assumptions match the model. The rest of this guide shows what
+                        each term
+                        means, how to compute it, and where people go wrong.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Key Definitions (So the Formula Actually Works)</h2>
+                    <p>
+                        Break-even formulas are straightforward, but only if you define inputs correctly. Here are the
+                        essential
+                        terms in plain English.
+                    </p>
+
+                    <h3>Fixed costs</h3>
+                    <p>
+                        Fixed costs are costs that do not change (much) with the number of units you sell in the short
+                        run.
+                        Examples: rent, base payroll, insurance, software subscriptions, accounting fees, fixed
+                        marketing retainers.
+                    </p>
+
+                    <h3>Variable costs</h3>
+                    <p>
+                        Variable costs increase with each unit sold. Examples: materials, manufacturing cost per unit,
+                        shipping,
+                        packaging, payment processing fees, sales commissions, per-order labor.
+                    </p>
+
+                    <h3>Price (P)</h3>
+                    <p>
+                        Price is how much you sell one unit for. If you have discounts, returns, or different pricing
+                        tiers,
+                        you need an average realized price, not a “list price fantasy.”
+                    </p>
+
+                    <h3>Contribution margin (CM)</h3>
+                    <p>
+                        Contribution margin is how much each unit sold contributes toward paying fixed costs and
+                        producing profit.
+                        In its simplest form:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Contribution margin per unit = Price − Variable cost per unit</strong></p>
+                    </div>
+                    <p>
+                        You can also express it as a ratio:
+                        <strong>contribution margin ratio = (Price − Variable cost) ÷ Price</strong>.
+                    </p>
+
+                    <h3>Monthly net benefit (for time break-even)</h3>
+                    <p>
+                        “Monthly net benefit” is monthly savings or cash flow <strong>after</strong> new costs caused by
+                        the decision.
+                        Example: a refinance that saves $200/month but adds $20/month in mortgage insurance has net
+                        benefit $180/month.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="units">
+                    <h2>Break-Even Formula in Units (Break-Even Point)</h2>
+                    <p>
+                        This is the classic break-even point formula used for products and services where you can define
+                        “one unit.”
+                        It asks: “How many units must I sell to cover fixed costs?”
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Break-even units = Fixed costs ÷ (Price − Variable cost per unit)</strong></p>
+                    </div>
+
+                    <h3>Why it works</h3>
+                    <p>
+                        Each sale produces a “chunk” of contribution margin. Those chunks accumulate to cover fixed
+                        costs.
+                        When total contribution margin equals fixed costs, profit is zero (break-even).
+                    </p>
+
+                    <h3>Interpretation</h3>
+                    <ul>
+                        <li>If fixed costs rise, break-even units rise.</li>
+                        <li>If variable costs rise, contribution margin shrinks → break-even rises.</li>
+                        <li>If price rises (without losing demand), contribution margin grows → break-even falls.</li>
+                    </ul>
+
+                    <h3>Common real-world adjustments</h3>
+                    <p>
+                        In reality, some costs are semi-variable and some prices vary. If your price or variable cost
+                        changes with volume,
+                        your break-even point becomes a range rather than one number. That’s why scenario testing
+                        matters.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="revenue">
+                    <h2>Break-Even Formula in Revenue (Sales Dollars)</h2>
+                    <p>
+                        Break-even in revenue answers: “How much total sales do I need to cover fixed costs?” It’s
+                        especially useful when:
+                    </p>
+                    <ul>
+                        <li>You sell multiple products and units are hard to compare.</li>
+                        <li>Your average order value is meaningful but individual unit counting isn’t.</li>
+                        <li>You want a revenue target for planning.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p><strong>Break-even revenue = Fixed costs ÷ Contribution margin ratio</strong></p>
+                    </div>
+
+                    <p>
+                        Where contribution margin ratio is:
+                        <strong>(Price − Variable cost) ÷ Price</strong>.
+                        If your margin is 40%, that means 40 cents of every revenue dollar is available to cover fixed
+                        costs and profit.
+                    </p>
+
+                    <h3>Why break-even revenue is often more practical</h3>
+                    <p>
+                        Businesses commonly manage and forecast revenue rather than units. Break-even revenue gives a
+                        simple target:
+                        “If we can hit $X/month in sales at Y% margin, we cover fixed costs.”
+                    </p>
+
+                    <h3>Warning: revenue break-even depends on stable margins</h3>
+                    <p>
+                        If your margin shifts because of discounts, ad costs, returns, or shipping price changes,
+                        break-even revenue shifts too.
+                        Use a conservative margin scenario.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="time">
+                    <h2>Time-to-Break-Even Formula (Payback Style)</h2>
+                    <p>
+                        Many “break-even” questions in personal finance and real estate are really time-to-break-even
+                        questions:
+                        “How many months until the savings repay the upfront cost?”
+                    </p>
+
+                    <div class="callout">
+                        <p><strong>Time-to-break-even (months) = Upfront cost ÷ Monthly net benefit</strong></p>
+                    </div>
+
+                    <h3>Examples of time-to-break-even decisions</h3>
+                    <ul>
+                        <li><strong>Refinance break-even:</strong> closing costs vs monthly payment savings.</li>
+                        <li><strong>Renovation break-even:</strong> renovation cost vs increased rent or increased
+                            resale value.</li>
+                        <li><strong>Energy upgrade break-even:</strong> insulation cost vs lower utility bills.</li>
+                        <li><strong>Subscription break-even:</strong> tool cost vs time saved (if you can quantify
+                            value).</li>
+                    </ul>
+
+                    <h3>When the simple time formula is not enough</h3>
+                    <p>
+                        If monthly benefits change (utilities rise, rent grows, costs increase), the simple formula
+                        becomes an approximation.
+                        A better method is cumulative net benefit: add net benefit month by month until it equals
+                        upfront cost.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Tip:</strong> If your benefits are uncertain, calculate break-even as a range:
+                            conservative (lower savings) and optimistic (higher savings).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Step-by-Step Examples (So You Can Replicate the Math)</h2>
+
+                    <h3>Example 1: Break-even units</h3>
+                    <p>
+                        You sell a product for $80. Variable cost per unit is $35 (materials + shipping + fees). Fixed
+                        costs are $9,000/month.
+                    </p>
+                    <ul>
+                        <li>Price = 80</li>
+                        <li>Variable cost = 35</li>
+                        <li>Contribution margin per unit = 45</li>
+                        <li>Fixed costs = 9,000</li>
+                    </ul>
+                    <p>
+                        Break-even units = 9,000 ÷ 45 = 200 units per month.
+                    </p>
+                    <p>
+                        Interpretation: selling 200 units covers fixed costs. Each unit after that contributes roughly
+                        $45 to profit
+                        (before taxes and other complications).
+                    </p>
+
+                    <h3>Example 2: Break-even revenue</h3>
+                    <p>
+                        Using the same example:
+                        contribution margin ratio = 45 ÷ 80 = 56.25%.
+                        Break-even revenue = 9,000 ÷ 0.5625 ≈ $16,000/month (rounded).
+                    </p>
+
+                    <h3>Example 3: Time-to-break-even</h3>
+                    <p>
+                        You spend $2,400 on an upgrade that saves $60/month. Time-to-break-even = 2,400 ÷ 60 = 40 months
+                        (~3.3 years).
+                    </p>
+                    <p>
+                        If savings might be only $45/month in a conservative case, break-even becomes 2,400 ÷ 45 ≈ 53
+                        months (~4.4 years).
+                        This is why it’s smart to compute both base and conservative scenarios.
+                    </p>
+
+                    <h3>Example 4: Break-even with a sales mix (preview)</h3>
+                    <p>
+                        If half your sales are Product A and half are Product B, and each has different margins, your
+                        break-even depends on that mix.
+                        A change in mix can shift break-even even if total revenue stays the same.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="multi">
+                    <h2>Multiple Products: Break-Even With a Sales Mix</h2>
+                    <p>
+                        With multiple products, you don’t have one contribution margin. You have several. The break-even
+                        depends on the
+                        expected mix of sales.
+                    </p>
+
+                    <h3>Weighted average contribution margin</h3>
+                    <p>
+                        You can compute a weighted average contribution margin based on the share of each product in
+                        total sales.
+                        Then plug that average into the break-even formula.
+                    </p>
+
+                    <p>
+                        The key insight: if your sales mix shifts toward lower-margin products, break-even rises (you
+                        need more volume/revenue).
+                        If mix shifts toward higher-margin products, break-even falls.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> If your business depends on a high-margin product to hit
+                            break-even,
+                            monitor mix monthly. Many break-even plans fail because actual mix differs from forecast.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="sensitivity">
+                    <h2>Sensitivity and Scenario Testing (The Part Most People Skip)</h2>
+                    <p>
+                        Break-even formulas look precise, but real-world inputs are uncertain. A good analysis answers:
+                        “What assumptions decide the break-even number?”
+                    </p>
+
+                    <h3>Variables that move break-even the most</h3>
+                    <ul>
+                        <li><strong>Contribution margin</strong> (price, variable costs, fees, returns)</li>
+                        <li><strong>Fixed costs</strong> (especially if they’re rising or semi-variable)</li>
+                        <li><strong>Volume</strong> (whether demand supports the break-even target)</li>
+                        <li><strong>Timeline</strong> (for payback-style break-even)</li>
+                    </ul>
+
+                    <h3>Two scenario minimum</h3>
+                    <p>
+                        Always run at least:
+                        (1) a base case and
+                        (2) a conservative case (lower price, higher costs, lower savings, slower volume ramp).
+                        If break-even only “works” in the base case, treat the decision as higher risk.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to see what moves break-even most?</h4>
+                            <p>
+                                Change one input at a time (price, variable cost, fixed cost, savings) in the Break-Even
+                                calculator and watch how the break-even point shifts.
+                            </p>
+                        </div>
+                        <a href="/break-even/calculator/">Open calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes Using Break-Even Formulas</h2>
+
+                    <h3>1) Misclassifying costs</h3>
+                    <p>
+                        The #1 mistake is mixing fixed and variable costs or ignoring semi-variable costs. If you don’t
+                        know,
+                        document your assumptions and test ranges.
+                    </p>
+
+                    <h3>2) Using list price instead of realized price</h3>
+                    <p>
+                        Discounts, refunds, and promotions reduce realized price. Use what customers actually pay on
+                        average.
+                    </p>
+
+                    <h3>3) Ignoring fees and friction</h3>
+                    <p>
+                        Payment processing fees, returns, shipping surprises, and platform costs can be large.
+                        Break-even is sensitive to margin. Don’t ignore the “small” costs.
+                    </p>
+
+                    <h3>4) Assuming break-even is “safe”</h3>
+                    <p>
+                        Even if your break-even is low, a cash crunch or demand shock can still hurt. Break-even is a
+                        planning tool,
+                        not a risk elimination tool.
+                    </p>
+
+                    <h3>5) One scenario only</h3>
+                    <p>
+                        If you don’t run a conservative scenario, you’re effectively assuming everything goes right.
+                        Good decisions survive conservative assumptions.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist (Before You Trust Your Break-Even)</h2>
+                    <ul>
+                        <li>✅ Fixed costs and variable costs are clearly separated</li>
+                        <li>✅ Price is realistic (realized price, not “wish price”)</li>
+                        <li>✅ Variable costs include all per-unit fees and returns</li>
+                        <li>✅ Break-even is computed in the right unit (units, revenue, or time)</li>
+                        <li>✅ Base + conservative scenarios are run</li>
+                        <li>✅ You checked whether the required volume/revenue is achievable</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Shortcut:</strong> If a 10–15% margin change makes your break-even jump massively,
+                            your business model is margin-fragile—focus on cost control and pricing power.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/break-even/calculator/">Break-Even calculator</a>
+                            <p>Compute break-even in units, revenue, or time.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/what-is-break-even/">What is break-even?</a>
+                            <p>Definitions and use cases before formulas.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/fixed-vs-variable-costs/">Fixed vs variable costs</a>
+                            <p>Cost categories that decide your break-even.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/contribution-margin/">Contribution margin</a>
+                            <p>Understand margin and how it drives break-even.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/sensitivity-analysis/">Sensitivity analysis</a>
+                            <p>Find which assumption moves your result most.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/common-mistakes/">Common mistakes</a>
+                            <p>Modeling errors that make break-even misleading.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the break-even point formula?</h4>
+                        <p>
+                            A common formula in units is: fixed costs ÷ (price − variable cost per unit). In revenue
+                            it’s:
+                            fixed costs ÷ contribution margin ratio. For time-to-break-even it’s often upfront cost ÷
+                            monthly net benefit.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is contribution margin in break-even analysis?</h4>
+                        <p>
+                            Contribution margin is how much each unit sold contributes to covering fixed costs and
+                            profit. It equals
+                            price minus variable cost per unit. Contribution margin ratio is contribution margin divided
+                            by price.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do fixed and variable costs affect break-even?</h4>
+                        <p>
+                            Higher fixed costs increase break-even because you must cover more overhead. Higher variable
+                            costs reduce
+                            contribution margin, which also increases break-even. Lower fixed costs and higher
+                            contribution margin reduce break-even.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Is break-even formula the same for multiple products?</h4>
+                        <p>
+                            Not exactly. With multiple products, you use a weighted average contribution margin based on
+                            expected sales mix.
+                            If the mix changes, break-even changes too.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What are common mistakes using break-even formulas?</h4>
+                        <p>
+                            Misclassifying costs, ignoring fees/returns, using list price instead of realized price,
+                            skipping conservative scenarios,
+                            and treating break-even as “safe” are common mistakes.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        The break-even formula is simple: fixed costs divided by contribution margin (units or ratio),
+                        or upfront cost divided by net monthly benefit (time).
+                        The hard part is defining inputs correctly and testing uncertainty.
+                        Separate fixed and variable costs, use realized pricing and complete variable costs, and run a
+                        conservative scenario.
+                        If break-even still works conservatively, your conclusion is much more reliable.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: plug your inputs into the <a href="/break-even/calculator/">Break-Even
+                                calculator</a> and run base + conservative cases.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Break-even depends on pricing, costs, and sales mix. Use ranges for uncertain
+                        inputs and validate assumptions with real data where possible.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

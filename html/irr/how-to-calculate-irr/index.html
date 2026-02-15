@@ -1,0 +1,797 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="How to calculate IRR (Internal Rate of Return): step-by-step instructions for Excel, Google Sheets, and real estate deals using IRR vs XIRR, correct cash flow signs, dates, and common fixes when IRR returns errors. Includes examples, templates, IRR vs XIRR, MIRR, troubleshooting, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/irr/how-to-calculate-irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/how-to-calculate-irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/how-to-calculate-irr/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>How to Calculate IRR (Excel & Google Sheets) — Step-by-Step | PropertyCost</title>
+
+    <meta property="og:title" content="How to Calculate IRR (Excel & Google Sheets)" />
+    <meta property="og:description"
+        content="Step-by-step IRR and XIRR calculation with examples, real estate cash flows, templates, and fixes for common errors." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/irr/how-to-calculate-irr/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to Calculate IRR (Excel & Google Sheets)">
+    <meta name="twitter:description"
+        content="Learn IRR vs XIRR, how to format cash flows, and troubleshoot errors with real examples and a checklist.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/irr/how-to-calculate-irr/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"IRR","item":"https://mypropertycost.com/irr/"},
+          {"@type":"ListItem","position":3,"name":"How to calculate IRR","item":"https://mypropertycost.com/irr/how-to-calculate-irr/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/irr/how-to-calculate-irr/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"How do you calculate IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"IRR is the discount rate that makes NPV equal to zero. In practice, you usually calculate it with a spreadsheet function: IRR() for equally spaced cash flows, or XIRR() when cash flow dates are irregular."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"When should I use IRR vs XIRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Use IRR when cash flows occur at regular intervals (monthly or annually). Use XIRR when cash flow timing is irregular, which is common in real estate and private investments."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why does IRR return #NUM! or an error?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Common causes include missing a negative or positive cash flow, incorrect signs, multiple sign changes (multiple IRRs), or a guess that prevents convergence. Try XIRR, provide a guess, check cash flow signs, and validate dates."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What cash flows should be included for real estate IRR?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Include all equity cash flows: down payment and closing costs (negative), renovations (negative), net operating cash flow (positive or negative), refinance proceeds (positive), and net sale proceeds after selling costs and loan payoff (positive)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is MIRR and when should I use it?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"MIRR (Modified IRR) uses a realistic reinvestment rate for interim cash flows and a finance rate for costs. Use MIRR when IRR is misleading (very high IRR, multiple sign changes, or unrealistic reinvestment assumptions)."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/">IRR</a>
+                <span class="sep">/</span>
+                <span class="current">How to calculate IRR</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#before">Before you calculate: cash flow rules</a></li>
+                    <li><a href="#irr-vs-xirr">IRR vs XIRR (choose the right one)</a></li>
+                    <li><a href="#excel">Excel IRR step-by-step</a></li>
+                    <li><a href="#sheets">Google Sheets IRR/XIRR step-by-step</a></li>
+                    <li><a href="#real-estate">Real estate IRR cash flows (full list)</a></li>
+                    <li><a href="#examples">Worked examples</a></li>
+                    <li><a href="#errors">Troubleshooting errors (#NUM!, #VALUE!)</a></li>
+                    <li><a href="#guess">What is the “guess” argument?</a></li>
+                    <li><a href="#mirr">MIRR (modified IRR) and when to use it</a></li>
+                    <li><a href="#sanity">Sanity checks and validation</a></li>
+                    <li><a href="#checklist">Quick checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Calculate IRR in 30 seconds</div>
+                        <div class="sidebar-cta__sub">Cash flows + dates → IRR/XIRR.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/irr/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>How to Calculate IRR (Excel & Google Sheets): Step-by-Step</h1>
+                        <p class="subtitle">
+                            Calculating IRR is easy when your cash flows are clean and periodic—and frustrating when
+                            they’re not.
+                            Most IRR “errors” come from formatting issues: missing a negative cash flow, wrong signs,
+                            irregular dates, or
+                            a cash flow pattern that produces multiple IRRs. This guide shows exactly how to calculate
+                            IRR and XIRR in Excel and Google Sheets,
+                            including real estate cash flows (down payment, renovations, net cash flow, refinance
+                            proceeds, and sale), plus a complete troubleshooting section.
+                            By the end, you’ll have a repeatable template and a set of sanity checks to know your IRR is
+                            actually correct.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/irr/" aria-label="Back to IRR hub">← Back to IRR</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~20–30 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#irr-vs-xirr">IRR vs XIRR</a>
+                    <a href="#errors">Troubleshoot</a>
+                    <a href="#real-estate">Real estate</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/irr/calculator/">
+                            <strong>IRR calculator</strong>
+                            <span>Compute IRR/XIRR from cash flows and dates.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/what-is-irr/">
+                            <strong>What is IRR?</strong>
+                            <span>Definition, intuition, and pitfalls.</span>
+                        </a>
+                        <a class="start-here__card" href="/irr/irr-vs-npv/">
+                            <strong>IRR vs NPV</strong>
+                            <span>Why higher IRR isn’t always better.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <p>
+                        To calculate IRR in a spreadsheet:
+                        (1) list cash flows in order (money you invest is negative; money you receive is positive),
+                        (2) use <strong>IRR(values)</strong> if cash flows happen at regular intervals,
+                        or <strong>XIRR(values, dates)</strong> if cash flows happen on irregular dates (common in real
+                        estate),
+                        and (3) sanity-check results using NPV or equity multiple. If IRR returns an error, the usual
+                        fixes are
+                        correcting signs, ensuring you have at least one negative and one positive cash flow, switching
+                        to XIRR, or providing a guess.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best default:</strong> If you’re doing real estate (purchase, renovations, monthly
+                            net cash flow, sale),
+                            use <strong>XIRR</strong>, not IRR.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="before">
+                    <h2>Before You Calculate: The Cash Flow Rules (This Is Where Most People Mess Up)</h2>
+                    <p>
+                        IRR is not “magic.” It’s just a function that tries to solve for a rate that fits your cash flow
+                        stream.
+                        If you feed it the wrong cash flows, you get a wrong answer—or an error.
+                    </p>
+
+                    <h3>Rule 1: you must have at least one negative and one positive cash flow</h3>
+                    <p>
+                        If you only have negative numbers (all money out) or only positives (all money in), IRR can’t be
+                        computed.
+                        A real investment always starts with money out (negative) and later returns money in (positive).
+                    </p>
+
+                    <h3>Rule 2: signs matter more than labels</h3>
+                    <p>
+                        You can call it “investment,” “deposit,” “capex,” “distribution”—IRR doesn’t care.
+                        It only cares whether cash is leaving your pocket (negative) or entering your pocket (positive).
+                    </p>
+
+                    <h3>Rule 3: order matters</h3>
+                    <p>
+                        Cash flows must be in chronological order. With XIRR you’ll also provide dates,
+                        but even then you should list them in time order to avoid confusion and errors.
+                    </p>
+
+                    <h3>Rule 4: include all friction and fees if you want a real IRR</h3>
+                    <p>
+                        In real estate and private investing, leaving out costs is the #1 way people inflate IRR:
+                        acquisition fees, closing costs, renovation costs, refinance fees, selling commissions, taxes
+                        (if you model taxes).
+                        If it’s a real cash flow to you, it belongs in your IRR list.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="irr-vs-xirr">
+                    <h2>IRR vs XIRR: Choose the Right Tool</h2>
+
+                    <h3>Use IRR when cash flows are periodic</h3>
+                    <p>
+                        IRR assumes equal spacing between cash flows:
+                        monthly, quarterly, yearly—whatever you chose, but it must be evenly spaced.
+                        If your cash flows are exactly monthly (one per month), IRR can work.
+                    </p>
+
+                    <h3>Use XIRR when cash flows are irregular</h3>
+                    <p>
+                        XIRR allows irregular dates:
+                        you provide a cash flow list and a matching date list.
+                        This is the common real-world case:
+                        purchase on one date, renovation over multiple dates, rent starting later, sale on another date.
+                    </p>
+
+                    <h3>Why using IRR instead of XIRR can materially change the answer</h3>
+                    <p>
+                        If you treat irregular cash flows as “equal spacing,” you’re distorting time.
+                        And time distortion changes IRR—sometimes a lot.
+                        That’s why real estate analysts default to XIRR unless they’re modeling perfectly periodic cash
+                        flows.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If you aren’t 100% sure your cash flows are evenly spaced, use <strong>XIRR</strong>.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="excel">
+                    <h2>Excel IRR: Step-by-Step (Periodic Cash Flows)</h2>
+                    <p>
+                        If your cash flows occur at regular intervals (say, one per year or one per month), use IRR in
+                        Excel.
+                    </p>
+
+                    <h3>Step 1: Create a cash flow column</h3>
+                    <p>
+                        Put cash flows in a single column. Example (yearly):
+                    </p>
+                    <ul>
+                        <li>Row 1: -100000 (initial investment)</li>
+                        <li>Row 2: 8000 (year 1 distribution)</li>
+                        <li>Row 3: 8000 (year 2 distribution)</li>
+                        <li>Row 4: 8000 (year 3 distribution)</li>
+                        <li>Row 5: 8000 (year 4 distribution)</li>
+                        <li>Row 6: 120000 (final distribution / sale)</li>
+                    </ul>
+
+                    <h3>Step 2: Use IRR()</h3>
+                    <p>
+                        In Excel:
+                        <br><strong>=IRR(A1:A6)</strong>
+                    </p>
+
+                    <h3>Step 3: Format as percent</h3>
+                    <p>
+                        Excel returns a decimal (e.g., 0.12). Format as percent (12%).
+                    </p>
+
+                    <h3>Step 4: sanity-check</h3>
+                    <p>
+                        If IRR says something extreme, check:
+                        cash flow signs, missing costs, and whether cash flows are truly periodic.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="sheets">
+                    <h2>Google Sheets IRR/XIRR: Step-by-Step</h2>
+
+                    <h3>IRR in Sheets (periodic)</h3>
+                    <p>
+                        Same idea:
+                        <br><strong>=IRR(A1:A6)</strong>
+                    </p>
+
+                    <h3>XIRR in Sheets (irregular dates)</h3>
+                    <p>
+                        Put cash flows in one column and dates in another column.
+                        Example:
+                    </p>
+                    <ul>
+                        <li>Column A: cash flows</li>
+                        <li>Column B: dates</li>
+                    </ul>
+                    <p>
+                        Then:
+                        <br><strong>=XIRR(A1:A12, B1:B12)</strong>
+                    </p>
+
+                    <h3>Date formatting matters</h3>
+                    <p>
+                        If dates are stored as text, XIRR can return errors.
+                        Make sure Sheets recognizes them as dates (not strings).
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="real-estate">
+                    <h2>Real Estate IRR: What Cash Flows to Include (Full List)</h2>
+                    <p>
+                        Real estate IRR is usually calculated on <strong>equity cash flows</strong> (cash that you, the
+                        investor, actually put in or receive).
+                        Here’s the complete list most investors forget pieces of:
+                    </p>
+
+                    <h3>At purchase (usually negative)</h3>
+                    <ul>
+                        <li>Down payment (negative)</li>
+                        <li>Closing costs (negative)</li>
+                        <li>Upfront repairs/renovations (negative)</li>
+                        <li>Any initial reserves you fund (negative, if it’s your cash and not returned)</li>
+                    </ul>
+
+                    <h3>During ownership (positive or negative)</h3>
+                    <ul>
+                        <li>Net operating cash flow (rent minus all expenses, including vacancy and repairs)</li>
+                        <li>Capital expenses (roof, HVAC, major remodels)</li>
+                        <li>Leasing costs or turnover costs</li>
+                        <li>Large property tax/insurance changes if modeled as cash outflows</li>
+                    </ul>
+
+                    <h3>Financing events (often forgotten)</h3>
+                    <ul>
+                        <li>Refinance closing costs (negative)</li>
+                        <li>Refinance cash-out proceeds (positive)</li>
+                        <li>Mortgage paydown is not a “cash flow” unless you model it explicitly as part of cash flow to
+                            equity (usually it’s embedded in debt service)</li>
+                    </ul>
+
+                    <h3>At sale (final positive cash flow net of everything)</h3>
+                    <ul>
+                        <li>Sale price (positive)</li>
+                        <li>Minus selling costs (agent commissions, transfer taxes, closing fees) (negative)</li>
+                        <li>Minus remaining loan payoff (negative)</li>
+                        <li>Minus taxes (if you include them) (negative)</li>
+                        <li>Equals net sale proceeds (positive cash flow)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            If you want the IRR to be realistic, your sale cash flow should be <strong>net</strong>
+                            proceeds after selling costs and loan payoff.
+                            Otherwise, your IRR is inflated.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Worked Examples (So You Can Copy the Pattern)</h2>
+
+                    <h3>Example 1: Simple periodic IRR (annual)</h3>
+                    <p>
+                        You invest $100,000 today, receive $10,000 per year for 5 years, then receive $110,000 in year
+                        5.
+                        Put cash flows in A1:A6:
+                    </p>
+                    <ul>
+                        <li>A1: -100000</li>
+                        <li>A2: 10000</li>
+                        <li>A3: 10000</li>
+                        <li>A4: 10000</li>
+                        <li>A5: 10000</li>
+                        <li>A6: 120000</li>
+                    </ul>
+                    <p>
+                        Formula:
+                        <br><strong>=IRR(A1:A6)</strong>
+                    </p>
+
+                    <h3>Example 2: Real estate XIRR (irregular dates)</h3>
+                    <p>
+                        You buy on Jan 15, spend renovations on Feb 1 and Mar 1, start receiving rent later, then sell
+                        on a specific date.
+                        Put values and dates:
+                    </p>
+                    <ul>
+                        <li>Cash flow -80000 on 2026-01-15 (down payment + closing)</li>
+                        <li>-10000 on 2026-02-01 (renovation)</li>
+                        <li>-5000 on 2026-03-01 (renovation)</li>
+                        <li>+600 monthly cash flow for many months (each with its date)</li>
+                        <li>+95000 net sale proceeds on 2028-06-20</li>
+                    </ul>
+                    <p>
+                        Formula:
+                        <br><strong>=XIRR(A1:A30, B1:B30)</strong>
+                    </p>
+
+                    <h3>Why the “net sale proceeds” line is everything</h3>
+                    <p>
+                        Many real estate IRR spreadsheets “forget” to subtract selling costs or loan payoff.
+                        That can add several percentage points to the IRR and produce misleading comparisons.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="errors">
+                    <h2>Troubleshooting: Why IRR Returns #NUM!, #VALUE!, or Weird Results</h2>
+
+                    <h3>Error: #NUM!</h3>
+                    <p>
+                        This usually means the function couldn’t find a rate that solves the equation.
+                        Common causes:
+                    </p>
+                    <ul>
+                        <li>No sign change (all cash flows same sign)</li>
+                        <li>Cash flows create multiple IRRs (more than one sign change)</li>
+                        <li>Dates/cash flows aren’t aligned (XIRR)</li>
+                        <li>The algorithm needs a different starting “guess”</li>
+                    </ul>
+
+                    <h3>Error: #VALUE!</h3>
+                    <p>
+                        Often caused by:
+                    </p>
+                    <ul>
+                        <li>Dates stored as text instead of date values (XIRR)</li>
+                        <li>Non-numeric cash flow cells (blank strings, commas as text)</li>
+                        <li>Range mismatch (values range and dates range different sizes)</li>
+                    </ul>
+
+                    <h3>Weird results (like 200% or negative IRR)</h3>
+                    <p>
+                        Weird doesn’t always mean wrong. A short deal with a big early return can produce a high IRR.
+                        But it can also mean:
+                    </p>
+                    <ul>
+                        <li>You accidentally flipped signs (initial investment positive)</li>
+                        <li>You double-counted sale proceeds</li>
+                        <li>You forgot the loan payoff or selling costs</li>
+                        <li>You assumed rent starts earlier than it can</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            A quick test: sum your cash flows. If the sum is negative, a positive IRR may be impossible.
+                            If the sum is wildly positive without including costs, you likely missed negatives.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="guess">
+                    <h2>What Is the “Guess” Argument (and When to Use It)?</h2>
+                    <p>
+                        IRR and XIRR functions often allow a “guess” input:
+                        it’s just a starting point for the iterative calculation.
+                        If the function struggles to converge, giving a reasonable guess can help.
+                    </p>
+
+                    <h3>Example</h3>
+                    <p>
+                        <strong>=IRR(A1:A20, 0.1)</strong> starts the search near 10%.
+                        If you expect a negative IRR, you can use a negative guess.
+                    </p>
+
+                    <h3>When guesses are useful</h3>
+                    <ul>
+                        <li>Very high or very low returns</li>
+                        <li>Cash flow patterns with multiple sign changes</li>
+                        <li>When IRR returns #NUM! but you’re sure the setup is correct</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="mirr">
+                    <h2>MIRR: Modified IRR (When IRR Is Misleading)</h2>
+                    <p>
+                        IRR has a built-in assumption that interim cash flows are reinvested at the IRR itself.
+                        For very high IRRs, that’s often unrealistic.
+                        MIRR (Modified IRR) fixes this by letting you specify:
+                    </p>
+                    <ul>
+                        <li>A <strong>finance rate</strong> for money you put in</li>
+                        <li>A <strong>reinvestment rate</strong> for money you receive before the end</li>
+                    </ul>
+
+                    <h3>When MIRR is most helpful</h3>
+                    <ul>
+                        <li>Cash flows have multiple sign changes (multiple IRRs)</li>
+                        <li>IRR is extremely high due to early distributions</li>
+                        <li>You want a more conservative, realistic rate assumption</li>
+                    </ul>
+
+                    <p>
+                        MIRR is more “decision-friendly” in some contexts, but it’s less commonly quoted than IRR.
+                        Many analysts will compute both: IRR for the standard metric and MIRR for realism.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="sanity">
+                    <h2>Sanity Checks: How to Know Your IRR Is Actually Correct</h2>
+
+                    <h3>Check 1: Does the cash flow pattern make economic sense?</h3>
+                    <ul>
+                        <li>Large negative upfront</li>
+                        <li>Small positives over time</li>
+                        <li>Final positive at exit</li>
+                    </ul>
+                    <p>
+                        If your list is mostly positives early with no initial negative, something is wrong.
+                    </p>
+
+                    <h3>Check 2: Does the IRR match rough intuition?</h3>
+                    <p>
+                        If you doubled your money in one year, IRR should be near 100%.
+                        If you made 20% total over 10 years, IRR should be low.
+                        Use intuition as a “smell test.”
+                    </p>
+
+                    <h3>Check 3: Compare with NPV at a hurdle rate</h3>
+                    <p>
+                        If you have a required return (say 10%), compute NPV.
+                        If IRR is above the hurdle rate, NPV should usually be positive.
+                    </p>
+
+                    <h3>Check 4: Compare with equity multiple</h3>
+                    <p>
+                        Equity multiple is total cash returned ÷ total cash invested.
+                        It ignores time, but it’s a reality check for “how much money did I get back?”
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            If IRR looks amazing but equity multiple is barely above 1.0x, you’re looking at a short
+                            timeline effect.
+                            That can be fine—but it should be intentional.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Quick Checklist (Copy/Paste)</h2>
+                    <ul>
+                        <li>✅ At least one negative and one positive cash flow</li>
+                        <li>✅ Correct signs: money out = negative, money in = positive</li>
+                        <li>✅ Use XIRR when dates are irregular (common in real estate)</li>
+                        <li>✅ Dates are true date values (not text), ranges match in size</li>
+                        <li>✅ Include all costs: closing, fees, CapEx, selling costs, loan payoff at sale</li>
+                        <li>✅ Run a conservative scenario and compare to base</li>
+                        <li>✅ Pair IRR with NPV or equity multiple</li>
+                        <li>✅ If errors: try a guess, check sign changes, consider MIRR</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR/XIRR quickly in the <a href="/irr/calculator/">IRR calculator</a> and
+                            cross-check your spreadsheet.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/irr/calculator/">IRR calculator</a>
+                            <p>Compute IRR/XIRR from cash flows and dates.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/what-is-irr/">What is IRR?</a>
+                            <p>Definition, intuition, and pitfalls.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/irr-vs-npv/">IRR vs NPV</a>
+                            <p>When “higher IRR” isn’t better.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/irr/real-estate-irr/">Real estate IRR</a>
+                            <p>Cash flows, leverage, and exits.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/cash-flow/">Cash flow</a>
+                            <p>Timing of distributions and net income.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>How do you calculate IRR?</h4>
+                        <p>
+                            IRR is the discount rate that makes NPV equal to zero. In practice, you calculate it using
+                            IRR() for periodic cash flows or XIRR() for irregular dates.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>When should I use IRR vs XIRR?</h4>
+                        <p>
+                            Use IRR for evenly spaced cash flows (monthly or yearly). Use XIRR when cash flows occur on
+                            irregular dates (common in real estate).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does IRR return #NUM!?</h4>
+                        <p>
+                            Usually because there’s no sign change, there are multiple sign changes (multiple IRRs), the
+                            function can’t converge, or you need a different guess. Check signs, ensure you have both
+                            negative and positive cash flows, try XIRR, and provide a guess.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What cash flows should be included for real estate IRR?</h4>
+                        <p>
+                            Include all equity cash flows: down payment and closing costs (negative), renovations
+                            (negative), net operating cash flow (positive/negative), refinance proceeds (positive), and
+                            net sale proceeds after selling costs and loan payoff (positive).
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is MIRR and when should I use it?</h4>
+                        <p>
+                            MIRR uses a realistic reinvestment rate and finance rate. Use it when IRR is misleading
+                            (very high IRR, multiple sign changes, or unrealistic reinvestment assumptions).
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Calculating IRR is straightforward once your cash flows are correct and your timing method
+                        matches reality.
+                        Use IRR for evenly spaced flows and XIRR for irregular dates. In real estate, XIRR is usually
+                        the right default.
+                        Most mistakes come from wrong signs, missing costs, and “gross sale” proceeds that ignore
+                        selling costs and loan payoff.
+                        Once you compute IRR, validate it with sanity checks and pair it with NPV or equity multiple so
+                        you don’t get misled by a single headline percentage.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute IRR/XIRR in the <a href="/irr/calculator/">IRR calculator</a> and
+                            cross-check your spreadsheet setup.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. IRR depends entirely on your cash flow assumptions and timing. For irregular
+                        cash flows, XIRR is typically more appropriate than IRR.
+                        Always include real-world fees and friction for a realistic result.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

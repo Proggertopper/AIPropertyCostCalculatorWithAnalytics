@@ -1,0 +1,831 @@
+       .toc {
+           background: #f1f5f9;
+           border: 1px solid #e5e7eb;
+           border-radius: 12px;
+           padding: 18px 20px;
+           margin-top: 0px;
+       }
+
+       .toc strong {
+           display: block;
+           margin-bottom: 8px;
+       }
+
+       .toc ul {
+           margin: 0;
+           padding-left: 22px;
+       }
+
+       .toc li {
+           margin-bottom: 10px;
+       }
+
+       .two-col {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 18px;
+           margin-top: 18px;
+       }
+
+       @media (max-width: 860px) {
+           .two-col {
+               grid-template-columns: 1fr;
+           }
+       }
+
+       .cost-box {
+           border: 1px solid #e5e7eb;
+           border-radius: 12px;
+           padding: 18px 18px;
+           background: #ffffff;
+       }
+
+       .cost-box h4 {
+           margin-bottom: 10px;
+           font-size: 18px;
+       }
+
+       .callout {
+           background: #eff6ff;
+           border-left: 4px solid #2563eb;
+           border-radius: 10px;
+           padding: 16px 18px;
+           margin: 18px 0;
+       }
+
+       .callout p {
+           margin: 0;
+       }
+
+       .internal-links {
+           display: grid;
+           grid-template-columns: repeat(2, minmax(0, 1fr));
+           gap: 12px;
+           margin-top: 16px;
+       }
+
+       @media (max-width: 860px) {
+           .internal-links {
+               grid-template-columns: 1fr;
+           }
+       }
+
+       .internal-link-card {
+           border: 1px solid #e5e7eb;
+           border-radius: 12px;
+           padding: 14px 16px;
+           background: #fff;
+       }
+
+       .internal-link-card a {
+           font-weight: 600;
+           color: #2563eb;
+       }
+
+       .internal-link-card p {
+           margin: 8px 0 0;
+           font-size: 14px;
+           color: #475569;
+       }
+
+       .mini-note {
+           font-size: 14px;
+           color: #64748b;
+           margin-top: 10px;
+       }
+
+       /* .breadcrumbs {
+            font-size: 17px;
+            color: black;
+            margin: 0;
+        } */
+       .breadcrumbs {
+           display: flex;
+           justify-content: center;
+           gap: 6px;
+           padding: 12px 14px;
+           font-size: 17px;
+           flex-wrap: wrap;
+           /* ✅ разрешаем перенос */
+           text-align: center;
+           color: black;
+           margin: 0;
+       }
+
+       .breadcrumbs a {
+           color: rgb(30, 48, 124);
+       }
+
+       /* =========================================
+   SEO PAGE UX OVERRIDES (safe scope)
+   Add: <main class="seo-page"> ... </main>
+   ========================================= */
+
+       /* ====== SEO LAYOUT (2 columns) ====== */
+       .seo-page {
+           --bg: #f6f8fc;
+           --panel: #ffffff;
+           --text: #0f172a;
+           --muted: #475569;
+           --body-text: #1e293b;
+           --body-muted: #334155;
+           --link-ink: #334155;
+           --link-underline: rgba(51, 65, 85, 0.24);
+           --link-underline-strong: rgba(51, 65, 85, 0.46);
+           --border: rgba(15, 23, 42, 0.10);
+           --shadow: 0 10px 30px rgba(2, 6, 23, 0.08);
+           --shadow-soft: 0 6px 18px rgba(2, 6, 23, 0.06);
+           --accent: #2563eb;
+           --accent-2: #1e40af;
+           --radius: 16px;
+           --radius-sm: 12px;
+
+           background:
+               radial-gradient(1200px 600px at 50% -10%, rgba(37, 99, 235, 0.12), transparent 60%),
+               radial-gradient(900px 500px at 0% 10%, rgba(16, 185, 129, 0.10), transparent 55%),
+               var(--bg);
+
+           color: var(--text);
+
+           display: grid;
+           grid-template-columns: minmax(240px, 300px) minmax(0, 1fr);
+           gap: 18px;
+           align-items: start;
+       }
+
+       /* RIGHT column wrapper */
+       .seo-content {
+           max-width: 1400px;
+       }
+
+       /* LEFT sticky sidebar */
+       .seo-sidebar {
+           position: sticky;
+           top: 140px;
+           /* подстрой под высоту хедера */
+           align-self: start;
+           padding: 9px 0 18px 18px;
+           overflow: auto;
+       }
+
+       /* prettier toc */
+       .seo-page .toc {
+           background: rgba(255, 255, 255, 0.86);
+           backdrop-filter: blur(10px);
+           border: 1px solid var(--border);
+           border-radius: 14px;
+           padding: 16px 16px;
+           box-shadow: var(--shadow-soft);
+       }
+
+       .seo-page .toc strong {
+           display: block;
+           margin-bottom: 10px;
+           font-size: 15px;
+           letter-spacing: 0.02em;
+           color: #0f172a;
+       }
+
+       .seo-page .toc ul {
+           margin: 0;
+           padding-left: 18px;
+       }
+
+       .seo-page .toc li {
+           margin: 0 0 10px;
+       }
+
+       .seo-page .toc a {
+           display: block;
+           padding: 6px 8px;
+           border-radius: 10px;
+           color: #0f172a;
+           text-decoration: none;
+           font-size: 15px;
+           line-height: 1.35;
+       }
+
+       .seo-page .toc a:hover {
+           color: var(--accent);
+           text-decoration: underline;
+           background: rgba(37, 99, 235, 0.08);
+       }
+
+       .seo-page .toc a.is-active {
+           color: #1e40af;
+           background: rgba(37, 99, 235, 0.14);
+           font-weight: 700;
+           text-decoration: none;
+       }
+
+
+       /* Cards */
+       .seo-page .content-section {
+           background: var(--panel);
+           border: 1px solid var(--border);
+           border-radius: var(--radius);
+           padding: 34px;
+           margin: 18px auto;
+           box-shadow: var(--shadow-soft);
+       }
+
+       /* Mobile: sidebar becomes top block */
+       @media (max-width: 980px) {
+           .seo-page {
+               grid-template-columns: 1fr;
+           }
+
+           .seo-sidebar {
+               display: none;
+           }
+       }
+
+       /* Extra-small */
+       @media (max-width: 520px) {
+           .seo-page .content-section {
+               padding: 22px 18px;
+               border-radius: 14px;
+           }
+
+           .seo-page .content-section p {
+               font-size: 16px;
+               line-height: 1.7;
+           }
+       }
+
+       .seo-page .content-wrapper {
+           max-width: 1120px;
+           margin: 0 auto;
+           padding: 10px 0px 20px;
+       }
+
+       /* Make sections feel like premium cards */
+       .seo-page .content-section {
+           background: var(--panel);
+           border: 1px solid var(--border);
+           border-radius: var(--radius);
+           padding: 38px;
+           margin: 18px auto;
+           box-shadow: var(--shadow-soft);
+           max-width: 100%;
+       }
+
+       .seo-page .content-section:hover {
+           box-shadow: var(--shadow);
+           transform: translateY(-1px);
+           transition: 160ms ease;
+       }
+
+       /* Typography tuned for long-form SEO */
+       .seo-page .content-section h2 {
+           font-size: 28px;
+           line-height: 1.15;
+           letter-spacing: -0.4px;
+           margin-bottom: 14px;
+           text-align: left;
+       }
+
+       .seo-page .content-section h3 {
+           font-size: 19px;
+           margin-top: 18px;
+           margin-bottom: 10px;
+       }
+
+       .seo-page .content-section p {
+           font-size: 15.8px;
+           line-height: 1.66;
+           color: var(--body-text);
+           text-wrap: pretty;
+       }
+
+       .seo-page .hero h1 {
+           font-size: clamp(34px, 3.2vw, 52px);
+           line-height: 1.14;
+           letter-spacing: -0.02em;
+           margin-bottom: 12px;
+       }
+
+       .seo-page .hero .subtitle {
+           font-size: 16px;
+           line-height: 1.62;
+           color: var(--body-muted);
+           max-width: 74ch;
+       }
+
+       /* Keep long-form line length readable on wide displays */
+       .seo-page .content-section > p,
+       .seo-page .content-section > ul,
+       .seo-page .content-section > ol,
+       .seo-page .content-section > h3,
+       .seo-page .content-section > h4 {
+           max-width: 76ch;
+           margin-right: auto;
+       }
+
+       .seo-page .content-section ul {
+           padding-left: 18px;
+           margin: 14px 0 18px;
+       }
+
+       .seo-page .content-section li {
+           font-size: 15.4px;
+           line-height: 1.62;
+           color: var(--body-muted);
+           margin-bottom: 10px;
+       }
+
+       /* Narrative links on guide pages: avoid default browser blue underline on click */
+       .seo-page .hero .subtitle a,
+       .seo-page .content-section a,
+       .seo-page .internal-link-card a {
+           color: var(--link-ink);
+           text-decoration-color: var(--link-underline);
+           text-decoration-thickness: 1px;
+           text-underline-offset: 2.5px;
+       }
+
+       .seo-page .hero .subtitle a:visited,
+       .seo-page .content-section a:visited,
+       .seo-page .internal-link-card a:visited {
+           color: var(--link-ink);
+           text-decoration-color: var(--link-underline);
+       }
+
+       .seo-page .hero .subtitle a:hover,
+       .seo-page .content-section a:hover,
+       .seo-page .internal-link-card a:hover {
+           color: #1e293b;
+           text-decoration-color: var(--link-underline-strong);
+       }
+
+       .seo-page .hero .subtitle a:active,
+       .seo-page .content-section a:active,
+       .seo-page .internal-link-card a:active {
+           color: #1e293b;
+           text-decoration-color: var(--link-underline-strong);
+       }
+
+       .seo-page .hero .subtitle a:focus-visible,
+       .seo-page .content-section a:focus-visible,
+       .seo-page .internal-link-card a:focus-visible {
+           outline: 2px solid rgba(51, 65, 85, 0.26);
+           outline-offset: 2px;
+           border-radius: 3px;
+       }
+
+       /* Section top “eyebrow” label (optional) */
+       .seo-page .eyebrow {
+           display: inline-flex;
+           align-items: center;
+           gap: 8px;
+           font-size: 12px;
+           font-weight: 700;
+           letter-spacing: 0.08em;
+           text-transform: uppercase;
+           color: var(--accent-2);
+           background: rgba(37, 99, 235, 0.10);
+           border: 1px solid rgba(37, 99, 235, 0.18);
+           padding: 8px 12px;
+           border-radius: 999px;
+           margin-bottom: 14px;
+       }
+
+       /* Two-column blocks that look good */
+       .seo-page .two-col {
+           display: grid;
+           grid-template-columns: 1fr 1fr;
+           gap: 18px;
+           margin-top: 16px;
+       }
+
+       @media (max-width: 900px) {
+           .seo-page .two-col {
+               grid-template-columns: 1fr;
+           }
+       }
+
+       .seo-page .cost-box {
+           background: linear-gradient(180deg, rgba(2, 6, 23, 0.02), transparent);
+           border: 1px solid var(--border);
+           border-radius: var(--radius-sm);
+           padding: 18px 18px 14px;
+       }
+
+       .seo-page .cost-box h4 {
+           font-size: 16px;
+           margin-bottom: 8px;
+           color: var(--text);
+       }
+
+       .seo-page .cost-box p {
+           font-size: 15px;
+           line-height: 1.7;
+           margin-bottom: 10px;
+       }
+
+       /* Highlight blocks */
+       .seo-page .highlight-box {
+           background: rgba(37, 99, 235, 0.08);
+           border: 1px solid rgba(37, 99, 235, 0.18);
+           border-left: 4px solid var(--accent);
+           padding: 16px 18px;
+           border-radius: var(--radius-sm);
+           margin: 18px 0;
+       }
+
+       .seo-page .highlight-box p {
+           margin: 0;
+           color: #1e293b;
+           font-size: 16px;
+       }
+
+       /* CTA to calculator (the thing you asked for) */
+       .seo-page .cta-calc {
+           display: grid;
+           grid-template-columns: 1fr auto;
+           gap: 14px;
+           align-items: center;
+           padding: 18px 18px;
+           border-radius: var(--radius);
+           background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(37, 99, 235, 0.92));
+           color: #fff;
+           box-shadow: 0 16px 40px rgba(37, 99, 235, 0.25);
+           margin-top: 18px;
+       }
+
+       @media (max-width: 720px) {
+           .seo-page .cta-calc {
+               grid-template-columns: 1fr;
+               text-align: left;
+           }
+       }
+
+       .seo-page .cta-calc h4 {
+           font-size: 18px;
+           margin-bottom: 6px;
+           color: #fff;
+       }
+
+       .seo-page .cta-calc p {
+           margin: 0;
+           font-size: 15px;
+           color: rgba(255, 255, 255, 0.90);
+           max-width: 70ch;
+       }
+
+       .seo-page .cta-calc a {
+           display: inline-flex;
+           justify-content: center;
+           align-items: center;
+           gap: 10px;
+           white-space: nowrap;
+           padding: 12px 16px;
+           border-radius: 12px;
+           background: #fff;
+           color: #0b1c24;
+           font-weight: 700;
+           text-decoration: none;
+           border: 1px solid rgba(255, 255, 255, 0.4);
+           transition: 140ms ease;
+       }
+
+       .seo-page .cta-calc a:hover {
+           transform: translateY(-1px);
+           box-shadow: 0 10px 22px rgba(0, 0, 0, 0.15);
+       }
+
+       /* FAQ: nicer spacing */
+       .seo-page .faq-item {
+           border: 1px solid var(--border);
+           border-radius: var(--radius-sm);
+           padding: 16px 18px;
+           margin-bottom: 12px;
+           background: #fff;
+       }
+
+       .seo-page .faq-item h4 {
+           font-size: 16px;
+           margin: 0 0 8px;
+           color: var(--text);
+       }
+
+       .seo-page .faq-item p {
+           margin: 0;
+           font-size: 15px;
+       }
+
+       /* Optional: small “stat chips” row */
+       .seo-page .stat-row {
+           display: flex;
+           flex-wrap: wrap;
+           gap: 10px;
+           margin-top: 12px;
+       }
+
+       .seo-page .stat-chip {
+           font-size: 13px;
+           color: #0f172a;
+           background: rgba(2, 6, 23, 0.04);
+           border: 1px solid var(--border);
+           border-radius: 999px;
+           padding: 8px 12px;
+       }
+
+       @media (max-width: 520px) {
+           .seo-page .content-section {
+               padding: 22px 18px;
+               border-radius: 14px;
+           }
+
+           .seo-page .content-section h2 {
+               font-size: 24px;
+               line-height: 1.15;
+           }
+
+           .seo-page .content-section p {
+               font-size: 15.2px;
+               line-height: 1.6;
+           }
+
+           .seo-page .hero h1 {
+               font-size: clamp(29px, 8.4vw, 38px);
+               line-height: 1.12;
+           }
+
+       }
+
+       .hero {
+           margin: 0;
+       }
+
+       /* ===== Sidebar blocks under TOC (Google-ish, light, useful) ===== */
+       .seo-page .sidebar-stack {
+           display: grid;
+           gap: 40px;
+           margin-top: 29px;
+       }
+
+       /* small meta chips row */
+       .seo-page .sidebar-meta {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 8px;
+       }
+
+       .seo-page .meta-chip {
+           font-size: 15px;
+           color: #0f172a;
+           background: rgba(2, 6, 23, 0.04);
+           border: 1px solid var(--border);
+           border-radius: 999px;
+           padding: 7px 10px;
+           line-height: 1;
+       }
+
+       /* Card under toc */
+       .seo-page .sidebar-card {
+           background: rgba(255, 255, 255, 0.86);
+           backdrop-filter: blur(10px);
+           border: 1px solid var(--border);
+           border-radius: 14px;
+           padding: 14px 14px;
+           box-shadow: var(--shadow-soft);
+       }
+
+       .seo-page .sidebar-card__title {
+           font-size: 13px;
+           font-weight: 700;
+           margin: 0 0 10px;
+           color: #0f172a;
+           letter-spacing: 0.02em;
+       }
+
+       /* Takeaways list */
+       .seo-page .takeaways {
+           margin: 0;
+           padding-left: 18px;
+       }
+
+       .seo-page .takeaways li {
+           margin: 0 0 10px;
+           font-size: 13.5px;
+           line-height: 1.5;
+           color: #334155;
+       }
+
+       /* Sidebar CTA */
+       .seo-page .sidebar-cta {
+           border-radius: 14px;
+           padding: 10px;
+           border: 1px solid rgba(37, 99, 235, 0.22);
+           background: linear-gradient(135deg, rgba(30, 64, 175, 0.12), rgba(37, 99, 235, 0.10));
+       }
+
+       .seo-page .sidebar-cta__title {
+           font-weight: 800;
+           font-size: 16px;
+           color: #0f172a;
+           margin-bottom: 6px;
+       }
+
+       .seo-page .sidebar-cta__sub {
+           font-size: 15px;
+           color: #334155;
+           line-height: 1.45;
+           margin-bottom: 10px;
+       }
+
+       .seo-page .sidebar-cta__btn {
+           display: inline-flex;
+           align-items: center;
+           justify-content: center;
+           gap: 8px;
+
+           width: 100%;
+           padding: 7px 12px;
+           border-radius: 12px;
+
+           background: #2563eb;
+           color: #fff;
+           font-weight: 800;
+           text-decoration: none;
+           border: 1px solid rgba(255, 255, 255, 0.25);
+
+           transition: 140ms ease;
+       }
+
+       .seo-page .sidebar-cta__btn:hover {
+           text-decoration: none;
+           transform: translateY(-1px);
+           box-shadow: 0 10px 22px rgba(37, 99, 235, 0.22);
+       }
+
+                  .page-meta {
+                      display: flex;
+                      align-items: center;
+                      justify-content: space-between;
+                      gap: 12px;
+                      margin-top: 18px;
+                      flex-wrap: wrap;
+                  }
+        
+                  .page-meta__left {
+                      display: flex;
+                      align-items: center;
+                      gap: 10px;
+                      flex-wrap: wrap;
+                      font-size: 14px;
+                  }
+        
+                  .backlink {
+                      color: rgba(15, 23, 42, .85);
+                      text-decoration: none;
+                      font-weight: 600;
+                  }
+        
+                  .backlink:hover {
+                      text-decoration: underline;
+                  }
+        
+                  .backlink--muted {
+                      color: rgba(15, 23, 42, .60);
+                      font-weight: 600;
+                  }
+        
+                  .page-meta__right {
+                      display: flex;
+                      gap: 8px;
+                      flex-wrap: wrap;
+                  }
+        
+                  .meta-chip {
+                      font-size: 13px;
+                      color: #0f172a;
+                      background: rgba(2, 6, 23, 0.04);
+                      border: 1px solid rgba(15, 23, 42, 0.10);
+                      border-radius: 999px;
+                      padding: 7px 10px;
+                      line-height: 1;
+                  }
+
+                                  /* Start here block */
+                                  .start-here {
+                                      margin: 14px 0 12px;
+                                  }
+                
+                                  .start-here__grid {
+                                      display: grid;
+                                      grid-template-columns: repeat(3, minmax(0, 1fr));
+                                      gap: 12px;
+                                  }
+                
+                                  .start-here__card {
+                                      display: block;
+                                      text-decoration: none;
+                                      background: #fff;
+                                      border: 1px solid rgba(15, 23, 42, 0.10);
+                                      border-radius: 14px;
+                                      padding: 14px 14px;
+                                      box-shadow: 0 8px 26px rgba(2, 6, 23, 0.06);
+                                      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+                                  }
+                
+                                  .start-here__card strong {
+                                      display: block;
+                                      color: #0f172a;
+                                      font-size: 14px;
+                                      line-height: 1.2;
+                                      margin-bottom: 6px;
+                                  }
+                
+                                  .start-here__card span {
+                                      display: block;
+                                      color: rgba(15, 23, 42, 0.75);
+                                      font-size: 13px;
+                                      line-height: 1.35;
+                                  }
+                
+                                  .start-here__card:hover {
+                                      transform: translateY(-1px);
+                                      border-color: rgba(37, 99, 235, 0.30);
+                                      box-shadow: 0 12px 34px rgba(2, 6, 23, 0.10);
+                                  }
+                
+                                  @media (max-width: 960px) {
+                                      .start-here__grid {
+                                          grid-template-columns: 1fr;
+                                      }
+                                  }
+
+       .seo-page .content-wrapper > .start-here + .content-section {
+           margin-top: 10px;
+       }
+
+ /* Mobile TOC: details accordion */
+                                                                     .toc-mobile {
+                                                                      display: none;
+                                                                      /* desktop off */
+                                                                      background: rgba(255, 255, 255, .92);
+                                                                      border: 1px solid rgba(15, 23, 42, .10);
+                                                                      border-radius: 14px;
+                                                                      box-shadow: 0 6px 18px rgba(2, 6, 23, .06);
+                                                                      padding: 10px 12px;
+                                                                      margin: 14px 0 14px;
+                                                                  }
+                                
+                                                                  .toc-mobile summary {
+                                                                      cursor: pointer;
+                                                                      font-weight: 800;
+                                                                      color: #0f172a;
+                                                                      list-style: none;
+                                                                  }
+                                
+                                                                  .toc-mobile summary::-webkit-details-marker {
+                                                                      display: none;
+                                                                  }
+                                
+                                                                  .toc-mobile summary::after {
+                                                                      content: "▾";
+                                                                      float: right;
+                                                                      opacity: .7;
+                                                                  }
+                                
+                                                                  .toc-mobile[open] summary::after {
+                                                                      content: "▴";
+                                                                  }
+                                
+                                                                  .toc-mobile nav {
+                                                                      display: grid;
+                                                                      gap: 6px;
+                                                                      margin-top: 10px;
+                                                                      max-height: min(52vh, 420px);
+                                                                      overflow-y: auto;
+                                                                  }
+                                
+                                                                  .toc-mobile a {
+                                                                      padding: 10px 10px;
+                                                                      border-radius: 12px;
+                                                                      text-decoration: none;
+                                                                      color: rgba(15, 23, 42, .82);
+                                                                      background: rgba(2, 6, 23, .03);
+                                                                      border: 1px solid rgba(15, 23, 42, .06);
+                                                                  }
+
+                                                                  .toc-mobile a.is-active {
+                                                                      background: rgba(37, 99, 235, .14);
+                                                                      border-color: rgba(37, 99, 235, .32);
+                                                                      color: #1e40af;
+                                                                      font-weight: 700;
+                                                                  }
+                                
+                                                                  .toc-mobile a:hover {
+                                                                      background: rgba(37, 99, 235, .08);
+                                                                      border-color: rgba(37, 99, 235, .18);
+                                                                  }
+                                
+                                                                  @media (max-width: 980px) {
+                                                                      .toc-mobile {
+                                                                          display: block;
+                                                                      }
+                                                                  }

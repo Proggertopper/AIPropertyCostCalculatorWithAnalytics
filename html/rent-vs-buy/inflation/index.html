@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent vs buy with inflation (U.S.): how inflation changes real housing costs, fixed mortgage payments, rent growth, taxes/insurance, maintenance, and opportunity cost. Learn which assumptions matter and how to model low/base/high inflation scenarios. Includes FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/inflation/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/inflation/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/inflation/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy With Inflation (U.S.) — Real Costs, Fixed Mortgages, and Scenario Testing</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy With Inflation (U.S.) — Real Costs and Scenario Testing" />
+    <meta property="og:description"
+        content="Inflation changes rent vs buy math. See how inflation affects real housing costs, fixed mortgage payments, rent growth, taxes/insurance, maintenance, and opportunity cost. Includes low/base/high inflation scenarios and FAQs." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/inflation/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/inflation/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "Inflation", "item": "https://mypropertycost.com/rent-vs-buy/inflation/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/inflation/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Does inflation make buying better than renting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation can make buying more attractive when you have a fixed-rate mortgage because the real burden of a fixed payment can fall over time, while rent often rises. But inflation also tends to increase taxes, insurance, and maintenance costs. The correct answer depends on your horizon and assumptions."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does inflation matter in a rent vs buy calculator?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Inflation affects rent growth, home prices, property taxes, insurance, maintenance, and investment returns. Over long horizons, even small differences in inflation assumptions can compound into large gaps."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Should I compare costs in nominal dollars or inflation-adjusted dollars?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Both views can be helpful. Nominal shows cash outflow, while inflation-adjusted (real) dollars show what those costs mean in today’s purchasing power. For long horizons, real comparisons often make the trade-offs clearer."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I model rent growth during inflation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Use a range. In some periods rent tracks inflation; in others it rises faster or slower. Run low/base/high scenarios for rent growth rather than assuming a single steady rate for decades."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">Inflation</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-inflation-matters">Why inflation changes rent vs buy outcomes</a></li>
+                    <li><a href="#fixed-mortgage">Fixed mortgages vs rising rents</a></li>
+                    <li><a href="#inflation-hits-owning">Inflation also raises ownership costs</a></li>
+                    <li><a href="#real-vs-nominal">Nominal vs inflation-adjusted comparisons</a></li>
+                    <li><a href="#assumptions">Which assumptions matter most</a></li>
+                    <li><a href="#scenarios">Low/base/high inflation scenarios</a></li>
+                    <li><a href="#how-to-run">How to run inflation scenarios in the calculator</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Run inflation scenarios</div>
+                        <div class="sidebar-cta__sub">Test base vs high inflation in under a minute.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy With Inflation (U.S.)<br>Real Costs, Fixed Mortgages, and Scenario Testing</h1>
+                        <p class="subtitle">
+                            Inflation changes rent vs buy math because it changes everything around housing: rent
+                            increases, home prices,
+                            property taxes, insurance, maintenance costs, and the opportunity cost of investing.
+                            A fixed-rate mortgage can become “cheaper” in real terms over time, while rent often rises —
+                            but owning costs can rise too.
+                            This guide shows how to model inflation realistically and how to avoid the common mistakes
+                            that produce misleading results.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~11 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-inflation-matters">Why inflation matters</a>
+                    <a href="#fixed-mortgage">Fixed mortgage vs rent</a>
+                    <a href="#inflation-hits-owning">Inflation hits owning</a>
+                    <a href="#real-vs-nominal">Real vs nominal</a>
+                    <a href="#assumptions">Key assumptions</a>
+                    <a href="#scenarios">Scenarios</a>
+                    <a href="#how-to-run">How to run</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Compare base vs high inflation scenarios.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/assumptions/">
+                            <strong>Assumptions guide</strong>
+                            <span>Which inputs move outcomes most.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/opportunity-cost/">
+                            <strong>Opportunity cost</strong>
+                            <span>How inflation interacts with investing.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why-inflation-matters">
+                    <h2>Why Inflation Changes Rent vs Buy Outcomes</h2>
+                    <p>
+                        Inflation is not a single “number” in rent vs buy.
+                        It influences rent growth, home price growth, ownership expenses, and the returns you can earn
+                        on invested cash.
+                        Over 10–30 years, small differences in inflation assumptions can compound into very large
+                        differences in total cost and end-of-horizon net position.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key idea:</strong> The rent vs buy decision isn’t just about what you pay —
+                            it’s about how your housing costs and your assets evolve in purchasing-power terms over
+                            time.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="fixed-mortgage">
+                    <h2>Fixed Mortgages vs Rising Rents: The “Inflation Hedge” Argument</h2>
+                    <p>
+                        One reason inflation can favor buying is the fixed-rate mortgage effect:
+                        if you lock in a fixed payment, inflation can reduce the real burden of that payment over time.
+                        In plain terms, your payment is the same in dollars, but your income and prices may rise — so
+                        the payment can feel smaller in purchasing power.
+                    </p>
+
+                    <h3>Why this matters in the comparison</h3>
+                    <ul>
+                        <li><strong>Rent can rise</strong> over time (often influenced by inflation and local
+                            supply/demand).</li>
+                        <li><strong>Mortgage principal + interest</strong> on a fixed-rate loan stays constant
+                            (principal/interest portion).</li>
+                        <li><strong>Over long horizons</strong>, this can shift the cash flow advantage toward owning.
+                        </li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Important:</strong> This is not “buying always wins with inflation.”
+                            It’s “fixed payments can become less painful in real terms” — while rent often adjusts
+                            upward.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="inflation-hits-owning">
+                    <h2>Inflation Also Raises Ownership Costs (Taxes, Insurance, Maintenance)</h2>
+                    <p>
+                        The inflation hedge narrative is incomplete if you only look at the mortgage.
+                        In reality, a homeowner has other costs that can rise with inflation:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Costs that often rise with inflation</h4>
+                            <ul>
+                                <li><strong>Property taxes</strong> (assessments and local rates)</li>
+                                <li><strong>Home insurance</strong> (replacement costs can rise)</li>
+                                <li><strong>Maintenance & repairs</strong> (labor and materials)</li>
+                                <li><strong>HOA dues</strong> (if applicable)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>What tends to stay “fixed”</h4>
+                            <ul>
+                                <li><strong>Mortgage principal + interest</strong> (fixed-rate only)</li>
+                                <li><strong>Some fixed utilities</strong> (depends on local pricing)</li>
+                                <li><strong>Some contract costs</strong> (but many are inflation-sensitive)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        The right conclusion is: inflation can make a fixed mortgage attractive,
+                        but you still need to model rising ownership expenses to avoid overstating the benefit.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="real-vs-nominal">
+                    <h2>Nominal vs Inflation-Adjusted Comparisons: Which One Is “Correct”?</h2>
+                    <p>
+                        There are two ways to look at long-horizon costs:
+                    </p>
+                    <ul>
+                        <li><strong>Nominal dollars:</strong> the actual cash you pay over time.</li>
+                        <li><strong>Real (inflation-adjusted) dollars:</strong> what those payments mean in today’s
+                            purchasing power.</li>
+                    </ul>
+
+                    <p>
+                        Nominal is useful for budgeting and cash flow.
+                        Real is useful for long-term decision clarity because it puts future costs into “today’s money.”
+                        A strong calculator can show both, but even if you only see nominal totals, you should still
+                        model inflation via growth rates.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical tip:</strong> If an analysis is for 20–30 years, looking at
+                            inflation-adjusted results often makes the trade-offs easier to interpret.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="assumptions">
+                    <h2>Which Assumptions Matter Most Under Inflation</h2>
+                    <p>
+                        Inflation interacts with several core assumptions. These are the ones that most commonly flip
+                        outcomes:
+                    </p>
+
+                    <h3>1) Rent growth vs inflation</h3>
+                    <p>
+                        If rent growth tracks inflation closely, renting becomes more expensive over time in nominal
+                        terms.
+                        If rent grows slower, renting remains competitive longer. If it grows faster (high-demand
+                        markets), the advantage of a fixed mortgage can look larger.
+                    </p>
+
+                    <h3>2) Home appreciation</h3>
+                    <p>
+                        Inflation often influences nominal home prices, but appreciation is not guaranteed. Over shorter
+                        horizons, price cycles matter more than inflation narratives.
+                        That’s why you should stress-test low/flat appreciation even in an inflation scenario.
+                    </p>
+
+                    <h3>3) Taxes, insurance, and maintenance growth</h3>
+                    <p>
+                        If you keep these flat, you will overstate the “inflation hedge” benefit of owning.
+                        Taxes and insurance can rise, and maintenance costs can rise with materials and labor.
+                    </p>
+
+                    <h3>4) Opportunity cost and investment returns</h3>
+                    <p>
+                        Inflation affects what returns mean. A renter’s invested cash might earn a nominal return —
+                        but what matters for purchasing power is the real return (after inflation).
+                        This is why you should test a range rather than assuming one perfect return.
+                    </p>
+
+                    <p class="mini-note">
+                        For the full breakdown, see <a href="/rent-vs-buy/opportunity-cost/">Opportunity cost</a>.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="scenarios">
+                    <h2>Low / Base / High Inflation Scenarios (Simple Framework)</h2>
+                    <p>
+                        Don’t pick one inflation number and assume it lasts forever. Instead, run three scenarios and
+                        see how sensitive your result is.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Low inflation scenario</h4>
+                            <ul>
+                                <li>Lower rent growth</li>
+                                <li>Lower cost growth (taxes/insurance/maintenance)</li>
+                                <li>Moderate nominal investment returns</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>High inflation scenario</h4>
+                            <ul>
+                                <li>Higher rent growth</li>
+                                <li>Higher expense growth (taxes/insurance/maintenance)</li>
+                                <li>Nominal investment returns may also rise</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="cost-box" style="margin-top: 14px;">
+                        <h4>Base scenario (most useful for decisions)</h4>
+                        <ul>
+                            <li>Moderate rent growth</li>
+                            <li>Realistic expense growth</li>
+                            <li>Conservative appreciation stress test included</li>
+                        </ul>
+                        <p class="mini-note">
+                            The base scenario should be conservative enough that you’d still be okay if reality is
+                            imperfect.
+                        </p>
+                    </div>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision quality rule:</strong> If buying only wins in the high inflation scenario,
+                            treat that as fragile.
+                            You’re betting on a specific future path.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-run">
+                    <h2>How to Run Inflation Scenarios in the Rent vs Buy Calculator</h2>
+                    <p>
+                        Use this workflow:
+                    </p>
+
+                    <h3>Step 1: Base case</h3>
+                    <ul>
+                        <li>Real rent and realistic rent growth</li>
+                        <li>Real taxes, insurance, HOA, maintenance</li>
+                        <li>Realistic appreciation (and a low/flat test)</li>
+                        <li>Include selling costs</li>
+                    </ul>
+
+                    <h3>Step 2: High inflation scenario</h3>
+                    <p>
+                        Increase rent growth and ownership expense growth.
+                        Keep appreciation conservative in one run to see if the decision depends on “everything rising
+                        perfectly.”
+                    </p>
+
+                    <h3>Step 3: Opportunity cost sensitivity</h3>
+                    <p>
+                        Test a range of investment returns for the renter’s cash.
+                        If your result flips easily, your decision depends on behavior and risk tolerance — not just
+                        inflation.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Inflation changes the winner fast</h4>
+                            <p>Run base vs high inflation, then add a low appreciation test. If buying still wins, it’s
+                                robust.</p>
+                        </div>
+                        <a href="/rent-vs-buy/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        Inflation affects both ownership expenses and exit proceeds. These pages help connect the full
+                        picture:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Compare base vs high inflation scenarios and see the net position impact.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale (Inflation-Adjusted)</a>
+                            <p>Understand what “profit” means after inflation and selling costs.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Model taxes, insurance, HOA, and maintenance growth over time.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/assumptions/">Assumptions Guide</a>
+                            <p>Choose realistic growth rates and run low/base/high scenarios.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Does inflation make buying better than renting?</h4>
+                        <p>
+                            Inflation can make buying more attractive with a fixed-rate mortgage because the real burden
+                            of a fixed payment can fall over time,
+                            while rent often rises. But inflation can also raise property taxes, insurance, and
+                            maintenance costs.
+                            The correct answer depends on your horizon and assumptions.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does inflation matter in a rent vs buy calculator?</h4>
+                        <p>
+                            Inflation affects rent growth, home prices, property taxes, insurance, maintenance, and
+                            investment returns.
+                            Over long horizons, even small differences in inflation assumptions can compound into large
+                            gaps.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Should I compare costs in nominal dollars or inflation-adjusted dollars?</h4>
+                        <p>
+                            Both can be helpful. Nominal shows cash outflow, while inflation-adjusted (real) dollars
+                            show what those costs mean in today’s purchasing power.
+                            For long horizons, real comparisons often make the trade-offs clearer.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How should I model rent growth during inflation?</h4>
+                        <p>
+                            Use a range. In some periods rent tracks inflation; in others it rises faster or slower.
+                            Run low/base/high scenarios for rent growth rather than assuming a single steady rate for
+                            decades.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the fastest inflation “reality check” before buying?</h4>
+                        <p>
+                            Run base vs high inflation scenarios, then add a low/flat appreciation test.
+                            If buying only wins when appreciation is strong, treat it as fragile.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: Inflation Helps Fixed Payments — But Raises Other Costs</h2>
+                    <p>
+                        Inflation can make a fixed mortgage look better over time in real terms, while rent often rises.
+                        But inflation also increases taxes, insurance, and maintenance, and it changes what investment
+                        returns mean.
+                    </p>
+                    <p>
+                        The best approach is scenario testing: low/base/high inflation combined with low appreciation
+                        stress tests.
+                        If buying still wins under conservative assumptions, it’s strong. If it only wins under
+                        optimistic paths, treat it as a bet — not a guarantee.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run base vs high inflation in the <a href="/rent-vs-buy/calculator/">Rent vs Buy
+                                Calculator</a> and compare break-even under different growth paths.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions (inflation-linked growth
+                        rates, transaction costs, and ownership expenses).
+                        For decisions, run your numbers in the <a href="/rent-vs-buy/calculator/">calculator</a> and
+                        consider local market factors.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

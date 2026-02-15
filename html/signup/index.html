@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Register at PropertyCost to save calculations, access personalized real estate tools, and get accurate property analysis online.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/register.css">
+    <title>Sign up</title>
+</head>
+<body>
+<main class="auth-main">
+    <div class="auth-page auth-layout">
+        <aside class="auth-brand">
+            <a href="/" class="auth-back-link">Back to PropertyCost</a>
+            <p class="auth-badge">Get started in minutes</p>
+            <h2>Create your workspace for real estate decisions.</h2>
+            <p class="auth-copy">
+                Save calculations, unlock full verdicts, and manage scenario packs in one account with clear credit usage.
+            </p>
+            <ul class="auth-points">
+                <li>Run calculators free before buying credits</li>
+                <li>Keep verdicts, scenarios, compare, and optimizer runs</li>
+                <li>Export clean PDF reports for clients or partners</li>
+            </ul>
+        </aside>
+
+        <section class="auth-card auth-card-wrap" aria-label="Sign up form">
+            <div class="auth-header">
+                <h1>Create account</h1>
+                <p>Start with free calculations and unlock premium analysis tools</p>
+            </div>
+
+            <div id="error" class="auth-error hidden"></div>
+
+            <form id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" placeholder="you@company.com" required autocomplete="email" />
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Minimum 8 characters" required autocomplete="new-password" />
+                </div>
+
+                <button type="submit" class="btn-primary">
+                    Sign up
+                </button>
+            </form>
+
+            <div class="divider">
+                <span>or continue with</span>
+            </div>
+
+            <div class="social-auth">
+                <button id="googleLogin" class="btn-social google">
+                    Continue with Google
+                </button>
+            </div>
+
+            <div class="auth-footer">
+                Already have an account?
+                <a href="/login/">Login</a>
+            </div>
+        </section>
+    </div>
+</main>
+    <script src="/js/register.js"></script>
+
+</body>
+</html>

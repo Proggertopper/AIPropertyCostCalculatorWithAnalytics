@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent vs buy with HOA fees (U.S.): how HOA changes total cost, break-even, resale risk, and monthly affordability. Learn what to model (HOA increases, special assessments, condo insurance, taxes, maintenance), run scenarios, and avoid common mistakes." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/hoa-fees/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/hoa-fees/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/hoa-fees/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy With HOA Fees (U.S.) — True Cost, Break-Even, and Special Assessments</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy With HOA Fees (U.S.) — True Cost, Break-Even, Special Assessments" />
+    <meta property="og:description"
+        content="HOA fees can flip rent vs buy outcomes. Learn how to model HOA increases, special assessments, condo insurance, taxes, maintenance, and resale risk in a realistic U.S. rent vs buy comparison." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/hoa-fees/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/hoa-fees/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "HOA Fees", "item": "https://mypropertycost.com/rent-vs-buy/hoa-fees/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/hoa-fees/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Do HOA fees make buying worse than renting?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "HOA fees increase the non-equity cost of owning and can push break-even farther out. They don’t automatically make renting better, but they must be included (with realistic fee increases and possible special assessments) to compare net position fairly."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How should I model HOA increases over time?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Model HOA dues with an annual growth assumption rather than keeping them flat. Also stress-test a scenario with a one-time special assessment and higher-than-expected increases."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is a special assessment and why does it matter?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A special assessment is an extra charge to cover a large expense not fully funded by reserves. It matters because it can be a large, unexpected cost that impacts short and medium holding periods."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do condos change the rent vs buy comparison?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Often yes. Condos typically have HOA dues and different maintenance responsibilities. Some costs shift from the homeowner to the HOA, but dues can rise and special assessments add risk. You should model both the dues and the risk of large assessments."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">HOA Fees</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-hoa-matters">Why HOA fees change the rent vs buy math</a></li>
+                    <li><a href="#what-to-include">What to include in a realistic HOA model</a></li>
+                    <li><a href="#fee-growth">HOA fee growth: don’t keep dues flat</a></li>
+                    <li><a href="#special-assessments">Special assessments: the “one big event” risk</a></li>
+                    <li><a href="#condo-vs-house">Condo vs house: what costs shift and what doesn’t</a></li>
+                    <li><a href="#break-even">How HOA affects break-even and short horizons</a></li>
+                    <li><a href="#checklist">HOA due diligence checklist (quick)</a></li>
+                    <li><a href="#how-to-run">How to run HOA scenarios in the calculator</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Test HOA risk</div>
+                        <div class="sidebar-cta__sub">Run a “HOA increases + assessment” scenario in 60 seconds.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy With HOA Fees (U.S.)<br>True Cost, Break-Even, and Special Assessments</h1>
+                        <p class="subtitle">
+                            HOA fees can quietly flip a rent vs buy decision — especially for condos and planned
+                            communities.
+                            The challenge isn’t just today’s monthly dues. It’s how dues grow over time, how often
+                            special assessments happen,
+                            and how HOA rules affect resale demand. This guide shows how to model HOA realistically and
+                            how to stress-test the risks.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~10 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-hoa-matters">Why HOA matters</a>
+                    <a href="#what-to-include">What to include</a>
+                    <a href="#fee-growth">Fee growth</a>
+                    <a href="#special-assessments">Special assessments</a>
+                    <a href="#condo-vs-house">Condo vs house</a>
+                    <a href="#break-even">Break-even</a>
+                    <a href="#checklist">Checklist</a>
+                    <a href="#how-to-run">How to run scenarios</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Include HOA dues and test increases + assessments.</span>
+                        </a>
+                        <a class="start-here__card" href="/homeownership-cost/">
+                            <strong>Total cost of ownership</strong>
+                            <span>Taxes, insurance, maintenance, and operating costs.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/common-mistakes/">
+                            <strong>Common mistakes</strong>
+                            <span>Why missing HOA and selling costs flips results.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="why-hoa-matters">
+                    <h2>Why HOA Fees Change the Rent vs Buy Math</h2>
+                    <p>
+                        HOA dues are a recurring ownership cost that usually does not build equity.
+                        That doesn’t make HOA “bad” — dues often pay for services and shared maintenance — but it does
+                        change the comparison.
+                        In rent vs buy math, HOA behaves like an extra layer of rent on top of the mortgage.
+                    </p>
+                    <p>
+                        The reason HOA can flip outcomes is simple: it increases the buyer’s non-equity spending and can
+                        push break-even farther out.
+                        If you might move in a few years, higher non-equity costs matter a lot because you have less
+                        time to build equity and dilute transaction costs.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Key point:</strong> HOA dues must be modeled like taxes and insurance — not as a
+                            one-time or flat cost.
+                            They can rise, and special assessments can appear as “one big event” expenses.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="what-to-include">
+                    <h2>What to Include in a Realistic HOA Model</h2>
+                    <p>
+                        If a rent vs buy calculator asks for “HOA,” many users enter the current monthly dues and move
+                        on.
+                        That’s a start, but a realistic model should include the parts that actually create risk:
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>HOA costs to model</h4>
+                            <ul>
+                                <li><strong>Monthly dues</strong> (today)</li>
+                                <li><strong>Annual increases</strong> (dues rarely stay flat forever)</li>
+                                <li><strong>Special assessments</strong> (one-time charges)</li>
+                                <li><strong>Insurance gaps</strong> (condo policies may require extra coverage)</li>
+                                <li><strong>Transfer/move-in fees</strong> (sometimes)</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>HOA impacts beyond cost</h4>
+                            <ul>
+                                <li><strong>Resale demand</strong> (high dues can reduce buyer pool)</li>
+                                <li><strong>Financing constraints</strong> (some buyers avoid high-HOA units)</li>
+                                <li><strong>Rules</strong> (renting restrictions, pets, renovations)</li>
+                                <li><strong>Reserve health</strong> (underfunded reserves = higher future costs)</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <p>
+                        The cost model tells you the financial side. The “impact” model tells you how predictable resale
+                        and living experience will be.
+                        You don’t need to quantify everything — but you should understand the direction of the risk.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="fee-growth">
+                    <h2>HOA Fee Growth: Don’t Keep Dues Flat</h2>
+                    <p>
+                        Many comparisons quietly assume HOA stays constant for 10–30 years. That’s rarely realistic.
+                        Even modest annual increases compound. Over a decade, small increases can meaningfully change
+                        total cost.
+                    </p>
+
+                    <h3>How to pick a conservative HOA growth assumption</h3>
+                    <ul>
+                        <li><strong>Base case:</strong> assume dues rise gradually over time.</li>
+                        <li><strong>Stress test:</strong> assume higher growth if the building is aging or the HOA is
+                            underfunded.</li>
+                        <li><strong>Short horizon:</strong> even 3–5 years can be impacted if increases happen quickly
+                            or assessments appear.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Practical rule:</strong> If the decision only works when HOA stays flat, the
+                            decision is fragile.
+                            You want a model that stays reasonable even if dues rise.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="special-assessments">
+                    <h2>Special Assessments: The “One Big Event” Risk</h2>
+                    <p>
+                        A special assessment is a one-time charge to cover an expense not fully funded by regular dues
+                        and reserves.
+                        Think of large building repairs, major upgrades, or unexpected structural work.
+                        For the owner, this is similar to a major repair on a single-family home — but shared and
+                        triggered by HOA decisions.
+                    </p>
+
+                    <h3>Why assessments matter in rent vs buy</h3>
+                    <ul>
+                        <li>They can be large relative to a short holding period.</li>
+                        <li>They are hard to predict without reviewing HOA documents.</li>
+                        <li>They can affect resale if buyers fear future assessments.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Stress test:</strong> Add a one-time assessment scenario. If that flips the outcome,
+                            buying is sensitive to HOA risk.
+                        </p>
+                    </div>
+
+                    <p class="mini-note">
+                        This is the HOA version of “one big repair” risk. Short-horizon owners are exposed because
+                        there’s less time to average it out.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="condo-vs-house">
+                    <h2>Condo vs House: What Costs Shift (and What Doesn’t)</h2>
+                    <p>
+                        HOA-heavy properties are often condos or communities where shared maintenance is centralized.
+                        This changes where the costs appear, but not whether costs exist.
+                    </p>
+
+                    <h3>Costs that often shift into HOA dues</h3>
+                    <ul>
+                        <li>Exterior maintenance and some capital replacements</li>
+                        <li>Shared utilities or amenities (varies widely)</li>
+                        <li>Building insurance (varies by HOA structure)</li>
+                    </ul>
+
+                    <h3>Costs that still exist for the owner</h3>
+                    <ul>
+                        <li>Mortgage interest</li>
+                        <li>Property taxes (often separate)</li>
+                        <li>Owner’s insurance (unit-level policy may still be required)</li>
+                        <li>Interior maintenance and upgrades</li>
+                        <li>Selling costs and transaction friction</li>
+                    </ul>
+
+                    <p>
+                        The key is not to double-count or undercount. If HOA covers some maintenance, your personal
+                        maintenance reserve may be lower —
+                        but dues must reflect that reality and must be stress-tested for increases.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="break-even">
+                    <h2>How HOA Affects Break-Even (Especially 3–10 Years)</h2>
+                    <p>
+                        Break-even is when buying catches up to renting in net position.
+                        HOA pushes break-even out because it increases monthly non-equity cost.
+                        That matters most when:
+                    </p>
+                    <ul>
+                        <li><strong>Time horizon is short</strong> (3–5 years, 5–10 years)</li>
+                        <li><strong>HOA dues are high relative to rent</strong></li>
+                        <li><strong>Selling costs are high</strong> (transaction friction dominates)</li>
+                        <li><strong>Appreciation is modest</strong> (less asset growth to offset costs)</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple test:</strong> Run the calculator with HOA = $0 and then with realistic HOA +
+                            growth.
+                            The difference shows you how much HOA is “charging” your break-even.
+                        </p>
+                    </div>
+
+                    <p class="mini-note">
+                        Want the full framework? Read <a href="/rent-vs-buy/break-even/">Break-even explained</a>.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>HOA Due Diligence Checklist (Quick)</h2>
+                    <p>
+                        Before you assume HOA is “stable,” do a quick check. You don’t need to become an expert — just
+                        avoid obvious risk.
+                    </p>
+
+                    <div class="two-col">
+                        <div class="cost-box">
+                            <h4>Cost & reserves</h4>
+                            <ul>
+                                <li>How often have dues increased in recent years?</li>
+                                <li>Are reserves funded for upcoming repairs?</li>
+                                <li>Any planned projects that could trigger assessments?</li>
+                                <li>Are there known building issues (roof, plumbing, structure)?</li>
+                            </ul>
+                        </div>
+
+                        <div class="cost-box">
+                            <h4>Rules & resale</h4>
+                            <ul>
+                                <li>Rental restrictions (can reduce buyer pool)</li>
+                                <li>Pet rules, renovation rules</li>
+                                <li>Litigation or ongoing disputes (risk factor)</li>
+                                <li>How do dues compare to similar buildings?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Why this matters:</strong> If dues are underpriced today, the “real” cost arrives
+                            later as higher increases or assessments.
+                            That’s exactly the risk rent vs buy math should reflect.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="how-to-run">
+                    <h2>How to Run HOA Scenarios in the Rent vs Buy Calculator</h2>
+                    <p>
+                        Use this simple workflow to model HOA risk without overcomplicating the inputs:
+                    </p>
+
+                    <h3>Step 1: Base case</h3>
+                    <ul>
+                        <li>Enter current monthly HOA dues.</li>
+                        <li>Use realistic taxes, insurance, and maintenance.</li>
+                        <li>Include selling costs.</li>
+                    </ul>
+
+                    <h3>Step 2: HOA growth scenario</h3>
+                    <p>
+                        Increase HOA dues over time (or approximate with a higher average HOA input if your calculator
+                        uses a single value).
+                        This reveals how sensitive break-even is to dues inflation.
+                    </p>
+
+                    <h3>Step 3: Special assessment stress test</h3>
+                    <p>
+                        Add a one-time “extra cost” assumption (or include it as increased costs spread over the holding
+                        period).
+                        If the decision flips, you’re exposed to HOA assessment risk — which is most relevant in 3–10
+                        year horizons.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>HOA can flip the winner</h4>
+                            <p>Run one scenario with “stable HOA” and one with “HOA increases + assessment” to see how
+                                fragile your result is.</p>
+                        </div>
+                        <a href="/rent-vs-buy/calculator/">Run the calculator →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        HOA interacts with total ownership cost and exit proceeds. These pages help you tighten the full
+                        model:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Include HOA dues and stress-test fee increases and assessments.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Taxes, insurance, maintenance, and operating costs — the non-equity costs that decide
+                                outcomes.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale (Inflation-Adjusted)</a>
+                            <p>Estimate what you keep after selling costs and inflation — crucial when dues are high.
+                            </p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/common-mistakes/">Common Mistakes</a>
+                            <p>Missing HOA growth and selling costs is one of the biggest reasons calculators disagree.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Do HOA fees make buying worse than renting?</h4>
+                        <p>
+                            HOA fees increase the non-equity cost of owning and can push break-even farther out.
+                            They don’t automatically make renting better, but they must be included (with realistic fee
+                            increases and possible special assessments)
+                            to compare net position fairly.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How should I model HOA increases over time?</h4>
+                        <p>
+                            Model HOA dues with an annual growth assumption rather than keeping them flat.
+                            Also stress-test a scenario with a one-time special assessment and higher-than-expected
+                            increases.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is a special assessment and why does it matter?</h4>
+                        <p>
+                            A special assessment is an extra charge to cover a large expense not fully funded by
+                            reserves.
+                            It matters because it can be a large, unexpected cost that impacts short and medium holding
+                            periods.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Do condos change the rent vs buy comparison?</h4>
+                        <p>
+                            Often yes. Condos typically have HOA dues and different maintenance responsibilities.
+                            Some costs shift from the homeowner to the HOA, but dues can rise and special assessments
+                            add risk.
+                            You should model both the dues and the risk of large assessments.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the fastest HOA “risk check” before buying?</h4>
+                        <p>
+                            Run a scenario with dues increasing and a one-time assessment.
+                            If buying stops making sense under that stress test, your decision is sensitive to HOA risk
+                            and you should treat the purchase as higher-variance.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: HOA Is a Cost + a Risk Profile</h2>
+                    <p>
+                        HOA dues can be worth it when they fund real maintenance and improve quality of life — but they
+                        must be included in rent vs buy math.
+                        The most common mistake is treating HOA as flat and predictable. In reality, dues can rise and
+                        special assessments can occur.
+                    </p>
+                    <p>
+                        Run conservative scenarios. If buying still works with higher dues and an assessment stress
+                        test, it’s stronger.
+                        If it only works when HOA stays stable, treat buying as a fragile decision and consider whether
+                        renting is the better risk-managed choice.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run your HOA scenario in the <a href="/rent-vs-buy/calculator/">Rent vs Buy
+                                Calculator</a> and compare break-even with and without HOA growth.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified modeling assumptions (HOA dues, growth,
+                        assessments, transaction costs, and ownership expenses).
+                        For decisions, run your numbers in the <a href="/rent-vs-buy/calculator/">calculator</a> and
+                        consider local HOA documents and market conditions.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

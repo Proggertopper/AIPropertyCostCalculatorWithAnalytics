@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Rent vs buy if you might move in 3–5 years (U.S.): how short holding periods change the math, which costs dominate (closing costs, selling costs, interest-heavy early years, taxes, HOA, maintenance), and how to run scenarios to avoid a bad decision." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://mypropertycost.com/rent-vs-buy/3-5-years/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/rent-vs-buy/3-5-years/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/rent-vs-buy/3-5-years/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Rent vs Buy If You Might Move in 3–5 Years (U.S.) — The Short-Horizon Reality Check</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Rent vs Buy If You Might Move in 3–5 Years (U.S.)" />
+    <meta property="og:description"
+        content="Short holding periods change everything. Learn how to model rent vs buy for 3–5 years in the U.S., which costs dominate (selling costs, closing costs, interest, taxes, HOA, maintenance), and how to run conservative scenarios." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/rent-vs-buy/3-5-years/" />
+
+    <link rel="stylesheet" href="/css/main.css">
+
+
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://mypropertycost.com/rent-vs-buy/3-5-years/#breadcrumbs",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Rent vs Buy", "item": "https://mypropertycost.com/rent-vs-buy/" },
+          { "@type": "ListItem", "position": 3, "name": "3–5 Years", "item": "https://mypropertycost.com/rent-vs-buy/3-5-years/" }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://mypropertycost.com/rent-vs-buy/3-5-years/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is it worth buying a house if I might move in 3 to 5 years?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It depends on selling costs, closing costs, mortgage rate, appreciation, taxes, HOA, insurance, maintenance, and opportunity cost. Short horizons magnify transaction friction and interest-heavy early payments, so buying is often riskier unless appreciation is strong and costs are low."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why does short-term rent vs buy math look so different?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because closing and selling costs are large relative to the timeline and the first years of a mortgage are interest-heavy. A small price dip or an unexpected repair can dominate the outcome over 3–5 years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What should I include when modeling rent vs buy for a short holding period?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Include purchase closing costs, selling costs, mortgage interest, taxes, insurance, HOA, maintenance/CapEx, realistic appreciation assumptions, and opportunity cost of investing the down payment if you rent."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How can I make buying safer if I might move soon?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Run conservative scenarios, keep transaction costs low, avoid overpaying, choose a property with strong resale demand, maintain cash reserves, and consider whether renting is the simpler risk-managed choice for short horizons."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/rent-vs-buy/">Rent vs Buy</a>
+                <span class="sep">/</span>
+                <span class="current">3–5 Years</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <!-- LEFT: sticky toc -->
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#why-short-horizon">Why 3–5 years changes everything</a></li>
+                    <li><a href="#what-dominates">What dominates the math in short holds</a></li>
+                    <li><a href="#break-even-short">Break-even for short horizons (what it really means)</a></li>
+                    <li><a href="#scenarios">Three scenarios you should always run</a></li>
+                    <li><a href="#how-to-reduce-risk">How to reduce risk if you still want to buy</a></li>
+                    <li><a href="#rent-is-strategy">Renting as a strategy (not “throwing money away”)</a></li>
+                    <li><a href="#related-calculators">Related calculators (internal links)</a></li>
+                    <li><a href="#faq">Frequently asked questions</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Do the 3–5 year test</div>
+                        <div class="sidebar-cta__sub">Run a conservative short-horizon scenario before you buy.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/rent-vs-buy/calculator/">Open calculator →</a>
+                </section>
+            </div>
+        </aside>
+
+        <!-- RIGHT: content -->
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Rent vs Buy If You Might Move in 3–5 Years (U.S.)<br>The Short-Horizon Reality Check</h1>
+                        <p class="subtitle">
+                            If there’s a real chance you’ll move in 3–5 years, the rent vs buy math changes completely.
+                            Transaction costs and interest-heavy early mortgage payments dominate, and small market
+                            moves or one big repair
+                            can outweigh “long-term” benefits. This guide shows how to model short holding periods
+                            realistically — and how to
+                            reduce risk if you still choose to buy.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/rent-vs-buy/" aria-label="Back to Rent vs Buy hub">← Back to
+                                    Rent vs Buy</a>
+                                <a class="backlink backlink--muted" id="backToBlog" href="/blog/" hidden
+                                    aria-label="Back to Blog">
+                                    · Back to Blog
+                                </a>
+                            </div>
+
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~10 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#why-short-horizon">Why 3–5 years changes everything</a>
+                    <a href="#what-dominates">What dominates the math</a>
+                    <a href="#break-even-short">Break-even in short holds</a>
+                    <a href="#scenarios">Three scenarios</a>
+                    <a href="#how-to-reduce-risk">Reduce risk</a>
+                    <a href="#rent-is-strategy">Renting as strategy</a>
+                    <a href="#related-calculators">Related calculators</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/rent-vs-buy/calculator/">
+                            <strong>Run the calculator</strong>
+                            <span>Set the horizon to 3–5 years and include selling costs.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/break-even/">
+                            <strong>Read: Break-even explained</strong>
+                            <span>Why transaction costs dominate short holds.</span>
+                        </a>
+                        <a class="start-here__card" href="/rent-vs-buy/common-mistakes/">
+                            <strong>Read: Common mistakes</strong>
+                            <span>The errors that make short-horizon buying look “too good.”</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <!-- SECTION 1 -->
+                <div class="content-section" id="why-short-horizon">
+                    <h2>Why 3–5 Years Changes Everything</h2>
+                    <p>
+                        Over 20–30 years, buying often benefits from amortization (more principal paid over time) and
+                        long-run equity building.
+                        Over 3–5 years, those benefits are much smaller — while the costs that don’t build equity can be
+                        large.
+                    </p>
+                    <p>
+                        The short-horizon problem has three main ingredients:
+                    </p>
+                    <ul>
+                        <li><strong>Transaction friction:</strong> closing costs and selling costs are large relative to
+                            3–5 years.</li>
+                        <li><strong>Interest-heavy early years:</strong> in the first years of a mortgage, a bigger
+                            share of the payment is interest (a real cost).</li>
+                        <li><strong>Market/repair volatility:</strong> small price changes or one major repair can
+                            dominate the outcome.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Short-horizon rule:</strong> The fewer years you hold, the more the result depends
+                            on transaction costs and price risk,
+                            and the less it depends on long-run equity building.
+                        </p>
+                    </div>
+
+                    <p>
+                        That doesn’t mean buying is “wrong” for 3–5 years. It means it’s a higher-variance decision:
+                        you need more things to go right for it to be financially superior.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 2 -->
+                <div class="content-section" id="what-dominates">
+                    <h2>What Dominates the Math in Short Holds</h2>
+                    <p>
+                        If you’re modeling a 3–5 year horizon, focus on the items that have the biggest impact quickly.
+                        These are the costs and risks that often get ignored — and they matter more than small
+                        differences in “monthly payment.”
+                    </p>
+
+                    <h3>1) Selling costs (the exit toll)</h3>
+                    <p>
+                        If you buy and then sell within a few years, selling costs can be one of the largest expenses in
+                        the entire timeline.
+                        Many “quick” calculators forget to subtract them or bury them.
+                        That single omission can turn “rent wins” into “buy wins” on paper.
+                    </p>
+
+                    <h3>2) Purchase closing costs (the entry toll)</h3>
+                    <p>
+                        Closing costs reduce your investable cash immediately. Over 3–5 years, you don’t have decades to
+                        “dilute” them.
+                        They matter much more than they do in 30-year comparisons.
+                    </p>
+
+                    <h3>3) Interest cost in years 1–5</h3>
+                    <p>
+                        Early mortgage payments are often interest-heavy. Interest is a consumption cost — like rent.
+                        Over 3–5 years, the principal you pay down may be smaller than people intuitively expect,
+                        meaning the equity-building advantage is limited.
+                    </p>
+
+                    <h3>4) Taxes, insurance, HOA, and maintenance</h3>
+                    <p>
+                        These can be large annual costs that don’t build equity. In some U.S. areas, taxes + HOA alone
+                        can materially change the decision.
+                        Maintenance is especially important in short holds because one large repair can destroy the
+                        expected advantage.
+                    </p>
+
+                    <h3>5) Price risk (small moves matter)</h3>
+                    <p>
+                        Over 3–5 years, even a modest price decline or flat market can overwhelm the small amount of
+                        equity built,
+                        especially once selling costs are paid. This is why short-horizon buying is more dependent on
+                        appreciation assumptions.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Reality check:</strong> If buying only wins in a short-horizon model when
+                            appreciation is strong,
+                            you’re effectively taking market timing risk — whether you realize it or not.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- CTA -->
+                <div class="cta-calc">
+                    <div>
+                        <h4>Short horizon? Use the conservative scenario</h4>
+                        <p>Run 3–5 years with selling costs + realistic maintenance + low appreciation. If buying still
+                            wins, that’s meaningful.</p>
+                    </div>
+                    <a href="/rent-vs-buy/calculator/">Run the calculator →</a>
+                </div>
+
+
+                <!-- SECTION 3 -->
+                <div class="content-section" id="break-even-short">
+                    <h2>Break-Even in a Short Hold: What It Really Means</h2>
+                    <p>
+                        Break-even is the moment the buyer’s net position catches up to the renter’s net position.
+                        In short holds, break-even often moves out — not because owning can’t be good, but because the
+                        “toll booths” are front-loaded:
+                        purchase closing costs at entry and selling costs at exit.
+                    </p>
+                    <p>
+                        A useful framing for 3–5 years:
+                    </p>
+                    <ul>
+                        <li>If your break-even is <strong>after</strong> your likely move date, buying is financially
+                            risky.</li>
+                        <li>If break-even is <strong>before</strong> your likely move date (under conservative
+                            assumptions), buying is financially stronger.</li>
+                        <li>If break-even only happens under optimistic appreciation, treat buying as a market bet.</li>
+                    </ul>
+
+                    <p class="mini-note">
+                        For the full framework, see <a href="/rent-vs-buy/break-even/">Break-even explained</a>.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 4 -->
+                <div class="content-section" id="scenarios">
+                    <h2>Three Scenarios You Should Always Run (3–5 Years)</h2>
+                    <p>
+                        Short horizons require scenario thinking because uncertainty is a bigger percentage of the
+                        timeline.
+                        Here are three scenarios that quickly reveal whether buying is robust or fragile.
+                    </p>
+
+                    <h3>Scenario A: Conservative / “flat market”</h3>
+                    <ul>
+                        <li>Low or flat appreciation</li>
+                        <li>Realistic selling costs</li>
+                        <li>Realistic maintenance reserve</li>
+                        <li>Moderate investment return (opportunity cost) for the renter</li>
+                    </ul>
+                    <p>
+                        If buying still looks good here, that’s a strong signal.
+                        If buying loses here, it may still be worth it — but you’re paying for lifestyle, not guaranteed
+                        financial upside.
+                    </p>
+
+                    <h3>Scenario B: Base case</h3>
+                    <ul>
+                        <li>Moderate appreciation</li>
+                        <li>Normal ownership expenses</li>
+                        <li>Normal rent growth</li>
+                        <li>Reasonable opportunity cost return</li>
+                    </ul>
+
+                    <h3>Scenario C: “Something goes wrong” stress test</h3>
+                    <ul>
+                        <li>One major repair event</li>
+                        <li>Longer time on market / higher selling friction</li>
+                        <li>Weaker appreciation</li>
+                    </ul>
+                    <p>
+                        This is not pessimism — it’s realism.
+                        Short-horizon buyers are exposed to “one event” risk because there are fewer years to average it
+                        out.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Short-horizon takeaway:</strong> The conservative case matters more than the
+                            optimistic case.
+                            You’re choosing a risk profile, not just a spreadsheet winner.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- SECTION 5 -->
+                <div class="content-section" id="how-to-reduce-risk">
+                    <h2>How to Reduce Risk If You Still Want to Buy (3–5 Years)</h2>
+                    <p>
+                        If you still want to buy despite a possible move, you can reduce the downside by structuring the
+                        decision around resale strength and cost control.
+                        Here are practical ways to make short-horizon buying safer:
+                    </p>
+
+                    <h3>1) Keep transaction costs as low as possible</h3>
+                    <p>
+                        In short holds, transaction friction is the enemy. Compare closing costs, understand selling
+                        costs, and avoid a purchase
+                        that requires immediate major upgrades just to be market-ready.
+                    </p>
+
+                    <h3>2) Choose “easy resale” properties</h3>
+                    <p>
+                        Short-horizon buyers should prioritize broad buyer demand and liquidity:
+                        homes with common layouts, good school zones, and standard features tend to sell more
+                        predictably than niche properties.
+                    </p>
+
+                    <h3>3) Avoid overpaying for optional upgrades</h3>
+                    <p>
+                        Expensive customization rarely returns dollar-for-dollar on resale, especially in a short hold.
+                        If you might sell soon, focus on functionality and market-ready condition.
+                    </p>
+
+                    <h3>4) Maintain a larger cash reserve</h3>
+                    <p>
+                        Short holds amplify repair risk. A stronger cash buffer reduces the chance of financial stress
+                        if something breaks or if the market slows.
+                    </p>
+
+                    <h3>5) Run the “low appreciation + repair event” test</h3>
+                    <p>
+                        If your plan survives this stress test, the decision is safer.
+                        If it fails badly, you should treat buying as a lifestyle choice with a known cost — or choose
+                        renting for risk control.
+                    </p>
+                </div>
+
+
+                <!-- SECTION 6 -->
+                <div class="content-section" id="rent-is-strategy">
+                    <h2>Renting as a Strategy (Not “Throwing Money Away”)</h2>
+                    <p>
+                        In short horizons, renting is often the low-risk strategy because it avoids the entry/exit toll
+                        and reduces exposure to price risk.
+                        Renting can also be financially strong if you invest the cash you didn’t spend on a down payment
+                        (opportunity cost).
+                    </p>
+
+                    <p>
+                        A fair way to compare is:
+                    </p>
+                    <ul>
+                        <li>Rent for 3–5 years, invest the down payment, and keep flexibility.</li>
+                        <li>Buy now, pay transaction costs, carry ownership expenses, and take resale price risk.</li>
+                    </ul>
+
+                    <p class="mini-note">
+                        Want to see why investing the down payment matters? Read <a
+                            href="/rent-vs-buy/opportunity-cost/">Opportunity cost</a>.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Short-horizon bottom line:</strong> Renting can be the “smart” choice when you value
+                            flexibility or have timeline uncertainty.
+                            Buying can still make sense — but you need a conservative scenario where it works without
+                            relying on perfect appreciation.
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- RELATED CALCULATORS -->
+                <div class="content-section" id="related-calculators">
+                    <h2>Related Calculators (Internal Links)</h2>
+                    <p>
+                        Short-horizon decisions are sensitive to costs and exit proceeds. These pages help you tighten
+                        the short-hold model:
+                    </p>
+
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/calculator/">Rent vs Buy Calculator</a>
+                            <p>Set the horizon to 3–5 years and include selling costs, maintenance, and opportunity
+                                cost.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/rent-vs-buy/break-even/">Break-even Point</a>
+                            <p>Understand how quickly buying catches up — and why selling costs dominate short holds.
+                            </p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/property-sale/">Property Sale (Inflation-Adjusted)</a>
+                            <p>Estimate what you actually keep after selling costs and inflation — crucial for 3–5 year
+                                modeling.</p>
+                        </div>
+
+                        <div class="internal-link-card">
+                            <a href="/homeownership-cost/">Total Cost of Ownership</a>
+                            <p>Taxes, insurance, HOA, and maintenance/CapEx — the costs that often decide short-horizon
+                                outcomes.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- FAQ -->
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>Is it worth buying a house if I might move in 3 to 5 years?</h4>
+                        <p>
+                            It depends on selling costs, closing costs, mortgage rate, appreciation, taxes, HOA,
+                            insurance, maintenance, and opportunity cost.
+                            Short horizons magnify transaction friction and interest-heavy early payments, so buying is
+                            often riskier unless appreciation is strong and costs are low.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why does short-term rent vs buy math look so different?</h4>
+                        <p>
+                            Because closing and selling costs are large relative to the timeline and the first years of
+                            a mortgage are interest-heavy.
+                            A small price dip or an unexpected repair can dominate the outcome over 3–5 years.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What should I include when modeling rent vs buy for a short holding period?</h4>
+                        <p>
+                            Include purchase closing costs, selling costs, mortgage interest, taxes, insurance, HOA,
+                            maintenance/CapEx, realistic appreciation assumptions,
+                            and opportunity cost of investing the down payment if you rent.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How can I make buying safer if I might move soon?</h4>
+                        <p>
+                            Run conservative scenarios, keep transaction costs low, avoid overpaying, choose a property
+                            with strong resale demand,
+                            maintain cash reserves, and consider whether renting is the simpler risk-managed choice for
+                            short horizons.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the fastest reality check before buying for 3–5 years?</h4>
+                        <p>
+                            Run the calculator with low/flat appreciation, realistic selling costs, and a maintenance
+                            reserve.
+                            If buying still wins, it’s robust. If buying loses, you’re paying for lifestyle and taking
+                            market risk.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- BOTTOM LINE -->
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line: 3–5 Years Is a Risk Test</h2>
+                    <p>
+                        If you might move in 3–5 years, buying can still work — but it’s more sensitive to transaction
+                        friction, market moves, and repairs.
+                        Renting is often the lower-risk financial strategy because it avoids the entry/exit toll and
+                        keeps capital flexible.
+                    </p>
+                    <p>
+                        Use a conservative scenario. If buying works when appreciation is low and costs are realistic,
+                        it’s strong.
+                        If it only works when appreciation is high, treat it as a market bet — and decide whether that
+                        risk is worth it.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Want to connect this with your longer-term plan? Run the same inputs at <a
+                                href="/rent-vs-buy/10-vs-30-years/">10 vs 30 years</a>
+                            and see how the result changes as the horizon grows.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        This guide is educational and uses simplified assumptions (appreciation, rent growth,
+                        transaction costs, and ownership expenses).
+                        For decisions, run your numbers in the <a href="/rent-vs-buy/calculator/">calculator</a> and
+                        consider local market factors.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

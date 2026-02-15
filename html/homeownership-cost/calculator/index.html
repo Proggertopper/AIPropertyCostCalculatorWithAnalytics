@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description"
+        content="Home ownership cost calculator: analyze expenses for mortgage, taxes, insurance, and maintenance with PropertyCost.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://mypropertycost.com/homeownership-cost/calculator/">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <link rel="stylesheet" href="/css/calculator.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Homeownership Cost Calculator (U.S.) | PropertyCost</title>
+</head>
+
+
+<body class="calc-page">
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/homeownership-cost/">Homeownership Cost</a>
+                <span class="sep">/</span>
+                <span class="current">Calculator</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+    <div class="hero">
+        <h1>Total Cost Of Ownership</h1>
+        <p class="subtitle">Compare the true long-term cost of renting versus owning a property over 10, 20, or 30 years
+        </p>
+
+        <div class="benefits-bar">
+            <div class="benefit-item">10-30 year ownership analysis</div>
+            <div class="benefit-item">Includes opportunity cost of capital</div>
+            <div class="benefit-item">All ownership expenses included</div>
+            <div class="benefit-item">Real estate appreciation modeling</div>
+        </div>
+    </div>
+
+
+    <section class="calculator">
+
+        <div class="grid">
+
+            <!-- INPUT -->
+            <div class="card">
+                <h3>Parameters</h3>
+
+                <label>
+                    Property Price ($)
+                    <input type="number" id="price" placeholder="400000">
+                    <div class="error" id="priceError"></div>
+                </label>
+
+                <label>
+                    Ownership Period (years)
+                    <input type="number" id="years" placeholder="10">
+                    <div class="error" id="yearsError"></div>
+                </label>
+
+                <label>
+                    Property Tax (% per year)
+                    <input type="number" id="tax" step="0.1" placeholder="1.2">
+                    <div class="error" id="taxError"></div>
+                </label>
+
+                <label>
+                    Annual Maintenance ($)
+                    <input type="number" id="maintenance" placeholder="4500">
+                    <div class="error" id="maintenanceError"></div>
+                </label>
+
+                <label>
+                    Inflation (%)
+                    <input type="number" id="inflation" placeholder="2.5">
+                    <div class="error" id="inflationError"></div>
+                </label>
+
+                <button id="calcBtn">Calculate</button>
+            </div>
+
+            <!-- RESULT -->
+            <div id="results" class="card result">
+                <h3>Result</h3>
+
+                <div class="row">
+                    <span>Total Ownership Cost</span>
+                    <strong id="totalCost">—</strong>
+                </div>
+
+                <div class="row">
+                    <span>Total Cost (Discounted / Real)</span>
+                    <strong id="totalCostPV">—</strong>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div id="guest-promo" class="hidden playful-blob">
+                <div class="blob-content">
+                    <span class="blob-emoji">🚀</span>
+                    <div class="blob-title">Ready to make smarter decisions?</div>
+                    <div class="blob-text">Join our community and get access to your personal calculation dashboard
+                        with full history and insights</div>
+                    <a href="/signup/" class="blob-btn">Create Free Account</a>
+                </div>
+            </div>
+
+            <div id="user-promo" class="hidden compact-teaser">
+            <span class="teaser-emoji ">💡</span>
+            <div class="teaser-content">
+                <div class="teaser-title-small">Saved in your workspace</div>
+                <div class="teaser-text-small">Open your workspace to review saved calculations, comparisons, and verdicts
+                </div>
+            </div>
+            <a href="/account/" class="teaser-btn">Open account</a>
+        </div>
+        
+        <div class="disclaimer">
+            Estimates only, not financial advice.
+            <a href="/disclaimer/">Read full disclaimer</a>
+        </div>
+    </section>
+
+    <section class="guide-layout" aria-label="Guide">
+        <aside class="guide-nav" aria-label="Jump to">
+            <details class="jump" open>
+                <summary class="jump-summary">
+                    Jump to
+                    <span class="jump-caret" aria-hidden="true"></span>
+                </summary>
+    
+                <nav class="jump-links">
+                    <a href="#intro">Introduction</a>
+                    <a href="#what-shows">What it shows</a>
+                    <a href="#how-calculated">How it’s calculated</a>
+                    <a href="#why-matters">Why it matters</a>
+                    <a href="#selling-costs">Selling costs</a>
+                    <a href="#tips">Tips</a>
+                    <a href="#improvements">Home improvement</a>
+                    <a href="#faq">FAQ</a>
+                    <a href="#who">Who should use</a>
+                    <a href="#bottom-line">Bottom line</a>
+                </nav>
+            </details>
+        </aside>
+
+    <div class="guide-content">
+
+        <!-- Introduction -->
+        <div class="content-section" id="intro">
+            <h2>Total Cost of Homeownership Calculator</h2>
+            <p><strong>The purchase price is not the real cost of a property.</strong></p>
+
+            <p>The Total Cost of Ownership Calculator shows you what a property truly costs to own over time. It
+                combines
+                all major ongoing and hidden expenses into one clear picture. You can see how taxes, maintenance,
+                interest,
+                insurance, and operating costs add up year after year.</p>
+
+            <p>We designed this calculator for buyers, investors, and homeowners who want to understand the full
+                financial
+                impact of owning real estate. This goes beyond just the upfront or monthly numbers.</p>
+
+            <p>When you're buying a home, the sales price is only the beginning. The real cost of homeownership includes
+                closing costs, down payment, monthly mortgage payment, property taxes, home insurance cost, maintenance,
+                and
+                more. Understanding these housing costs in the US helps you make better financial decisions.</p>
+        </div>
+
+        <!-- What Calculator Shows -->
+        <div class="content-section"  id="what-shows">
+            <h2>What This Calculator Shows That Others Often Miss</h2>
+            <p>Many people undervalue ownership costs because they focus only on the loan payment. In reality, operating
+                expenses can equal or even exceed the mortgage interest over long periods.</p>
+
+            <p>This calculator helps you answer questions like:</p>
+            <ul>
+                <li>How much will this property actually cost me after 10, 20, or 30 years?</li>
+                <li>Which expenses grow the most over time?</li>
+                <li>How much of my payment builds equity versus pure cost?</li>
+                <li>Why do two homes with the same price have very different ownership costs?</li>
+                <li>What are the true homeownership costs beyond the mortgage?</li>
+            </ul>
+
+            <p>When you see these costs together, you can prevent unpleasant surprises after buying.</p>
+        </div>
+
+        <!-- How It's Calculated -->
+        <div class="content-section" id="how-calculated">
+            <h2>How We Calculate the Total Cost of Homeownership</h2>
+            <p>Our calculator aggregates all major cost categories involved in owning a property.</p>
+
+            <p>We calculate mortgage-related costs including principal and interest payments over the selected time
+                period.
+                The principal builds equity in your home. Interest represents a real cost that we track separately.</p>
+
+            <p>We calculate property taxes annually. You can adjust them over time if you assume tax growth. Maintenance
+                and
+                repairs appear as ongoing expenses. These typically rise with property value and inflation.</p>
+
+            <p>We add insurance, HOA fees, utilities (if included), and other operating costs. These reflect the real
+                cash
+                outflow you need to keep the property functional and compliant.</p>
+
+            <p>The result shows you a total ownership cost timeline. You can see how expenses compound and where your
+                money
+                actually goes.</p>
+        </div>
+
+
+        <!-- Why It Matters -->
+        <div class="content-section" id="why-matters">
+            <h2>Why Total Cost of Homeownership Matters</h2>
+            <p>Two properties with identical sales prices can have dramatically different long-term costs. High property
+                taxes, aging infrastructure, or rising maintenance can turn a seemingly budget-friendly home into a
+                financial burden.</p>
+
+            <p>This calculator helps you evaluate how easy costs are to manage. You can compare properties objectively
+                and
+                avoid decisions based on incomplete numbers.</p>
+
+            <p>Understanding the cost of owning a house in the US is especially useful when comparing:</p>
+            <ul>
+                <li>New construction vs older homes (different maintenance needs)</li>
+                <li>Different states or counties with varying tax levels</li>
+                <li>Single family homes vs condos (different HOA and maintenance structures)</li>
+                <li>Owner-occupied homes vs rental properties</li>
+            </ul>
+        </div>
+
+        <!-- Selling Costs -->
+        <div class="content-section" id="selling-costs">
+            <h2>Don't Forget Selling Costs</h2>
+            <p>When you eventually sell, you'll face additional transaction costs:</p>
+
+            <ul>
+                <li><strong>Agent Commission:</strong> Typically 5-6% of the sales price, split between buyer's and
+                    seller's
+                    agents</li>
+                <li><strong>Transfer Taxes:</strong> State and locality transfer taxes vary based on location</li>
+                <li><strong>Title Insurance:</strong> Protects the buyer and is often paid by the seller</li>
+                <li><strong>Home Repairs:</strong> You may need to make repairs or improvements before listing</li>
+                <li><strong>Staging and Marketing:</strong> Professional staging and photography help sell faster</li>
+            </ul>
+
+            <p>These selling costs typically total 8-10% of your home's value. Factor this into your bottom line when
+                calculating returns on homeownership.</p>
+        </div>
+
+        <!-- Tips -->
+        <div class="content-section" id="tips">
+            <h2>Get More Insight From Your Results</h2>
+            <p>To explore alternative scenarios, try:</p>
+
+            <div class="info-box">
+                <p>Increase maintenance assumptions to model older or high-wear properties. Older homes often need more
+                    frequent HVAC repairs and roof replacement.</p>
+            </div>
+
+            <div class="info-box">
+                <p>Compare different tax rates across states or counties. Small differences in property tax by state add
+                    up
+                    to huge amounts over 30 years.</p>
+            </div>
+
+            <div class="info-box">
+                <p>Extend the time horizon to 30 years to see long-term cost build-up. This shows the true impact of
+                    home
+                    ownership in the long run.</p>
+            </div>
+
+            <div class="info-box">
+                <p>Adjust interest rates to reflect refinancing or rate changes. Refinancing can significantly reduce
+                    your
+                    monthly mortgage payment and total interest paid.</p>
+            </div>
+
+            <p>These small adjustments often reveal which costs matter most over time. They help you understand what
+                factors
+                drive the real cost of homeownership.</p>
+        </div>
+
+        <!-- Home Improvement -->
+        <div class="content-section" id="improvements">
+            <h2>Home Improvement and Energy Efficiency</h2>
+            <p>Home improvement projects can affect your long-term costs in both directions:</p>
+
+            <p><strong>Cost-saving improvements:</strong></p>
+            <ul>
+                <li>Energy efficiency upgrades (insulation, windows, HVAC) reduce utility costs</li>
+                <li>New roof and siding reduce maintenance needs</li>
+                <li>Upgraded plumbing and electrical prevent emergency repairs</li>
+            </ul>
+
+            <p><strong>Value-adding improvements:</strong></p>
+            <ul>
+                <li>Kitchen and bathroom remodels increase home value</li>
+                <li>Finished basements and additions expand living space</li>
+                <li>Landscaping and curb appeal improvements</li>
+            </ul>
+
+            <p>While these require upfront investment, strategic home improvement can reduce your ongoing costs and
+                build
+                more equity over time.</p>
+        </div>
+
+        <!-- FAQ -->
+        <div class="content-section" id="faq">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h4>Does this include maintenance and unexpected repairs?</h4>
+                <p>Yes. The calculator includes estimated maintenance and repair costs. This represents one of the most
+                    overlooked aspects of ownership. We use the annual maintenance percentage approach to estimate these
+                    costs.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Are property taxes included for the entire period?</h4>
+                <p>Yes. We model property taxes annually. You can increase them over time if you assume tax growth.
+                    Remember
+                    that property tax by state varies significantly across the country.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>How do you treat mortgage interest differently from principal?</h4>
+                <p>We count interest as a cost, while we track principal payments separately. Principal payments build
+                    equity rather than being lost. This distinction matters when calculating your true bottom line.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Does this calculator include insurance and HOA fees?</h4>
+                <p>Yes. We include insurance and recurring HOA fees as part of operating costs when applicable. These
+                    are
+                    required costs of covering the cost of homeownership.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>Can I use this for rental properties?</h4>
+                <p>Yes. The calculator works for both personal residences and investment properties. It's especially
+                    useful
+                    when you combine it with rental income or cash flow tools to see your true return.</p>
+            </div>
+
+            <div class="faq-item">
+                <h4>What about PMI and closing costs?</h4>
+                <p>While the basic calculator focuses on ongoing costs, you should add private mortgage insurance PMI,
+                    closing costs, and down payment to get your complete picture. PMI typically costs 0.5-1% of the loan
+                    amount annually until you reach 20% equity.</p>
+            </div>
+        </div>
+
+        <!-- Who Should Use -->
+        <div class="content-section" id="who">
+            <h2>Who Should Use This Calculator</h2>
+            <p>This calculator proves useful if you are:</p>
+            <ul>
+                <li>Comparing multiple properties before buying a home</li>
+                <li>Trying to understand long-term budget requirements</li>
+                <li>Evaluating the true cost of homeownership versus renting</li>
+                <li>Analyzing operating expenses for an investment property</li>
+                <li>Planning for capital expenditures (CapEx) over time</li>
+                <li>Deciding between a conventional loan and FHA loan</li>
+                <li>Considering refinancing options</li>
+            </ul>
+            <p>It works best when you use it alongside mortgage calculators, rent comparison tools, or ROI calculators.
+                This
+                gives you a complete financial picture.</p>
+        </div>
+
+        <!-- Bottom Line -->
+        <div class="content-section" id="bottom-line">
+            <h2>Bottom Line: Understanding the Real Cost of Homeownership</h2>
+            <p>The total cost number represents real money leaving your pocket over time. A lower monthly payment does
+                not
+                always mean lower total cost if taxes or maintenance run high.</p>
+
+            <p>Use the breakdown to identify which expense categories drive the outcome. You can see where adjustments
+                or
+                alternative properties might make more sense.</p>
+
+            <p>When you understand the complete picture—including down payment, closing costs, monthly mortgage payment,
+                property taxes, home insurance cost, maintenance, HVAC costs, roof replacement, and eventual selling
+                costs—you make better decisions about buying a home.</p>
+
+            <p>The real cost of homeownership extends far beyond the sales price. Use this calculator to see the full
+                picture and plan accordingly. Your future financial self will thank you for doing this research before
+                you
+                purchase a home.</p>
+        </div>
+
+
+        </div>
+    </section>
+
+
+
+    </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+
+    <script src="/js/ownership-cost.js"></script>
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

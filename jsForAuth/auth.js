@@ -31,7 +31,6 @@ function delay(ms) {
 module.exports = app => {
 
     
-
     app.get("/api/csrf", (req, res) => {
         if (!req.session.csrfSecret) {
             req.session.csrfSecret = tokens.secretSync();
@@ -133,8 +132,6 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
     app.post("/api/auth/login", loginLimiter, async (req, res) => {
         const csrfToken = req.headers["x-csrf-token"];
             const secret = req.session.csrfSecret;
-         console.log("Secret:", req.session.csrfSecret);
-         console.log("Token:", csrfToken);
 
         res.set("Cache-Control", "no-store");
         
@@ -151,22 +148,45 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
         return res.status(400).json({ error: "invalid_data" });
     }
 
-    let user;
-    try {
-        user = await db.query(
-            "SELECT id, email, password_hash FROM users WHERE email=$1",
-            [email]
-        );
-    } catch {
-        return res.status(500).json({ error: "internal_error" });
-    }
+    // let user;
+    // try {
+    //     user = await db.query(
+    //         "SELECT id, email, password_hash FROM users WHERE email=$1",
+    //         [email]
+    //     );
+    // } catch {
+    //     return res.status(500).json({ error: "internal_error" });
+    // }
+
+        let user;
+        try {
+            user = await db.query(
+                "SELECT id, email, password_hash FROM users WHERE email=$1",
+                [email]
+            );
+        } catch (e) {
+            console.error("DB error in login:", e);
+            return res.status(500).json({ error: "internal_error" });
+        }
 
     if (!user.rows[0]) {
         await delay(1000);
         return res.status(403).json({ error: "invalid_credentials" });
     }
 
-    const ok = await bcrypt.compare(password, user.rows[0].password_hash);
+    const passHash = user.rows[0].password_hash;
+    if (!passHash) {
+        await delay(1000);
+        return res.status(403).json({ error: "invalid_credentials" });
+    }
+
+    let ok = false;
+    try {
+        ok = await bcrypt.compare(password, passHash);
+    } catch {
+        await delay(1000);
+        return res.status(403).json({ error: "invalid_credentials" });
+    }
     if (!ok) {
         await delay(1000);
         return res.status(403).json({ error: "invalid_credentials" });

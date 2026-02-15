@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="IRR hub (U.S.): use the IRR calculator to compute internal rate of return for investments and real estate, then explore 12 guides on IRR vs NPV, discount rates, XIRR, MIRR, multiple IRRs, and common modeling mistakes." />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="canonical" href="https://mypropertycost.com/irr/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/irr/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/irr/" />
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <meta property="og:title" content="IRR — Calculator + Guides (U.S.) | PropertyCost">
+    <meta property="og:description"
+        content="Use the IRR calculator to compute internal rate of return. Explore 12 guides on IRR vs NPV, XIRR, MIRR, discount rates, real estate IRR, and common mistakes.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mypropertycost.com/irr/">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="IRR — Calculator + Guides (U.S.) | PropertyCost">
+    <meta name="twitter:description"
+        content="Calculate internal rate of return (IRR) and learn IRR vs NPV, XIRR, MIRR, discount rate selection, and real estate modeling pitfalls.">
+
+    <title>IRR — Calculator + Guides (U.S.) | PropertyCost</title>
+
+    <!-- Schema.org: BreadcrumbList -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://mypropertycost.com/" },
+      { "@type": "ListItem", "position": 2, "name": "IRR", "item": "https://mypropertycost.com/irr/" }
+    ]
+  }
+  </script>
+
+    <!-- Schema.org: ItemList (12 guides + calculator) -->
+    <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "IRR Guides",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "url": "https://mypropertycost.com/irr/calculator/" },
+
+      { "@type": "ListItem", "position": 2, "url": "https://mypropertycost.com/irr/what-is-irr/" },
+      { "@type": "ListItem", "position": 3, "url": "https://mypropertycost.com/irr/how-to-calculate-irr/" },
+      { "@type": "ListItem", "position": 4, "url": "https://mypropertycost.com/irr/irr-vs-npv/" },
+      { "@type": "ListItem", "position": 5, "url": "https://mypropertycost.com/irr/discount-rate-vs-irr/" },
+      { "@type": "ListItem", "position": 6, "url": "https://mypropertycost.com/irr/xirr-irregular-cash-flows/" },
+      { "@type": "ListItem", "position": 7, "url": "https://mypropertycost.com/irr/mirr-modified-irr/" },
+      { "@type": "ListItem", "position": 8, "url": "https://mypropertycost.com/irr/real-estate-irr/" },
+      { "@type": "ListItem", "position": 9, "url": "https://mypropertycost.com/irr/cash-on-cash-vs-irr/" },
+      { "@type": "ListItem", "position": 10, "url": "https://mypropertycost.com/irr/multiple-irrs/" },
+      { "@type": "ListItem", "position": 11, "url": "https://mypropertycost.com/irr/hurdle-rate/" },
+      { "@type": "ListItem", "position": 12, "url": "https://mypropertycost.com/irr/when-irr-misleads/" },
+      { "@type": "ListItem", "position": 13, "url": "https://mypropertycost.com/irr/common-mistakes/" }
+    ]
+  }
+  </script>
+</head>
+
+<body class="hub-page">
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span><span></span><span></span>
+            </label>
+
+            <!-- MENU -->
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/irr/" class="current">IRR</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="content-wrapper">
+
+        <section class="hub-hero">
+            <h1>IRR (Internal Rate of Return)</h1>
+            <p class="mini-note">
+                Updated: <time datetime="2026-01-30">Jan 30, 2026</time>
+            </p>
+
+            <p>
+                This hub helps you answer a common question: <strong>What return am I really getting?</strong>
+                Use the IRR calculator to compute the internal rate of return for an investment or real estate deal.
+                Then read the guides below to understand when IRR works well (and when it can mislead), how to handle
+                irregular cash flows (XIRR), and how IRR compares to NPV, hurdle rates, and cash-on-cash return.
+            </p>
+
+            <div class="hub-actions">
+                <a class="primary" href="/irr/calculator/">Open calculator →</a>
+                <a class="secondary" href="/calculators/">All calculators</a>
+            </div>
+
+            <div class="mini-note">
+                Tip: Don’t judge deals by IRR alone. Compare IRR with absolute dollars (NPV), timeline, and risk.
+            </div>
+        </section>
+
+
+        <section class="content-section hub-seo" aria-label="About this hub">
+            <h2>How to use the IRR hub</h2>
+            <p>
+                IRR is the discount rate that makes a project’s net present value (NPV) equal to zero.
+                It’s popular because it turns a stream of cash flows into one “annualized” number.
+                But IRR can mislead when cash flows change signs multiple times, when reinvestment assumptions are
+                unrealistic,
+                or when comparing projects of different size.
+            </p>
+            <p>
+                Start with the <a href="/irr/calculator/">IRR calculator</a>, then use the guides to interpret IRR
+                correctly:
+                IRR vs NPV, discount rates, XIRR for irregular dates, MIRR as a safer alternative, and common modeling
+                mistakes.
+            </p>
+        </section>
+
+
+        <!-- Start here -->
+        <section class="content-section">
+            <h2 class="hub-section-title">Start here</h2>
+
+            <div class="hub-grid">
+                <a class="hub-card" href="/irr/what-is-irr/">
+                    <strong>What is IRR?</strong>
+                    <span>Definition, intuition, and why it’s used in investing and real estate.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/irr-vs-npv/">
+                    <strong>IRR vs NPV</strong>
+                    <span>Why a “higher IRR” isn’t always better if the project is smaller.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/xirr-irregular-cash-flows/">
+                    <strong>XIRR (irregular cash flows)</strong>
+                    <span>How to calculate return when dates aren’t evenly spaced.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/when-irr-misleads/">
+                    <strong>When IRR misleads</strong>
+                    <span>Multiple IRRs, reinvestment assumptions, and scale problems.</span>
+                </a>
+            </div>
+        </section>
+
+
+        <!-- All guides (12 total) -->
+        <section class="content-section">
+            <h2 class="hub-section-title">All IRR guides (12)</h2>
+
+            <div class="hub-grid">
+                <a class="hub-card" href="/irr/what-is-irr/">
+                    <strong>What is IRR?</strong>
+                    <span>IRR meaning, intuition, and how it relates to NPV.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/how-to-calculate-irr/">
+                    <strong>How to calculate IRR</strong>
+                    <span>Step-by-step examples and what the calculator is solving for.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/irr-vs-npv/">
+                    <strong>IRR vs NPV</strong>
+                    <span>Percent returns vs dollar value—how to compare projects.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/discount-rate-vs-irr/">
+                    <strong>Discount rate vs IRR</strong>
+                    <span>Choosing a discount rate and interpreting IRR against it.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/xirr-irregular-cash-flows/">
+                    <strong>XIRR for irregular cash flows</strong>
+                    <span>Uneven dates, contributions, distributions, and real-world investing.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/mirr-modified-irr/">
+                    <strong>MIRR (Modified IRR)</strong>
+                    <span>A more realistic alternative when reinvestment assumptions matter.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/real-estate-irr/">
+                    <strong>Real estate IRR</strong>
+                    <span>Cash flows from rent, expenses, financing, and sale proceeds.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/cash-on-cash-vs-irr/">
+                    <strong>Cash-on-cash vs IRR</strong>
+                    <span>Why cash-on-cash can look good while IRR (or NPV) tells a different story.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/multiple-irrs/">
+                    <strong>Multiple IRRs (and why it happens)</strong>
+                    <span>Sign changes, non-conventional cash flows, and how to handle them.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/hurdle-rate/">
+                    <strong>Hurdle rate</strong>
+                    <span>What minimum return investors require and how it differs from IRR.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/when-irr-misleads/">
+                    <strong>When IRR misleads</strong>
+                    <span>Timing, scale, reinvestment, and comparing across different durations.</span>
+                </a>
+
+                <a class="hub-card" href="/irr/common-mistakes/">
+                    <strong>Common IRR mistakes</strong>
+                    <span>Wrong cash flow signs, missing dates, fees ignored, and bad comparisons.</span>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="content-section">
+            <h2 class="hub-section-title">Related calculators</h2>
+            <div class="hub-grid">
+                <a class="hub-card" href="/rent-or-invest/">
+                    <strong>Rent or Invest</strong>
+                    <span>Compare strategies by net worth outcomes over time.</span>
+                </a>
+                <a class="hub-card" href="/renovation-roi/">
+                    <strong>Renovation ROI</strong>
+                    <span>Project-level returns: cost vs value added and payback.</span>
+                </a>
+                <a class="hub-card" href="/mortgage-overpayment/">
+                    <strong>Mortgage Overpayment</strong>
+                    <span>Compare guaranteed interest savings vs investing for return.</span>
+                </a>
+                <a class="hub-card" href="/property-sale/">
+                    <strong>Property Sale</strong>
+                    <span>Model sale proceeds and fees—key for real estate IRR.</span>
+                </a>
+            </div>
+        </section>
+
+
+        <section class="content-section" id="faq">
+            <h2 class="hub-section-title">IRR FAQ</h2>
+
+            <div class="faq-item">
+                <h3>What is IRR (internal rate of return)?</h3>
+                <p>
+                    IRR is the discount rate that makes NPV equal zero. In plain terms, it’s the annualized rate that
+                    best “fits” the cash flows of an investment (contributions and distributions).
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is a higher IRR always better?</h3>
+                <p>
+                    Not always. IRR is a percentage, so it can favor smaller projects or faster paybacks.
+                    NPV (dollar value) and risk/timeline context often matter more.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is XIRR?</h3>
+                <p>
+                    XIRR is IRR for cash flows that occur on irregular dates (not evenly spaced).
+                    It’s common for real investments where deposits and withdrawals happen at different times.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Why can IRR be misleading?</h3>
+                <p>
+                    IRR can produce multiple solutions when cash flows change sign more than once, and it implicitly
+                    assumes reinvestment at the IRR rate. It also doesn’t measure “how many dollars” you make.
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What is a good IRR?</h3>
+                <p>
+                    “Good” depends on risk, timeline, and your hurdle rate (minimum acceptable return).
+                    Compare IRR against alternatives (risk-free rates, markets, or comparable deals) rather than using
+                    one universal benchmark.
+                </p>
+            </div>
+        </section>
+
+
+        <section class="content-section hub-cta">
+            <h2 class="hub-section-title">Ready to calculate IRR?</h2>
+            <p class="mini-note" style="margin-top:0;">
+                Run IRR and compare with NPV—percent returns and dollar value tell different stories.
+            </p>
+            <div class="hub-actions">
+                <a class="primary" href="/irr/calculator/">Open calculator →</a>
+                <a class="secondary" href="/irr/irr-vs-npv/">Understand IRR vs NPV</a>
+            </div>
+        </section>
+
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

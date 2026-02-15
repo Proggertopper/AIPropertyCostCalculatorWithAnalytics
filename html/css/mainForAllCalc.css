@@ -25,8 +25,8 @@ body {
 .page-subtitle {
     text-align: center;
     margin-bottom: 0.5rem;
-    font-size: 1rem;
-    color: #555;
+    font-size: 1.05rem;
+    color: #020202;
 }
 
 .cards-grid {
@@ -70,7 +70,7 @@ body {
 .card p {
     margin: 0;
     font-size: 0.95rem;
-    color: #555;
+    color: #0a0a0a;
 }
 
 .card:hover {

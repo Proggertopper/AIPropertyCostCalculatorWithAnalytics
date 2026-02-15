@@ -73,11 +73,6 @@
     justify-content: flex-end;
 }
 
-@media(max-width:1600px){
-    #userControls{
-        width: 70px;
-    }
-}
 
 .nav-link {
     color: #cbd5f5;

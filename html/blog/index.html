@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/main.css">
+    <title>Blog - Understanding True Cost of Homeownership</title>
+    <style>
+
+        body {
+            color: #1F2937;
+            background: #F9FAFB;
+            line-height: 1.7
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px
+        }
+
+       
+
+        .search-btn {
+            background: #F3F4F6;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px
+        }
+
+        /* Hero Section */
+        .hero {
+            background: #fff;
+            padding: 48px 0;
+            margin-bottom: 32px;
+            text-align: center
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 12px
+        }
+
+        .hero p {
+            color: #6B7280;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto
+        }
+
+        /* Filters */
+        .filters {
+            background: #fff;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 32px;
+            overflow-x: auto
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            background: #F3F4F6;
+            border: 1px solid #E5E7EB;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: .2s
+        }
+
+        .chip:hover,
+        .chip.active {
+            background: #2563EB;
+            color: #fff;
+            border-color: #2563EB
+        }
+
+        /* Pagination Top */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 32px
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #E5E7EB;
+            background: #fff;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: .2s
+        }
+
+        .page-btn:hover {
+            border-color: #2563EB;
+            color: #2563EB
+        }
+
+        .page-btn.active {
+            background: #2563EB;
+            color: #fff;
+            border-color: #2563EB
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 48px
+        }
+
+        /* Card */
+        .card {
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: .3s;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .05)
+        }
+
+        .card:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, .1)
+        }
+
+        .card-image {
+            position: relative;
+            padding-top: 56.25%;
+            background: #E5E7EB;
+            overflow: hidden
+        }
+
+        .card-image img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .tags {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .tag {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fff;
+            backdrop-filter: blur(8px)
+        }
+
+        .tag.green {
+            background: rgba(16, 185, 129, .9)
+        }
+
+        .tag.orange {
+            background: rgba(245, 158, 11, .9)
+        }
+
+        .tag.red {
+            background: rgba(239, 68, 68, .9)
+        }
+
+        .tag.purple {
+            background: rgba(139, 92, 246, .9)
+        }
+
+        .tag.pink {
+            background: rgba(236, 72, 153, .9)
+        }
+
+        .tag.blue {
+            background: rgba(37, 99, 235, .9)
+        }
+
+        .card-content {
+            padding: 24px
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+            line-height: 1.3
+        }
+
+        .card-description {
+            color: #6B7280;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: 16px;
+            border-top: 1px solid #F3F4F6
+        }
+
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+        }
+
+        .author-info {
+            font-size: 13px
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: #1F2937
+        }
+
+        .date {
+            color: #9CA3AF;
+            font-size: 12px
+        }
+
+        /* Load More */
+        .load-more {
+            text-align: center;
+            margin: 48px 0
+        }
+
+        .load-btn {
+            padding: 14px 32px;
+            background: #2563EB;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: .2s;
+            font-size: 16px
+        }
+
+        .load-btn:hover {
+            background: #1D4ED8
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            background: #2563EB;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, .3);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible
+        }
+
+        .scroll-top:hover {
+            background: #1D4ED8;
+            transform: translateY(-4px)
+        }
+
+        /* Responsive */
+        @media(max-width:1023px) {
+            .blog-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px
+            }
+
+            .hero h1 {
+                font-size: 36px
+            }
+
+            nav {
+                gap: 20px
+            }
+        }
+
+        @media(max-width:767px) {
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px
+            }
+
+            .hero {
+                padding: 32px 0
+            }
+
+            .hero h1 {
+                font-size: 28px
+            }
+
+            .hero p {
+                font-size: 16px
+            }
+
+            nav {
+                display: none
+            }
+
+            .filter-chips {
+                overflow-x: scroll;
+                flex-wrap: nowrap
+            }
+
+            .scroll-top {
+                bottom: 16px;
+                right: 16px;
+                width: 44px;
+                height: 44px
+            }
+
+            .pagination {
+                overflow-x: scroll
+            }
+
+            .card-content {
+                padding: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="navbar ">
+    
+            <div class="logo">
+                <a href="/" class="white-color">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="22" height="21" fill="currentColor"
+                                    class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                                    <path
+                                        d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73z" />
+                                </svg> -->
+                    <span>PropertyCost</span>
+                </a>
+            </div>
+    
+    
+            <!-- BURGER -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
+    
+            <!-- MENU -->
+            <div class="nav-menu">
+    
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+    
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+    
+    
+                    <div class="user-dropdown" id="userDropdown">
+    
+                        <div id="userAccount" class="avatar">A</div>
+    
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">
+                                Log out
+                            </button>
+                        </div>
+    
+                    </div>
+                </div>
+    
+            </div>
+        </nav>
+    
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/blog/" class="current">Blog</a>
+            </div>
+        </div>
+    </header>
+    
+<main>
+    <div class="container">
+        <div class="filters">
+            <div class="filter-chips">
+                <div class="chip active">All Articles</div>
+                <div class="chip">Property Taxes</div>
+                <div class="chip">Insurance</div>
+                <div class="chip">Maintenance</div>
+                <div class="chip">HOA Fees</div>
+                <div class="chip">Climate Risk</div>
+                <div class="chip">First-Time Buyers</div>
+                <div class="chip">Case Studies</div>
+            </div>
+        </div>
+
+        
+
+        <div class="blog-grid">
+            <a href="/rent-vs-buy/10-vs-30-years/?from=blog"><div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800" alt="House">
+                    <div class="tags">
+                        <span class="tag green">Property Tax</span>
+                        <span class="tag orange">Analysis</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">How Property Taxes Vary by State: Complete Breakdown</h3>
+                    <p class="card-description">Understanding the dramatic differences in property tax rates across US
+                        states and how they impact your total cost of ownership over 30 years.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">Sarah Mitchell</div>
+                                <div class="date">Jan 15, 2026 · 2 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div></a>
+            <!-- Card 1 -->
+            
+
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800" alt="Insurance">
+                    <div class="tags">
+                        <span class="tag red">Insurance</span>
+                        <span class="tag blue">Climate Risk</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Rising Home Insurance Costs: What Every Owner Should Know</h3>
+                    <p class="card-description">Climate change is driving insurance premiums up 20-30% annually in
+                        high-risk areas. Here's how to calculate your real exposure.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">Michael Chen</div>
+                                <div class="date">Jan 14, 2026 · 3 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=800" alt="Maintenance">
+                    <div class="tags">
+                        <span class="tag purple">Maintenance</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">The 1% Rule: Budgeting for Home Maintenance and Repairs</h3>
+                    <p class="card-description">Why the traditional 1% rule often underestimates actual maintenance
+                        costs, and how to create a realistic budget based on your home's age.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">Jennifer Torres</div>
+                                <div class="date">Jan 12, 2026 · 5 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1560184897-ae75f418493e?w=800" alt="HOA">
+                    <div class="tags">
+                        <span class="tag pink">HOA</span>
+                        <span class="tag orange">Case Study</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Hidden HOA Costs: Beyond the Monthly Fee</h3>
+                    <p class="card-description">Special assessments, rising fees, and restrictions can add thousands to
+                        your annual costs. A deep dive into real HOA financials.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">David Park</div>
+                                <div class="date">Jan 10, 2026 · 1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800" alt="First-time buyer">
+                    <div class="tags">
+                        <span class="tag green">First-Time Buyers</span>
+                        <span class="tag blue">Guide</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">First-Time Buyer's Guide to True Ownership Costs</h3>
+                    <p class="card-description">Everything beyond the down payment: closing costs, maintenance reserves,
+                        utilities, and the expenses that catch new homeowners off guard.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">Emma Rodriguez</div>
+                                <div class="date">Jan 8, 2026 · 1 week ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?w=800" alt="Calculator">
+                    <div class="tags">
+                        <span class="tag purple">Tools</span>
+                        <span class="tag green">Analysis</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <h3 class="card-title">Rent vs Buy: The Real Math Behind the Decision</h3>
+                    <p class="card-description">A comprehensive calculator-based approach to comparing renting and
+                        buying, accounting for opportunity cost and all hidden expenses.</p>
+                    <div class="card-meta">
+                        <div class="author">
+                            <div class="avatar"></div>
+                            <div class="author-info">
+                                <div class="author-name">Alex Kumar</div>
+                                <div class="date">Jan 5, 2026 · 12 days ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="pagination">
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">...</button>
+            <button class="page-btn">12</button>
+        </div>
+
+        <div class="load-more">
+            <button class="load-btn">Load More Articles</button>
+        </div>
+
+    </div>
+
+    <button class="scroll-top" id="scrollTop">↑</button>
+    </main>
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <!-- не менять марджины и ботоммы сломается адаптивность-->
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script>
+        // Scroll to top functionality
+        const scrollBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => {
+            scrollBtn.classList.toggle('visible', window.scrollY > 300);
+        });
+        scrollBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Filter chips
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+            });
+        });
+
+        // Pagination
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                if (btn.textContent !== '...') {
+                    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Load more
+        document.querySelector('.load-btn').addEventListener('click', () => {
+            alert('Loading more articles...');
+        });
+    </script>
+    <script src="/js/logout.js" defer></script>
+
+
+</body>
+
+</html>

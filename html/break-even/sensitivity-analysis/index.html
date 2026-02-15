@@ -1,0 +1,847 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Sensitivity analysis explained (U.S.): learn how to run sensitivity analysis for break-even, pricing, investing, and real estate decisions. Includes one-way and two-way sensitivity analysis, scenario tables, tornado charts, break-even sensitivity, step-by-step methods, examples, templates, common mistakes, and FAQs. Great for testing assumptions like price, variable cost, fixed cost, rent growth, interest rates, and return rates." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-mask.svg">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/break-even/sensitivity-analysis/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/break-even/sensitivity-analysis/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/break-even/sensitivity-analysis/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Sensitivity Analysis (U.S.) — Break-Even, Pricing, and Scenario Testing | PropertyCost</title>
+
+    <meta property="og:title" content="Sensitivity Analysis (U.S.)" />
+    <meta property="og:description"
+        content="A complete guide to sensitivity analysis: one-way and two-way tables, break-even sensitivity, and how to stress-test assumptions for business and real estate decisions." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/break-even/sensitivity-analysis/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Sensitivity Analysis (U.S.)">
+    <meta name="twitter:description"
+        content="Learn sensitivity analysis with break-even examples: one-way, two-way, scenario tables, and what assumptions matter most.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/break-even/sensitivity-analysis/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Break-Even","item":"https://mypropertycost.com/break-even/"},
+          {"@type":"ListItem","position":3,"name":"Sensitivity analysis","item":"https://mypropertycost.com/break-even/sensitivity-analysis/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/break-even/sensitivity-analysis/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is sensitivity analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Sensitivity analysis tests how much a result changes when you change assumptions. You vary one input (one-way) or two inputs (two-way) and observe how the output (profit, break-even units, ROI, NPV, cash flow) responds. It helps you find the variables that matter most and identify fragile decisions."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is break-even sensitivity analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Break-even sensitivity analysis shows how break-even point changes when price, variable cost, fixed cost, or volume assumptions change. It’s commonly done as a table of break-even units across different prices and costs, or as scenarios (conservative/base/optimistic)."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the difference between sensitivity analysis and scenario analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Sensitivity analysis changes one variable at a time (or two in a table) to isolate impact. Scenario analysis changes multiple variables together to represent a realistic world (e.g., higher inflation + higher rates + weaker demand). Both are useful: sensitivity tells you what matters; scenarios tell you what’s plausible."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What is a tornado chart?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"A tornado chart is a sensitivity analysis visualization that ranks input variables by their impact on an outcome. The most influential variables appear as the widest bars, making it easy to see what assumptions drive results."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the biggest mistake in sensitivity analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Using unrealistic ranges. If your sensitivity ranges are too optimistic or too wide without justification, you can mislead yourself. Good sensitivity analysis uses plausible ranges and checks whether decisions stay the same across realistic outcomes."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/break-even/">Break-Even</a>
+                <span class="sep">/</span>
+                <span class="current">Sensitivity analysis</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#why">Why sensitivity analysis matters</a></li>
+                    <li><a href="#definitions">Key definitions</a></li>
+                    <li><a href="#steps">How to run sensitivity analysis</a></li>
+                    <li><a href="#one-way">One-way sensitivity analysis</a></li>
+                    <li><a href="#two-way">Two-way sensitivity tables</a></li>
+                    <li><a href="#tornado">Tornado charts (concept)</a></li>
+                    <li><a href="#break-even">Break-even sensitivity</a></li>
+                    <li><a href="#pricing">Pricing sensitivity</a></li>
+                    <li><a href="#real-estate">Real estate examples</a></li>
+                    <li><a href="#templates">Simple templates (copy-paste logic)</a></li>
+                    <li><a href="#mistakes">Common mistakes</a></li>
+                    <li><a href="#stress-tests">Stress tests and decision rules</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open break-even calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Start with break-even</div>
+                        <div class="sidebar-cta__sub">Then vary assumptions.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/calculator/">Break-Even calculator →</a>
+                </section>
+
+                <section class="sidebar-cta" aria-label="Pricing break-even">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Pricing sensitivity?</div>
+                        <div class="sidebar-cta__sub">Price vs volume break-even.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/pricing-break-even/">Pricing break-even →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Sensitivity Analysis (U.S.)</h1>
+                        <p class="subtitle">
+                            Sensitivity analysis is how you stop trusting a single “perfect” spreadsheet result.
+                            Instead of asking, “What’s the answer under my best guess assumptions?”
+                            you ask, “Which assumptions drive the answer—and how easily can the answer flip?”
+                            This guide teaches sensitivity analysis in a practical way: one-way tests, two-way tables,
+                            break-even sensitivity,
+                            pricing examples, and real estate-style assumptions like rent growth, interest rates, and
+                            renovation costs.
+                            The goal is decision clarity, not fancy math.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/break-even/" aria-label="Back to Break-Even hub">← Back to
+                                    Break-Even</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~26–38 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#steps">How to run</a>
+                    <a href="#one-way">One-way</a>
+                    <a href="#two-way">Two-way</a>
+                    <a href="#break-even">Break-even sensitivity</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/break-even/break-even-analysis/">
+                            <strong>Break-even analysis</strong>
+                            <span>Core break-even logic and interpretation.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/pricing-break-even/">
+                            <strong>Pricing break-even</strong>
+                            <span>How price changes break-even volume.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/contribution-margin/">
+                            <strong>Contribution margin</strong>
+                            <span>The lever behind break-even sensitivity.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <div class="callout">
+                        <p>
+                            <strong>Sensitivity analysis</strong> tests how much an outcome changes when you change
+                            inputs (assumptions).
+                            In a <strong>one-way</strong> sensitivity test you vary one input at a time; in a
+                            <strong>two-way</strong> table you vary two inputs at once.
+                            The purpose is to identify the assumptions that drive results, find fragile decisions (where
+                            outcomes flip easily),
+                            and build better scenario planning for break-even, pricing, investing, and real estate
+                            decisions.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why Sensitivity Analysis Matters (The Real Reason)</h2>
+                    <p>
+                        Most decisions fail not because someone “did the math wrong,” but because the decision was built
+                        on fragile assumptions.
+                        You can have a perfectly calculated model and still make a bad decision if:
+                    </p>
+                    <ul>
+                        <li>Your cost estimate is too optimistic.</li>
+                        <li>Your demand forecast is too confident.</li>
+                        <li>Your rent growth or resale value assumption is “best case.”</li>
+                        <li>Your financing cost changes (rates rise, credit terms change).</li>
+                        <li>Your timeline changes (you move, sell, or refinance earlier).</li>
+                    </ul>
+
+                    <p>
+                        Sensitivity analysis makes uncertainty visible.
+                        It answers questions like:
+                    </p>
+                    <ul>
+                        <li>What variable matters most?</li>
+                        <li>How wrong can I be and still be okay?</li>
+                        <li>What has to be true for this decision to work?</li>
+                        <li>If things go slightly worse, does the whole plan collapse?</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision clarity:</strong> If your decision only works in one narrow set of
+                            assumptions, it’s not a plan—it’s a bet.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="definitions">
+                    <h2>Key Definitions (So We Don’t Mix Terms)</h2>
+
+                    <h3>Sensitivity analysis</h3>
+                    <p>
+                        Change one input (or two) and observe how the output changes.
+                        You’re isolating cause-and-effect.
+                    </p>
+
+                    <h3>Scenario analysis</h3>
+                    <p>
+                        Change multiple inputs together to represent a plausible world.
+                        Example: “higher inflation + higher rates + slower demand.”
+                    </p>
+
+                    <h3>Stress testing</h3>
+                    <p>
+                        Use intentionally harsh assumptions to see if the decision survives.
+                        Stress tests are about survivability, not likely outcomes.
+                    </p>
+
+                    <h3>Break-even sensitivity</h3>
+                    <p>
+                        Sensitivity analysis applied to break-even point:
+                        how break-even units or break-even time changes when you vary price, costs, or margins.
+                    </p>
+
+                    <h3>Elasticity (pricing sensitivity)</h3>
+                    <p>
+                        How demand responds to price changes.
+                        Pricing sensitivity is not only a cost problem; it’s also a demand behavior problem.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="steps">
+                    <h2>How to Run Sensitivity Analysis (Step-by-Step)</h2>
+
+                    <h3>Step 1: Define the decision and the output you care about</h3>
+                    <p>
+                        The output should match the decision:
+                        profit, break-even units, cash flow, ROI, NPV, payback months, or a “yes/no” feasibility flag.
+                        If you choose the wrong output, you’ll optimize the wrong thing.
+                    </p>
+
+                    <h3>Step 2: List inputs (assumptions) that could reasonably change</h3>
+                    <p>
+                        Typical business inputs:
+                        price, variable cost per unit, fixed cost, sales volume, discount rate, churn, conversion rate,
+                        returns.
+                        Real estate inputs:
+                        rent growth, vacancy, expense ratio, interest rate, appreciation, renovation cost, time horizon.
+                    </p>
+
+                    <h3>Step 3: Choose realistic ranges</h3>
+                    <p>
+                        Ranges are where sensitivity analysis becomes either useful or misleading.
+                        Good ranges are:
+                        plausible,
+                        anchored to data or experience,
+                        and wide enough to include uncertainty without being fantasy.
+                    </p>
+
+                    <h3>Step 4: Run one-way tests first</h3>
+                    <p>
+                        One-way sensitivity analysis helps you discover what matters.
+                        If one input dominates, you’ve learned where to focus.
+                    </p>
+
+                    <h3>Step 5: Run two-way tables for the two most important inputs</h3>
+                    <p>
+                        Many decisions hinge on two inputs:
+                        price and volume, rent growth and appreciation, costs and timeline, rate and holding period.
+                        Two-way tables show the “regions” where a decision is safe or risky.
+                    </p>
+
+                    <h3>Step 6: Convert results into decision rules</h3>
+                    <p>
+                        The goal isn’t to produce a huge table. The goal is to produce a rule you can act on.
+                        Examples:
+                    </p>
+                    <ul>
+                        <li>“We only launch if contribution margin stays above $18/unit.”</li>
+                        <li>“We only discount if we can increase volume by at least 30%.”</li>
+                        <li>“We only refinance if break-even is under 30 months.”</li>
+                        <li>“We renovate only if payback is under 6 years in conservative case.”</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Sensitivity analysis should change what you do. If it
+                            doesn’t, you did a spreadsheet exercise, not a decision tool.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="one-way">
+                    <h2>One-Way Sensitivity Analysis (The Fastest Useful Method)</h2>
+                    <p>
+                        One-way sensitivity analysis varies one input while holding others constant.
+                        It answers: “If this one assumption is wrong, how much does my outcome change?”
+                    </p>
+
+                    <h3>Common one-way sensitivity variables</h3>
+                    <ul>
+                        <li><strong>Price:</strong> ±5%, ±10%, ±20%</li>
+                        <li><strong>Variable cost:</strong> shipping/fees changes, supplier price changes</li>
+                        <li><strong>Fixed cost:</strong> higher payroll, rent increase, overhead tier increase</li>
+                        <li><strong>Volume:</strong> conservative vs optimistic demand</li>
+                        <li><strong>Timeline:</strong> how long you hold an investment or loan</li>
+                        <li><strong>Rate:</strong> interest rate or discount rate</li>
+                    </ul>
+
+                    <h3>How to interpret one-way sensitivity</h3>
+                    <p>
+                        You’re looking for:
+                    </p>
+                    <ul>
+                        <li><strong>Steep slope:</strong> small changes produce big outcome shifts → fragile input.</li>
+                        <li><strong>Flat slope:</strong> input doesn’t matter much → don’t waste time debating it.</li>
+                        <li><strong>Threshold effects:</strong> input causes outcome to flip from positive to negative.
+                        </li>
+                    </ul>
+
+                    <p>
+                        Thresholds are especially useful.
+                        If profit becomes negative when variable cost rises by 8%, then you need:
+                        supplier contracts, pricing power, or a buffer.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="two-way">
+                    <h2>Two-Way Sensitivity Tables (Where Most Decisions Actually Live)</h2>
+                    <p>
+                        Two-way tables vary two inputs simultaneously.
+                        They are useful when the decision is naturally two-dimensional, like:
+                        price vs volume, rent growth vs vacancy, interest rate vs time horizon.
+                    </p>
+
+                    <h3>Classic two-way table: price vs volume</h3>
+                    <p>
+                        You set rows as price levels and columns as volume.
+                        Each cell calculates profit, break-even feasibility, or contribution margin.
+                        The table quickly shows:
+                        where you break even, where you lose money, and where you have a safe margin.
+                    </p>
+
+                    <h3>Real estate two-way table: rent growth vs vacancy</h3>
+                    <p>
+                        A rental investment might look great with low vacancy and high rent growth.
+                        But what if vacancy rises and rent growth slows at the same time?
+                        A two-way table shows how sensitive the deal is to these conditions.
+                    </p>
+
+                    <h3>How to make two-way tables meaningful</h3>
+                    <ul>
+                        <li>Use <strong>realistic</strong> ranges. Don’t include extremes you would never plan for.</li>
+                        <li>Use a <strong>clear output</strong> (profit, cash flow, break-even months).</li>
+                        <li>Add <strong>visual coding</strong> (even simple “good/neutral/bad” categories) when you
+                            implement.</li>
+                        <li>Make the table small enough to read: 5×5 or 7×7 is usually enough.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Goal:</strong> Find the “safe region” where the decision works even if the world
+                            isn’t perfect.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="tornado">
+                    <h2>Tornado Charts (Concept: Ranking What Matters Most)</h2>
+                    <p>
+                        Tornado charts are a common way to summarize one-way sensitivity results.
+                        You vary each input between low and high values and measure how much the output changes.
+                        Then you rank variables by impact.
+                    </p>
+                    <p>
+                        Even if you don’t build a chart, you can use the tornado concept:
+                        identify the top 2–3 inputs that move results the most.
+                        Those inputs become your focus:
+                        negotiate them, hedge them, validate them with data, or build buffers around them.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="break-even">
+                    <h2>Break-Even Sensitivity Analysis (The Most Common Use Case)</h2>
+                    <p>
+                        Break-even is especially sensitive to contribution margin.
+                        When contribution margin is small, break-even units become huge.
+                        That’s why break-even sensitivity analysis is a powerful early warning system.
+                    </p>
+
+                    <h3>Break-even formulas to anchor sensitivity</h3>
+                    <div class="callout">
+                        <p>
+                            <strong>Break-even units = Fixed costs ÷ (Price − Variable cost)</strong><br>
+                            <strong>Break-even revenue = Fixed costs ÷ Contribution margin ratio</strong>
+                        </p>
+                    </div>
+
+                    <h3>What to vary in break-even sensitivity</h3>
+                    <ul>
+                        <li><strong>Price:</strong> list price vs realized price after discounts</li>
+                        <li><strong>Variable cost:</strong> fees, shipping, support, returns</li>
+                        <li><strong>Fixed cost:</strong> overhead and step costs</li>
+                        <li><strong>Sales volume:</strong> compare break-even units to realistic demand</li>
+                    </ul>
+
+                    <h3>Break-even sensitivity tells you your “minimum viable margin”</h3>
+                    <p>
+                        If your contribution margin drops from $22 to $18 because of costs or discounts, what happens?
+                        Break-even units increase by 22/18 ≈ 22% (assuming fixed costs unchanged).
+                        This kind of quick ratio thinking helps you see fragility.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="pricing">
+                    <h2>Pricing Sensitivity: Break-Even Meets Demand</h2>
+                    <p>
+                        Pricing sensitivity is more than costs; it’s also demand behavior.
+                        A higher price lowers break-even volume, but if demand drops, you may still lose.
+                        A lower price increases break-even volume, but demand may rise.
+                        The hard question becomes:
+                        how does volume change when price changes?
+                    </p>
+
+                    <h3>Practical approach without fancy statistics</h3>
+                    <ul>
+                        <li>Pick 3 price points: low, base, high.</li>
+                        <li>For each price point, estimate 3 volumes: conservative, base, optimistic.</li>
+                        <li>Compute profit in each combination (two-way table).</li>
+                    </ul>
+                    <p>
+                        You now have 9 outcomes.
+                        If only 1–2 outcomes are good, your pricing plan is fragile.
+                        If 6–7 outcomes are good, you have a robust plan.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="real-estate">
+                    <h2>Real Estate Sensitivity Examples (Rent, Rates, Renovations)</h2>
+
+                    <h3>Example 1: Refinance break-even sensitivity</h3>
+                    <p>
+                        Refinance break-even often depends on two inputs:
+                        (1) monthly payment savings, and (2) total closing costs.
+                        A two-way table of “costs vs savings” shows how quickly break-even changes.
+                        If break-even is only attractive when savings are high and costs are low, the refinance is
+                        fragile.
+                    </p>
+
+                    <h3>Example 2: Renovation payback sensitivity</h3>
+                    <p>
+                        Renovation payback depends on renovation cost, rent increase (or expense savings), and downtime.
+                        A simple sensitivity setup:
+                        vary renovation cost ±20% and rent premium ±25% and compute payback months.
+                        Many renovations look great until you test this.
+                    </p>
+
+                    <h3>Example 3: Rental property sensitivity</h3>
+                    <p>
+                        Rental cash flow is sensitive to vacancy, repairs, and rent growth.
+                        If your deal only cash-flows in the optimistic vacancy scenario, that’s a warning sign.
+                    </p>
+
+                    <h3>Example 4: Rent vs buy sensitivity</h3>
+                    <p>
+                        Rent vs buy results can flip based on appreciation, rent growth, investment returns, and time
+                        horizon.
+                        Sensitivity analysis helps you see which variable is driving the conclusion.
+                        If your conclusion flips with small changes, your decision depends more on risk tolerance than
+                        “math certainty.”
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="templates">
+                    <h2>Simple Templates (Copy-Paste Logic You Can Use)</h2>
+
+                    <h3>Template A: One-way sensitivity table</h3>
+                    <p>
+                        Choose an input (like variable cost) and test 5 values:
+                        low, slightly low, base, slightly high, high.
+                        Compute the output for each.
+                        Look for thresholds where the sign flips (profit becomes negative, break-even months exceed your
+                        timeline).
+                    </p>
+
+                    <h3>Template B: Two-way sensitivity table</h3>
+                    <p>
+                        Choose two inputs (like price and volume).
+                        Rows: price levels. Columns: volume levels.
+                        Each cell: profit or cash flow.
+                        Identify safe region, fragile region, and failure region.
+                    </p>
+
+                    <h3>Template C: Scenario set (conservative/base/optimistic)</h3>
+                    <p>
+                        Change multiple inputs together to reflect plausible worlds.
+                        Conservative might include: lower revenue, higher costs, longer timeline, worse rates.
+                        Optimistic might include the opposite.
+                        The key is to keep scenarios realistic, not extreme.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Implementation tip:</strong> Keep it small. A 5×5 table is often more useful than a
+                            20×20 table you never interpret.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>Common Mistakes in Sensitivity Analysis</h2>
+
+                    <h3>1) Unrealistic ranges</h3>
+                    <p>
+                        If ranges are unrealistic, results are meaningless.
+                        Use plausible ranges based on history, vendor quotes, local market comps, or conservative
+                        buffers.
+                    </p>
+
+                    <h3>2) Changing one input when inputs are correlated</h3>
+                    <p>
+                        Some variables move together:
+                        discounts might increase volume but also increase returns and support costs.
+                        High inflation might raise rent growth but also raise repairs and taxes.
+                        That’s why scenario analysis matters in addition to sensitivity analysis.
+                    </p>
+
+                    <h3>3) Treating the base case as “truth”</h3>
+                    <p>
+                        The base case is just a guess.
+                        Sensitivity analysis is useful precisely because the base case is uncertain.
+                    </p>
+
+                    <h3>4) Ignoring thresholds and decision rules</h3>
+                    <p>
+                        If you don’t turn sensitivity results into a decision rule (“we only do X if Y”), it won’t
+                        affect action.
+                    </p>
+
+                    <h3>5) Overcomplicating the model</h3>
+                    <p>
+                        A model that no one can understand will not be used.
+                        Start simple, identify key drivers, then add complexity only if it changes decisions.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="stress-tests">
+                    <h2>Stress Tests and Decision Rules (How Pros Use Sensitivity)</h2>
+
+                    <h3>Stress test idea: “worst plausible case”</h3>
+                    <p>
+                        Define the worst plausible case (not apocalypse):
+                        slightly lower demand, slightly higher costs, slightly longer timeline.
+                        If the decision fails, you need buffers or a different plan.
+                    </p>
+
+                    <h3>Decision rule examples</h3>
+                    <ul>
+                        <li><strong>Pricing:</strong> Don’t discount unless expected volume gain exceeds the margin loss
+                            threshold.</li>
+                        <li><strong>Renovation:</strong> Only renovate if conservative payback is under your hold
+                            period.</li>
+                        <li><strong>Refinance:</strong> Only refinance if break-even is under your “likely stay”
+                            horizon.</li>
+                        <li><strong>New product:</strong> Only launch if contribution margin stays above a minimum even
+                            with higher returns/fees.</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Best practice:</strong> Use sensitivity analysis to define “kill criteria” and “go
+                            criteria.”
+                            That prevents you from rationalizing weak deals.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Checklist: Sensitivity Analysis Done Right</h2>
+                    <ul>
+                        <li>✅ I defined one clear output (profit, break-even, ROI, cash flow)</li>
+                        <li>✅ I listed the inputs that could realistically change</li>
+                        <li>✅ I used plausible ranges (not fantasy)</li>
+                        <li>✅ I ran one-way sensitivity to find the top drivers</li>
+                        <li>✅ I ran a two-way table for the top two drivers</li>
+                        <li>✅ I used scenario analysis when inputs are correlated</li>
+                        <li>✅ I turned results into decision rules</li>
+                    </ul>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/break-even/break-even-analysis/">Break-even analysis</a>
+                            <p>How to interpret break-even beyond a single formula.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/pricing-break-even/">Pricing break-even</a>
+                            <p>Two-way logic: price vs volume.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/contribution-margin/">Contribution margin</a>
+                            <p>The main lever behind break-even.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/renovation-break-even/">Renovation break-even</a>
+                            <p>Payback and resale sensitivity for renovations.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/refinance-break-even/">Refinance break-even</a>
+                            <p>Break-even sensitivity to costs and savings.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/break-even-formula/">Break-even formula</a>
+                            <p>Core formulas you vary in sensitivity tests.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is sensitivity analysis?</h4>
+                        <p>
+                            Sensitivity analysis tests how much an outcome changes when you change assumptions.
+                            You vary one input (one-way) or two inputs (two-way) and observe how the output responds.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is break-even sensitivity analysis?</h4>
+                        <p>
+                            Break-even sensitivity analysis shows how break-even point changes when price, variable
+                            costs, or fixed costs change.
+                            It’s commonly done with tables or scenarios.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the difference between sensitivity analysis and scenario analysis?</h4>
+                        <p>
+                            Sensitivity analysis changes one variable at a time to isolate impact.
+                            Scenario analysis changes multiple variables together to represent realistic worlds.
+                            Sensitivity tells you what matters; scenarios tell you what’s plausible.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What is a tornado chart?</h4>
+                        <p>
+                            A tornado chart ranks assumptions by how much they change the outcome, helping you quickly
+                            see which variables matter most.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the biggest mistake in sensitivity analysis?</h4>
+                        <p>
+                            Using unrealistic ranges or ignoring correlated variables.
+                            The best sensitivity analysis uses plausible ranges and then tests scenarios where multiple
+                            variables move together.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Sensitivity analysis is how you turn a spreadsheet into a decision tool.
+                        It shows which assumptions drive outcomes, where break-even and profitability are fragile, and
+                        what has to be true for a plan to work.
+                        Start with one-way sensitivity to find the biggest drivers, then build a two-way table around
+                        the top two inputs.
+                        Use plausible ranges, add scenario analysis when inputs are correlated, and convert findings
+                        into decision rules you can actually follow.
+                        If your plan only works in a narrow best-case world, you don’t have a plan—you have a bet.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: run a two-way table for your top two inputs (price vs volume, or costs vs
+                            savings) and identify your safe region.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Sensitivity analysis depends on plausible input ranges and correct model
+                        structure.
+                        Start simple, focus on the biggest drivers, and use scenario analysis when real-world variables
+                        are correlated.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>

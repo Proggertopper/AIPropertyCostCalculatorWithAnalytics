@@ -1,9 +1,3 @@
-let csrfToken;
-window.addEventListener("DOMContentLoaded", async () => {
-  const res = await fetch("/api/csrf", { credentials: "include" });
-  const data = await res.json();
-  csrfToken = data.csrfToken;
-});
 
 const moneyFormatter = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -11,146 +5,208 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
   maximumFractionDigits: 0
 });
 
-document.getElementById("calcBtn").addEventListener("click", e => {
+function num(id) {
+  const el = document.getElementById(id);
+  if (!el) return NaN;
+  // Number("") -> 0, поэтому лучше trim+NaN
+  const v = el.value?.trim?.() ?? "";
+  if (v === "") return NaN;
+  return Number(v);
+}
+
+async function calculateRentVsBuy(e) {
   e.preventDefault();
 
-  let rent = +document.getElementById("rent").value;
-  const years = +document.getElementById("years").value;
-  let mortgage = +document.getElementById("mortgage").value;
-  const propertyValue = +document.getElementById("propertyValue").value;
-  const rentGrowth = +document.getElementById("rentGrowth").value / 100;
-  const mortgageRate = +document.getElementById("mortgageRate").value / 100;
-  const propertyGrowth = +document.getElementById("propertyGrowth").value / 100;
-  const inflation = +document.getElementById("inflation").value / 100;
+  // ===== 1) читаем ИСХОДНЫЕ значения как вводит пользователь =====
+  const rentInput = num("rent");                  // $/month
+  const mortgageInput = num("mortgage");          // $/month
+  const years = Math.trunc(num("years"));         // years
+  const propertyValueInput = num("propertyValue");// $
 
-  if (!validateInputs({ rent, mortgage, years, propertyValue, rentGrowth , mortgageRate, propertyGrowth , inflation })) return;
+  // проценты как проценты (3 = 3%)
+  const rentGrowthPct = num("rentGrowth");
+  const mortgageRatePct = num("mortgageRate");
+  const propertyGrowthPct = num("propertyGrowth");
+  const inflationPct = num("inflation");
 
-  /* ===== calculations ===== */
+  if (!validateInputs({
+    rent: rentInput,
+    mortgage: mortgageInput,
+    years,
+    propertyValue: propertyValueInput,
+    rentGrowthPct,
+    mortgageRatePct,
+    propertyGrowthPct,
+    inflationPct
+  })) return;
 
-  let rentTotal = 0;
-  let mortgagePaid = 0;
-  let propertyValueFinal = propertyValue;
+  // ===== 2) для расчёта переводим проценты в доли =====
+  const rentGrowth = rentGrowthPct / 100;
+  const mortgageRate = mortgageRatePct / 100;
+  const propertyGrowth = propertyGrowthPct / 100;
+  const inflation = inflationPct / 100;
 
-  for (let year = 1; year <= years; year++) {
-    // рост аренды
-    rentTotal += rent * 12;
-    rent *= 1 + rentGrowth;
+  // ===== 3) расчёт =====
+  // Assumptions:
+  // - mortgage is fixed monthly payment
+  // - mortgageRate defines amortization for implied remaining balance
+  // - implied mortgage term = 30 years
+  const mortgageTermYears = 30;
+  const termMonths = mortgageTermYears * 12;
+  const horizonMonths = years * 12;
+  const monthlyRate = mortgageRate / 12;
 
-    // ипотека с процентами
-    mortgagePaid += mortgage * 12;
-    mortgage *= 1 + mortgageRate;
+  const impliedLoanAmount = monthlyRate === 0
+    ? mortgageInput * termMonths
+    : mortgageInput * ((1 - Math.pow(1 + monthlyRate, -termMonths)) / monthlyRate);
 
-    // рост стоимости недвижимости
-    propertyValueFinal *= 1 + propertyGrowth;
+  let remainingLoanBalance = 0;
+  if (horizonMonths < termMonths) {
+    if (monthlyRate === 0) {
+      remainingLoanBalance = Math.max(0, impliedLoanAmount - mortgageInput * horizonMonths);
+    } else {
+      const pow = Math.pow(1 + monthlyRate, horizonMonths);
+      remainingLoanBalance =
+        impliedLoanAmount * pow -
+        mortgageInput * ((pow - 1) / monthlyRate);
+      if (!Number.isFinite(remainingLoanBalance)) remainingLoanBalance = 0;
+      remainingLoanBalance = Math.max(0, remainingLoanBalance);
+    }
   }
 
-  // покупка с учётом инфляции
-  const buyNetCost = Math.max(mortgagePaid - propertyValueFinal / (1 + inflation) ** years, 0);
+  // ===== rent path =====
+  let rent = rentInput;
 
-  /* ===== output ===== */
+  let rentTotal = 0;
+  const mortgagePaid = mortgageInput * 12 * years;
+  let propertyValueFinal = propertyValueInput;
 
+  for (let year = 1; year <= years; year++) {
+    rentTotal += rent * 12;
+    rent *= (1 + rentGrowth);
+
+    propertyValueFinal *= (1 + propertyGrowth);
+  }
+
+  // Real equity approximation at horizon
+  const discountedPropertyValue = propertyValueFinal / Math.pow(1 + inflation, years);
+  const remainingBalanceReal = remainingLoanBalance / Math.pow(1 + inflation, years);
+  const equityReal = discountedPropertyValue - remainingBalanceReal;
+  const buyNetCost = mortgagePaid - equityReal;
+
+  // ===== 4) output =====
   document.getElementById("rentResult").textContent =
-    `Rent (total paid with growth): ${moneyFormatter.format(rentTotal)}`;
+    `${moneyFormatter.format(rentTotal)}`;
 
   document.getElementById("buyResult").textContent =
-    `Buy (net cost adjusted for growth and inflation): ${moneyFormatter.format(buyNetCost)}`;
+    `${moneyFormatter.format(buyNetCost)}`;
 
   document.getElementById("winner").textContent =
     rentTotal < buyNetCost
       ? "Renting is more cost-effective over this period"
       : "Buying is more cost-effective over this period";
 
-  /* ===== save ===== */
+  // ===== 5) save (сохраняем ИСХОДНЫЕ значения, а не 'rent' после цикла) =====
+  if (typeof csrfToken === "undefined" || !csrfToken) {
+    console.warn("CSRF token not loaded — skip saving.");
+  } else {
+    fetch("/api/app/calculation", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": csrfToken
+      },
+      body: JSON.stringify({
+        calculatorType: "rent_vs_buy",
+        inputData: {
+          rent: rentInput,
+          mortgage: mortgageInput,
+          years,
+          propertyValue: propertyValueInput,
 
-  if (!csrfToken) {
-    console.error("CSRF token not loaded");
-    return;
+          // сохраняем проценты как проценты (3, 6.5, ...)
+          rentGrowth: rentGrowthPct,
+          mortgageRate: mortgageRatePct,
+          propertyGrowth: propertyGrowthPct,
+          inflation: inflationPct
+        },
+        resultData: {
+          rentTotal,
+          mortgagePaid,
+          impliedLoanAmount,
+          remainingLoanBalance,
+          equityReal,
+          buyNetCost,
+          winner: rentTotal < buyNetCost ? "rent" : "buy"
+        }
+      })
+    }).catch(console.error);
   }
 
-  fetch("/api/app/calculation", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "X-CSRF-Token": csrfToken
-    },
-    body: JSON.stringify({
-      calculatorType: "rent_vs_buy",
+  document.getElementById("results")
+    ?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
 
-      inputData: {
-        rent,
-        mortgage,
-        years,
-        propertyValue,
-        rentGrowth,
-        mortgageRate,
-        propertyGrowth,
-        inflation
-      },
 
-      resultData: {
-        rentTotal,
-        mortgagePaid,
-        buyNetCost,
-        winner: rentTotal < buyNetCost ? "rent" : "buy"
-      }
-    })
-  }).catch(console.error);
-
-  document
-    .getElementById("results")
-    .scrollIntoView({ behavior: "smooth", block: "start" });
-});
-
-/* ===== validation ===== */
-
-function validateInputs({ rent, mortgage, years, propertyValue, rentGrowth, mortgageRate, propertyGrowth, inflation }) {
+function validateInputs({
+  rent,
+  mortgage,
+  years,
+  propertyValue,
+  rentGrowthPct,
+  mortgageRatePct,
+  propertyGrowthPct,
+  inflationPct
+}) {
   let isValid = true;
 
   document.querySelectorAll(".error").forEach(e => (e.textContent = ""));
 
-  if (isNaN(rent) || rent <= 0) {
-    document.getElementById("rentError").textContent =
-      "Please enter a valid rent amount";
+  if (!Number.isFinite(rent) || rent <= 0) {
+    document.getElementById("rentError").textContent = "Please enter a valid rent amount";
     isValid = false;
   }
 
-  if (isNaN(mortgage) || mortgage <= 0) {
-    document.getElementById("mortgageError").textContent =
-      "Please enter a valid mortgage payment";
+  if (!Number.isFinite(mortgage) || mortgage <= 0) {
+    document.getElementById("mortgageError").textContent = "Please enter a valid mortgage payment";
     isValid = false;
   }
 
-  if (isNaN(propertyValue) || propertyValue <= 0) {
-    document.getElementById("propertyValueError").textContent =
-      "Please enter a valid property value";
+  if (!Number.isFinite(propertyValue) || propertyValue <= 0) {
+    document.getElementById("propertyValueError").textContent = "Please enter a valid property value";
     isValid = false;
   }
 
   if (!Number.isInteger(years) || years <= 0 || years > 50) {
-    document.getElementById("yearsError").textContent =
-      "Please enter a valid ownership period (1-50 years)";
+    document.getElementById("yearsError").textContent = "Please enter a valid ownership period (1-50 years)";
     isValid = false;
   }
 
-  if (isNaN(mortgageRate) || mortgageRate < 0 || mortgageRate > 100) {
-    document.getElementById("mortgageRateError").textContent = "Enter a valid mortgage rate (0-100%)";
+  // проценты в формате "6.5" (не 0.065)
+  if (!Number.isFinite(rentGrowthPct) || rentGrowthPct < 0 || rentGrowthPct > 50) {
+    document.getElementById("rentGrowthError").textContent = "Enter a valid rent growth (0–50%)";
     isValid = false;
   }
-  if (isNaN(propertyGrowth) || propertyGrowth < -50 || propertyGrowth > 50) {
-    document.getElementById("propertyGrowthError").textContent = "Enter a valid property growth (-50% to 50%)";
+
+  if (!Number.isFinite(mortgageRatePct) || mortgageRatePct < 0 || mortgageRatePct > 100) {
+    document.getElementById("mortgageRateError").textContent = "Enter a valid mortgage rate (0–100%)";
     isValid = false;
   }
-  if (isNaN(rentGrowth) || rentGrowth < -50 || rentGrowth > 50) {
-    document.getElementById("rentGrowthError").textContent = "Enter a valid rent growth (-50% to 50%)";
+
+  if (!Number.isFinite(propertyGrowthPct) || propertyGrowthPct < 0 || propertyGrowthPct > 50) {
+    document.getElementById("propertyGrowthError").textContent = "Enter a valid property growth (0–50%)";
     isValid = false;
   }
-  if (isNaN(inflation) || inflation < 0 || inflation > 20) {
-    document.getElementById("inflationError").textContent = "Enter a valid inflation (0-20%)";
+
+  if (!Number.isFinite(inflationPct) || inflationPct < 0 || inflationPct > 20) {
+    document.getElementById("inflationError").textContent = "Enter a valid inflation (0–20%)";
     isValid = false;
   }
 
   return isValid;
 }
+
+document.getElementById("calcBtn")?.addEventListener("click", calculateRentVsBuy);
 
 
 

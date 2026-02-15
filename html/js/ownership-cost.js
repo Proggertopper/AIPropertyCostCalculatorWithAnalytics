@@ -1,15 +1,15 @@
-let csrfToken;
-window.addEventListener("DOMContentLoaded", async () => {
-    const res = await fetch("/api/csrf" , {credentials:"include"});
-    const data = await res.json();
-    csrfToken = data.csrfToken;
-});
-
-
 
 
 function clearErrors() {
     document.querySelectorAll(".error").forEach(e => (e.textContent = ""));
+}
+
+function num(id) {
+    const el = document.getElementById(id);
+    if (!el) return NaN;
+    const v = (el.value ?? "").toString().trim();
+    if (v === "") return NaN;
+    return Number(v);
 }
 
 function validateNumber({ value, min, max, errorEl, name }) {
@@ -34,77 +34,90 @@ const moneyFormatter = new Intl.NumberFormat("en-US", {
     maximumFractionDigits: 0
 });
 
-/* ===== calculation ===== */
-function calculateOwnershipCost() {
+function calculateOwnershipCost(e) {
+    if (e) e.preventDefault?.();
     clearErrors();
 
-    const price = +priceInput.value;
-    const years = +yearsInput.value;
-    const taxPercent = +taxInput.value;
-    const maintenance = +maintenanceInput.value;
-    const inflation = +inflationInput.value; 
+    const price = num("price");
+    const yearsRaw = num("years");
+    const taxPercent = num("tax");
+    const maintenance = num("maintenance");
+    const inflationPercent = num("inflation");
+
+    const years = Number.isNaN(yearsRaw) ? NaN : Math.trunc(yearsRaw);
 
     let valid = true;
+    valid = valid && validateNumber({ value: price, min: 1, max: 50_000_000, errorEl: document.getElementById("priceError"), name: "Property Price" });
+    valid = valid && validateNumber({ value: years, min: 1, max: 100, errorEl: document.getElementById("yearsError"), name: "Ownership Period (years)" });
 
-    valid = valid && validateNumber({
-        value: price,
-        min: 1,
-        max: 50_000_000,
-        errorEl: priceError,
-        name: "Property Price"
-    });
+    if (!Number.isNaN(yearsRaw) && yearsRaw !== years) {
+        document.getElementById("yearsError").textContent = "Ownership Period: must be a whole number";
+        valid = false;
+    }
 
-    valid = valid && validateNumber({
-        value: years,
-        min: 1,
-        max: 100,
-        errorEl: yearsError,
-        name: "Ownership Period"
-    });
-
-    valid = valid && validateNumber({
-        value: taxPercent,
-        min: 0,
-        max: 90,
-        errorEl: taxError,
-        name: "Property Tax"
-    });
-
-    valid = valid && validateNumber({
-        value: maintenance,
-        min: 0,
-        max: 10_000_000,
-        errorEl: maintenanceError,
-        name: "Maintenance"
-    });
-
-    valid = valid && validateNumber({ value: inflation, min: -5, max: 40, errorEl: inflationError, name: "Inflation %" });
+    valid = valid && validateNumber({ value: taxPercent, min: 0, max: 90, errorEl: document.getElementById("taxError"), name: "Property Tax (%)" });
+    valid = valid && validateNumber({ value: maintenance, min: 0, max: 10_000_000, errorEl: document.getElementById("maintenanceError"), name: "Maintenance (annual)" });
+    valid = valid && validateNumber({ value: inflationPercent, min: -5, max: 40, errorEl: document.getElementById("inflationError"), name: "Inflation (%)" });
 
     if (!valid) return;
 
-    /* ===== logic ===== */
-
     const taxRate = taxPercent / 100;
-    const discountRate = inflation/100;
+    const inflationRate = inflationPercent / 100;
 
+    // ===== логика + totals =====
+    // Carrying ownership costs only (tax + maintenance), without purchase principal.
+    let totalOwnershipCost = 0;
+    let totalOwnershipCostPV = 0;
 
-    let totalCost = price;
+    let totalTaxes = 0;
+    let totalMaintenance = 0;
 
-    let totalCostPV=price;
+    let totalTaxesPV = 0;
+    let totalMaintenancePV = 0;
 
-    for (let year = 1; year <= years; year++) {
-        const annualCost = price * taxRate + maintenance;
-        totalCost += annualCost;
-        totalCostPV += annualCost / Math.pow(1 + discountRate, year); // дисконтируем с учётом инфляции
+    for (let y = 1; y <= years; y++) {
+        const inflFactor = Math.pow(1 + inflationRate, y - 1);
+
+        const annualTax = price * taxRate * inflFactor;
+        const annualMaint = maintenance * inflFactor;
+
+        totalTaxes += annualTax;
+        totalMaintenance += annualMaint;
+
+        const annualCost = annualTax + annualMaint;
+        totalOwnershipCost += annualCost;
+
+        const discount = Math.pow(1 + inflationRate, y);
+        totalTaxesPV += annualTax / discount;
+        totalMaintenancePV += annualMaint / discount;
+        totalOwnershipCostPV += annualCost / discount;
     }
 
+    // округления
+    totalOwnershipCost = Math.round(totalOwnershipCost);
+    totalOwnershipCostPV = Math.round(totalOwnershipCostPV);
 
-    /* ===== output ===== */
+    totalTaxes = Math.round(totalTaxes);
+    totalMaintenance = Math.round(totalMaintenance);
 
-    totalCostEl.textContent = moneyFormatter.format(totalCost);
-    totalCostPVEl.textContent = moneyFormatter.format(totalCostPV);
+    totalTaxesPV = Math.round(totalTaxesPV);
+    totalMaintenancePV = Math.round(totalMaintenancePV);
 
-    /* ===== save ===== */
+    // derived-friendly fields прямо в resultData (чтобы UI не зависел от derived_metrics)
+    const costAsPercentOfPrice = price > 0 ? Math.round((totalOwnershipCost / price) * 10000) / 100 : null;
+    const taxesSharePercent = totalOwnershipCost > 0 ? Math.round((totalTaxes / totalOwnershipCost) * 10000) / 100 : null;
+    const maintenanceSharePercent = totalOwnershipCost > 0 ? Math.round((totalMaintenance / totalOwnershipCost) * 10000) / 100 : null;
+
+    // ===== output =====
+    document.getElementById("totalCost").textContent = moneyFormatter.format(totalOwnershipCost);
+    document.getElementById("totalCostPV").textContent = moneyFormatter.format(totalOwnershipCostPV);
+
+    // ===== save =====
+    if (!csrfToken) {
+        console.warn("CSRF token not loaded — skip saving.");
+        document.getElementById("results")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        return;
+    }
 
     fetch("/api/app/calculation", {
         method: "POST",
@@ -120,59 +133,35 @@ function calculateOwnershipCost() {
                 years,
                 taxPercent,
                 maintenance,
-                inflation
+                inflation: inflationPercent
             },
             resultData: {
-                totalCost, totalCostPV
+                // ✅ унифицированные ключи (используем везде)
+                years,
+                totalOwnershipCost,
+                totalOwnershipCostPV,
+
+                totalTaxes,
+                totalMaintenance,
+                totalTaxesPV,
+                totalMaintenancePV,
+
+                costAsPercentOfPrice,
+                taxesSharePercent,
+                maintenanceSharePercent,
+
+                // ✅ backward compat (если где-то старый фронт ждёт)
+                totalCost: totalOwnershipCost,
+                totalCostPV: totalOwnershipCostPV
             }
         })
     }).catch(console.error);
 
-    document
-        .getElementById("results")
-        .scrollIntoView({ behavior: "smooth", block: "start" });
+    document.getElementById("results")?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-/* ===== aliases ===== */
-
-const priceInput = document.getElementById("price");
-const yearsInput = document.getElementById("years");
-const taxInput = document.getElementById("tax");
-const maintenanceInput = document.getElementById("maintenance");
-const inflationInput = document.getElementById("inflation");
-
-const totalCostEl = document.getElementById("totalCost");
-const totalCostPVEl = document.getElementById("totalCostPV");
-
-/* errors */
-const priceError = document.getElementById("priceError");
-const yearsError = document.getElementById("yearsError");
-const taxError = document.getElementById("taxError");
-const maintenanceError = document.getElementById("maintenanceError");
-const inflationError = document.getElementById("inflationError");
-
-/* button */
-document
-    .getElementById("calcBtn")
-    .addEventListener("click", calculateOwnershipCost);
+document.getElementById("calcBtn").addEventListener("click", calculateOwnershipCost);
 
 
-async function checkLogin() {
-    try {
-        const res = await fetch("/api/auth/me");
-        const data = await res.json();
 
-        if (!data.loggedIn) {
-            // показываем блок для гостей
-            document.getElementById('guest-promo').style.display = 'block';
-        }
-        else {
-            document.getElementById('user-promo').style.display = 'flex'
-        }
-    } catch (err) {
-        console.error("Ошибка при проверке логина:", err);
-    }
-}
 
-// Проверяем при загрузке страницы
-checkLogin();

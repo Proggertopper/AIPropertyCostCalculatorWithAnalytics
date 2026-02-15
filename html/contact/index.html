@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+    <meta name="description" content="Contact PropertyCost support for calculator issues, billing questions, account help, and product feedback.">
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+    <link rel="canonical" href="https://mypropertycost.com/contact/">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/contactUs.css">
+    <title>Contact Us | PropertyCost</title>
+</head>
+<body class="auth-loading">
+<header class="header">
+    <nav class="navbar">
+        <div class="logo">
+            <a href="/" class="white-color"><span>PropertyCost</span></a>
+        </div>
+
+        <input type="checkbox" id="nav-toggle">
+        <label for="nav-toggle" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+
+        <div class="nav-menu">
+            <ul class="navbar-nav">
+                <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+            </ul>
+
+            <div id="userControls">
+                <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                <div class="user-dropdown" id="userDropdown">
+                    <div id="userAccount" class="avatar">A</div>
+                    <div class="dropdown-menu">
+                        <a href="/account/" class="dropdown-item">Account</a>
+                        <div class="divider"></div>
+                        <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="crumbs-row">
+        <div class="crumbs-inner">
+            <a href="/">Home</a>
+            <span class="sep">/</span>
+            <a href="/contact/" class="current">Contact</a>
+        </div>
+    </div>
+</header>
+
+<main class="contact-page" id="main-content">
+    <section class="hero reveal">
+        <div class="container hero-grid">
+            <div class="hero-copy">
+                <p class="eyebrow">Support Center</p>
+                <h1>Contact Us</h1>
+                <p class="lead">
+                    Need help with calculations, premium features, verdict logic, or account access? Send a message and the PropertyCost team will review it.
+                </p>
+                <div class="meta-row">
+                    <span>Response window: usually within 1 business day</span>
+                    <span>For urgent account issues, include your login email</span>
+                </div>
+            </div>
+
+            <aside class="info-panel">
+                <h2>Direct contact</h2>
+                <ul>
+                    <li><strong>Email:</strong> <a href="mailto:yourpropertycost@gmail.com">yourpropertycost@gmail.com</a></li>
+                    <li><strong>Location:</strong> Delaware, USA</li>
+                    <li><strong>Scope:</strong> product support, bug reports, billing, partnerships</li>
+                </ul>
+            </aside>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container channel-grid">
+            <article class="channel-card">
+                <h3>Technical Support</h3>
+                <p>Calculator results, scenario behavior, compare/deep dive/optimizer/portfolio output questions.</p>
+            </article>
+            <article class="channel-card">
+                <h3>Billing & Access</h3>
+                <p>Credits, premium features, account limits, and usage troubleshooting.</p>
+            </article>
+            <article class="channel-card">
+                <h3>Quality Feedback</h3>
+                <p>UI/UX issues, missing inputs, logic edge-cases, and feature requests.</p>
+            </article>
+        </div>
+    </section>
+
+    <section class="section reveal">
+        <div class="container form-layout">
+            <article class="form-card">
+                <h2>Send a message</h2>
+                <p class="form-note">Describe the issue with as much detail as possible. If it is calculator-related, include your key inputs and what result you expected.</p>
+
+                <form id="contactForm" novalidate>
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" autocomplete="name" placeholder="Your full name" required>
+
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required>
+
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" placeholder="Tell us what happened, what you expected, and steps to reproduce." required></textarea>
+
+                    <button type="submit" id="contactSubmit">Send Message</button>
+                    <div id="error" class="hidden" role="alert" aria-live="assertive"></div>
+                    <div id="success" class="hidden" role="status" aria-live="polite"></div>
+                </form>
+            </article>
+
+            <aside class="expect-card">
+                <h3>What helps us resolve faster</h3>
+                <ul>
+                    <li>Mention calculator type and the exact screen where issue appears.</li>
+                    <li>Include expected vs actual numbers, not only a general description.</li>
+                    <li>If account-related, provide the email tied to your account.</li>
+                    <li>Avoid sending private financial documents in plain text.</li>
+                </ul>
+
+                <h3>Related pages</h3>
+                <div class="policy-links">
+                    <a href="/about/">About</a>
+                    <a href="/pricing/">Pricing</a>
+                    <a href="/disclaimer/">Disclaimer</a>
+                    <a href="/privacy/">Privacy Policy</a>
+                </div>
+            </aside>
+        </div>
+    </section>
+</main>
+
+<footer class="pb-3">
+    <ul class="footer-links pb-3 justify-content-center mb-3">
+        <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+        <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+        <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+        <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+    </ul>
+    <p class="text-center">© 2026 PropertyCost</p>
+</footer>
+
+<script src="/js/contactUs.js" defer></script>
+<script src="/js/logout.js" defer></script>
+</body>
+</html>

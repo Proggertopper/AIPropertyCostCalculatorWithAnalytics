@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-adsense-account" content="ca-pub-4041439086297277">
+
+    <meta name="description"
+        content="Common break-even analysis mistakes (U.S.): the errors that make break-even point, break-even price, and payback calculations wrong—misclassifying fixed vs variable costs, using gross margin instead of contribution margin, forgetting fees/returns, ignoring step costs and capacity, confusing break-even revenue vs units, and using unrealistic assumptions. Includes a full checklist, real examples, sensitivity tests, and FAQs." />
+
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/images/favicon-48x48.png">
+    <link rel="mask-icon" href="/images/favicon-mask.svg" color="#000000">
+
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mypropertycost.com/break-even/common-mistakes/" />
+    <link rel="alternate" hreflang="en" href="https://mypropertycost.com/break-even/common-mistakes/" />
+    <link rel="alternate" hreflang="x-default" href="https://mypropertycost.com/break-even/common-mistakes/" />
+
+    <link rel="preload" href="/fonts/Inter-Italic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
+
+    <title>Common Break-Even Mistakes (U.S.) — Fix Your Break-Even Analysis | PropertyCost</title>
+
+    <meta property="og:title" content="Common Break-Even Mistakes (U.S.)" />
+    <meta property="og:description"
+        content="Avoid the mistakes that ruin break-even calculations: cost misclassification, wrong margin, missing fees/returns, step costs, and unrealistic assumptions." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mypropertycost.com/break-even/common-mistakes/" />
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Common Break-Even Mistakes (U.S.)">
+    <meta name="twitter:description"
+        content="Break-even errors are common. Learn the mistakes that flip results: fixed vs variable costs, contribution margin, fees, step costs, and more.">
+
+    <link rel="stylesheet" href="/css/main.css" />
+
+    <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@graph":[
+      {
+        "@type":"BreadcrumbList",
+        "@id":"https://mypropertycost.com/break-even/common-mistakes/#breadcrumbs",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://mypropertycost.com/"},
+          {"@type":"ListItem","position":2,"name":"Break-Even","item":"https://mypropertycost.com/break-even/"},
+          {"@type":"ListItem","position":3,"name":"Common mistakes","item":"https://mypropertycost.com/break-even/common-mistakes/"}
+        ]
+      },
+      {
+        "@type":"FAQPage",
+        "@id":"https://mypropertycost.com/break-even/common-mistakes/#faq",
+        "mainEntity":[
+          {
+            "@type":"Question",
+            "name":"What is the most common break-even mistake?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Misclassifying costs—especially treating partially variable costs (fees, shipping, returns, labor) as fixed. This inflates contribution margin and makes break-even look easier than it is."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"Why do break-even calculations often look too optimistic?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Because people use gross revenue or gross margin instead of contribution margin, and they forget real variable costs like payment processing, marketplace fees, shipping, returns, and customer support."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"What’s the difference between gross margin and contribution margin?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Gross margin usually subtracts cost of goods sold (COGS). Contribution margin subtracts all variable costs required to deliver the product or service. Break-even uses contribution margin because fixed costs are covered by the contribution after variable costs are paid."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How do step costs affect break-even?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Step costs increase fixed costs when volume crosses a threshold (new hire, larger facility, higher software tier). If you ignore step costs, you can underestimate break-even volume at higher scale."
+            }
+          },
+          {
+            "@type":"Question",
+            "name":"How can I sanity-check my break-even analysis?",
+            "acceptedAnswer":{
+              "@type":"Answer",
+              "text":"Run a conservative scenario: lower realized price, higher variable costs, higher fixed costs, and realistic returns/fees. If the model still breaks even at achievable volume, the conclusion is more robust."
+            }
+          }
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+
+<body>
+
+    <header class="header">
+        <nav class="navbar ">
+            <div class="logo">
+                <a href="/" class="white-color"><span>PropertyCost</span></a>
+            </div>
+
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="burger"><span></span><span></span><span></span></label>
+
+            <div class="nav-menu">
+                <ul class="navbar-nav">
+                    <li><a class="nav-link white-color px-2" href="/calculators/">Calculators</a></li>
+                    <li><a class="nav-link white-color px-2" href="/pricing/">Pricing</a></li>
+                    <li><a class="nav-link white-color px-2" href="/about/">About</a></li>
+                </ul>
+
+                <div id="userControls">
+                    <a id="btn-login" class="btn btn-login" href="/login/">Login</a>
+                    <a id="btn-signup" class="btn btn-signup" href="/signup/">Sign</a>
+
+                    <div class="user-dropdown" id="userDropdown">
+                        <div id="userAccount" class="avatar">A</div>
+                        <div class="dropdown-menu">
+                            <a href="/account/" class="dropdown-item">Account</a>
+                            <div class="divider"></div>
+                            <button id="btn-logout" class="dropdown-item danger">Log out</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </nav>
+
+        <div class="crumbs-row">
+            <div class="crumbs-inner">
+                <a href="/">Home</a>
+                <span class="sep">/</span>
+                <a href="/break-even/">Break-Even</a>
+                <span class="sep">/</span>
+                <span class="current">Common mistakes</span>
+            </div>
+        </div>
+    </header>
+
+
+    <main class="seo-page">
+
+        <aside class="seo-sidebar" aria-label="On this page">
+            <div class="toc" role="navigation" aria-label="Table of contents">
+                <strong>On this page:</strong>
+                <ul>
+                    <li><a href="#quick">Quick answer</a></li>
+                    <li><a href="#why">Why break-even goes wrong</a></li>
+                    <li><a href="#mistakes">15 common mistakes (and fixes)</a></li>
+                    <li><a href="#examples">Real-world examples</a></li>
+                    <li><a href="#sanity">Sanity checks</a></li>
+                    <li><a href="#stress">Stress tests</a></li>
+                    <li><a href="#checklist">Checklist</a></li>
+                    <li><a href="#related">Related links</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-stack">
+                <section class="sidebar-cta" aria-label="Open break-even calculator">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Compute break-even fast</div>
+                        <div class="sidebar-cta__sub">Units, revenue, and margins.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/calculator/">Break-Even calculator →</a>
+                </section>
+
+                <section class="sidebar-cta" aria-label="Contribution margin guide">
+                    <div class="sidebar-cta__text">
+                        <div class="sidebar-cta__title">Fix your margin first</div>
+                        <div class="sidebar-cta__sub">Contribution margin explains most errors.</div>
+                    </div>
+                    <a class="sidebar-cta__btn" href="/break-even/contribution-margin/">Contribution margin →</a>
+                </section>
+            </div>
+        </aside>
+
+
+        <div class="seo-content">
+
+            <section class="hero">
+                <div class="content-wrapper">
+                    <div class="hero-main">
+                        <h1>Common Break-Even Mistakes (U.S.)</h1>
+                        <p class="subtitle">
+                            Break-even analysis feels simple: “fixed costs ÷ margin.”
+                            But small errors in cost classification, pricing assumptions, or “realized” revenue
+                            can turn a break-even calculation from useful to dangerously optimistic.
+                            This guide lists the most common break-even mistakes—especially the ones that silently
+                            inflate contribution margin—
+                            and shows how to fix them with checklists, examples, and stress tests.
+                        </p>
+
+                        <div class="page-meta">
+                            <div class="page-meta__left">
+                                <a class="backlink" href="/break-even/" aria-label="Back to Break-Even hub">← Back to
+                                    Break-Even</a>
+                            </div>
+                            <div class="page-meta__right" aria-label="Article meta">
+                                <span class="meta-chip">Updated: <time datetime="2026-01-30">Jan 30, 2026</time></span>
+                                <span class="meta-chip">~24–34 min read</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+
+            <details class="toc-mobile">
+                <summary>Jump to section</summary>
+                <nav aria-label="Table of contents (mobile)">
+                    <a href="#mistakes">Mistakes</a>
+                    <a href="#examples">Examples</a>
+                    <a href="#sanity">Sanity checks</a>
+                    <a href="#faq">FAQ</a>
+                </nav>
+            </details>
+
+
+            <div class="content-wrapper">
+
+                <section class="start-here" aria-label="Start here">
+                    <div class="start-here__grid">
+                        <a class="start-here__card" href="/break-even/break-even-formula/">
+                            <strong>Break-even formula</strong>
+                            <span>Units vs revenue formulas explained.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/fixed-vs-variable-costs/">
+                            <strong>Fixed vs variable costs</strong>
+                            <span>The root cause of most break-even errors.</span>
+                        </a>
+                        <a class="start-here__card" href="/break-even/sensitivity-analysis/">
+                            <strong>Sensitivity analysis</strong>
+                            <span>How to stress-test break-even assumptions.</span>
+                        </a>
+                    </div>
+                </section>
+
+
+                <div class="content-section" id="quick">
+                    <h2>Quick Answer</h2>
+                    <div class="callout">
+                        <p>
+                            The most common break-even mistakes are:
+                            (1) misclassifying variable costs as fixed,
+                            (2) using gross margin instead of contribution margin,
+                            (3) ignoring fees, shipping, returns, and support,
+                            and (4) forgetting step costs and capacity constraints.
+                            These errors inflate contribution margin and make break-even look far easier than it really
+                            is.
+                            Fix break-even by building a correct unit economics view first, then running conservative
+                            sensitivity tests.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="why">
+                    <h2>Why Break-Even Calculations Go Wrong</h2>
+                    <p>
+                        Break-even is a “small denominator” problem.
+                        The classic formula is:
+                    </p>
+                    <div class="callout">
+                        <p><strong>Break-even units = Fixed costs ÷ (Price − Variable cost per unit)</strong></p>
+                    </div>
+                    <p>
+                        The denominator—contribution margin per unit—can be small.
+                        When the denominator is small, small errors create huge differences.
+                        If you think your margin is $12/unit but it’s really $9/unit, your break-even volume is 33%
+                        higher.
+                        If you also underestimated fixed costs and overestimated realized price, the error compounds.
+                    </p>
+
+                    <p>
+                        Break-even also gets misused.
+                        People treat break-even as “success,” but break-even means profit is zero.
+                        Most real decisions need:
+                        profit buffer, reinvestment capacity, and survivability under uncertainty.
+                        A break-even plan without buffer is fragile.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Rule:</strong> Break-even is a floor. If your plan only reaches break-even, you’re
+                            one small surprise away from losses.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="mistakes">
+                    <h2>15 Common Break-Even Mistakes (And How to Fix Them)</h2>
+
+                    <h3>1) Using gross margin instead of contribution margin</h3>
+                    <p>
+                        Gross margin usually subtracts only COGS. Contribution margin subtracts <em>all variable costs
+                            required to deliver the sale</em>.
+                        Break-even uses contribution margin because fixed costs are covered by contribution after
+                        variable costs are paid.
+                    </p>
+                    <p><strong>Fix:</strong> Build a list of variable costs: fees, shipping, returns, support,
+                        commissions, packaging, usage-based costs.</p>
+
+                    <h3>2) Forgetting “realized price” (discounts and promos)</h3>
+                    <p>
+                        Many businesses calculate break-even on list price, then operate on discounted prices.
+                        If average realized price is 8–15% lower than list, your break-even volume may be much higher.
+                    </p>
+                    <p><strong>Fix:</strong> Use average realized price: list price minus average discount (weighted by
+                        how often discounts happen).</p>
+
+                    <h3>3) Ignoring payment processing or marketplace fees</h3>
+                    <p>
+                        Fees are variable and scale with revenue. A 2.9% + $0.30 fee structure matters a lot at lower
+                        prices.
+                        Marketplace fees can be even larger and often include fulfillment components.
+                    </p>
+                    <p><strong>Fix:</strong> Add fees to variable cost or treat them as a percentage variable cost in
+                        contribution margin ratio.</p>
+
+                    <h3>4) Underestimating shipping, packaging, and fulfillment</h3>
+                    <p>
+                        Shipping costs change with fuel, carrier pricing, and dimensional weight.
+                        Packaging adds costs too. Fulfillment may require labor that scales with volume.
+                    </p>
+                    <p><strong>Fix:</strong> Use an average “fully loaded fulfillment cost per order,” not just postage.
+                    </p>
+
+                    <h3>5) Ignoring returns, refunds, chargebacks, and breakage</h3>
+                    <p>
+                        Returns can be a silent profit killer because they create reverse logistics costs, restocking
+                        losses, and additional support time.
+                        Chargebacks and fraud have direct costs too.
+                    </p>
+                    <p><strong>Fix:</strong> Add expected returns cost per unit (returns rate × loss per return) into
+                        variable cost.</p>
+
+                    <h3>6) Misclassifying labor</h3>
+                    <p>
+                        Labor can be fixed (salaries) or variable (hourly, overtime, per-order packing).
+                        Many operations have mixed labor: a baseline staff plus variable overtime.
+                    </p>
+                    <p><strong>Fix:</strong> Split labor into a fixed baseline and a variable per-unit component above
+                        capacity.</p>
+
+                    <h3>7) Treating marketing as fixed when it’s variable (or vice versa)</h3>
+                    <p>
+                        Performance marketing often behaves like a variable cost: you spend more to get more orders.
+                        But branding/creative can be more fixed. If you treat performance spend as fixed, you can
+                        overstate margin.
+                    </p>
+                    <p><strong>Fix:</strong> For paid acquisition, treat CAC (cost to acquire customer) as variable per
+                        order/customer in unit economics.</p>
+
+                    <h3>8) Confusing break-even units vs break-even revenue</h3>
+                    <p>
+                        Break-even revenue depends on contribution margin ratio. Break-even units depends on
+                        contribution margin per unit.
+                        They are related but not interchangeable.
+                    </p>
+                    <p><strong>Fix:</strong> Decide whether you model in units, revenue, or both. Don’t mix outputs
+                        mid-analysis.</p>
+
+                    <h3>9) Using average costs when costs are tiered</h3>
+                    <p>
+                        Supplier pricing may change with volume. Shipping may change with carrier tiers. Software
+                        pricing may jump at thresholds.
+                        Using one “average” cost can hide what happens at scale.
+                    </p>
+                    <p><strong>Fix:</strong> Use step functions or separate “volume bands” in your analysis.</p>
+
+                    <h3>10) Ignoring step costs (hiring, larger facility, higher software tier)</h3>
+                    <p>
+                        Scaling often requires new fixed costs at certain volume points.
+                        If you ignore step costs, you underestimate break-even when you grow.
+                    </p>
+                    <p><strong>Fix:</strong> Identify capacity thresholds and add step costs in the relevant scenarios.
+                    </p>
+
+                    <h3>11) Ignoring capacity constraints</h3>
+                    <p>
+                        A low price strategy might “work” on paper only because it assumes unlimited capacity.
+                        If your break-even requires more units than you can deliver, it’s not a viable plan.
+                    </p>
+                    <p><strong>Fix:</strong> Compare break-even units to maximum deliverable volume (production, staff,
+                        inventory, time).</p>
+
+                    <h3>12) Counting sunk costs as decision costs</h3>
+                    <p>
+                        If you already spent money (equipment, design), those costs are sunk.
+                        They matter for total profitability, but they may not matter for a go/no-go decision today.
+                    </p>
+                    <p><strong>Fix:</strong> Separate “forward-looking break-even” from “all-time break-even.” Use the
+                        right one for the decision.</p>
+
+                    <h3>13) Ignoring taxes (or mixing pre-tax and after-tax)</h3>
+                    <p>
+                        Taxes can matter depending on your business structure and how you measure “profit.”
+                        Mixing pre-tax and after-tax numbers can distort decisions.
+                    </p>
+                    <p><strong>Fix:</strong> Keep break-even on a consistent basis. If you include taxes, include them
+                        consistently across scenarios.</p>
+
+                    <h3>14) Treating the base case as guaranteed</h3>
+                    <p>
+                        Many break-even spreadsheets produce a single number and then people anchor on it.
+                        But break-even is sensitive. A slightly worse world can change the result dramatically.
+                    </p>
+                    <p><strong>Fix:</strong> Always run a conservative scenario and sensitivity analysis.</p>
+
+                    <h3>15) Forgetting that break-even is not the goal</h3>
+                    <p>
+                        Break-even means profit equals zero. Real businesses need margin for growth, risk, and
+                        surprises.
+                    </p>
+                    <p><strong>Fix:</strong> Set a target profit or target contribution margin buffer above break-even.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="examples">
+                    <h2>Real-World Examples (How Mistakes Flip Results)</h2>
+
+                    <h3>Example A: Discount + fees turns “profitable” into loss</h3>
+                    <p>
+                        List price: $50. COGS: $25. “Gross margin” looks like $25.
+                        But add payment fee (3% + $0.30 ≈ $1.80), shipping ($6), packaging ($1), returns reserve
+                        ($1.50), and support ($0.70).
+                        True variable cost becomes ~$36.00. Contribution margin becomes ~$14.00.
+                    </p>
+                    <p>
+                        Now run a 10% discount: realized price is $45.
+                        Margin drops to ~$9.00, and break-even volume increases by 14/9 ≈ 56%.
+                        If you planned to break even at 1,000 units, you now need ~1,560 units.
+                        That’s how small “ignored costs” create huge planning errors.
+                    </p>
+
+                    <h3>Example B: Step costs break scaling plans</h3>
+                    <p>
+                        You can handle 400 orders/month with current staff.
+                        At 450 orders you need a new part-time hire, increasing fixed costs by $2,500/month.
+                        Your spreadsheet shows break-even at 430 units, so you think you’re safe.
+                        But the moment you reach 450 units, fixed costs jump, and break-even shifts higher.
+                    </p>
+                    <p>
+                        This is why you should model break-even in stages: current capacity and next capacity tier.
+                    </p>
+
+                    <h3>Example C: Service business capacity constraint</h3>
+                    <p>
+                        A consulting firm calculates break-even based on billable hours.
+                        Spreadsheet says break-even is 220 billable hours/month.
+                        But the team’s maximum is 180 billable hours/month after admin time.
+                        The result: break-even is impossible at that price structure.
+                        The fix is price increase, cost reduction, or different delivery model.
+                    </p>
+                </div>
+
+
+                <div class="content-section" id="sanity">
+                    <h2>Sanity Checks (Fast Ways to Catch Bad Break-Even)</h2>
+
+                    <h3>Sanity check 1: Is contribution margin believable?</h3>
+                    <p>
+                        If margin per unit seems “too good,” list your missing variable costs.
+                        Most break-even mistakes are missing variable costs.
+                    </p>
+
+                    <h3>Sanity check 2: Does break-even volume exceed capacity?</h3>
+                    <p>
+                        If you cannot physically deliver the break-even volume, your break-even calculation is
+                        irrelevant.
+                    </p>
+
+                    <h3>Sanity check 3: Does the break-even plan require perfect behavior?</h3>
+                    <p>
+                        If your plan assumes no discounts, no returns, no downtime, and no overruns, it’s fragile.
+                        Real life adds friction.
+                    </p>
+
+                    <h3>Sanity check 4: How sensitive is the result to small changes?</h3>
+                    <p>
+                        Change price by -5% and variable cost by +10%. If break-even explodes, you need a buffer.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Simple rule:</strong> If a 5–10% change in a key assumption makes you lose money,
+                            build margin and cash buffers before committing.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="stress">
+                    <h2>Stress Tests (The Conservative Break-Even That Saves You)</h2>
+
+                    <h3>Stress test 1: Lower realized price</h3>
+                    <p>
+                        Model average discount, not list price.
+                        If you discount 30% of the time by 10%, realized price is about 3% lower.
+                        If discounting is frequent, the effect can be much bigger.
+                    </p>
+
+                    <h3>Stress test 2: Higher variable costs</h3>
+                    <p>
+                        Increase variable costs by 10–20% to account for fees, shipping increases, or higher returns.
+                    </p>
+
+                    <h3>Stress test 3: Higher fixed costs (step cost scenario)</h3>
+                    <p>
+                        Add the next likely hire, facility increase, or software tier.
+                        Many plans break right when they “scale.”
+                    </p>
+
+                    <h3>Stress test 4: Lower demand</h3>
+                    <p>
+                        Compare break-even units to conservative demand. If conservative demand is below break-even, you
+                        need a different structure.
+                    </p>
+
+                    <div class="cta-calc">
+                        <div>
+                            <h4>Want to stress-test your break-even?</h4>
+                            <p>Compute break-even, then vary price and costs in a sensitivity table.</p>
+                        </div>
+                        <a href="/break-even/sensitivity-analysis/">Sensitivity analysis →</a>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="checklist">
+                    <h2>Checklist: Fix Your Break-Even Analysis</h2>
+                    <ul>
+                        <li>✅ I used contribution margin (not gross margin)</li>
+                        <li>✅ I included variable fees, shipping, returns, and support</li>
+                        <li>✅ I used realized price (after typical discounts)</li>
+                        <li>✅ I separated fixed, variable, and mixed costs</li>
+                        <li>✅ I modeled step costs and capacity constraints</li>
+                        <li>✅ I ran conservative scenarios (lower price, higher costs)</li>
+                        <li>✅ I treated break-even as a floor, not a goal</li>
+                    </ul>
+
+                    <div class="callout">
+                        <p>
+                            <strong>Decision rule:</strong> If you can’t survive a conservative scenario, your
+                            break-even is not safe enough to bet on.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="related">
+                    <h2>Related links</h2>
+                    <div class="internal-links">
+                        <div class="internal-link-card">
+                            <a href="/break-even/break-even-formula/">Break-even formula</a>
+                            <p>Units vs revenue break-even formulas.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/fixed-vs-variable-costs/">Fixed vs variable costs</a>
+                            <p>Correct cost classification basics.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/contribution-margin/">Contribution margin</a>
+                            <p>The margin break-even uses.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/pricing-break-even/">Pricing break-even</a>
+                            <p>Price changes break-even volume.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/sensitivity-analysis/">Sensitivity analysis</a>
+                            <p>Stress-test your assumptions.</p>
+                        </div>
+                        <div class="internal-link-card">
+                            <a href="/break-even/break-even-analysis/">Break-even analysis</a>
+                            <p>How to interpret break-even results.</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="faq">
+                    <h2>Frequently Asked Questions</h2>
+
+                    <div class="faq-item">
+                        <h4>What is the most common break-even mistake?</h4>
+                        <p>
+                            Misclassifying costs—especially treating variable costs (fees, shipping, returns, labor) as
+                            fixed.
+                            That inflates contribution margin and makes break-even look too easy.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>Why do break-even calculations often look too optimistic?</h4>
+                        <p>
+                            Because people use gross margin instead of contribution margin and forget real variable
+                            costs like fees, shipping, returns, and support.
+                            They also often assume list price instead of realized price after discounts.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>What’s the difference between gross margin and contribution margin?</h4>
+                        <p>
+                            Gross margin usually subtracts only COGS. Contribution margin subtracts all variable costs
+                            needed to deliver the product or service.
+                            Break-even uses contribution margin.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How do step costs affect break-even?</h4>
+                        <p>
+                            Step costs increase fixed costs when you scale (new hires, larger facility, higher software
+                            tier).
+                            If you ignore them, your break-even at higher volume is underestimated.
+                        </p>
+                    </div>
+
+                    <div class="faq-item">
+                        <h4>How can I sanity-check my break-even analysis?</h4>
+                        <p>
+                            Run a conservative scenario: lower realized price, higher variable costs, higher fixed
+                            costs, realistic returns/fees.
+                            If you still break even at achievable volume, the result is more robust.
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="content-section" id="bottom-line">
+                    <h2>Bottom Line</h2>
+                    <p>
+                        Break-even analysis is only as good as your cost classification and contribution margin.
+                        The most damaging mistakes inflate margin by ignoring real variable costs (fees, shipping,
+                        returns, support),
+                        assuming list price instead of realized price, and forgetting step costs and capacity limits.
+                        Fix your break-even by building unit economics first, then running conservative sensitivity
+                        tests.
+                        Treat break-even as a floor—not a goal—and build margin buffers so your plan survives real-world
+                        friction.
+                    </p>
+
+                    <div class="callout">
+                        <p>
+                            Next step: compute contribution margin and break-even in the <a
+                                href="/break-even/calculator/">Break-Even calculator</a>, then run a conservative
+                            sensitivity test.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="content-section" id="methodology">
+                    <h2>Methodology and assumptions</h2>
+                    <p class="mini-note">
+                        Educational only. Break-even results vary by industry and cost structure. Use realized price
+                        (after discounts),
+                        include variable costs like fees/returns/shipping, model step costs at scale, and run
+                        sensitivity analysis for conservative planning.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="pb-3 ">
+        <ul class="footer-links pb-3 justify-content-center mb-3 ">
+            <li><a href="/privacy/" class="px-2 py-2">Privacy Policy</a></li>
+            <li><a href="/terms/" class="px-2 py-2">Terms of Service</a></li>
+            <li><a href="/disclaimer/" class="px-2 py-2">Disclaimer</a></li>
+            <li><a href="/contact/" class="px-2 py-2">Contact us</a></li>
+        </ul>
+        <p class="text-center">© 2026 PropertyCost</p>
+    </footer>
+
+    <script src="/js/logout.js" defer></script>
+</body>
+
+</html>
