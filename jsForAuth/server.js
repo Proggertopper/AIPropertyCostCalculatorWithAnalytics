@@ -41,7 +41,9 @@ const app = express();
 function resolveTrustProxy() {
     const raw = process.env.TRUST_PROXY;
     if (raw == null || raw === "") {
-        return process.env.NODE_ENV === "production" ? 1 : false;
+        // Typical production chain for this app is: LB -> Nginx -> Node.
+        // Trusting 2 hops preserves real client IP for req.ip/rate limits.
+        return process.env.NODE_ENV === "production" ? 2 : false;
     }
     const v = String(raw).trim().toLowerCase();
     if (v === "true") return true;
@@ -50,7 +52,7 @@ function resolveTrustProxy() {
     return raw;
 }
 
-app.set("trust proxy", 1);
+app.set("trust proxy", resolveTrustProxy());
 
 
 const PORT = process.env.PORT || 3000;
@@ -683,6 +685,18 @@ function aiFallbackScenario(payload) {
         "Recommendation:",
         `- ${levers[0] ? `Test ${levers[0]} next, then validate with ${levers[1] || levers[0]}.` : "Run one additional scenario focusing on your most controllable cost/input."}`
     ].join("\n");
+}
+
+async function aiJobInsertIfAbsent({ userId, jobId, kind, status = "queued", payload = null, reservedCredits = 0 }) {
+    await ensureAiJobsTable();
+    const r = await db.query(
+        `insert into ai_jobs(user_id, job_id, kind, status, payload, reserved_credits, updated_at)
+     values($1,$2,$3,$4,$5::jsonb,$6,now())
+     on conflict (job_id) do nothing
+     returning id`,
+        [userId, String(jobId), String(kind), String(status), payload ? JSON.stringify(payload) : null, Number(reservedCredits || 0)]
+    );
+    return !!r.rowCount;
 }
 
 function comparePrimaryGapStats({ aVal, bVal, winner, better }) {
@@ -2894,10 +2908,14 @@ function injectAuth(html, auth, accountData , tz) {
 
     return html;
 }
+const PAYPAL_BASE =
+    process.env.PAYPAL_ENV === "live"
+        ? "https://api-m.paypal.com"
+        : "https://api-m.sandbox.paypal.com";
 
 async function paypalAccessToken() {
     const res = await fetch(
-        `https://api-m.${process.env.PAYPAL_ENV}.paypal.com/v1/oauth2/token`,
+        `${PAYPAL_BASE}/v1/oauth2/token`,
         {
             method: "POST",
             headers: {
@@ -9329,10 +9347,7 @@ app.post("/api/scenarios/analyze", rl.byUser({ limit: 60, windowSec: 400 }), asy
     const normalizedBase = await normalizeCalcResultData(cr.rows[0], req.session.userId);
     const baseCalc = normalizedBase.calc;
 
-    const left = await reserveCredits(req.session.userId, cost);
-    if (left === null) return res.status(402).json(noCreditsPayload(suggestedPackByCost(cost)));
-
-    let reserved = cost;
+    let reserved = 0;
 
     let out;
     try {
@@ -9550,14 +9565,23 @@ app.post("/api/scenarios/analyze", rl.byUser({ limit: 60, windowSec: 400 }), asy
             const batchReq = buildScenarioBatchChatRequest(validPrepared.map((x) => x.payload));
             if (!batchReq) throw new Error("SCENARIO_BATCH_PREPARE_FAILED");
 
-            const queued = await enqueueOpenAiChat({
-                model: "gpt-4o-mini",
-                temperature: 0.2,
-                max_tokens: batchReq.max_tokens,
-                messages: batchReq.messages
-            }, {
-                dedupKey: `scenarios:${req.session.userId}:${calculationId}:${cost}:${batchReq.dedupKey}`
-            });
+            const dedupKey = `scenarios:${req.session.userId}:${calculationId}:${cost}:${batchReq.dedupKey}`;
+            const predictedJobId = aiJobIdFromDedupKey(dedupKey);
+            if (!predictedJobId) throw new Error("SCENARIO_JOB_ID_FAILED");
+
+            const existing = await aiJobGet(req.session.userId, predictedJobId);
+            if (existing?.status === "done" && existing?.result) {
+                return res.json(existing.result);
+            }
+            if (existing && existing.status !== "failed") {
+                const wallet = await getWallet(req.session.userId);
+                return res.status(202).json(aiQueueAcceptedBody({
+                    jobId: predictedJobId,
+                    type: "scenarios_analyze",
+                    wallet,
+                    message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId"
+                }));
+            }
 
             const pendingPayload = {
                 calculationId,
@@ -9566,25 +9590,113 @@ app.post("/api/scenarios/analyze", rl.byUser({ limit: 60, windowSec: 400 }), asy
                 cost,
                 prepared
             };
-            await aiJobInsert({
+
+            const claimed = await aiJobInsertIfAbsent({
                 userId: req.session.userId,
-                jobId: queued.jobId,
+                jobId: predictedJobId,
                 kind: "scenarios_analyze",
-                status: "queued",
+                status: "preparing",
                 payload: pendingPayload,
-                reservedCredits: reserved
+                reservedCredits: 0
             });
 
-            const queuedWallet = await getWallet(req.session.userId);
-            return res.status(202).json({
-                ok: true,
-                status: "queued",
-                jobId: queued.jobId,
-                type: "scenarios_analyze",
-                message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId",
-                wallet: queuedWallet
-            });
+            let ownsJob = claimed;
+            if (!ownsJob) {
+                const latest = await aiJobGet(req.session.userId, predictedJobId);
+                if (latest?.status === "done" && latest?.result) {
+                    return res.json(latest.result);
+                }
+                if (latest && latest.status !== "failed") {
+                    const wallet = await getWallet(req.session.userId);
+                    return res.status(202).json(aiQueueAcceptedBody({
+                        jobId: predictedJobId,
+                        type: "scenarios_analyze",
+                        wallet,
+                        message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId"
+                    }));
+                }
+                if (latest?.status === "failed") {
+                    const revived = await aiJobTryTransition(req.session.userId, predictedJobId, ["failed"], "preparing");
+                    if (revived) {
+                        await aiJobUpdate(req.session.userId, predictedJobId, {
+                            payload: pendingPayload,
+                            error: null,
+                            reserved_credits: 0
+                        });
+                        ownsJob = true;
+                    } else {
+                        const wallet = await getWallet(req.session.userId);
+                        return res.status(202).json(aiQueueAcceptedBody({
+                            jobId: predictedJobId,
+                            type: "scenarios_analyze",
+                            wallet,
+                            message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId"
+                        }));
+                    }
+                }
+            }
+            if (!ownsJob) {
+                const wallet = await getWallet(req.session.userId);
+                return res.status(202).json(aiQueueAcceptedBody({
+                    jobId: predictedJobId,
+                    type: "scenarios_analyze",
+                    wallet,
+                    message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId"
+                }));
+            }
+
+            const left = await reserveCredits(req.session.userId, cost);
+            if (left === null) {
+                await aiJobUpdate(req.session.userId, predictedJobId, {
+                    status: "failed",
+                    error: "NO_CREDITS",
+                    reserved_credits: 0
+                });
+                return res.status(402).json(noCreditsPayload(suggestedPackByCost(cost)));
+            }
+            reserved = cost;
+
+            try {
+                const queued = await enqueueOpenAiChat({
+                    model: "gpt-4o-mini",
+                    temperature: 0.2,
+                    max_tokens: batchReq.max_tokens,
+                    messages: batchReq.messages
+                }, { dedupKey });
+
+                await aiJobUpdate(req.session.userId, predictedJobId, {
+                    status: "queued",
+                    payload: pendingPayload,
+                    reserved_credits: reserved,
+                    error: null
+                });
+
+                const queuedWallet = await getWallet(req.session.userId);
+                return res.status(202).json({
+                    ok: true,
+                    status: "queued",
+                    jobId: queued.jobId,
+                    type: "scenarios_analyze",
+                    message: "Scenario analysis queued. Poll /api/ai/jobs/:jobId",
+                    wallet: queuedWallet
+                });
+            } catch (queueErr) {
+                if (reserved) {
+                    await refundCredits(req.session.userId, reserved);
+                    reserved = 0;
+                }
+                await aiJobUpdate(req.session.userId, predictedJobId, {
+                    status: "failed",
+                    error: String(queueErr?.message || queueErr),
+                    reserved_credits: 0
+                });
+                throw queueErr;
+            }
         }
+
+        const left = await reserveCredits(req.session.userId, cost);
+        if (left === null) return res.status(402).json(noCreditsPayload(suggestedPackByCost(cost)));
+        reserved = cost;
 
         let batchRows = [];
         if (validPrepared.length) {

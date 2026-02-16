@@ -413,9 +413,11 @@ async function startOpenAiWorkers() {
     const { Worker } = bull;
 
     const workerCount = Math.max(1, toInt(process.env.AI_WORKER_COUNT, 3));
+    const workerNodeCount = Math.max(1, toInt(process.env.AI_WORKER_NODE_COUNT, 1));
     const workerConcurrency = Math.max(1, toInt(process.env.AI_WORKER_CONCURRENCY, 1));
     const globalRpm = Math.max(1, toInt(process.env.AI_WORKER_GLOBAL_RPM, 180));
-    const perWorkerRpm = Math.max(1, Math.floor(globalRpm / workerCount));
+    const totalWorkers = Math.max(1, workerCount * workerNodeCount);
+    const perWorkerRpm = Math.max(1, Math.floor(globalRpm / totalWorkers));
     const maxTokensCap = Math.max(128, toInt(process.env.AI_WORKER_MAX_TOKENS_CAP, 1500));
     const connection = getBullConnectionOptions();
 
@@ -465,7 +467,7 @@ async function startOpenAiWorkers() {
         );
 
         worker.on("ready", () => {
-            console.log(`[AI_WORKER ${i + 1}/${workerCount}] ready (concurrency=${workerConcurrency}, rpm=${perWorkerRpm})`);
+            console.log(`[AI_WORKER ${i + 1}/${workerCount}] ready (concurrency=${workerConcurrency}, rpm=${perWorkerRpm}, node_count=${workerNodeCount})`);
         });
         worker.on("failed", (job, err) => {
             const jid = job?.id ? String(job.id) : "n/a";
