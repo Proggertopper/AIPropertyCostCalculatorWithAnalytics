@@ -6112,8 +6112,13 @@ app.post("/api/paypal/create-order", rl.byUser({ limit: 15, windowSec: 600 }), a
 
     const token = await paypalAccessToken();
 
+    const PAYPAL_BASE =
+        process.env.PAYPAL_ENV === "live"
+            ? "https://api-m.paypal.com"
+            : "https://api-m.sandbox.paypal.com";
+
     const r = await fetch(
-        `https://api-m.${process.env.PAYPAL_ENV}.paypal.com/v2/checkout/orders`,
+        `${PAYPAL_BASE}/v2/checkout/orders`,
         {
             method: "POST",
             headers: {
@@ -6164,8 +6169,13 @@ app.post("/api/paypal/capture-order", rl.byUser({ limit: 15, windowSec: 600 }), 
 
     const token = await paypalAccessToken();
 
+    const PAYPAL_BASE =
+        process.env.PAYPAL_ENV === "live"
+            ? "https://api-m.paypal.com"
+            : "https://api-m.sandbox.paypal.com";
+
     const r = await fetch(
-        `https://api-m.${process.env.PAYPAL_ENV}.paypal.com/v2/checkout/orders/${orderId}/capture`,
+        `${PAYPAL_BASE}/v2/checkout/orders/${orderId}/capture`,
         {
             method: "POST",
             headers: {
@@ -6256,9 +6266,14 @@ app.post("/api/webhooks/paypal", rl.byIp({ limit: 300, windowSec: 600, prefix: "
 
     const token = await paypalAccessToken();
 
+    const PAYPAL_BASE =
+        process.env.PAYPAL_ENV === "live"
+            ? "https://api-m.paypal.com"
+            : "https://api-m.sandbox.paypal.com";
+
     // verify webhook
     const verify = await fetch(
-        `https://api-m.${process.env.PAYPAL_ENV}.paypal.com/v1/notifications/verify-webhook-signature`,
+        `${PAYPAL_BASE}/v1/notifications/verify-webhook-signature`,
         {
             method: "POST",
             headers: {
