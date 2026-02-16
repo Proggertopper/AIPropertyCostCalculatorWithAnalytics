@@ -104,7 +104,7 @@ app.use(helmet({
 app.use(express.json({
     limit: "10mb",
     verify: (req, res, buf) => {
-        if (req.originalUrl.includes("/api/webhooks/paypal")) {
+        if (req.originalUrl.includes("/api/webhooks/paddle")) {
             req.rawBody = buf;
         }
     }
@@ -113,7 +113,7 @@ app.use(express.json({
 function needsCsrfProtection(req) {
     if (!["POST", "PUT", "PATCH", "DELETE"].includes(String(req.method || "").toUpperCase())) return false;
     if (!String(req.path || "").startsWith("/api/")) return false;
-    if (req.path === "/api/webhooks/paypal") return false;
+    if (req.path === "/api/webhooks/paddle") return false;
     return true;
 }
 
@@ -137,6 +137,7 @@ const LEGACY_REDIRECTS = Object.freeze({
     "/allCalculators.html": "/calculators/",
     "/termsOfService.html": "/terms/",
     "/privacyPolicy.html": "/privacy/",
+    "/refundPolicy.html": "/refund/",
     "/disclaimer.html": "/disclaimer/",
 
     "/login.html": "/login/",
@@ -2908,36 +2909,118 @@ function injectAuth(html, auth, accountData , tz) {
 
     return html;
 }
-const PAYPAL_BASE =
-    process.env.PAYPAL_ENV === "live"
-        ? "https://api-m.paypal.com"
-        : "https://api-m.sandbox.paypal.com";
+const PADDLE_BASE =
+    String(process.env.PADDLE_ENV || "").trim().toLowerCase() === "live"
+        ? "https://api.paddle.com"
+        : "https://sandbox-api.paddle.com";
 
-async function paypalAccessToken() {
-    const res = await fetch(
-        `${PAYPAL_BASE}/v1/oauth2/token`,
-        {
-            method: "POST",
-            headers: {
-                Authorization:
-                    "Basic " +
-                    Buffer.from(
-                        process.env.PAYPAL_CLIENT_ID +
-                        ":" +
-                        process.env.PAYPAL_SECRET
-                    ).toString("base64"),
-                "Content-Type": "application/x-www-form-urlencoded",
-            },
-            body: "grant_type=client_credentials",
-        }
-    );
-    let json;
-    try{
-        json = await res.json();
-    } catch(e){
-        console.error("Trouble with PayPal Access Token");
+let paddleTransactionsTableReady = null;
+
+async function ensurePaddleTransactionsTable() {
+    if (paddleTransactionsTableReady) return paddleTransactionsTableReady;
+    paddleTransactionsTableReady = (async () => {
+        await db.query(`
+      create table if not exists paddle_transactions (
+        id bigserial primary key,
+        transaction_id text not null unique,
+        user_id bigint not null references users(id) on delete cascade,
+        credits integer not null default 0,
+        status text not null default 'created',
+        pack_key text,
+        price_id text,
+        amount_usd numeric(10,2),
+        custom_data jsonb,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      )
+    `);
+        await db.query(`create index if not exists idx_paddle_transactions_user_created on paddle_transactions(user_id, created_at desc)`);
+        await db.query(`create index if not exists idx_paddle_transactions_status_created on paddle_transactions(status, created_at desc)`);
+    })().catch((e) => {
+        paddleTransactionsTableReady = null;
+        throw e;
+    });
+    return paddleTransactionsTableReady;
+}
+
+function paddleApiKey() {
+    return String(process.env.PADDLE_API_KEY || "").trim();
+}
+
+function paddleClientToken() {
+    return String(process.env.PADDLE_CLIENT_TOKEN || "").trim();
+}
+
+function paddleWebhookSecret() {
+    return String(process.env.PADDLE_WEBHOOK_SECRET || "").trim();
+}
+
+function parsePaddleSignature(headerValue) {
+    const out = {};
+    String(headerValue || "")
+        .split(";")
+        .forEach((part) => {
+            const idx = part.indexOf("=");
+            if (idx <= 0) return;
+            const k = part.slice(0, idx).trim();
+            const v = part.slice(idx + 1).trim();
+            if (!k) return;
+            out[k] = v;
+        });
+    return out;
+}
+
+function timingSafeHexEqual(a, b) {
+    try {
+        const left = Buffer.from(String(a || ""), "hex");
+        const right = Buffer.from(String(b || ""), "hex");
+        if (!left.length || left.length !== right.length) return false;
+        return crypto.timingSafeEqual(left, right);
+    } catch {
+        return false;
     }
-    return json.access_token;
+}
+
+function verifyPaddleWebhookSignature(rawBody, signatureHeader, secret, toleranceSec = 300) {
+    if (!secret) return false;
+    const sig = parsePaddleSignature(signatureHeader);
+    const ts = Number(sig?.ts || 0);
+    const h1 = String(sig?.h1 || "");
+    if (!ts || !h1) return false;
+
+    const nowSec = Math.floor(Date.now() / 1000);
+    if (Math.abs(nowSec - ts) > Math.max(30, Number(toleranceSec || 300))) return false;
+
+    const payload = Buffer.isBuffer(rawBody) ? rawBody.toString("utf8") : String(rawBody || "");
+    const expected = crypto.createHmac("sha256", secret).update(`${ts}:${payload}`).digest("hex");
+    return timingSafeHexEqual(expected, h1);
+}
+
+async function paddleApiRequest(pathname, init = {}) {
+    const apiKey = paddleApiKey();
+    if (!apiKey) {
+        return {
+            ok: false,
+            status: 500,
+            body: { error: "PADDLE_API_KEY_MISSING" }
+        };
+    }
+
+    const headers = {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+        ...(init.headers || {})
+    };
+    const response = await fetch(`${PADDLE_BASE}${pathname}`, {
+        ...init,
+        headers
+    });
+    const body = await response.json().catch(() => ({}));
+    return {
+        ok: response.ok,
+        status: response.status,
+        body
+    };
 }
 
 
@@ -6093,159 +6176,182 @@ function enrichResultDataForUI(calcType, inputData, resultData, derivedMetrics) 
 
 
 const PACKS = {
-    basic10: {credits : 10 , amount: "1.99" , currency: "USD" , label : "10 Full verdicts" },
-    plus30: {credits : 30 , amount: "4.99" , currency: "USD" , label : "30 Full verdicts" },
-    premium50: { credits: 50, amount: "7.99", currency: "USD", label: "50 Full verdicts"} ,
-    business150: { credits: 150, amount: "19.99", currency: "USD", label: "150 Full verdicts" },
+    basic10: {
+        credits: 10,
+        amount: "1.99",
+        currency: "USD",
+        label: "10 Full verdicts",
+        paddlePriceEnv: "PADDLE_PRICE_BASIC10"
+    },
+    plus30: {
+        credits: 30,
+        amount: "4.99",
+        currency: "USD",
+        label: "30 Full verdicts",
+        paddlePriceEnv: "PADDLE_PRICE_PLUS30"
+    },
+    premium50: {
+        credits: 50,
+        amount: "7.99",
+        currency: "USD",
+        label: "50 Full verdicts",
+        paddlePriceEnv: "PADDLE_PRICE_PREMIUM50"
+    },
+    business150: {
+        credits: 150,
+        amount: "19.99",
+        currency: "USD",
+        label: "150 Full verdicts",
+        paddlePriceEnv: "PADDLE_PRICE_BUSINESS150"
+    },
 };
 
 function getPack(key) {
-    return PACKS[key] || null;
+    const pack = PACKS[key];
+    if (!pack) return null;
+    return {
+        ...pack,
+        key: String(key),
+        paddlePriceId: String(process.env[pack.paddlePriceEnv] || "").trim()
+    };
 }
 
-app.post("/api/paypal/create-order", rl.byUser({ limit: 15, windowSec: 600 }), async (req, res) => {
+function packKeyByPaddlePriceId(priceId) {
+    const needle = String(priceId || "").trim();
+    if (!needle) return "";
+    for (const [key, pack] of Object.entries(PACKS)) {
+        const envKey = String(pack?.paddlePriceEnv || "");
+        const configuredPriceId = String(process.env[envKey] || "").trim();
+        if (configuredPriceId && configuredPriceId === needle) return key;
+    }
+    return "";
+}
+
+async function addWalletCredits(userId, credits) {
+    await db.query(
+        `insert into verdict_wallets(user_id, credits)
+         values($1,$2)
+         on conflict (user_id)
+         do update set credits = GREATEST(COALESCE(verdict_wallets.credits, 0), 0) + EXCLUDED.credits`,
+        [userId, credits]
+    );
+}
+
+app.get("/api/paddle/config", (req, res) => {
+    const clientToken = paddleClientToken();
+    if (!clientToken) return res.status(503).json({ error: "PADDLE_CLIENT_TOKEN_MISSING" });
+    return res.json({
+        env: String(process.env.PADDLE_ENV || "sandbox").trim().toLowerCase() === "live" ? "live" : "sandbox",
+        clientToken
+    });
+});
+
+app.post("/api/paddle/create-checkout", rl.byUser({ limit: 20, windowSec: 600 }), async (req, res) => {
     if (!req.session?.userId) return res.sendStatus(401);
 
     const packKey = String(req.body?.pack || "basic10");
     const pack = getPack(packKey);
     if (!pack) return res.status(400).json({ error: "BAD_PACK" });
-
-    const token = await paypalAccessToken();
-
-    const PAYPAL_BASE =
-        process.env.PAYPAL_ENV === "live"
-            ? "https://api-m.paypal.com"
-            : "https://api-m.sandbox.paypal.com";
-
-    const r = await fetch(
-        `${PAYPAL_BASE}/v2/checkout/orders`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                intent: "CAPTURE",
-                purchase_units: [
-                    {
-                        amount: {
-                            currency_code: pack.currency,
-                            value: pack.amount,
-                        },
-                        description: pack.label,
-                        custom_id: String(req.session.userId), // важно: userId
-                    },
-                ],
-                application_context: {
-                    return_url: `${process.env.APP_URL}/account?paid=1`,
-                    cancel_url: `${process.env.APP_URL}/account`,
-                },
-            }),
-        }
-    );
-
-    const order = await r.json().catch(() => ({}));
-    if (!r.ok) return res.status(400).json({ error: "CREATE_ORDER_FAILED", data: order });
-
-    // ✅ фиксируем выбранный пакет по orderId (чтобы capture/webhook знали сколько начислять)
-    if (order?.id) {
-        await db.query(
-            `insert into paypal_orders(order_id, user_id, credits, status, pack_key, amount_usd)
-             values($1,$2,$3,'created',$4,$5)
-             on conflict (order_id) do nothing`,
-            [order.id, req.session.userId, pack.credits, packKey, pack.amount]
-        );
+    if (!pack.paddlePriceId) {
+        return res.status(500).json({
+            error: "PADDLE_PRICE_NOT_CONFIGURED",
+            message: `Missing ${pack.paddlePriceEnv} for pack ${packKey}`
+        });
     }
 
-    res.json(order);
+    const checkoutBase = String(
+        process.env.PADDLE_CHECKOUT_URL ||
+        `${String(process.env.APP_URL || "").replace(/\/+$/, "")}/checkout/paddle/`
+    ).trim();
+    if (!/^https?:\/\//i.test(checkoutBase)) {
+        return res.status(500).json({ error: "PADDLE_CHECKOUT_URL_INVALID" });
+    }
+
+    const response = await paddleApiRequest("/transactions?include=checkout", {
+        method: "POST",
+        body: JSON.stringify({
+            items: [{ price_id: pack.paddlePriceId, quantity: 1 }],
+            collection_mode: "automatic",
+            custom_data: {
+                user_id: String(req.session.userId),
+                pack_key: pack.key,
+                credits: Number(pack.credits)
+            },
+            checkout: {
+                url: checkoutBase
+            }
+        })
+    });
+
+    if (!response.ok) {
+        console.error("Paddle create-checkout failed", {
+            status: response.status,
+            env: process.env.PADDLE_ENV || "sandbox",
+            userId: req.session.userId,
+            packKey,
+            paddle: response.body
+        });
+        return res.status(400).json({ error: "CREATE_CHECKOUT_FAILED", data: response.body });
+    }
+
+    const tx = response.body?.data || {};
+    const transactionId = String(tx?.id || "").trim();
+    const checkoutUrl = String(tx?.checkout?.url || "").trim();
+    if (!transactionId || !checkoutUrl) {
+        return res.status(502).json({
+            error: "CHECKOUT_URL_MISSING",
+            data: response.body
+        });
+    }
+
+    await ensurePaddleTransactionsTable();
+    await db.query(
+        `insert into paddle_transactions(transaction_id, user_id, credits, status, pack_key, price_id, amount_usd, custom_data, updated_at)
+         values($1,$2,$3,$4,$5,$6,$7,$8::jsonb,now())
+         on conflict (transaction_id) do update
+         set user_id=excluded.user_id,
+             credits=excluded.credits,
+             pack_key=excluded.pack_key,
+             price_id=excluded.price_id,
+             amount_usd=excluded.amount_usd,
+             custom_data=excluded.custom_data,
+             updated_at=now()`,
+        [
+            transactionId,
+            req.session.userId,
+            pack.credits,
+            String(tx?.status || "created"),
+            pack.key,
+            pack.paddlePriceId,
+            Number(pack.amount),
+            JSON.stringify({
+                user_id: String(req.session.userId),
+                pack_key: pack.key,
+                credits: Number(pack.credits)
+            })
+        ]
+    );
+
+    return res.json({
+        ok: true,
+        transactionId,
+        checkoutUrl
+    });
 });
 
-app.post("/api/paypal/capture-order", rl.byUser({ limit: 15, windowSec: 600 }), async (req, res) => {
+app.get("/api/paddle/transaction-status", rl.byUser({ limit: 180, windowSec: 600 }), async (req, res) => {
     if (!req.session?.userId) return res.sendStatus(401);
+    const txn = String(req.query?.txn || "").trim();
+    if (!txn) return res.status(400).json({ error: "TXN_REQUIRED" });
 
-    const orderId = String(req.body?.orderId || "");
-    if (!orderId) return res.status(400).json({ error: "orderId required" });
-
-    const token = await paypalAccessToken();
-
-    const PAYPAL_BASE =
-        process.env.PAYPAL_ENV === "live"
-            ? "https://api-m.paypal.com"
-            : "https://api-m.sandbox.paypal.com";
-
-    const r = await fetch(
-        `${PAYPAL_BASE}/v2/checkout/orders/${orderId}/capture`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            }
-        }
+    await ensurePaddleTransactionsTable();
+    const tr = await db.query(
+        `select transaction_id, status, credits
+         from paddle_transactions
+         where transaction_id=$1 and user_id=$2
+         limit 1`,
+        [txn, req.session.userId]
     );
-
-    const data = await r.json().catch(() => ({}));
-    if (!r.ok) return res.status(400).json({ error: "CAPTURE_FAILED", data });
-
-    // 1) узнаём сколько кредитов у этого заказа (из БД)
-    const or = await db.query(
-        `select credits, status from paypal_orders where order_id=$1 and user_id=$2`,
-        [orderId, req.session.userId]
-    );
-
-    let creditsToAdd = null;
-
-    if (or.rowCount) {
-        creditsToAdd = Number(or.rows[0].credits || 0);
-    } else {
-        // fallback: если почему-то заказа нет в БД (редко)
-        const capturedValue =
-            data?.purchase_units?.[0]?.payments?.captures?.[0]?.amount?.value ||
-            data?.purchase_units?.[0]?.amount?.value ||
-            "";
-
-        if (String(capturedValue) === "1.99") creditsToAdd = 10;
-        else if (String(capturedValue) === "4.99") creditsToAdd = 30;
-        else if (String(capturedValue) === "7.99") creditsToAdd = 50;
-        else if (String(capturedValue) === "19.99") creditsToAdd = 150;
-        else creditsToAdd = 0;
-
-        // попробуем создать запись
-        await db.query(
-            `insert into paypal_orders(order_id, user_id, credits, status)
-             values($1,$2,$3,'created')
-             on conflict (order_id) do nothing`,
-            [orderId, req.session.userId, creditsToAdd]
-        );
-    }
-
-    if (!creditsToAdd) {
-        return res.status(400).json({ error: "UNKNOWN_PACK_OR_ZERO_CREDITS" });
-    }
-
-    // 2) отмечаем заказ paid ТОЛЬКО если ещё не paid (идемпотентность)
-    const upd = await db.query(
-        `update paypal_orders
-         set status='paid'
-         where order_id=$1 and user_id=$2 and status <> 'paid'
-         returning credits`,
-        [orderId, req.session.userId]
-    );
-
-    // если уже был paid — ничего не начисляем повторно
-    if (upd.rowCount) {
-        const credits = Number(upd.rows[0].credits || creditsToAdd);
-
-        await db.query(
-            `insert into verdict_wallets(user_id, credits)
-             values($1,$2)
-             on conflict (user_id)
-             do update set credits = GREATEST(COALESCE(verdict_wallets.credits, 0), 0) + EXCLUDED.credits`,
-            [req.session.userId, credits]
-        );
-    }
-
     const wr = await db.query(
         "select free_used, credits from verdict_wallets where user_id=$1",
         [req.session.userId]
@@ -6255,118 +6361,124 @@ app.post("/api/paypal/capture-order", rl.byUser({ limit: 15, windowSec: 600 }), 
         ? { free_used: !!wr.rows[0].free_used, credits: Number(wr.rows[0].credits || 0) }
         : { free_used: false, credits: 0 };
 
-    res.json({ ok: true, data, wallet });
+    if (!tr.rowCount) {
+        return res.status(404).json({ error: "TRANSACTION_NOT_FOUND", wallet });
+    }
+
+    return res.json({
+        ok: true,
+        transactionId: String(tr.rows[0].transaction_id || txn),
+        status: String(tr.rows[0].status || ""),
+        credits: Number(tr.rows[0].credits || 0),
+        wallet
+    });
 });
 
-app.post("/api/webhooks/paypal", rl.byIp({ limit: 300, windowSec: 600, prefix: "rl:paypal:webhook" }), async (req, res) => {
-    const transmissionId = req.headers["paypal-transmission-id"];
-    const sig = req.headers["paypal-transmission-sig"];
-    const time = req.headers["paypal-transmission-time"];
-    const cert = req.headers["paypal-cert-url"];
+app.post("/api/webhooks/paddle", rl.byIp({ limit: 600, windowSec: 600, prefix: "rl:paddle:webhook" }), async (req, res) => {
+    const signature = String(req.headers["paddle-signature"] || "");
+    const secret = paddleWebhookSecret();
+    if (!signature || !secret || !req.rawBody) return res.sendStatus(400);
+    if (!verifyPaddleWebhookSignature(req.rawBody, signature, secret, 300)) return res.sendStatus(400);
 
-    const token = await paypalAccessToken();
+    const event = req.body || {};
+    const eventType = String(event?.event_type || "").trim().toLowerCase();
+    const data = (event?.data && typeof event.data === "object") ? event.data : {};
+    const transactionId = String(data?.id || "").trim();
+    if (!transactionId) return res.sendStatus(200);
 
-    const PAYPAL_BASE =
-        process.env.PAYPAL_ENV === "live"
-            ? "https://api-m.paypal.com"
-            : "https://api-m.sandbox.paypal.com";
+    await ensurePaddleTransactionsTable();
 
-    // verify webhook
-    const verify = await fetch(
-        `${PAYPAL_BASE}/v1/notifications/verify-webhook-signature`,
-        {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                transmission_id: transmissionId,
-                transmission_sig: sig,
-                transmission_time: time,
-                cert_url: cert,
-                webhook_id: process.env.PAYPAL_WEBHOOK_ID,
-                webhook_event: req.body,
-            }),
-        }
+    const payloadStatus = String(data?.status || "").trim().toLowerCase();
+    const eventIsPaid =
+        eventType === "transaction.paid" ||
+        eventType === "transaction.completed" ||
+        (eventType === "transaction.updated" && payloadStatus === "completed");
+
+    const customData = (data?.custom_data && typeof data.custom_data === "object") ? data.custom_data : {};
+    const fromPayloadUserId = Number(customData?.user_id || 0);
+    const fromPayloadPackKey = String(customData?.pack_key || "").trim();
+    const fromPayloadCredits = Number(customData?.credits || 0);
+    const itemPriceId =
+        String(data?.items?.[0]?.price?.id || "").trim();
+
+    const fallbackPackKey = fromPayloadPackKey || packKeyByPaddlePriceId(itemPriceId);
+    const fallbackPack = fallbackPackKey ? PACKS[fallbackPackKey] : null;
+
+    const tr = await db.query(
+        `select user_id, credits, status
+         from paddle_transactions
+         where transaction_id=$1
+         limit 1`,
+        [transactionId]
     );
 
-    if (!verify.ok) return res.sendStatus(400);
-    const v = await verify.json().catch(() => null);
-    if (!v || v.verification_status !== "SUCCESS") return res.sendStatus(400);
+    let userId = tr.rowCount ? Number(tr.rows[0].user_id || 0) : fromPayloadUserId;
+    let creditsToAdd = tr.rowCount ? Number(tr.rows[0].credits || 0) : 0;
+    if (!creditsToAdd && Number.isFinite(fromPayloadCredits) && fromPayloadCredits > 0) {
+        creditsToAdd = Math.trunc(fromPayloadCredits);
+    }
+    if (!creditsToAdd && fallbackPack?.credits) {
+        creditsToAdd = Number(fallbackPack.credits);
+    }
 
-    const event = req.body;
+    const mergedStatus = eventIsPaid
+        ? "paid"
+        : (payloadStatus || String(eventType || "updated"));
 
+    if (!tr.rowCount && userId > 0 && creditsToAdd > 0) {
+        await db.query(
+            `insert into paddle_transactions(transaction_id, user_id, credits, status, pack_key, price_id, amount_usd, custom_data, updated_at)
+             values($1,$2,$3,$4,$5,$6,$7,$8::jsonb,now())
+             on conflict (transaction_id) do nothing`,
+            [
+                transactionId,
+                userId,
+                creditsToAdd,
+                "created",
+                fallbackPackKey || null,
+                itemPriceId || null,
+                fallbackPack ? Number(fallbackPack.amount) : null,
+                JSON.stringify(customData || {})
+            ]
+        );
+    } else if (!tr.rowCount) {
+        console.error("Paddle webhook unmatched transaction", {
+            eventType,
+            transactionId,
+            payloadStatus,
+            fromPayloadUserId,
+            fromPayloadPackKey,
+            itemPriceId
+        });
+    }
 
-    if (event.event_type === "PAYMENT.CAPTURE.COMPLETED" || event.event_type === "CHECKOUT.ORDER.COMPLETED") {
-        const orderId =
-            event.resource?.supplementary_data?.related_ids?.order_id ||
-            event.resource?.id;
+    if (!eventIsPaid) {
+        await db.query(
+            `update paddle_transactions
+             set status=$2, updated_at=now()
+             where transaction_id=$1`,
+            [transactionId, mergedStatus]
+        );
+        return res.sendStatus(200);
+    }
 
-        const pu = event.resource?.purchase_units?.[0];
-        const fromPayloadUserId = Number(pu?.custom_id);
+    const upd = await db.query(
+        `update paddle_transactions
+         set status='paid', updated_at=now()
+         where transaction_id=$1 and status <> 'paid'
+         returning user_id, credits`,
+        [transactionId]
+    );
 
-        if (orderId) {
-            // 1) достаём credits из БД по orderId
-            const or = await db.query(
-                `select user_id, credits from paypal_orders where order_id=$1`,
-                [orderId]
-            );
-
-            const fromOrderUserId = or.rowCount ? Number(or.rows[0].user_id || 0) : 0;
-            const userId = fromPayloadUserId || fromOrderUserId;
-
-            let creditsToAdd = or.rowCount ? Number(or.rows[0].credits || 0) : 0;
-
-            // fallback по сумме (если заказа нет в БД)
-            if (!creditsToAdd) {
-                const amount =
-                    pu?.amount?.value ||
-                    event.resource?.amount?.value ||
-                    "";
-
-                if (String(amount) === "1.99") creditsToAdd = 10;
-                else if (String(amount) === "4.99") creditsToAdd = 30;
-                else if (String(amount) === "7.99") creditsToAdd = 50;
-                else if (String(amount) === "19.99") creditsToAdd = 150;
-            }
-
-            if (creditsToAdd && userId) {
-                // гарантируем запись о заказе
-                await db.query(
-                    `insert into paypal_orders(order_id, user_id, credits, status)
-                 values($1,$2,$3,'created')
-                 on conflict (order_id) do nothing`,
-                    [orderId, userId, creditsToAdd]
-                );
-
-                // ✅ идемпотентно переводим в paid
-                const upd = await db.query(
-                    `update paypal_orders
-                 set status='paid'
-                 where order_id=$1 and status <> 'paid'
-                 returning credits, user_id`,
-                    [orderId]
-                );
-
-                // начисляем только если реально сменили статус на paid
-                if (upd.rowCount) {
-                    const credits = Number(upd.rows[0].credits || creditsToAdd);
-                    const targetUserId = Number(upd.rows[0].user_id || userId);
-
-                    await db.query(
-                        `insert into verdict_wallets(user_id, credits)
-                     values($1,$2)
-                     on conflict (user_id)
-                     do update set credits = GREATEST(COALESCE(verdict_wallets.credits, 0), 0) + EXCLUDED.credits`,
-                        [targetUserId, credits]
-                    );
-                }
-            }
+    if (upd.rowCount) {
+        userId = Number(upd.rows[0].user_id || userId || 0);
+        creditsToAdd = Number(upd.rows[0].credits || creditsToAdd || 0);
+        if (userId > 0 && creditsToAdd > 0) {
+            await addWalletCredits(userId, creditsToAdd);
         }
     }
 
-    res.sendStatus(200);
+    return res.sendStatus(200);
 });
 
 function miniVerdictUniversal(calc) {

@@ -23,11 +23,11 @@ async function csrfFetch(url, init = {}, retryOnCsrf = true) {
 async function buyPack(packKey, btn) {
     const original = btn.textContent;
     btn.disabled = true;
-    btn.textContent = "Redirecting to PayPal…";
+    btn.textContent = "Redirecting to checkout…";
 
     try {
         await ensureCsrfToken();
-        const r = await csrfFetch("/api/paypal/create-order", {
+        const r = await csrfFetch("/api/paddle/create-checkout", {
             method: "POST",
             headers: withCsrfHeaders({ "Content-Type": "application/json" }),
             credentials: "include",
@@ -40,17 +40,17 @@ async function buyPack(packKey, btn) {
         }
 
         const order = await r.json().catch(() => ({}));
-        if (!r.ok) throw new Error(order?.error || "CREATE_ORDER_FAILED");
+        if (!r.ok) throw new Error(order?.error || "CREATE_CHECKOUT_FAILED");
 
-        const approve = order?.links?.find(l => l.rel === "approve")?.href;
-        if (!approve) throw new Error("NO_APPROVE_LINK");
+        const checkoutUrl = String(order?.checkoutUrl || "");
+        if (!checkoutUrl) throw new Error("NO_CHECKOUT_URL");
 
-        window.location.href = approve;
+        window.location.href = checkoutUrl;
     } catch (e) {
         console.error(e);
         btn.disabled = false;
         btn.textContent = original;
-        showPricingError(btn, "Failed to create PayPal order. Please try again.");
+        showPricingError(btn, "Failed to create checkout. Please try again.");
     }
 }
 

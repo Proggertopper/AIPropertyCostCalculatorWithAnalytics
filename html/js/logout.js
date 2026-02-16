@@ -26,7 +26,7 @@ var csrfToken = "";
         }
         if (u.origin !== window.location.origin) return false;
         if (!u.pathname.startsWith("/api/")) return false;
-        if (u.pathname === "/api/webhooks/paypal") return false;
+        if (u.pathname === "/api/webhooks/paddle") return false;
         return true;
     }
 

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Secure Checkout - PropertyCost</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        .paddle-wrap {
+            min-height: 72vh;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+        .paddle-card {
+            max-width: 680px;
+            width: 100%;
+            border: 1px solid #d9dee8;
+            border-radius: 14px;
+            padding: 24px;
+            background: #fff;
+        }
+        .paddle-title {
+            margin: 0 0 10px;
+            font-size: 1.35rem;
+            font-weight: 700;
+        }
+        .paddle-status {
+            margin: 0;
+            color: #4b5563;
+        }
+        .paddle-actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .paddle-legal {
+            margin-top: 16px;
+            font-size: 0.92rem;
+            color: #4b5563;
+        }
+        .paddle-legal a {
+            color: #0b5bd3;
+            text-decoration: none;
+        }
+        .paddle-legal a:hover {
+            text-decoration: underline;
+        }
+    </style>
+    <script src="https://cdn.paddle.com/paddle/v2/paddle.js" defer></script>
+    <script src="/js/paddleCheckout.js" defer></script>
+</head>
+<body>
+<main class="paddle-wrap">
+    <section class="paddle-card" aria-live="polite">
+        <h1 class="paddle-title">Secure checkout</h1>
+        <p id="paddleStatus" class="paddle-status">Preparing checkout...</p>
+        <div class="paddle-actions">
+            <a id="paddleBackToPricing" class="btn hidden" href="/pricing/">Back to pricing</a>
+            <a id="paddleBackToAccount" class="btn hidden" href="/account/">Back to account</a>
+        </div>
+        <p class="paddle-legal">
+            By continuing, you agree to our
+            <a href="/terms/">Terms</a>,
+            <a href="/privacy/">Privacy Policy</a>, and
+            <a href="/refund/">Refund Policy</a>.
+        </p>
+    </section>
+</main>
+</body>
+</html>

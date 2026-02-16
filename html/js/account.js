@@ -263,38 +263,35 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
 })();
 
 
-(async function handlePaypalReturn() {
+(async function handlePaddleReturn() {
     const qs = new URLSearchParams(location.search);
-    const orderId = qs.get("token"); // PayPal кладёт order id в token
-    const paid = qs.get("paid");
+    const txn = String(qs.get("txn") || "").trim();
+    const paid = qs.get("paddle_paid");
 
-    if (!orderId || !paid) return;
+    if (!txn || !paid) return;
 
-    try {
-        await ensureCsrfToken();
-        const r = await fetch("/api/paypal/capture-order", {
-            method: "POST",
-            headers: withCsrfHeaders({ "Content-Type": "application/json" }),
-            credentials: "include",
-            body: JSON.stringify({ orderId })
+    async function checkOnce() {
+        const r = await fetch(`/api/paddle/transaction-status?txn=${encodeURIComponent(txn)}`, {
+            credentials: "include"
         });
-
         const j = await r.json().catch(() => ({}));
-        if (j.wallet) {
+        if (j?.wallet) {
             window.__BOOT__ = window.__BOOT__ || {};
             window.__BOOT__.account = window.__BOOT__.account || {};
             window.__BOOT__.account.wallet = j.wallet;
-
             applyWalletToAiButtons(j.wallet);
         }
-        if (!r.ok) {
-            console.error("CAPTURE failed", j);
-            return;
+        return { r, j };
+    }
+
+    try {
+        for (let i = 0; i < 20; i++) {
+            const { r, j } = await checkOnce();
+            if (r.ok && String(j?.status || "").toLowerCase() === "paid") break;
+            if (i < 19) await waitMs(1200);
         }
 
-        // чтобы не капчурить повторно при обновлении страницы
         history.replaceState({}, "", "/account/");
-        // можно показать “Payment successful” и/или обновить UI
     } catch (e) {
         console.error(e);
     }
@@ -554,11 +551,11 @@ function makeBuyButton(details, text, packKey) {
 
     btn.addEventListener("click", async () => {
         btn.disabled = true;
-        btn.textContent = "Redirecting to PayPal…";
+        btn.textContent = "Redirecting to checkout…";
 
         try {
             await ensureCsrfToken();
-            const r = await fetch("/api/paypal/create-order", {
+            const r = await fetch("/api/paddle/create-checkout", {
                 method: "POST",
                 headers: withCsrfHeaders({ "Content-Type": "application/json" }),
                 credentials: "include",
@@ -568,23 +565,23 @@ function makeBuyButton(details, text, packKey) {
             const order = await r.json().catch(() => ({}));
 
             if (!r.ok) {
-                console.error("create-order failed", r.status, order);
+                console.error("create-checkout failed", r.status, order);
                 btn.disabled = false;
                 btn.textContent = text;
-                details.appendChild(el("div", "verdict bad", "Failed to create PayPal order."));
+                details.appendChild(el("div", "verdict bad", "Failed to create checkout."));
                 return;
             }
 
-            const approve = order?.links?.find(l => l.rel === "approve")?.href;
-            if (!approve) {
-                console.error("No approve link", order);
+            const checkoutUrl = String(order?.checkoutUrl || "");
+            if (!checkoutUrl) {
+                console.error("No checkout URL", order);
                 btn.disabled = false;
                 btn.textContent = text;
-                details.appendChild(el("div", "verdict bad", "PayPal approve link not found."));
+                details.appendChild(el("div", "verdict bad", "Checkout URL not found."));
                 return;
             }
 
-            window.location.href = approve;
+            window.location.href = checkoutUrl;
         } catch (e) {
             console.error(e);
             btn.disabled = false;
