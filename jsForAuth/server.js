@@ -3136,6 +3136,13 @@ function verifyNowPaymentsWebhookSignature(payloadObj, signatureHeader, secret) 
     return timingSafeHexEqual(expected, signature);
 }
 
+function shortHex(value, left = 10, right = 6) {
+    const s = String(value || "").trim();
+    if (!s) return "";
+    if (s.length <= left + right + 3) return s;
+    return `${s.slice(0, left)}...${s.slice(-right)}`;
+}
+
 async function nowPaymentsApiRequest(pathname, init = {}) {
     const apiKey = nowPaymentsApiKey();
     if (!apiKey) {
@@ -6580,10 +6587,43 @@ app.get("/api/nowpayments/transaction-status", rl.byUser({ limit: 180, windowSec
 app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, prefix: "rl:nowpayments:webhook" }), async (req, res) => {
     const signature = String(req.headers["x-nowpayments-sig"] || "").trim();
     const secret = nowPaymentsIpnSecret();
-    if (!signature || !secret) return res.sendStatus(400);
-
     const payload = (req.body && typeof req.body === "object") ? req.body : {};
-    if (!verifyNowPaymentsWebhookSignature(payload, signature, secret)) return res.sendStatus(400);
+    const rawBody = Buffer.isBuffer(req.rawBody) ? req.rawBody.toString("utf8") : "";
+    const rawBodyBytes = Buffer.isBuffer(req.rawBody) ? req.rawBody.length : 0;
+    const payloadKeys = Object.keys(payload || {});
+
+    if (!signature || !secret) {
+        console.warn("NOWPayments webhook rejected: missing signature/secret", {
+            hasSignature: !!signature,
+            hasSecret: !!secret,
+            signatureLen: signature.length,
+            ip: req.ip,
+            contentType: String(req.headers["content-type"] || ""),
+            rawBodyBytes,
+            payloadKeys
+        });
+        return res.sendStatus(400);
+    }
+
+    if (!verifyNowPaymentsWebhookSignature(payload, signature, secret)) {
+        const sortedPayload = nowPaymentsTopLevelSortedJson(payload);
+        const expectedSortedSig = hmacSha512Hex(secret, sortedPayload);
+        const expectedRawSig = rawBody ? hmacSha512Hex(secret, rawBody) : "";
+        console.warn("NOWPayments webhook rejected: signature mismatch", {
+            ip: req.ip,
+            signature: shortHex(signature),
+            expectedSortedSig: shortHex(expectedSortedSig),
+            expectedRawSig: shortHex(expectedRawSig),
+            orderId: String(payload?.order_id || ""),
+            invoiceId: String(payload?.invoice_id || ""),
+            paymentId: String(payload?.payment_id || ""),
+            paymentStatus: String(payload?.payment_status || payload?.status || "").trim().toLowerCase(),
+            contentType: String(req.headers["content-type"] || ""),
+            rawBodyBytes,
+            payloadKeys
+        });
+        return res.sendStatus(400);
+    }
 
     await ensureNowPaymentsTables();
 
