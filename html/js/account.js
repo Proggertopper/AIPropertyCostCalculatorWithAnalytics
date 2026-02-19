@@ -263,15 +263,26 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
 })();
 
 
-(async function handlePaddleReturn() {
+(async function handlePaymentReturn() {
     const qs = new URLSearchParams(location.search);
     const txn = String(qs.get("txn") || "").trim();
-    const paid = qs.get("paddle_paid");
+    const paddlePaid = qs.get("paddle_paid");
+    const nowPaid = qs.get("np_paid");
+    const providerHint = String(
+        qs.get("provider") || (nowPaid ? "nowpayments" : (paddlePaid ? "paddle" : ""))
+    ).trim().toLowerCase();
 
-    if (!txn || !paid) return;
+    if (!txn || (!paddlePaid && !nowPaid)) return;
 
-    async function checkOnce() {
-        const r = await fetch(`/api/paddle/transaction-status?txn=${encodeURIComponent(txn)}`, {
+    const endpoints =
+        providerHint === "paddle"
+            ? ["/api/paddle/transaction-status"]
+            : providerHint === "nowpayments"
+                ? ["/api/nowpayments/transaction-status"]
+                : ["/api/nowpayments/transaction-status", "/api/paddle/transaction-status"];
+
+    async function checkWithEndpoint(endpoint) {
+        const r = await fetch(`${endpoint}?txn=${encodeURIComponent(txn)}`, {
             credentials: "include"
         });
         const j = await r.json().catch(() => ({}));
@@ -282,6 +293,16 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
             applyWalletToAiButtons(j.wallet);
         }
         return { r, j };
+    }
+
+    async function checkOnce() {
+        let last = { r: { ok: false }, j: {} };
+        for (const endpoint of endpoints) {
+            const out = await checkWithEndpoint(endpoint);
+            last = out;
+            if (out?.r?.ok) return out;
+        }
+        return last;
     }
 
     try {
@@ -555,33 +576,37 @@ function makeBuyButton(details, text, packKey) {
 
         try {
             await ensureCsrfToken();
-            const r = await fetch("/api/paddle/create-checkout", {
-                method: "POST",
-                headers: withCsrfHeaders({ "Content-Type": "application/json" }),
-                credentials: "include",
-                body: JSON.stringify({ pack: packKey })
-            });
+            const endpoints = [
+                "/api/nowpayments/create-checkout",
+                "/api/paddle/create-checkout"
+            ];
+            let redirected = false;
+            let lastErr = null;
 
-            const order = await r.json().catch(() => ({}));
+            for (const endpoint of endpoints) {
+                const r = await fetch(endpoint, {
+                    method: "POST",
+                    headers: withCsrfHeaders({ "Content-Type": "application/json" }),
+                    credentials: "include",
+                    body: JSON.stringify({ pack: packKey })
+                });
+                const order = await r.json().catch(() => ({}));
+                const checkoutUrl = String(order?.checkoutUrl || "");
+                if (r.ok && checkoutUrl) {
+                    redirected = true;
+                    window.location.href = checkoutUrl;
+                    break;
+                }
+                lastErr = { endpoint, status: r.status, order };
+            }
 
-            if (!r.ok) {
-                console.error("create-checkout failed", r.status, order);
+            if (!redirected) {
+                console.error("create-checkout failed", lastErr);
                 btn.disabled = false;
                 btn.textContent = text;
                 details.appendChild(el("div", "verdict bad", "Failed to create checkout."));
                 return;
             }
-
-            const checkoutUrl = String(order?.checkoutUrl || "");
-            if (!checkoutUrl) {
-                console.error("No checkout URL", order);
-                btn.disabled = false;
-                btn.textContent = text;
-                details.appendChild(el("div", "verdict bad", "Checkout URL not found."));
-                return;
-            }
-
-            window.location.href = checkoutUrl;
         } catch (e) {
             console.error(e);
             btn.disabled = false;

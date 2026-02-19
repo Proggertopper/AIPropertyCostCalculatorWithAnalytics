@@ -104,7 +104,7 @@ app.use(helmet({
 app.use(express.json({
     limit: "10mb",
     verify: (req, res, buf) => {
-        if (req.originalUrl.includes("/api/webhooks/paddle")) {
+        if (req.originalUrl.includes("/api/webhooks/paddle") || req.originalUrl.includes("/api/webhooks/nowpayments")) {
             req.rawBody = buf;
         }
     }
@@ -114,6 +114,7 @@ function needsCsrfProtection(req) {
     if (!["POST", "PUT", "PATCH", "DELETE"].includes(String(req.method || "").toUpperCase())) return false;
     if (!String(req.path || "").startsWith("/api/")) return false;
     if (req.path === "/api/webhooks/paddle") return false;
+    if (req.path === "/api/webhooks/nowpayments") return false;
     return true;
 }
 
@@ -3022,6 +3023,199 @@ async function paddleApiRequest(pathname, init = {}) {
         body
     };
 }
+
+const NOWPAYMENTS_BASE = String(process.env.NOWPAYMENTS_API_BASE || "https://api.nowpayments.io/v1")
+    .trim()
+    .replace(/\/+$/, "");
+
+let nowPaymentsTransactionsTableReady = null;
+
+async function ensureNowPaymentsTables() {
+    if (nowPaymentsTransactionsTableReady) return nowPaymentsTransactionsTableReady;
+    nowPaymentsTransactionsTableReady = (async () => {
+        await db.query(`
+      create table if not exists nowpayments_transactions (
+        id bigserial primary key,
+        transaction_id text not null unique,
+        provider_invoice_id text,
+        provider_payment_id text,
+        user_id bigint not null references users(id) on delete cascade,
+        credits integer not null default 0,
+        status text not null default 'created',
+        pack_key text,
+        amount_usd numeric(10,2),
+        price_currency text not null default 'usd',
+        pay_currency text,
+        paid_price_amount numeric(16,8),
+        paid_currency text,
+        actually_paid numeric(24,12),
+        outcome_amount numeric(24,12),
+        outcome_currency text,
+        webhook_count integer not null default 0,
+        last_webhook_event_hash text,
+        last_payload jsonb,
+        paid_at timestamptz,
+        last_ipn_at timestamptz,
+        created_at timestamptz not null default now(),
+        updated_at timestamptz not null default now()
+      )
+    `);
+        await db.query(`
+      create table if not exists nowpayments_webhook_events (
+        id bigserial primary key,
+        event_hash text not null unique,
+        payment_id text,
+        order_id text,
+        invoice_id text,
+        status text,
+        signature text,
+        payload jsonb not null,
+        created_at timestamptz not null default now()
+      )
+    `);
+        await db.query(`create index if not exists idx_nowpayments_transactions_user_created on nowpayments_transactions(user_id, created_at desc)`);
+        await db.query(`create index if not exists idx_nowpayments_transactions_status_created on nowpayments_transactions(status, created_at desc)`);
+        await db.query(`create index if not exists idx_nowpayments_transactions_invoice on nowpayments_transactions(provider_invoice_id)`);
+        await db.query(`create index if not exists idx_nowpayments_webhook_events_payment_created on nowpayments_webhook_events(payment_id, created_at desc)`);
+    })().catch((e) => {
+        nowPaymentsTransactionsTableReady = null;
+        throw e;
+    });
+    return nowPaymentsTransactionsTableReady;
+}
+
+function nowPaymentsApiKey() {
+    return String(process.env.NOWPAYMENTS_API_KEY || "").trim();
+}
+
+function nowPaymentsIpnSecret() {
+    return String(process.env.NOWPAYMENTS_IPN_SECRET || "").trim();
+}
+
+function sortObjectKeysDeep(value) {
+    if (Array.isArray(value)) return value.map(sortObjectKeysDeep);
+    if (!value || typeof value !== "object") return value;
+    const out = {};
+    for (const key of Object.keys(value).sort()) {
+        out[key] = sortObjectKeysDeep(value[key]);
+    }
+    return out;
+}
+
+function jsonStableStringify(value) {
+    return JSON.stringify(sortObjectKeysDeep(value ?? {}));
+}
+
+function nowPaymentsTopLevelSortedJson(value) {
+    const obj = (value && typeof value === "object" && !Array.isArray(value)) ? value : {};
+    const sorted = {};
+    for (const key of Object.keys(obj).sort()) {
+        sorted[key] = obj[key];
+    }
+    return JSON.stringify(sorted);
+}
+
+function hmacSha512Hex(secret, payload) {
+    return crypto.createHmac("sha512", String(secret || ""))
+        .update(String(payload || ""))
+        .digest("hex");
+}
+
+function sha256Hex(payload) {
+    return crypto.createHash("sha256")
+        .update(String(payload || ""))
+        .digest("hex");
+}
+
+function verifyNowPaymentsWebhookSignature(payloadObj, signatureHeader, secret) {
+    if (!secret) return false;
+    const signature = String(signatureHeader || "").trim();
+    if (!signature) return false;
+    const payload = nowPaymentsTopLevelSortedJson(payloadObj);
+    const expected = hmacSha512Hex(secret, payload);
+    return timingSafeHexEqual(expected, signature);
+}
+
+async function nowPaymentsApiRequest(pathname, init = {}) {
+    const apiKey = nowPaymentsApiKey();
+    if (!apiKey) {
+        return {
+            ok: false,
+            status: 500,
+            body: { error: "NOWPAYMENTS_API_KEY_MISSING" }
+        };
+    }
+
+    const headers = {
+        "x-api-key": apiKey,
+        "Content-Type": "application/json",
+        ...(init.headers || {})
+    };
+
+    const path = String(pathname || "");
+    const normalizedPath = path.startsWith("/") ? path : `/${path}`;
+    const response = await fetch(`${NOWPAYMENTS_BASE}${normalizedPath}`, {
+        ...init,
+        headers
+    });
+    const body = await response.json().catch(() => ({}));
+    return {
+        ok: response.ok,
+        status: response.status,
+        body
+    };
+}
+
+function appBaseUrl() {
+    return String(process.env.APP_URL || "").trim().replace(/\/+$/, "");
+}
+
+function isHttpUrl(value) {
+    return /^https?:\/\//i.test(String(value || "").trim());
+}
+
+function buildAppUrl(pathname) {
+    const base = appBaseUrl();
+    if (!isHttpUrl(base)) return "";
+    const suffix = String(pathname || "").startsWith("/") ? String(pathname || "") : `/${String(pathname || "")}`;
+    return `${base}${suffix}`;
+}
+
+function parseBoolEnv(raw, fallback = false) {
+    if (raw === undefined || raw === null || raw === "") return !!fallback;
+    const v = String(raw).trim().toLowerCase();
+    if (["1", "true", "yes", "on"].includes(v)) return true;
+    if (["0", "false", "no", "off"].includes(v)) return false;
+    return !!fallback;
+}
+
+function roundMoney2(value) {
+    const n = Number(value);
+    if (!Number.isFinite(n)) return null;
+    return Math.round(n * 100) / 100;
+}
+
+function almostEqualMoney(a, b, tolerance = 0.01) {
+    const left = Number(a);
+    const right = Number(b);
+    if (!Number.isFinite(left) || !Number.isFinite(right)) return false;
+    return Math.abs(left - right) <= Math.max(0.000001, Number(tolerance || 0.01));
+}
+
+function generateNowPaymentsOrderId(userId) {
+    const uid = Number(userId || 0);
+    const rand = crypto.randomBytes(6).toString("hex");
+    return `np_${uid}_${Date.now()}_${rand}`;
+}
+
+function userIdFromNowPaymentsOrderId(orderId) {
+    const m = /^np_(\d+)_/i.exec(String(orderId || "").trim());
+    if (!m) return 0;
+    const uid = Number(m[1] || 0);
+    return Number.isFinite(uid) && uid > 0 ? uid : 0;
+}
+
+const NOWPAYMENTS_PAID_STATUSES = new Set(["finished"]);
 
 
 function n(v) {
@@ -6236,6 +6430,307 @@ async function addWalletCredits(userId, credits) {
         [userId, credits]
     );
 }
+
+async function readWalletSnapshot(userId) {
+    const wr = await db.query(
+        "select free_used, credits from verdict_wallets where user_id=$1",
+        [userId]
+    );
+    return wr.rowCount
+        ? { free_used: !!wr.rows[0].free_used, credits: Number(wr.rows[0].credits || 0) }
+        : { free_used: false, credits: 0 };
+}
+
+app.post("/api/nowpayments/create-checkout", rl.byUser({ limit: 20, windowSec: 600 }), async (req, res) => {
+    if (!req.session?.userId) return res.sendStatus(401);
+
+    const packKey = String(req.body?.pack || "basic10");
+    const pack = getPack(packKey);
+    if (!pack) return res.status(400).json({ error: "BAD_PACK" });
+
+    const callbackUrl = String(
+        process.env.NOWPAYMENTS_IPN_URL || buildAppUrl("/api/webhooks/nowpayments")
+    ).trim();
+    const orderId = generateNowPaymentsOrderId(req.session.userId);
+    const successUrl = String(
+        process.env.NOWPAYMENTS_SUCCESS_URL ||
+        buildAppUrl(`/account/?np_paid=1&provider=nowpayments&txn=${encodeURIComponent(orderId)}`)
+    ).trim();
+    const cancelUrl = String(
+        process.env.NOWPAYMENTS_CANCEL_URL || buildAppUrl("/pricing/?np_cancelled=1")
+    ).trim();
+
+    if (!isHttpUrl(callbackUrl)) return res.status(500).json({ error: "NOWPAYMENTS_IPN_URL_INVALID" });
+    if (!isHttpUrl(successUrl)) return res.status(500).json({ error: "NOWPAYMENTS_SUCCESS_URL_INVALID" });
+    if (!isHttpUrl(cancelUrl)) return res.status(500).json({ error: "NOWPAYMENTS_CANCEL_URL_INVALID" });
+
+    const fixedRate = parseBoolEnv(process.env.NOWPAYMENTS_FIXED_RATE, true);
+    const feePaidByUser = parseBoolEnv(process.env.NOWPAYMENTS_FEE_PAID_BY_USER, false);
+    const forcedPayCurrency = String(process.env.NOWPAYMENTS_PAY_CURRENCY || "").trim().toLowerCase();
+    const requestPayload = {
+        price_amount: Number(pack.amount),
+        price_currency: String(pack.currency || "USD").trim().toLowerCase(),
+        order_id: orderId,
+        order_description: `PropertyCost ${pack.label}`,
+        ipn_callback_url: callbackUrl,
+        success_url: successUrl,
+        cancel_url: cancelUrl,
+        is_fixed_rate: fixedRate,
+        is_fee_paid_by_user: feePaidByUser
+    };
+    if (forcedPayCurrency) requestPayload.pay_currency = forcedPayCurrency;
+
+    const response = await nowPaymentsApiRequest("/invoice", {
+        method: "POST",
+        body: JSON.stringify(requestPayload)
+    });
+    if (!response.ok) {
+        console.error("NOWPayments create-checkout failed", {
+            status: response.status,
+            userId: req.session.userId,
+            packKey,
+            nowpayments: response.body
+        });
+        return res.status(400).json({ error: "CREATE_CHECKOUT_FAILED", data: response.body });
+    }
+
+    const tx = (response.body?.data && typeof response.body.data === "object")
+        ? response.body.data
+        : (response.body || {});
+    const providerInvoiceId = String(tx?.id || tx?.invoice_id || "").trim();
+    const checkoutUrl = String(tx?.invoice_url || tx?.payment_url || tx?.pay_url || tx?.url || "").trim();
+    if (!checkoutUrl) {
+        return res.status(502).json({
+            error: "CHECKOUT_URL_MISSING",
+            data: response.body
+        });
+    }
+
+    await ensureNowPaymentsTables();
+    await db.query(
+        `insert into nowpayments_transactions(
+            transaction_id, provider_invoice_id, user_id, credits, status, pack_key, amount_usd, price_currency, pay_currency, last_payload, updated_at
+         )
+         values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10::jsonb,now())
+         on conflict (transaction_id) do update
+         set provider_invoice_id=excluded.provider_invoice_id,
+             user_id=excluded.user_id,
+             credits=excluded.credits,
+             status=excluded.status,
+             pack_key=excluded.pack_key,
+             amount_usd=excluded.amount_usd,
+             price_currency=excluded.price_currency,
+             pay_currency=excluded.pay_currency,
+             last_payload=excluded.last_payload,
+             updated_at=now()`,
+        [
+            orderId,
+            providerInvoiceId || null,
+            req.session.userId,
+            Number(pack.credits),
+            String(tx?.payment_status || tx?.status || "created").toLowerCase(),
+            pack.key,
+            Number(pack.amount),
+            String(pack.currency || "USD").trim().toLowerCase(),
+            forcedPayCurrency || null,
+            JSON.stringify({
+                request: requestPayload,
+                response: tx
+            })
+        ]
+    );
+
+    return res.json({
+        ok: true,
+        provider: "nowpayments",
+        transactionId: orderId,
+        checkoutUrl
+    });
+});
+
+app.get("/api/nowpayments/transaction-status", rl.byUser({ limit: 180, windowSec: 600 }), async (req, res) => {
+    if (!req.session?.userId) return res.sendStatus(401);
+    const txn = String(req.query?.txn || "").trim();
+    if (!txn) return res.status(400).json({ error: "TXN_REQUIRED" });
+
+    await ensureNowPaymentsTables();
+    const tr = await db.query(
+        `select transaction_id, status, credits
+         from nowpayments_transactions
+         where transaction_id=$1 and user_id=$2
+         limit 1`,
+        [txn, req.session.userId]
+    );
+    const wallet = await readWalletSnapshot(req.session.userId);
+
+    if (!tr.rowCount) {
+        return res.status(404).json({ error: "TRANSACTION_NOT_FOUND", wallet });
+    }
+
+    return res.json({
+        ok: true,
+        provider: "nowpayments",
+        transactionId: String(tr.rows[0].transaction_id || txn),
+        status: String(tr.rows[0].status || ""),
+        credits: Number(tr.rows[0].credits || 0),
+        wallet
+    });
+});
+
+app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, prefix: "rl:nowpayments:webhook" }), async (req, res) => {
+    const signature = String(req.headers["x-nowpayments-sig"] || "").trim();
+    const secret = nowPaymentsIpnSecret();
+    if (!signature || !secret) return res.sendStatus(400);
+
+    const payload = (req.body && typeof req.body === "object") ? req.body : {};
+    if (!verifyNowPaymentsWebhookSignature(payload, signature, secret)) return res.sendStatus(400);
+
+    await ensureNowPaymentsTables();
+
+    const paymentStatus = String(payload?.payment_status || payload?.status || "").trim().toLowerCase();
+    const orderId = String(payload?.order_id || "").trim();
+    const invoiceId = String(payload?.invoice_id || "").trim();
+    const paymentId = String(payload?.payment_id || "").trim();
+    const priceCurrency = String(payload?.price_currency || "").trim().toLowerCase();
+    const paidCurrency = String(payload?.pay_currency || "").trim().toLowerCase();
+    const outcomeCurrency = String(payload?.outcome_currency || "").trim().toLowerCase();
+    const priceAmount = roundMoney2(payload?.price_amount);
+    const paidPriceAmount = Number.isFinite(Number(payload?.pay_amount)) ? Number(payload?.pay_amount) : null;
+    const actuallyPaid = Number.isFinite(Number(payload?.actually_paid)) ? Number(payload?.actually_paid) : null;
+    const outcomeAmount = Number.isFinite(Number(payload?.outcome_amount)) ? Number(payload?.outcome_amount) : null;
+
+    const eventHash = sha256Hex(jsonStableStringify(payload));
+    await db.query(
+        `insert into nowpayments_webhook_events(event_hash, payment_id, order_id, invoice_id, status, signature, payload)
+         values($1,$2,$3,$4,$5,$6,$7::jsonb)
+         on conflict (event_hash) do nothing`,
+        [
+            eventHash,
+            paymentId || null,
+            orderId || null,
+            invoiceId || null,
+            paymentStatus || null,
+            signature,
+            JSON.stringify(payload)
+        ]
+    );
+
+    let tr = null;
+    if (orderId) {
+        tr = await db.query(
+            `select transaction_id, user_id, credits, status, amount_usd, price_currency
+             from nowpayments_transactions
+             where transaction_id=$1
+             limit 1`,
+            [orderId]
+        );
+    }
+    if ((!tr || !tr.rowCount) && invoiceId) {
+        tr = await db.query(
+            `select transaction_id, user_id, credits, status, amount_usd, price_currency
+             from nowpayments_transactions
+             where provider_invoice_id=$1
+             order by created_at desc
+             limit 1`,
+            [invoiceId]
+        );
+    }
+    if (!tr || !tr.rowCount) {
+        const fallbackUserId = userIdFromNowPaymentsOrderId(orderId);
+        console.error("NOWPayments webhook unmatched transaction", {
+            orderId,
+            invoiceId,
+            paymentId,
+            paymentStatus,
+            fallbackUserId
+        });
+        return res.sendStatus(200);
+    }
+
+    const row = tr.rows[0];
+    const transactionId = String(row.transaction_id || orderId || "").trim();
+    if (!transactionId) return res.sendStatus(200);
+
+    await db.query(
+        `update nowpayments_transactions
+         set status=case when status='paid' then status else $2 end,
+             provider_invoice_id=coalesce($3, provider_invoice_id),
+             provider_payment_id=coalesce($4, provider_payment_id),
+             pay_currency=coalesce($5, pay_currency),
+             paid_price_amount=coalesce($6, paid_price_amount),
+             paid_currency=coalesce($7, paid_currency),
+             actually_paid=coalesce($8, actually_paid),
+             outcome_amount=coalesce($9, outcome_amount),
+             outcome_currency=coalesce($10, outcome_currency),
+             webhook_count=webhook_count + 1,
+             last_webhook_event_hash=$11,
+             last_payload=$12::jsonb,
+             last_ipn_at=now(),
+             updated_at=now()
+         where transaction_id=$1`,
+        [
+            transactionId,
+            paymentStatus || "updated",
+            invoiceId || null,
+            paymentId || null,
+            paidCurrency || null,
+            paidPriceAmount,
+            paidCurrency || null,
+            actuallyPaid,
+            outcomeAmount,
+            outcomeCurrency || null,
+            eventHash,
+            JSON.stringify(payload)
+        ]
+    );
+
+    if (!NOWPAYMENTS_PAID_STATUSES.has(paymentStatus)) return res.sendStatus(200);
+    if (String(row.status || "").toLowerCase() === "paid") return res.sendStatus(200);
+
+    const expectedAmount = roundMoney2(row.amount_usd);
+    const expectedCurrency = String(row.price_currency || "usd").trim().toLowerCase();
+    const amountMatches = expectedAmount !== null && priceAmount !== null && almostEqualMoney(priceAmount, expectedAmount, 0.01);
+    const currencyMatches = !!priceCurrency && priceCurrency === expectedCurrency;
+    if (!amountMatches || !currencyMatches) {
+        await db.query(
+            `update nowpayments_transactions
+             set status=case when status='paid' then status else 'mismatch' end,
+                 updated_at=now()
+             where transaction_id=$1`,
+            [transactionId]
+        );
+        console.error("NOWPayments paid webhook mismatch", {
+            transactionId,
+            orderId,
+            invoiceId,
+            expectedAmount,
+            expectedCurrency,
+            payloadPriceAmount: priceAmount,
+            payloadPriceCurrency: priceCurrency
+        });
+        return res.sendStatus(200);
+    }
+
+    const upd = await db.query(
+        `update nowpayments_transactions
+         set status='paid',
+             paid_at=coalesce(paid_at, now()),
+             updated_at=now()
+         where transaction_id=$1 and status <> 'paid'
+         returning user_id, credits`,
+        [transactionId]
+    );
+
+    if (upd.rowCount) {
+        const userId = Number(upd.rows[0].user_id || 0);
+        const creditsToAdd = Number(upd.rows[0].credits || 0);
+        if (userId > 0 && creditsToAdd > 0) {
+            await addWalletCredits(userId, creditsToAdd);
+        }
+    }
+
+    return res.sendStatus(200);
+});
 
 app.get("/api/paddle/config", (req, res) => {
     const clientToken = paddleClientToken();

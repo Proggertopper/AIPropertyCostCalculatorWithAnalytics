@@ -27,25 +27,37 @@ async function buyPack(packKey, btn) {
 
     try {
         await ensureCsrfToken();
-        const r = await csrfFetch("/api/paddle/create-checkout", {
-            method: "POST",
-            headers: withCsrfHeaders({ "Content-Type": "application/json" }),
-            credentials: "include",
-            body: JSON.stringify({ pack: packKey })
-        });
+        const providers = [
+            "/api/nowpayments/create-checkout",
+            "/api/paddle/create-checkout"
+        ];
+        let lastErr = null;
 
-        if (r.status === 401) {
-            window.location.href = "/login/";
-            return;
+        for (const endpoint of providers) {
+            const r = await csrfFetch(endpoint, {
+                method: "POST",
+                headers: withCsrfHeaders({ "Content-Type": "application/json" }),
+                credentials: "include",
+                body: JSON.stringify({ pack: packKey })
+            });
+
+            if (r.status === 401) {
+                window.location.href = "/login/";
+                return;
+            }
+
+            const order = await r.json().catch(() => ({}));
+            const checkoutUrl = String(order?.checkoutUrl || "");
+            if (r.ok && checkoutUrl) {
+                window.location.href = checkoutUrl;
+                return;
+            }
+
+            lastErr = { endpoint, status: r.status, order };
         }
 
-        const order = await r.json().catch(() => ({}));
-        if (!r.ok) throw new Error(order?.error || "CREATE_CHECKOUT_FAILED");
-
-        const checkoutUrl = String(order?.checkoutUrl || "");
-        if (!checkoutUrl) throw new Error("NO_CHECKOUT_URL");
-
-        window.location.href = checkoutUrl;
+        console.error("create-checkout failed", lastErr);
+        throw new Error(lastErr?.order?.error || "CREATE_CHECKOUT_FAILED");
     } catch (e) {
         console.error(e);
         btn.disabled = false;

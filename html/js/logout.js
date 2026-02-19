@@ -27,6 +27,7 @@ var csrfToken = "";
         if (u.origin !== window.location.origin) return false;
         if (!u.pathname.startsWith("/api/")) return false;
         if (u.pathname === "/api/webhooks/paddle") return false;
+        if (u.pathname === "/api/webhooks/nowpayments") return false;
         return true;
     }
 
