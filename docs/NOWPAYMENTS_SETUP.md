@@ -25,7 +25,7 @@ NOWPAYMENTS_API_BASE=https://api.nowpayments.io/v1
 
 # Optional callback URLs (if not set, APP_URL-based defaults are used)
 NOWPAYMENTS_IPN_URL=https://your-domain.com/api/webhooks/nowpayments
-NOWPAYMENTS_SUCCESS_URL=https://your-domain.com/account/?np_paid=1&provider=nowpayments
+NOWPAYMENTS_SUCCESS_URL=https://your-domain.com/account/?np_paid=1&provider=nowpayments&txn=<order_id>
 NOWPAYMENTS_CANCEL_URL=https://your-domain.com/pricing/
 
 # Optional behavior
@@ -35,6 +35,7 @@ NOWPAYMENTS_FEE_PAID_BY_USER=false
 ```
 
 `APP_URL` must be a valid `https://...` URL (already used by the project).
+If `NOWPAYMENTS_SUCCESS_URL` is set without `np_paid/provider/txn`, backend normalizes and appends missing params automatically.
 
 ## 3) NOWPayments dashboard
 

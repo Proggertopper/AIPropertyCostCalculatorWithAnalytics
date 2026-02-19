@@ -3127,13 +3127,20 @@ function sha256Hex(payload) {
         .digest("hex");
 }
 
-function verifyNowPaymentsWebhookSignature(payloadObj, signatureHeader, secret) {
+function verifyNowPaymentsWebhookSignature(payloadObj, signatureHeader, secret, rawBody = "") {
     if (!secret) return false;
     const signature = String(signatureHeader || "").trim();
     if (!signature) return false;
     const payload = nowPaymentsTopLevelSortedJson(payloadObj);
     const expected = hmacSha512Hex(secret, payload);
-    return timingSafeHexEqual(expected, signature);
+    if (timingSafeHexEqual(expected, signature)) return true;
+
+    // Compatibility fallback: some providers sign raw JSON body.
+    if (rawBody) {
+        const expectedRaw = hmacSha512Hex(secret, String(rawBody || ""));
+        if (timingSafeHexEqual(expectedRaw, signature)) return true;
+    }
+    return false;
 }
 
 function shortHex(value, left = 10, right = 6) {
@@ -3192,6 +3199,18 @@ function buildAppUrl(pathname) {
     if (!isHttpUrl(base)) return "";
     const suffix = String(pathname || "").startsWith("/") ? String(pathname || "") : `/${String(pathname || "")}`;
     return `${base}${suffix}`;
+}
+
+function appendQueryParam(url, key, value) {
+    try {
+        const out = new URL(String(url || "").trim());
+        const k = String(key || "").trim();
+        if (!k) return String(url || "").trim();
+        if (!out.searchParams.has(k)) out.searchParams.set(k, String(value ?? ""));
+        return out.toString();
+    } catch {
+        return String(url || "").trim();
+    }
 }
 
 function parseBoolEnv(raw, fallback = false) {
@@ -6465,10 +6484,14 @@ app.post("/api/nowpayments/create-checkout", rl.byUser({ limit: 20, windowSec: 6
         process.env.NOWPAYMENTS_IPN_URL || buildAppUrl("/api/webhooks/nowpayments")
     ).trim();
     const orderId = generateNowPaymentsOrderId(req.session.userId);
-    const successUrl = String(
-        process.env.NOWPAYMENTS_SUCCESS_URL ||
-        buildAppUrl(`/account/?np_paid=1&provider=nowpayments&txn=${encodeURIComponent(orderId)}`)
+    const successUrlBase = String(
+        process.env.NOWPAYMENTS_SUCCESS_URL || buildAppUrl("/account/")
     ).trim();
+    const successUrlHadTxn = /[?&]txn=/.test(successUrlBase);
+    const successUrlHadPaidFlag = /[?&]np_paid=/.test(successUrlBase);
+    let successUrl = appendQueryParam(successUrlBase, "np_paid", "1");
+    successUrl = appendQueryParam(successUrl, "provider", "nowpayments");
+    successUrl = appendQueryParam(successUrl, "txn", orderId);
     const cancelUrl = String(
         process.env.NOWPAYMENTS_CANCEL_URL || buildAppUrl("/pricing/?np_cancelled=1")
     ).trim();
@@ -6478,11 +6501,12 @@ app.post("/api/nowpayments/create-checkout", rl.byUser({ limit: 20, windowSec: 6
     if (!isHttpUrl(cancelUrl)) return res.status(500).json({ error: "NOWPAYMENTS_CANCEL_URL_INVALID" });
 
     const hasTxnInSuccessUrl = /[?&]txn=/.test(successUrl);
-    if (!hasTxnInSuccessUrl) {
-        console.warn("NOWPayments create-checkout success_url has no txn query param", {
+    if (String(process.env.NOWPAYMENTS_SUCCESS_URL || "").trim() && (!successUrlHadTxn || !successUrlHadPaidFlag)) {
+        console.warn("NOWPayments create-checkout success_url normalized missing markers", {
             userId: req.session.userId,
             orderId,
             fromEnv: !!String(process.env.NOWPAYMENTS_SUCCESS_URL || "").trim(),
+            successUrlBase,
             successUrl
         });
     }
@@ -6666,7 +6690,7 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
         return res.sendStatus(400);
     }
 
-    if (!verifyNowPaymentsWebhookSignature(payload, signature, secret)) {
+    if (!verifyNowPaymentsWebhookSignature(payload, signature, secret, rawBody)) {
         const sortedPayload = nowPaymentsTopLevelSortedJson(payload);
         const expectedSortedSig = hmacSha512Hex(secret, sortedPayload);
         const expectedRawSig = rawBody ? hmacSha512Hex(secret, rawBody) : "";

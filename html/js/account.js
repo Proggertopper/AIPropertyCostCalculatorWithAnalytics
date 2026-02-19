@@ -321,7 +321,7 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
         qs.get("provider") || (nowPaid ? "nowpayments" : (paddlePaid ? "paddle" : ""))
     ).trim().toLowerCase();
 
-    if (!txn || (!paddlePaid && !nowPaid)) return;
+    if (!txn) return;
 
     const endpoints =
         providerHint === "paddle"
@@ -355,10 +355,10 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
     }
 
     try {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 45; i++) {
             const { r, j } = await checkOnce();
             if (r.ok && String(j?.status || "").toLowerCase() === "paid") break;
-            if (i < 19) await waitMs(1200);
+            if (i < 44) await waitMs(1500);
         }
 
         history.replaceState({}, "", "/account/");
