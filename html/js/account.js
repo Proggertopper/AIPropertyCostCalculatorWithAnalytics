@@ -37,6 +37,48 @@ async function csrfFetch(url, init = {}, retryOnCsrf = true) {
     return fetch(url, { credentials: "include", ...(init || {}) });
 }
 
+function getBootCalculations() {
+    const list = window.__BOOT__?.account?.calculations;
+    return Array.isArray(list) ? list : [];
+}
+
+function upsertBootCalculation(calc) {
+    const id = Number(calc?.id);
+    if (!Number.isFinite(id) || id <= 0) return;
+
+    window.__BOOT__ = window.__BOOT__ || {};
+    window.__BOOT__.account = window.__BOOT__.account || {};
+
+    const list = Array.isArray(window.__BOOT__.account.calculations)
+        ? window.__BOOT__.account.calculations.slice()
+        : [];
+    const idx = list.findIndex((x) => Number(x?.id) === id);
+    if (idx >= 0) list[idx] = calc;
+    else list.unshift(calc);
+    window.__BOOT__.account.calculations = list;
+}
+
+async function fetchCalculationById(calculationId) {
+    const id = Number(calculationId);
+    if (!Number.isFinite(id) || id <= 0) return null;
+
+    const r = await fetch(`/api/calculations/item?calculationId=${encodeURIComponent(id)}`, {
+        credentials: "include"
+    });
+    if (r.status === 401) {
+        window.location.href = "/login/";
+        return null;
+    }
+
+    const j = await r.json().catch(() => ({}));
+    const calc = j?.calc && typeof j.calc === "object" ? j.calc : null;
+    if (r.ok && calc) {
+        upsertBootCalculation(calc);
+        return calc;
+    }
+    return null;
+}
+
 document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { once: true });
 
 (function init() {
@@ -46,7 +88,6 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
     }
 
     const boot = window.__BOOT__ || {};
-    const list = boot.account?.calculations || [];
 
     applyWalletToAiButtons(boot.account?.wallet);
 
@@ -242,8 +283,16 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
             if (!details) return;
 
             // ищем calc из boot (без перерисовки списка)
-            const calc = list.find(x => Number(x.id) === id);
-            if (!calc) return;
+            let calc = getBootCalculations().find((x) => Number(x?.id) === id);
+            if (!calc) {
+                calc = await fetchCalculationById(id);
+            }
+            if (!calc) {
+                details.classList.remove("hidden");
+                clearNode(details);
+                details.appendChild(el("div", "verdict warn", "Calculation data not found. Refresh page and try again."));
+                return;
+            }
 
             closeAiPanel(row);
 
@@ -256,7 +305,7 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
         if (action === "run_scenarios") {
             const count = Number(btn.dataset.count || 3);
             const pack = String(btn.dataset.pack || "quick");
-            await runScenariosFlow(row, id, count, list, pack);
+            await runScenariosFlow(row, id, count, getBootCalculations(), pack);
             return;
         }
     });

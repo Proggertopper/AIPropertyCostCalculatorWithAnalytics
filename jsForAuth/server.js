@@ -9713,6 +9713,26 @@ app.post("/api/report/pdf", rl.byUser({ limit: 50, windowSec: 600 }), async (req
 
 
 
+app.get("/api/calculations/item", rl.byUser({ limit: 240, windowSec: 600 }), async (req, res) => {
+    if (!req.session?.userId) return res.sendStatus(401);
+    const calculationId = Number(req.query?.calculationId || req.query?.id);
+    if (!Number.isFinite(calculationId) || calculationId <= 0) {
+        return res.status(400).json({ error: "BAD_INPUT" });
+    }
+
+    const c = await db.query(
+        `select id, calculator_type, created_at, input_data, result_data
+         from calculations
+         where id=$1 and user_id=$2
+         limit 1`,
+        [calculationId, req.session.userId]
+    );
+    if (!c.rowCount) return res.status(404).json({ error: "NOT_FOUND" });
+
+    const normalized = await normalizeCalcResultData(c.rows[0], req.session.userId);
+    return res.json({ ok: true, calc: normalized.calc, stale: normalized.stale });
+});
+
 app.get("/api/calculations/list", rl.byUser({ limit: 120, windowSec: 600 }), async (req, res) => {
     if (!req.session?.userId) return res.sendStatus(401);
     const userId = req.session.userId;
