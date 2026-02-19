@@ -3143,6 +3143,12 @@ function shortHex(value, left = 10, right = 6) {
     return `${s.slice(0, left)}...${s.slice(-right)}`;
 }
 
+function nowpDiag(stage, meta = {}) {
+    try {
+        console.info("NOWP_DIAG", stage, meta);
+    } catch (_) { }
+}
+
 async function nowPaymentsApiRequest(pathname, init = {}) {
     const apiKey = nowPaymentsApiKey();
     if (!apiKey) {
@@ -6471,6 +6477,16 @@ app.post("/api/nowpayments/create-checkout", rl.byUser({ limit: 20, windowSec: 6
     if (!isHttpUrl(successUrl)) return res.status(500).json({ error: "NOWPAYMENTS_SUCCESS_URL_INVALID" });
     if (!isHttpUrl(cancelUrl)) return res.status(500).json({ error: "NOWPAYMENTS_CANCEL_URL_INVALID" });
 
+    const hasTxnInSuccessUrl = /[?&]txn=/.test(successUrl);
+    if (!hasTxnInSuccessUrl) {
+        console.warn("NOWPayments create-checkout success_url has no txn query param", {
+            userId: req.session.userId,
+            orderId,
+            fromEnv: !!String(process.env.NOWPAYMENTS_SUCCESS_URL || "").trim(),
+            successUrl
+        });
+    }
+
     const fixedRate = parseBoolEnv(process.env.NOWPAYMENTS_FIXED_RATE, true);
     const feePaidByUser = parseBoolEnv(process.env.NOWPAYMENTS_FEE_PAID_BY_USER, false);
     const forcedPayCurrency = String(process.env.NOWPAYMENTS_PAY_CURRENCY || "").trim().toLowerCase();
@@ -6547,6 +6563,19 @@ app.post("/api/nowpayments/create-checkout", rl.byUser({ limit: 20, windowSec: 6
         ]
     );
 
+    nowpDiag("create_checkout_ok", {
+        userId: req.session.userId,
+        orderId,
+        providerInvoiceId,
+        packKey: pack.key,
+        amountUsd: Number(pack.amount),
+        callbackUrl,
+        successUrl,
+        cancelUrl,
+        hasTxnInSuccessUrl,
+        payCurrency: forcedPayCurrency || null
+    });
+
     return res.json({
         ok: true,
         provider: "nowpayments",
@@ -6571,8 +6600,20 @@ app.get("/api/nowpayments/transaction-status", rl.byUser({ limit: 180, windowSec
     const wallet = await readWalletSnapshot(req.session.userId);
 
     if (!tr.rowCount) {
+        nowpDiag("txn_status_not_found", {
+            userId: req.session.userId,
+            txn
+        });
         return res.status(404).json({ error: "TRANSACTION_NOT_FOUND", wallet });
     }
+
+    nowpDiag("txn_status_ok", {
+        userId: req.session.userId,
+        txn,
+        status: String(tr.rows[0].status || ""),
+        creditsPack: Number(tr.rows[0].credits || 0),
+        walletCredits: Number(wallet?.credits || 0)
+    });
 
     return res.json({
         ok: true,
@@ -6591,6 +6632,26 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
     const rawBody = Buffer.isBuffer(req.rawBody) ? req.rawBody.toString("utf8") : "";
     const rawBodyBytes = Buffer.isBuffer(req.rawBody) ? req.rawBody.length : 0;
     const payloadKeys = Object.keys(payload || {});
+    const ingressOrderId = String(payload?.order_id || "").trim();
+    const ingressInvoiceId = String(payload?.invoice_id || "").trim();
+    const ingressPaymentId = String(payload?.payment_id || "").trim();
+    const ingressStatus = String(payload?.payment_status || payload?.status || "").trim().toLowerCase();
+
+    nowpDiag("webhook_ingress", {
+        ip: req.ip,
+        userAgent: String(req.headers["user-agent"] || ""),
+        cfRay: String(req.headers["cf-ray"] || ""),
+        xForwardedFor: String(req.headers["x-forwarded-for"] || ""),
+        signatureLen: signature.length,
+        hasSecret: !!secret,
+        contentType: String(req.headers["content-type"] || ""),
+        rawBodyBytes,
+        orderId: ingressOrderId,
+        invoiceId: ingressInvoiceId,
+        paymentId: ingressPaymentId,
+        paymentStatus: ingressStatus,
+        payloadKeys
+    });
 
     if (!signature || !secret) {
         console.warn("NOWPayments webhook rejected: missing signature/secret", {
@@ -6640,7 +6701,7 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
     const outcomeAmount = Number.isFinite(Number(payload?.outcome_amount)) ? Number(payload?.outcome_amount) : null;
 
     const eventHash = sha256Hex(jsonStableStringify(payload));
-    await db.query(
+    const evIns = await db.query(
         `insert into nowpayments_webhook_events(event_hash, payment_id, order_id, invoice_id, status, signature, payload)
          values($1,$2,$3,$4,$5,$6,$7::jsonb)
          on conflict (event_hash) do nothing`,
@@ -6654,6 +6715,13 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
             JSON.stringify(payload)
         ]
     );
+    nowpDiag("webhook_event_recorded", {
+        orderId,
+        invoiceId,
+        paymentId,
+        paymentStatus,
+        inserted: evIns.rowCount > 0
+    });
 
     let tr = null;
     if (orderId) {
@@ -6691,6 +6759,13 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
     const transactionId = String(row.transaction_id || orderId || "").trim();
     if (!transactionId) return res.sendStatus(200);
 
+    nowpDiag("webhook_transaction_matched", {
+        transactionId,
+        rowStatus: String(row.status || ""),
+        userId: Number(row.user_id || 0),
+        credits: Number(row.credits || 0)
+    });
+
     await db.query(
         `update nowpayments_transactions
          set status=case when status='paid' then status else $2 end,
@@ -6724,8 +6799,19 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
         ]
     );
 
-    if (!NOWPAYMENTS_PAID_STATUSES.has(paymentStatus)) return res.sendStatus(200);
-    if (String(row.status || "").toLowerCase() === "paid") return res.sendStatus(200);
+    if (!NOWPAYMENTS_PAID_STATUSES.has(paymentStatus)) {
+        nowpDiag("webhook_non_paid_status", {
+            transactionId,
+            paymentStatus
+        });
+        return res.sendStatus(200);
+    }
+    if (String(row.status || "").toLowerCase() === "paid") {
+        nowpDiag("webhook_already_paid_skip", {
+            transactionId
+        });
+        return res.sendStatus(200);
+    }
 
     const expectedAmount = roundMoney2(row.amount_usd);
     const expectedCurrency = String(row.price_currency || "usd").trim().toLowerCase();
@@ -6766,6 +6852,11 @@ app.post("/api/webhooks/nowpayments", rl.byIp({ limit: 900, windowSec: 600, pref
         const creditsToAdd = Number(upd.rows[0].credits || 0);
         if (userId > 0 && creditsToAdd > 0) {
             await addWalletCredits(userId, creditsToAdd);
+            nowpDiag("webhook_credits_added", {
+                transactionId,
+                userId,
+                creditsToAdd
+            });
         }
     }
 
