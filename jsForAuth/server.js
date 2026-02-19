@@ -6372,7 +6372,7 @@ function enrichResultDataForUI(calcType, inputData, resultData, derivedMetrics) 
 const PACKS = {
     basic10: {
         credits: 10,
-        amount: "2.99",
+        amount: "5.99",
         currency: "USD",
         label: "10 Full verdicts",
         paddlePriceEnv: "PADDLE_PRICE_BASIC10"
