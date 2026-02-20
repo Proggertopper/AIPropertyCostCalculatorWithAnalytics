@@ -79,6 +79,57 @@ async function fetchCalculationById(calculationId) {
     return null;
 }
 
+async function fetchWalletOnLoad() {
+    try {
+        const r = await fetch("/api/account/wallet", {
+            credentials: "include",
+            cache: "no-store"
+        });
+        if (r.status === 401) {
+            window.location.href = "/login/";
+            return null;
+        }
+        if (r.ok) {
+            const j = await r.json().catch(() => ({}));
+            if (j?.wallet && typeof j.wallet === "object") return j.wallet;
+        }
+    } catch (_) { }
+
+    try {
+        let calcId = Number(window.__BOOT__?.account?.calculations?.[0]?.id || 0);
+        if (!Number.isFinite(calcId) || calcId <= 0) {
+            const firstRow = document.querySelector("#calculations .calc-item[data-id]");
+            calcId = Number(firstRow?.dataset?.id || 0);
+        }
+        if (!Number.isFinite(calcId) || calcId <= 0) return null;
+
+        const r = await fetch(`/api/verdict/qa/history?calculationId=${encodeURIComponent(calcId)}`, {
+            credentials: "include",
+            cache: "no-store"
+        });
+        if (r.status === 401) {
+            window.location.href = "/login/";
+            return null;
+        }
+        if (!r.ok) return null;
+
+        const j = await r.json().catch(() => ({}));
+        if (j?.wallet && typeof j.wallet === "object") return j.wallet;
+    } catch (_) { }
+
+    return null;
+}
+
+async function refreshWalletFromServerOnLoad() {
+    const wallet = await fetchWalletOnLoad();
+    if (!wallet) return;
+
+    window.__BOOT__ = window.__BOOT__ || {};
+    window.__BOOT__.account = window.__BOOT__.account || {};
+    window.__BOOT__.account.wallet = wallet;
+    applyWalletToAiButtons(wallet);
+}
+
 document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { once: true });
 
 (function init() {
@@ -90,6 +141,7 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
     const boot = window.__BOOT__ || {};
 
     applyWalletToAiButtons(boot.account?.wallet);
+    void refreshWalletFromServerOnLoad();
 
     const root = document.getElementById("calculations");
     if (!root) return;

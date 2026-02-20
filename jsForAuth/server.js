@@ -9895,6 +9895,13 @@ app.get("/api/calculations/list", rl.byUser({ limit: 120, windowSec: 600 }), asy
     res.json({ items });
 });
 
+app.get("/api/account/wallet", rl.byUser({ limit: 180, windowSec: 600 }), async (req, res) => {
+    if (!req.session?.userId) return res.sendStatus(401);
+    const wallet = await getWallet(req.session.userId);
+    res.set("Cache-Control", "no-store");
+    return res.json({ wallet });
+});
+
 app.get("/api/optimizer/cached", rl.byUser({ limit: 120, windowSec: 600 }), async (req, res) => {
     if (!req.session?.userId) return res.sendStatus(401);
 
