@@ -6417,31 +6417,31 @@ function enrichResultDataForUI(calcType, inputData, resultData, derivedMetrics) 
 
 const PACKS = {
     basic10: {
-        credits: 10,
+        credits: 30,
         amount: "6.99",
         currency: "USD",
-        label: "10 Full verdicts",
+        label: "30 credits",
         paddlePriceEnv: "PADDLE_PRICE_BASIC10"
     },
     plus30: {
-        credits: 30,
-        amount: "4.99",
+        credits: 50,
+        amount: "10.99",
         currency: "USD",
-        label: "30 Full verdicts",
+        label: "50 credits",
         paddlePriceEnv: "PADDLE_PRICE_PLUS30"
     },
     premium50: {
-        credits: 50,
-        amount: "7.99",
+        credits: 100,
+        amount: "19.99",
         currency: "USD",
-        label: "50 Full verdicts",
+        label: "100 credits",
         paddlePriceEnv: "PADDLE_PRICE_PREMIUM50"
     },
     business150: {
         credits: 150,
-        amount: "19.99",
+        amount: "27.99",
         currency: "USD",
-        label: "150 Full verdicts",
+        label: "150 credits",
         paddlePriceEnv: "PADDLE_PRICE_BUSINESS150"
     },
 };

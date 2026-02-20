@@ -740,9 +740,9 @@ function renderCreditsOffer(hostEl, options = {}) {
     removeCreditsOffer(hostEl);
 
     const message = String(options.message || "⚠️ Not enough credits for this action.");
-    const primaryText = String(options.primaryText || "Buy 10 Full verdicts for $6.99");
+    const primaryText = String(options.primaryText || "Buy 30 credits for $6.99");
     const primaryPack = String(options.primaryPack || "basic10");
-    const secondaryText = String(options.secondaryText || "Buy 30 Full verdicts for $4.99");
+    const secondaryText = String(options.secondaryText || "Buy 50 credits for $10.99");
     const secondaryPack = String(options.secondaryPack || "plus30");
     const includeLink = options.includeLink !== false;
 
@@ -770,8 +770,8 @@ function renderAiNoCredits(details) {
 
     details.appendChild(el("div", "verdict warn", "⚠️ You have no credits for Full analysis."));
 
-    details.appendChild(makeBuyButton( details , "Buy 10 Full verdicts for $6.99", "basic10"));
-    details.appendChild(makeBuyButton( details , "Buy 50 Full verdicts for $7.99", "premium50"));
+    details.appendChild(makeBuyButton( details , "Buy 30 credits for $6.99", "basic10"));
+    details.appendChild(makeBuyButton( details , "Buy 100 credits for $19.99", "premium50"));
     const a = document.createElement("a");
     a.href = "/pricing/";
     a.className = "muted";
