@@ -2826,6 +2826,16 @@ function injectAuth(html, auth, accountData , tz) {
     const list = accountData?.calculations || [];
     const wallet = accountData?.wallet || { free_used: false, credits: 0 };
     html = html.replace("<!--SSR_CALCS-->", renderCalcListSSR(list , tz , wallet));
+    const walletCredits = Math.max(0, Number(wallet?.credits || 0));
+    const walletFreeText = wallet?.free_used ? "Free verdict: used" : "Free verdict: available";
+    html = html.replace(
+        /(<div\b[^>]*\bid=["']walletCredits["'][^>]*>).*?(<\/div>)/i,
+        `$1Credits: ${walletCredits}$2`
+    );
+    html = html.replace(
+        /(<div\b[^>]*\bid=["']walletFree["'][^>]*>).*?(<\/div>)/i,
+        `$1${walletFreeText}$2`
+    );
 
     // ✅ 5) Счётчики прямо в HTML
     const count = Array.isArray(list) ? list.length : 0;

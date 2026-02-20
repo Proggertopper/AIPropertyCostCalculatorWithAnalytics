@@ -3211,10 +3211,22 @@ function buildScenarioSummary(calcType, resultData, baseResult) {
 
 
 
+function applyWalletPanel(wallet = (window.__BOOT__ || {}).account?.wallet) {
+    const creditsNode = document.getElementById("walletCredits");
+    const freeNode = document.getElementById("walletFree");
+    const w = wallet || {};
+    const credits = Number(w.credits || 0);
+    const freeUsed = !!w.free_used;
+
+    if (creditsNode) creditsNode.textContent = "Credits: " + credits;
+    if (freeNode) freeNode.textContent = freeUsed ? "Free verdict: used" : "Free verdict: available";
+}
+
 function applyWalletToAiButtons(wallet) {
     document.querySelectorAll('button.btn-ai[data-action="ai"]').forEach(btn => {
         syncAiButtonState(btn, wallet);
     });
+    applyWalletPanel(wallet);
 }
 
 
@@ -4539,31 +4551,6 @@ if (cancelBtn) {
 document.addEventListener("DOMContentLoaded", () => {
     const list = document.getElementById("calculations");
     const search = document.getElementById("calcSearch");
-    const creditsNode = document.getElementById("walletCredits");
-    const freeNode = document.getElementById("walletFree");
-
-    const updateWallet = (wallet) => {
-        const w = wallet || (window.__BOOT__ && window.__BOOT__.account && window.__BOOT__.account.wallet) || {};
-        const credits = Number(w.credits || 0);
-        const freeUsed = !!w.free_used;
-
-        if (creditsNode) creditsNode.textContent = "Credits: " + credits;
-        if (freeNode) freeNode.textContent = freeUsed ? "Free verdict: used" : "Free verdict: available";
-    };
-
-    const bindWalletHook = () => {
-        if (typeof window.applyWalletToAiButtons !== "function") return;
-        if (window.applyWalletToAiButtons.__premiumHooked) return;
-
-        const original = window.applyWalletToAiButtons;
-        const wrapped = function (wallet) {
-            const out = original.call(this, wallet);
-            updateWallet(wallet);
-            return out;
-        };
-        wrapped.__premiumHooked = true;
-        window.applyWalletToAiButtons = wrapped;
-    };
 
     const filterList = () => {
         if (!list || !search) return;
@@ -4580,12 +4567,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (list) {
         const mo = new MutationObserver(() => {
             filterList();
-            updateWallet();
         });
         mo.observe(list, { childList: true, subtree: true });
     }
 
-    bindWalletHook();
-    updateWallet();
+    applyWalletToAiButtons((window.__BOOT__ || {}).account?.wallet);
     filterList();
 });
