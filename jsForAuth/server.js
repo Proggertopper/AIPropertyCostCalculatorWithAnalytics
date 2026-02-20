@@ -2541,11 +2541,9 @@ function escapeHtml(s = "") {
 
 function aiBtnTextSSR(wallet) {
     const freeUsed = !!wallet?.free_used;
-    const credits = Number(wallet?.credits || 0);
 
     if (!freeUsed) return "✨Full Analysis (Free)";
-    if (credits > 0) return `✨Full Analysis (${credits} left)`;
-    return "✨Full Analysis (0 left)";
+    return "✨Full Analysis";
 }
 
 function renderCalcListSSR(list, tz , wallet) {
