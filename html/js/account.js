@@ -130,6 +130,11 @@ async function refreshWalletFromServerOnLoad() {
     applyWalletToAiButtons(wallet);
 }
 
+function hasWalletSnapshot(wallet) {
+    if (!wallet || typeof wallet !== "object") return false;
+    return wallet.credits !== undefined || wallet.free_used !== undefined;
+}
+
 document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { once: true });
 
 (function init() {
@@ -139,8 +144,10 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
     }
 
     const boot = window.__BOOT__ || {};
-
-    applyWalletToAiButtons(boot.account?.wallet);
+    const bootWallet = boot.account?.wallet;
+    if (hasWalletSnapshot(bootWallet)) {
+        applyWalletToAiButtons(bootWallet);
+    }
     void refreshWalletFromServerOnLoad();
 
     const root = document.getElementById("calculations");
@@ -3266,7 +3273,8 @@ function buildScenarioSummary(calcType, resultData, baseResult) {
 function applyWalletPanel(wallet = (window.__BOOT__ || {}).account?.wallet) {
     const creditsNode = document.getElementById("walletCredits");
     const freeNode = document.getElementById("walletFree");
-    const w = wallet || {};
+    if (!hasWalletSnapshot(wallet)) return;
+    const w = wallet;
     const credits = Number(w.credits || 0);
     const freeUsed = !!w.free_used;
 
@@ -3275,6 +3283,7 @@ function applyWalletPanel(wallet = (window.__BOOT__ || {}).account?.wallet) {
 }
 
 function applyWalletToAiButtons(wallet) {
+    if (!hasWalletSnapshot(wallet)) return;
     document.querySelectorAll('button.btn-ai[data-action="ai"]').forEach(btn => {
         syncAiButtonState(btn, wallet);
     });
@@ -4623,6 +4632,9 @@ document.addEventListener("DOMContentLoaded", () => {
         mo.observe(list, { childList: true, subtree: true });
     }
 
-    applyWalletToAiButtons((window.__BOOT__ || {}).account?.wallet);
+    const bootWallet = (window.__BOOT__ || {}).account?.wallet;
+    if (hasWalletSnapshot(bootWallet)) {
+        applyWalletToAiButtons(bootWallet);
+    }
     filterList();
 });

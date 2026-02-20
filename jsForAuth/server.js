@@ -2827,14 +2827,20 @@ function injectAuth(html, auth, accountData , tz) {
     const wallet = accountData?.wallet || { free_used: false, credits: 0 };
     html = html.replace("<!--SSR_CALCS-->", renderCalcListSSR(list , tz , wallet));
     const walletCredits = Math.max(0, Number(wallet?.credits || 0));
+    const walletCreditsText = `Credits: ${walletCredits}`;
     const walletFreeText = wallet?.free_used ? "Free verdict: used" : "Free verdict: available";
+
+    html = html.replaceAll("__SSR_WALLET_CREDITS__", escapeHtml(walletCreditsText));
+    html = html.replaceAll("__SSR_WALLET_FREE__", escapeHtml(walletFreeText));
+
+    // Legacy fallback if placeholder tags are absent in template.
     html = html.replace(
         /(<div\b[^>]*\bid=["']walletCredits["'][^>]*>).*?(<\/div>)/i,
-        `$1Credits: ${walletCredits}$2`
+        `$1${escapeHtml(walletCreditsText)}$2`
     );
     html = html.replace(
         /(<div\b[^>]*\bid=["']walletFree["'][^>]*>).*?(<\/div>)/i,
-        `$1${walletFreeText}$2`
+        `$1${escapeHtml(walletFreeText)}$2`
     );
 
     // ✅ 5) Счётчики прямо в HTML
