@@ -97,8 +97,8 @@ if (process.env.NODE_ENV === 'development') {
 } 
 
 app.use(helmet({
-    contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false
+    contentSecurityPolicy: true,
+    crossOriginEmbedderPolicy: true
 }));
 
 app.use(express.json({
@@ -2539,6 +2539,15 @@ function escapeHtml(s = "") {
         .replaceAll("'", "&#039;");
 }
 
+function jsonForScriptTag(value) {
+    return JSON.stringify(value)
+        .replace(/</g, "\\u003c")
+        .replace(/>/g, "\\u003e")
+        .replace(/&/g, "\\u0026")
+        .replace(/\u2028/g, "\\u2028")
+        .replace(/\u2029/g, "\\u2029");
+}
+
 function aiBtnTextSSR(wallet) {
     const freeUsed = !!wallet?.free_used;
 
@@ -2908,16 +2917,16 @@ function injectAuth(html, auth, accountData , tz) {
         `<div id="userAccount" class="avatar">${auth.initial}</div>`
     );
 
-    const boot = `<script>window.__BOOT__=${JSON.stringify({
+    const boot = `<script id="boot-data" type="application/json">${jsonForScriptTag({
         auth: {
             loggedIn: auth.loggedIn,
             email: auth.email,
             initial: auth.initial
         },
         account: accountData || null
-    })};</script>`;
+    })}</script>`;
 
-    if (!/window\.__BOOT__\s*=/.test(html)) {
+    if (!/<script\b[^>]*\bid=["']boot-data["'][^>]*>/i.test(html)) {
         html = html.replace(/<\/head>/i, `${boot}\n</head>`);
     }
     html = setPromoVisibilitySSR(html, auth.loggedIn);
@@ -11622,8 +11631,54 @@ app.get("/api/ai/jobs/:jobId", rl.byUser({ limit: 180, windowSec: 600 }), async 
     }
 });
 
-app.get("/api/ai/queue/stats", rl.byUser({ limit: 120, windowSec: 600 }), async (req, res) => {
-    if (!req.session?.userId) return res.sendStatus(401);
+function internalMetricsEnabled() {
+    return parseBoolEnv(process.env.INTERNAL_METRICS_ENABLED, false);
+}
+
+function internalMetricsToken() {
+    return String(process.env.INTERNAL_METRICS_TOKEN || "").trim();
+}
+
+function extractInternalToken(req) {
+    const rawHeader = req.headers?.["x-internal-token"];
+    const fromHeader = Array.isArray(rawHeader) ? rawHeader[0] : rawHeader;
+    const headerToken = String(fromHeader || "").trim();
+    if (headerToken) return headerToken;
+
+    const auth = String(req.headers?.authorization || "").trim();
+    const m = /^Bearer\s+(.+)$/i.exec(auth);
+    return m?.[1] ? String(m[1]).trim() : "";
+}
+
+function safeTokenEqual(expected, got) {
+    const left = Buffer.from(String(expected || ""), "utf8");
+    const right = Buffer.from(String(got || ""), "utf8");
+    if (!left.length || left.length !== right.length) return false;
+    try {
+        return crypto.timingSafeEqual(left, right);
+    } catch {
+        return false;
+    }
+}
+
+function requireInternalMetricsAccess(req, res, next) {
+    if (!internalMetricsEnabled()) return res.sendStatus(404);
+
+    const expected = internalMetricsToken();
+    if (!expected) {
+        return res.status(503).json({
+            ok: false,
+            error: "INTERNAL_METRICS_TOKEN_MISSING"
+        });
+    }
+
+    const got = extractInternalToken(req);
+    if (!got) return res.sendStatus(401);
+    if (!safeTokenEqual(expected, got)) return res.sendStatus(403);
+    return next();
+}
+
+app.get("/api/ai/queue/stats", rl.byIp({ limit: 120, windowSec: 600, prefix: "rl:internal", scope: "ai:queue:stats" }), requireInternalMetricsAccess, async (req, res) => {
     try {
         const stats = await getOpenAiQueueStats();
         return res.json({
@@ -11785,9 +11840,7 @@ async function getAiMetricsWindow(hours) {
     };
 }
 
-app.get("/api/ai/metrics", rl.byUser({ limit: 120, windowSec: 600 }), async (req, res) => {
-    if (!req.session?.userId) return res.sendStatus(401);
-
+app.get("/api/ai/metrics", rl.byIp({ limit: 120, windowSec: 600, prefix: "rl:internal", scope: "ai:metrics" }), requireInternalMetricsAccess, async (req, res) => {
     try {
         await ensureAiJobsTable();
         const hoursList = parseAiMetricsHours(req.query?.hours);
@@ -11934,7 +11987,7 @@ function startScenarioCleanupJob() {
 
 app.listen(PORT, HOST, () =>{
     console.log(`Server on ${HOST}:${PORT}`);
-    //startScenarioCleanupJob();
+    startScenarioCleanupJob();
 });
 
 

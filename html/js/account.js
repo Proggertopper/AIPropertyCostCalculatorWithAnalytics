@@ -37,6 +37,27 @@ async function csrfFetch(url, init = {}, retryOnCsrf = true) {
     return fetch(url, { credentials: "include", ...(init || {}) });
 }
 
+function hydrateBootFromScript() {
+    if (window.__BOOT__ && typeof window.__BOOT__ === "object") return window.__BOOT__;
+    try {
+        const node = document.getElementById("boot-data");
+        const raw = String(node?.textContent || "").trim();
+        if (!raw) {
+            window.__BOOT__ = {};
+            return window.__BOOT__;
+        }
+        const parsed = JSON.parse(raw);
+        window.__BOOT__ = (parsed && typeof parsed === "object") ? parsed : {};
+        return window.__BOOT__;
+    } catch (e) {
+        console.error("boot-data parse failed", e);
+        window.__BOOT__ = {};
+        return window.__BOOT__;
+    }
+}
+
+hydrateBootFromScript();
+
 function getBootCalculations() {
     const list = window.__BOOT__?.account?.calculations;
     return Array.isArray(list) ? list : [];
@@ -696,12 +717,16 @@ function makeBuyButton(details, text, packKey) {
             let lastErr = null;
 
             for (const endpoint of endpoints) {
-                const r = await fetch(endpoint, {
+                const r = await csrfFetch(endpoint, {
                     method: "POST",
                     headers: withCsrfHeaders({ "Content-Type": "application/json" }),
                     credentials: "include",
                     body: JSON.stringify({ pack: packKey })
                 });
+                if (r.status === 401) {
+                    window.location.href = "/login/";
+                    return;
+                }
                 const order = await r.json().catch(() => ({}));
                 const checkoutUrl = String(order?.checkoutUrl || "");
                 if (r.ok && checkoutUrl) {
@@ -771,7 +796,7 @@ function renderAiNoCredits(details) {
     details.appendChild(el("div", "verdict warn", "⚠️ You have no credits for Full analysis."));
 
     details.appendChild(makeBuyButton( details , "Buy 30 credits for $6.99", "basic10"));
-    details.appendChild(makeBuyButton( details , "Buy 100 credits for $19.99", "premium50"));
+    details.appendChild(makeBuyButton( details , "Buy 50 credits for $10.99", "plus30"));
     const a = document.createElement("a");
     a.href = "/pricing/";
     a.className = "muted";

@@ -284,6 +284,41 @@ function assertNoCreditsPayload(data, label) {
     assert.equal(String(data?.action?.type || ""), "BUY_CREDITS", `${label}: expected action BUY_CREDITS`);
 }
 
+function assertInternalMetricsGuard(metricsNoToken, queueNoToken, metricsBadToken, queueBadToken) {
+    const noTokenStatus = Number(metricsNoToken?.response?.status || 0);
+    const queueNoTokenStatus = Number(queueNoToken?.response?.status || 0);
+    const badTokenStatus = Number(metricsBadToken?.response?.status || 0);
+    const queueBadTokenStatus = Number(queueBadToken?.response?.status || 0);
+
+    assert.equal(
+        noTokenStatus,
+        queueNoTokenStatus,
+        `internal metrics guard: expected same no-token status for both endpoints, got metrics=${noTokenStatus}, queue=${queueNoTokenStatus}`
+    );
+    assert.equal(
+        badTokenStatus,
+        queueBadTokenStatus,
+        `internal metrics guard: expected same bad-token status for both endpoints, got metrics=${badTokenStatus}, queue=${queueBadTokenStatus}`
+    );
+
+    assert.ok(
+        [401, 404, 503].includes(noTokenStatus),
+        `internal metrics guard: unexpected no-token status ${noTokenStatus}`
+    );
+
+    if (noTokenStatus === 401) {
+        assert.equal(badTokenStatus, 403, "internal metrics guard: bad token must return 403 when endpoint is enabled");
+    } else if (noTokenStatus === 404) {
+        assert.equal(badTokenStatus, 404, "internal metrics guard: disabled endpoint should stay hidden");
+    } else if (noTokenStatus === 503) {
+        assert.equal(
+            badTokenStatus,
+            503,
+            "internal metrics guard: missing server token config should return 503 even with provided token"
+        );
+    }
+}
+
 async function main() {
     const email = `smoke_${Date.now()}_${Math.random().toString(36).slice(2, 8)}@example.com`;
     const password = "SmokeTest#123";
@@ -306,6 +341,59 @@ async function main() {
         json: { email, password }
     });
     assertStatus(login.response.status, 200, "login");
+
+    const wallet = await request("/api/account/wallet");
+    assertStatus(wallet.response.status, 200, "wallet snapshot");
+    assert.ok(wallet.data && typeof wallet.data.wallet === "object", "wallet snapshot: missing wallet object");
+    assert.ok(Number.isFinite(Number(wallet.data.wallet?.credits || 0)), "wallet snapshot: credits should be numeric");
+
+    const csrfBadPackNow = await getCsrf("csrf bad pack nowpayments");
+    const badPackNow = await request("/api/nowpayments/create-checkout", {
+        method: "POST",
+        headers: { "X-CSRF-Token": csrfBadPackNow },
+        json: { pack: "__bad_pack__" }
+    });
+    assertStatus(badPackNow.response.status, 400, "nowpayments bad pack");
+    assert.equal(String(badPackNow.data?.error || ""), "BAD_PACK", "nowpayments bad pack: expected BAD_PACK");
+
+    const csrfBadPackPaddle = await getCsrf("csrf bad pack paddle");
+    const badPackPaddle = await request("/api/paddle/create-checkout", {
+        method: "POST",
+        headers: { "X-CSRF-Token": csrfBadPackPaddle },
+        json: { pack: "__bad_pack__" }
+    });
+    assertStatus(badPackPaddle.response.status, 400, "paddle bad pack");
+    assert.equal(String(badPackPaddle.data?.error || ""), "BAD_PACK", "paddle bad pack: expected BAD_PACK");
+
+    const txnNowNoId = await request("/api/nowpayments/transaction-status");
+    assertStatus(txnNowNoId.response.status, 400, "nowpayments txn status missing txn");
+    assert.equal(String(txnNowNoId.data?.error || ""), "TXN_REQUIRED", "nowpayments txn status: expected TXN_REQUIRED");
+
+    const txnPaddleNoId = await request("/api/paddle/transaction-status");
+    assertStatus(txnPaddleNoId.response.status, 400, "paddle txn status missing txn");
+    assert.equal(String(txnPaddleNoId.data?.error || ""), "TXN_REQUIRED", "paddle txn status: expected TXN_REQUIRED");
+
+    const webhookNowNoSig = await request("/api/webhooks/nowpayments", {
+        method: "POST",
+        json: { order_id: "smoke-test-order" }
+    });
+    assertStatus(webhookNowNoSig.response.status, 400, "nowpayments webhook missing signature");
+
+    const webhookPaddleNoSig = await request("/api/webhooks/paddle", {
+        method: "POST",
+        json: { event_type: "transaction.paid", data: { id: "txn_smoke_missing_sig" } }
+    });
+    assertStatus(webhookPaddleNoSig.response.status, 400, "paddle webhook missing signature");
+
+    const aiMetricsNoToken = await request("/api/ai/metrics");
+    const aiQueueNoToken = await request("/api/ai/queue/stats");
+    const aiMetricsBadToken = await request("/api/ai/metrics", {
+        headers: { "X-Internal-Token": "smoke_bad_token" }
+    });
+    const aiQueueBadToken = await request("/api/ai/queue/stats", {
+        headers: { "X-Internal-Token": "smoke_bad_token" }
+    });
+    assertInternalMetricsGuard(aiMetricsNoToken, aiQueueNoToken, aiMetricsBadToken, aiQueueBadToken);
 
     const ids = [];
     for (const c of CALCULATOR_CASES) {
@@ -396,6 +484,9 @@ async function main() {
 
     const afterLogout = await request("/api/app/calculations");
     assertStatus(afterLogout.response.status, 401, "auth guard after logout");
+
+    const walletAfterLogout = await request("/api/account/wallet");
+    assertStatus(walletAfterLogout.response.status, 401, "wallet auth guard after logout");
 
     console.log("[smoke] OK");
 }
