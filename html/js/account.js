@@ -358,6 +358,10 @@ document.addEventListener("DOMContentLoaded", () => { ensureCsrfToken(); }, { on
         for (let i = 0; i < 45; i++) {
             const { r, j } = await checkOnce();
             if (r.ok && String(j?.status || "").toLowerCase() === "paid") break;
+            if (r?.status === 404 && String(j?.error || "").toUpperCase() === "TRANSACTION_NOT_FOUND") {
+                console.warn("Payment return txn does not belong to current user or no longer exists", { txn, providerHint });
+                break;
+            }
             if (i < 44) await waitMs(1500);
         }
 
