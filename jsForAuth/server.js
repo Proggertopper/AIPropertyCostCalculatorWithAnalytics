@@ -138,7 +138,7 @@ const LEGACY_REDIRECTS = Object.freeze({
     "/allCalculators.html": "/calculators/",
     "/termsOfService.html": "/terms/",
     "/privacyPolicy.html": "/privacy/",
-    "/refundPolicy.html": "/refund/",
+    // "/refundPolicy.html": "/refund/",
     "/disclaimer.html": "/disclaimer/",
 
     "/login.html": "/login/",
