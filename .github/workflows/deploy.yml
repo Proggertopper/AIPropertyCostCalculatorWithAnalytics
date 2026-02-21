@@ -17,16 +17,16 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
 
       - name: Select env
-      id: sel
-      run: |
-    if [ "${GITHUB_REF_NAME}" = "develop" ]; then
-      echo "env=development" >> $GITHUB_OUTPUT
-    elif [ "${GITHUB_REF_NAME}" = "main" ]; then
-      echo "env=production" >> $GITHUB_OUTPUT
-    else
-      echo "Unsupported branch: ${GITHUB_REF_NAME}"
-      exit 1
-    fi
+        id: sel
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "develop" ]; then
+            echo "env=development" >> $GITHUB_OUTPUT
+          elif [ "${GITHUB_REF_NAME}" = "main" ]; then
+            echo "env=production" >> $GITHUB_OUTPUT
+          else
+            echo "Unsupported branch: ${GITHUB_REF_NAME}"
+            exit 1
+          fi
 
       - name: Deploy to both droplets
         run: |
