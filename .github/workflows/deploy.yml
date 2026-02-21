@@ -1,0 +1,38 @@
+name: deploy
+
+on:
+  push:
+    branches: [ "develop", "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Select env
+      id: sel
+      run: |
+    if [ "${GITHUB_REF_NAME}" = "develop" ]; then
+      echo "env=development" >> $GITHUB_OUTPUT
+    elif [ "${GITHUB_REF_NAME}" = "main" ]; then
+      echo "env=production" >> $GITHUB_OUTPUT
+    else
+      echo "Unsupported branch: ${GITHUB_REF_NAME}"
+      exit 1
+    fi
+
+      - name: Deploy to both droplets
+        run: |
+          HOSTS=$(echo "${{ secrets.HOSTS }}" | tr ',' ' ')
+          for h in $HOSTS; do
+            echo "Deploying ${{ steps.sel.outputs.env }} to $h"
+            ssh -o StrictHostKeyChecking=yes "${{ secrets.SSH_USER }}@$h" \
+              "bash /opt/deploy.sh ${{ steps.sel.outputs.env }} ${{ github.sha }}"
+          done
