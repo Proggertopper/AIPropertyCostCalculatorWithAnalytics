@@ -2,28 +2,8 @@ const form = document.getElementById("contactForm");
 const errorBox = document.getElementById("error");
 const successBox = document.getElementById("success");
 const submitBtn = document.getElementById("contactSubmit");
-let csrfToken = "";
-let csrfTokenPromise = null;
-
-async function ensureCsrfToken() {
-    if (csrfToken) return csrfToken;
-    if (!csrfTokenPromise) {
-        csrfTokenPromise = fetch("/api/csrf", { credentials: "include" })
-            .then((r) => (r.ok ? r.json() : {}))
-            .then((j) => {
-                csrfToken = String(j?.csrfToken || "");
-                return csrfToken;
-            })
-            .catch(() => "")
-            .finally(() => {
-                csrfTokenPromise = null;
-            });
-    }
-    return csrfTokenPromise;
-}
 
 if (form && errorBox && successBox) {
-    ensureCsrfToken();
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -50,17 +30,14 @@ if (form && errorBox && successBox) {
                 submitBtn.textContent = "Sending...";
             }
 
-            await ensureCsrfToken();
             const res = await fetch("/api/contact", {
                 method: "POST",
-                headers: csrfToken
-                    ? { "Content-Type": "application/json", "X-CSRF-Token": csrfToken }
-                    : { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
                 body: JSON.stringify(data),
             });
 
-            const json = await res.json();
+            const json = await res.json().catch(() => ({}));
 
             if (res.ok && json.success) {
                 successBox.textContent = "Message sent. We will get back to you soon.";
@@ -70,7 +47,7 @@ if (form && errorBox && successBox) {
                 errorBox.textContent = json.error || "Unable to send message right now.";
                 errorBox.classList.remove("hidden");
             }
-        } catch (err) {
+        } catch {
             errorBox.textContent = "Network error. Please try again.";
             errorBox.classList.remove("hidden");
         } finally {
