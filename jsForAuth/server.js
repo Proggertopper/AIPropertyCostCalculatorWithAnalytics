@@ -97,8 +97,8 @@ if (process.env.NODE_ENV === 'development') {
 } 
 
 app.use(helmet({
-    contentSecurityPolicy: true,
-    crossOriginEmbedderPolicy: true
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false
 }));
 
 app.use(express.json({
