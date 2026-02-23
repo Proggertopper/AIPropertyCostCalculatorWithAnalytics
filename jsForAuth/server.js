@@ -96,10 +96,96 @@ if (process.env.NODE_ENV === 'development') {
     }));
 } 
 
-app.use(helmet({
-    contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false
-}));
+
+app.use((req, res, next) => {
+    res.locals.cspNonce = crypto.randomBytes(16).toString("base64");
+    next();
+});
+
+app.use(
+    helmet({
+        // ВАЖНО: COEP/COOP часто ломают рекламу/3rd-party. Оставим выключенным.
+        crossOriginEmbedderPolicy: false,
+
+        contentSecurityPolicy: {
+            useDefaults: true,
+            directives: {
+                "default-src": ["'self'"],
+
+                // Скрипты: self + nonce + домены рекламы/аналитики
+                "script-src": [
+                    "'self'",
+                    (req, res) => `'nonce-${res.locals.cspNonce}'`,
+
+                    "https://pagead2.googlesyndication.com",
+                    "https://googleads.g.doubleclick.net",
+                    "https://fundingchoicesmessages.google.com",
+
+                    "https://www.googletagmanager.com",
+                    "https://www.google-analytics.com",
+
+                    "https://connect.facebook.net",
+
+                    "https://static.cloudflareinsights.com",
+
+                    "https://ep1.adtrafficquality.google",
+                    "https://ep2.adtrafficquality.google",
+                ],
+
+                // Подгрузка модулей/worker обычно не нужно, оставляем по дефолту
+
+                // Фреймы (AdSense / SODAR / GTM / Google)
+                "frame-src": [
+                    "'self'",
+                    "https://tpc.googlesyndication.com",
+                    "https://googleads.g.doubleclick.net",
+                    "https://fundingchoicesmessages.google.com",
+                    "https://www.googletagmanager.com",
+                    "https://www.google.com",
+                    "https://ep2.adtrafficquality.google",
+                ],
+
+                // Запросы (analytics / ads / funding choices / fb)
+                "connect-src": [
+                    "'self'",
+                    "https://www.google-analytics.com",
+                    "https://analytics.google.com",
+                    "https://www.googletagmanager.com",
+                    "https://www.google.com",
+
+                    "https://pagead2.googlesyndication.com",
+                    "https://stats.g.doubleclick.net",
+                    "https://googleads.g.doubleclick.net",
+
+                    "https://fundingchoicesmessages.google.com",
+
+                    "https://static.cloudflareinsights.com",
+
+                    "https://graph.facebook.com",
+                    "https://www.facebook.com",
+
+                    "https://ep1.adtrafficquality.google",
+                    "https://ep2.adtrafficquality.google",
+                ],
+
+                // Картинки/пиксели
+                "img-src": ["'self'", "data:", "https:"],
+
+                // Стили: часто нужен inline из-за фреймворков/критикал css
+                "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+
+                "font-src": ["'self'", "https://fonts.gstatic.com"],
+
+                // Запрет встраивания твоего сайта в iframe
+                "frame-ancestors": ["'none'"],
+
+                // На всякий: формы только на себя (если не надо внешних)
+                "form-action": ["'self'"],
+                "base-uri": ["'self'"],
+            },
+        },
+    })
+);
 
 app.use(express.json({
     limit: "10mb",
