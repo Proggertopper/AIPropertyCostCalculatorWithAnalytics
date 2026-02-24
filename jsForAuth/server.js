@@ -125,6 +125,7 @@ app.use(
                     "https://www.google-analytics.com",
 
                     "https://connect.facebook.net",
+                    "https://www.facebook.com",
 
                     "https://static.cloudflareinsights.com",
 
