@@ -65,7 +65,17 @@ var csrfToken = "";
     }
 
     async function csrfFetch(url, init = {}, retryOnCsrf = true) {
-        const baseInit = { credentials: "include", ...(init || {}) };
+        // same-origin? тогда include, иначе omit (чтобы не ловить CORS на facebook/google)
+        let sameOrigin = true;
+        try {
+            const raw = resolveUrl(url);
+            const u = new URL(raw || String(url || ""), window.location.origin);
+            sameOrigin = (u.origin === window.location.origin);
+        } catch {
+            sameOrigin = true;
+        }
+
+        const baseInit = { credentials: sameOrigin ? "include" : "omit", ...(init || {}) };
         const method = String(baseInit.method || "GET").toUpperCase();
 
         if (!isStateChangingApi(url, method)) {

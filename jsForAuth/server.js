@@ -175,7 +175,7 @@ app.use(
                 // Стили: часто нужен inline из-за фреймворков/критикал css
                 "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
 
-                "font-src": ["'self'", "https://fonts.gstatic.com"],
+                "font-src": ["'self'", "https://fonts.gstatic.com", "data:"],
 
                 // Запрет встраивания твоего сайта в iframe
                 "frame-ancestors": ["'none'"],
@@ -9935,8 +9935,6 @@ app.post("/api/report/pdf", rl.byUser({ limit: 50, windowSec: 600 }), async (req
         return res.status(502).json({ error: "PDF_FAILED", message: String(e.message || e) });
     }
 });
-
-
 
 app.get("/api/calculations/item", rl.byUser({ limit: 240, windowSec: 600 }), async (req, res) => {
     if (!req.session?.userId) return res.sendStatus(401);
