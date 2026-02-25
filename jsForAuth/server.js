@@ -153,8 +153,6 @@ app.use(
                     "https://analytics.google.com",
                     "https://www.googletagmanager.com",
                     "https://www.google.com",
-                    "https://www.googleadservices.com",
-                    "https://*.googleadservices.com",
 
                     "https://pagead2.googlesyndication.com",
                     "https://stats.g.doubleclick.net",
