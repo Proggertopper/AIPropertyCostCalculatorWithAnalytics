@@ -155,6 +155,7 @@ app.use(
                     "https://www.google.com",
                     "https://www.googleadservices.com",
                     "https://*.googleadservices.com",
+                    "https://tagassistant.google.com",
 
                     "https://pagead2.googlesyndication.com",
                     "https://stats.g.doubleclick.net",
@@ -175,9 +176,9 @@ app.use(
                 "img-src": ["'self'", "data:", "https:"],
 
                 // Стили: часто нужен inline из-за фреймворков/критикал css
-                "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+                "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://www.googletagmanager.com"],
 
-                "font-src": ["'self'", "https://fonts.gstatic.com", "data:"],
+                "font-src": ["'self'", "https://fonts.gstatic.com", "data:", "https://tagassistant.google.com"],
 
                 // Запрет встраивания твоего сайта в iframe
                 "frame-ancestors": ["'none'"],
