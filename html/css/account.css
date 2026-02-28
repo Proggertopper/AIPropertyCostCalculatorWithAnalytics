@@ -1016,6 +1016,55 @@ body.account-page {
     text-decoration: underline;
 }
 
+.paywall-mini-sample {
+    border: 1px solid var(--pc-stroke-soft);
+    border-radius: 10px;
+    padding: 9px;
+    background: rgba(255, 255, 255, 0.95);
+    display: grid;
+    gap: 6px;
+}
+
+.paywall-mini-sample__title {
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #36557c;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.paywall-mini-sample__verdict {
+    width: fit-content;
+    border-radius: 999px;
+    border: 1px solid rgba(185, 116, 18, 0.26);
+    background: rgba(185, 116, 18, 0.14);
+    color: #8b5b10;
+    padding: 4px 9px;
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+.paywall-mini-sample__text {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.46;
+    color: #294766;
+}
+
+.paywall-mini-sample__list {
+    margin: 0;
+    padding-left: 18px;
+    display: grid;
+    gap: 4px;
+}
+
+.paywall-mini-sample__list li {
+    margin: 0;
+    font-size: 12.5px;
+    line-height: 1.42;
+    color: #284a71;
+}
+
 .calc-tools-dock {
     margin-top: 10px;
 }

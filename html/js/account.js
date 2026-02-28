@@ -699,6 +699,48 @@ function getSavedToolsPanel(calculationId) {
     return SAVED_TOOLS.get(Number(calculationId)) || null;
 }
 
+function renderPaywallMiniSample(hostEl, variant = "generic") {
+    if (!hostEl) return null;
+
+    const box = document.createElement("div");
+    box.className = "paywall-mini-sample";
+
+    const title = document.createElement("div");
+    title.className = "paywall-mini-sample__title";
+    title.textContent = variant === "full_analysis"
+        ? "Sample Full Analysis outcome"
+        : "Sample premium output";
+    box.appendChild(title);
+
+    const verdict = document.createElement("div");
+    verdict.className = "paywall-mini-sample__verdict";
+    verdict.textContent = "⚠️ Caution: thin stress margin";
+    box.appendChild(verdict);
+
+    const line = document.createElement("p");
+    line.className = "paywall-mini-sample__text";
+    line.textContent = variant === "full_analysis"
+        ? "You get verdict + key drivers + next runs. Typical output shows what to change first and why."
+        : "Premium actions include scenarios, deep dives, compare, and export-ready report format.";
+    box.appendChild(line);
+
+    const list = document.createElement("ul");
+    list.className = "paywall-mini-sample__list";
+    [
+        "Driver #1: vacancy +2% flips stress result",
+        "Next run: lower purchase price by 3-4%",
+        "Expected impact: cash flow +$120 to +$180/mo"
+    ].forEach((text) => {
+        const item = document.createElement("li");
+        item.textContent = text;
+        list.appendChild(item);
+    });
+    box.appendChild(list);
+
+    hostEl.appendChild(box);
+    return box;
+}
+
 function makeBuyButton(details, text, packKey) {
     const btn = el("button", "btn btn-ai-buy", text);
     btn.type = "button";
@@ -770,11 +812,13 @@ function renderCreditsOffer(hostEl, options = {}) {
     const secondaryText = String(options.secondaryText || "Buy 50 credits for $10.99");
     const secondaryPack = String(options.secondaryPack || "plus30");
     const includeLink = options.includeLink !== false;
+    const sampleVariant = String(options.sampleVariant || "generic");
 
     const box = document.createElement("div");
     box.className = "credits-offer";
 
     box.appendChild(el("div", "verdict warn", message));
+    renderPaywallMiniSample(box, sampleVariant);
     box.appendChild(makeBuyButton(box, primaryText, primaryPack));
     box.appendChild(makeBuyButton(box, secondaryText, secondaryPack));
 
@@ -794,15 +838,16 @@ function renderAiNoCredits(details) {
     clearNode(details);
 
     details.appendChild(el("div", "verdict warn", "⚠️ You have no credits for Full analysis."));
+    renderPaywallMiniSample(details, "full_analysis");
 
-    details.appendChild(makeBuyButton( details , "Buy 30 credits for $6.99", "basic10"));
-    details.appendChild(makeBuyButton( details , "Buy 50 credits for $10.99", "plus30"));
+    details.appendChild(makeBuyButton(details, "Buy 30 credits for $6.99", "basic10"));
+    details.appendChild(makeBuyButton(details, "Buy 50 credits for $10.99", "plus30"));
     const a = document.createElement("a");
     a.href = "/pricing/";
     a.className = "muted";
     a.style.display = "block";
-    a.style.margin= "18px auto"
-    a.style.textAlign="center";
+    a.style.margin = "18px auto";
+    a.style.textAlign = "center";
     a.textContent = "See all plans & what’s included →";
     details.appendChild(a);
 }
