@@ -11981,36 +11981,100 @@ app.use(contactRoutes);
 //         views: req.session.views
 //     });
 // });
-const pages = [
-    { url: "/", changefreq: "daily", priority: 1.0 },
-    { url: "/pricing/", changefreq: "weekly", priority: 0.9 },
-    { url: "/examples/", changefreq: "weekly", priority: 0.85 },
-    { url: "/about/", changefreq: "monthly", priority: 0.8 },
-    { url: "/contact/", changefreq: "monthly", priority: 0.8 },
-    { url: "/calculators/", changefreq: "weekly", priority: 0.9 },
-    { url: "/terms/", changefreq: "yearly", priority: 0.5 },
-    { url: "/privacy/", changefreq: "yearly", priority: 0.5 },
-];
+const SITEMAP_HOST = "https://mypropertycost.com";
+const SITEMAP_CACHE_TTL_MS = 30 * 60 * 1000;
+let sitemapCache = { xml: "", expiresAt: 0 };
 
-app.get("/sitemap.xml", (req, res) => {
-    res.header("Content-Type", "application/xml");
+function extractRobotsMeta(html = "") {
+    const direct = html.match(/<meta[^>]+name=["']robots["'][^>]+content=["']([^"']+)["'][^>]*>/i);
+    if (direct?.[1]) return String(direct[1]);
+    const reverse = html.match(/<meta[^>]+content=["']([^"']+)["'][^>]+name=["']robots["'][^>]*>/i);
+    return reverse?.[1] ? String(reverse[1]) : "";
+}
 
-    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+function htmlRelToUrlPath(htmlRelPath = "") {
+    const rel = String(htmlRelPath).split(path.sep).join("/");
+    if (rel === "index.html") return "/";
+    return `/${rel.replace(/\/index\.html$/i, "")}/`;
+}
+
+function sitemapMetaForPath(urlPath = "/") {
+    if (urlPath === "/") return { changefreq: "daily", priority: "1.0" };
+
+    const seg = urlPath.split("/").filter(Boolean);
+    if (seg.length === 1) return { changefreq: "weekly", priority: "0.9" };
+    if (seg[seg.length - 1] === "calculator") return { changefreq: "weekly", priority: "0.9" };
+    if (urlPath === "/pricing/" || urlPath === "/examples/") return { changefreq: "weekly", priority: "0.9" };
+    return { changefreq: "monthly", priority: "0.8" };
+}
+
+async function buildSitemapXml() {
+    const urls = [];
+
+    async function walk(dirAbs) {
+        const items = await fs.readdir(dirAbs, { withFileTypes: true });
+        for (const item of items) {
+            const abs = path.join(dirAbs, item.name);
+            if (item.isDirectory()) {
+                await walk(abs);
+                continue;
+            }
+            if (!item.isFile() || item.name !== "index.html") continue;
+
+            const rel = path.relative(HTML_ROOT, abs);
+            const urlPath = htmlRelToUrlPath(rel);
+            const [html, st] = await Promise.all([fs.readFile(abs, "utf8"), fs.stat(abs)]);
+            const robots = extractRobotsMeta(html);
+            if (/noindex/i.test(robots)) continue;
+
+            const { changefreq, priority } = sitemapMetaForPath(urlPath);
+            urls.push({
+                loc: `${SITEMAP_HOST}${urlPath}`,
+                lastmod: st.mtime.toISOString().split("T")[0],
+                changefreq,
+                priority
+            });
+        }
+    }
+
+    await walk(HTML_ROOT);
+
+    urls.sort((a, b) => {
+        if (a.loc === `${SITEMAP_HOST}/`) return -1;
+        if (b.loc === `${SITEMAP_HOST}/`) return 1;
+        return a.loc.localeCompare(b.loc);
+    });
+
+    return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages
-            .map(
-                (page) => `
+${urls
+    .map(
+        (item) => `
   <url>
-    <loc>https://mypropertycost.com${page.url}</loc>
-    <lastmod>${new Date().toISOString().split("T")[0]}</lastmod>
-    <changefreq>${page.changefreq}</changefreq>
-    <priority>${page.priority}</priority>
+    <loc>${item.loc}</loc>
+    <lastmod>${item.lastmod}</lastmod>
+    <changefreq>${item.changefreq}</changefreq>
+    <priority>${item.priority}</priority>
   </url>`
-            )
-            .join("")}
+    )
+    .join("")}
 </urlset>`;
+}
 
-    res.send(xml);
+app.get("/sitemap.xml", async (req, res) => {
+    try {
+        const now = Date.now();
+        if (!sitemapCache.xml || now >= sitemapCache.expiresAt) {
+            sitemapCache.xml = await buildSitemapXml();
+            sitemapCache.expiresAt = now + SITEMAP_CACHE_TTL_MS;
+        }
+
+        res.header("Content-Type", "application/xml");
+        return res.send(sitemapCache.xml);
+    } catch (e) {
+        console.error("sitemap.xml build failed:", e);
+        return res.status(500).type("text/plain").send("sitemap unavailable");
+    }
 });
 
 
@@ -12030,9 +12094,7 @@ app.get("/robots.txt", (req, res) => {
 
 User-agent: *
 Disallow: /admin/
-Disallow: /login/
-Disallow: /register/
-Disallow: /account/
+Disallow: /api/
 Allow: /
 
 Sitemap: https://mypropertycost.com/sitemap.xml
