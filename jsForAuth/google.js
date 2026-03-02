@@ -37,7 +37,13 @@ function registerGoogleRoutes(app){
 
         
 
-        res.redirect(`${rootUrl}?${params.toString()}`);
+        req.session.save((err) => {
+            if (err) {
+                console.error("Google auth state save failed:", err);
+                return res.redirect("/login/?error=internal_error");
+            }
+            res.redirect(`${rootUrl}?${params.toString()}`);
+        });
     });
     ///////////////////////////
     
@@ -49,6 +55,14 @@ function registerGoogleRoutes(app){
             return res.redirect("/login/?error=oauth_state_invalid");
         }
         delete req.session.googleState;
+        try {
+            await new Promise((resolve, reject) => {
+                req.session.save((err) => (err ? reject(err) : resolve()));
+            });
+        } catch (err) {
+            console.error("Google auth state clear failed:", err);
+            return res.redirect("/login/?error=internal_error");
+        }
 
         const code = req.query.code;
         if (!code) {
@@ -104,7 +118,8 @@ function registerGoogleRoutes(app){
 
         const profile = await userRes.json();
 
-        if (!profile.email) {
+        const normalizedEmail = String(profile.email || "").trim().toLowerCase();
+        if (!normalizedEmail) {
             return res.redirect("/login/?error=no_email");
         }
 
@@ -118,8 +133,8 @@ function registerGoogleRoutes(app){
 
             if (!user.rows[0]) {
                 user = await db.query(
-                    "SELECT * FROM users WHERE email=$1",
-                    [profile.email]
+                    "SELECT * FROM users WHERE lower(email)=lower($1)",
+                    [normalizedEmail]
                 );
 
                 if (user.rows[0]) {
@@ -130,7 +145,7 @@ function registerGoogleRoutes(app){
                 } else {
                     user = await db.query(
                         "INSERT INTO users (google_id, email) VALUES ($1, $2) RETURNING *",
-                        [profile.id, profile.email]
+                        [profile.id, normalizedEmail]
                     );
                 }
             }

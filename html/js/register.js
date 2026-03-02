@@ -1,47 +1,85 @@
 const form = document.getElementById("registerForm");
 const errorBox = document.getElementById("error");
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
 
-//  показать ошибку
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+const PASSWORD_MIN_LENGTH = 8;
+const EMAIL_MAX_LENGTH = 254;
+
+let csrfToken = "";
+
 function showError(message) {
     errorBox.textContent = message;
     errorBox.style.display = "block";
+    errorBox.classList.remove("hidden");
 }
 
-let csrfToken;
+function hideError() {
+    errorBox.textContent = "";
+    errorBox.style.display = "none";
+    errorBox.classList.add("hidden");
+}
+
+function validateCredentials(email, password) {
+    if (!email || email.length > EMAIL_MAX_LENGTH || !EMAIL_RE.test(email)) {
+        return "Enter a valid email address.";
+    }
+    if (!password || password.length < PASSWORD_MIN_LENGTH) {
+        return "Password must be at least 8 characters.";
+    }
+    return "";
+}
+
 window.addEventListener("DOMContentLoaded", async () => {
-    const res = await fetch("/api/csrf" , {credentials:"include"});
-    const data = await res.json();
-    csrfToken = data.csrfToken;
+    try {
+        const res = await fetch("/api/csrf", { credentials: "include" });
+        const data = await res.json();
+        csrfToken = data.csrfToken || "";
+    } catch (err) {
+        console.error("CSRF fetch failed:", err);
+        showError("Cannot initialize session. Refresh the page and try again.");
+    }
 });
 
-//  обработка ошибок из URL (?error=...)
 const params = new URLSearchParams(window.location.search);
 const error = params.get("error");
 
 const errorMessages = {
-    email_exists: "User with this email already exists",
-    weak_password: "Password must be at least 8 characters",
-    invalid_email: "Invalid email address",
-    internal_error: "Server error. Try again later",
-    registration_failed : "Registration failed. Please check your input."
+    email_exists: "User with this email already exists.",
+    weak_password: "Password must be at least 8 characters.",
+    invalid_email: "Invalid email address.",
+    invalid_data: "Enter a valid email and password (min 8 characters).",
+    internal_error: "Server error. Try again later.",
+    registration_failed: "Registration failed. Please check your input."
 };
 
 if (error && errorMessages[error]) {
     showError(errorMessages[error]);
 }
 
-// 👉 submit формы
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    errorBox.style.display = "none";
+    hideError();
 
-    const email = document.getElementById("email").value.trim();
-    const password = document.getElementById("password").value;
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    const validationError = validateCredentials(email, password);
+    if (validationError) {
+        showError(validationError);
+        return;
+    }
+
+    if (!csrfToken) {
+        showError("Session expired. Refresh the page and try again.");
+        return;
+    }
 
     try {
         const res = await fetch("/api/auth/register", {
             method: "POST",
-            headers: { "Content-Type": "application/json" , "x-csrf-token": csrfToken },
+            headers: { "Content-Type": "application/json", "x-csrf-token": csrfToken },
             credentials: "include",
             body: JSON.stringify({ email, password })
         });
@@ -51,28 +89,21 @@ form.addEventListener("submit", async (e) => {
             return;
         }
 
-        //  сервер возвращает JSON с кодом ошибки
-        const data = await res.json();
+        const data = await res.json().catch(() => ({}));
 
         if (data.error && errorMessages[data.error]) {
             showError(errorMessages[data.error]);
         } else {
             showError(errorMessages.internal_error);
         }
-
     } catch (err) {
         showError(errorMessages.internal_error);
     }
 });
 
-    // Кнопка Google OAuth
-        document.getElementById("googleLogin").addEventListener("click", () => {
-            window.location.href = "/auth/api/google";
-        });
-        // document.getElementById("facebookLogin").addEventListener("click", () => {
-        //     window.location.href = "/auth/api/facebook";
-        // });
-        //  для епл входа
-        // document.getElementById("appleLogin").addEventListener("click" , ()=> {
-        //     window.location.href="/auth/api/apple";
-        // } );
+const googleLogin = document.getElementById("googleLogin");
+if (googleLogin) {
+    googleLogin.addEventListener("click", () => {
+        window.location.href = "/auth/api/google";
+    });
+}

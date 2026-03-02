@@ -57,6 +57,7 @@ app.set("trust proxy", resolveTrustProxy());
 
 const PORT = process.env.PORT || 3000;
 const HOST = process.env.HOST || '127.0.0.1'; 
+const SESSION_MAX_AGE_MS = 1000 * 60 * 60 * 24 * 10;
 
 if (process.env.NODE_ENV === 'development') {
     app.use(session({
@@ -73,7 +74,7 @@ if (process.env.NODE_ENV === 'development') {
             httpOnly: true,
             secure: false,        // обязательно в проде
             sameSite: "lax",     // OAuth работает
-            maxAge: 1000 * 60 * 60 * 24
+            maxAge: SESSION_MAX_AGE_MS
         }
     }));
 } else if (process.env.NODE_ENV === 'production') {
@@ -91,7 +92,7 @@ if (process.env.NODE_ENV === 'development') {
             httpOnly: true,
             secure: true,        // обязательно в проде
             sameSite: "lax",     // OAuth работает
-            maxAge: 1000 * 60 * 60 * 24
+            maxAge: SESSION_MAX_AGE_MS
         }
     }));
 } 
@@ -2577,7 +2578,8 @@ app.use(async (req, res, next) => {
         if (!absPath.startsWith(HTML_ROOT + path.sep)) return next();
         await fs.access(absPath);
         
-        const isAccount = (p === "/account" || p === "/account/");
+        const normalizedRel = rel.toLowerCase().replace(/\/index\.html$/, "/");
+        const isAccount = normalizedRel === "/account/";
 
         // ✅ редирект если не авторизован
         if (isAccount && !req.session?.userId) {

@@ -19,6 +19,7 @@ if (!process.env.REDIS_URL) {
         await redisClient.connect();
     } catch (e) {
         console.error("Redis connect failed:", e);
+        process.exit(1);
     }
 })();
 

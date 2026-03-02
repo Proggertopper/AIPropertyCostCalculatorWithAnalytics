@@ -18,6 +18,16 @@ const loginLimiter = rateLimit({
     legacyHeaders: false,
 });
 
+const csrfLimiter = rateLimit({
+    store: new RedisStore({
+        sendCommand: (...args) => redisClient.sendCommand(args),
+    }),
+    windowMs: 5 * 60 * 1000,
+    max: 120,
+    standardHeaders: true,
+    legacyHeaders: false,
+});
+
 
 
 
@@ -26,12 +36,31 @@ function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+const PASSWORD_MIN_LENGTH = 8;
+const EMAIL_MAX_LENGTH = 254;
+
+function normalizeEmail(email) {
+    return typeof email === "string" ? email.trim().toLowerCase() : "";
+}
+
+function normalizePassword(password) {
+    return typeof password === "string" ? password : "";
+}
+
+function isValidEmail(email) {
+    return email.length > 0 && email.length <= EMAIL_MAX_LENGTH && validator.isEmail(email);
+}
+
+function isValidPassword(password) {
+    return password.length >= PASSWORD_MIN_LENGTH;
+}
+
 
 
 module.exports = app => {
 
     
-    app.get("/api/csrf", (req, res) => {
+    app.get("/api/csrf", csrfLimiter, (req, res) => {
         if (!req.session.csrfSecret) {
             req.session.csrfSecret = tokens.secretSync();
         }
@@ -96,9 +125,10 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
             if (!tokens.verify(secret, csrfToken)) {
             return res.status(403).json({ error: "Invalid CSRF token" });
             }
-    const { email, password } = req.body;
+    const email = normalizeEmail(req.body?.email);
+    const password = normalizePassword(req.body?.password);
 
-    if (!email || !password || !email.includes("@") || password.length < 8 || !validator.isEmail(email)) {
+    if (!isValidEmail(email) || !isValidPassword(password)) {
         return res.status(400).json({ error: "invalid_data" });
     }
 
@@ -110,6 +140,15 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
     }
 
     try {
+        const exists = await db.query(
+            "SELECT 1 FROM users WHERE lower(email)=lower($1) LIMIT 1",
+            [email]
+        );
+        if (exists.rowCount) {
+            await delay(1000);
+            return res.status(400).json({ error: "registration_failed" });
+        }
+
         await db.query(
             "INSERT INTO users (email, password_hash) VALUES ($1,$2)",
             [email, hash]
@@ -142,9 +181,10 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
             if (!tokens.verify(secret, csrfToken)) {
             return res.status(403).json({ error: "Invalid CSRF token" });
             }
-    const { email, password } = req.body;
+    const email = normalizeEmail(req.body?.email);
+    const password = normalizePassword(req.body?.password);
 
-    if (!email || !password) {
+    if (!isValidEmail(email) || !isValidPassword(password)) {
         return res.status(400).json({ error: "invalid_data" });
     }
 
@@ -161,7 +201,7 @@ app.post("/api/auth/register", loginLimiter, async (req, res) => {
         let user;
         try {
             user = await db.query(
-                "SELECT id, email, password_hash FROM users WHERE email=$1",
+                "SELECT id, email, password_hash FROM users WHERE lower(email)=lower($1)",
                 [email]
             );
         } catch (e) {
