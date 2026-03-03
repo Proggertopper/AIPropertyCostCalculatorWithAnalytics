@@ -2557,7 +2557,8 @@ async function getAccountDataForSSR(req, db) {
 // 1) SSR ДОЛЖЕН быть ДО статики
 app.use(async (req, res, next) => {
     try {
-        if (req.method !== "GET") return next();
+        const method = String(req.method || "").toUpperCase();
+        if (method !== "GET" && method !== "HEAD") return next();
 
         const p = req.path;
 
@@ -2592,12 +2593,15 @@ app.use(async (req, res, next) => {
         }
 
         
-        const tpl = await loadTemplate(absPath);
-        const auth = await getAuthForSSR(req, db);
-
         res.set("Vary", "Cookie");
         res.set("Cache-Control", "no-store");
 
+        if (method === "HEAD") {
+            return res.type("html").status(200).end();
+        }
+
+        const tpl = await loadTemplate(absPath);
+        const auth = await getAuthForSSR(req, db);
         const tz = getCookie(req, "tz");
         return res.send(injectAuth(tpl, auth , accountData , tz));
     } catch (e) {
