@@ -264,6 +264,44 @@ app.use((req, res, next) => {
     return res.redirect(301, `${target}${query}`);
 });
 
+const CANONICAL_NOINDEX_PATHS = new Set([
+    "/login/",
+    "/signup/",
+    "/account/",
+    "/checkout/paddle/"
+]);
+
+app.use((req, res, next) => {
+    const method = String(req.method || "").toUpperCase();
+    if (method !== "GET" && method !== "HEAD") return next();
+    if (req.path.startsWith("/api/")) return next();
+
+    const hasExt = /\.[a-zA-Z0-9]+$/.test(req.path);
+    if (hasExt && !req.path.endsWith(".html")) return next();
+
+    let canonicalPath = req.path;
+
+    if (/\/index\.html$/i.test(canonicalPath)) {
+        canonicalPath = canonicalPath.replace(/index\.html$/i, "");
+    } else if (!hasExt && canonicalPath !== "/" && !canonicalPath.endsWith("/")) {
+        canonicalPath += "/";
+    }
+
+    if (!canonicalPath) canonicalPath = "/";
+
+    if (canonicalPath !== req.path) {
+        const qIndex = req.originalUrl.indexOf("?");
+        const query = qIndex >= 0 ? req.originalUrl.slice(qIndex) : "";
+        return res.redirect(301, `${canonicalPath}${query}`);
+    }
+
+    if (CANONICAL_NOINDEX_PATHS.has(canonicalPath)) {
+        res.set("X-Robots-Tag", "noindex, nofollow");
+    }
+
+    return next();
+});
+
 
 async function loadTemplate(absPath) {
     const cached = templateCache.get(absPath);
@@ -11989,6 +12027,12 @@ app.use(contactRoutes);
 // });
 const SITEMAP_HOST = "https://mypropertycost.com";
 const SITEMAP_CACHE_TTL_MS = 30 * 60 * 1000;
+const SITEMAP_EXCLUDED_PATHS = new Set([
+    "/login/",
+    "/signup/",
+    "/account/",
+    "/checkout/paddle/"
+]);
 let sitemapCache = { xml: "", expiresAt: 0 };
 
 function extractRobotsMeta(html = "") {
@@ -12029,6 +12073,7 @@ async function buildSitemapXml() {
 
             const rel = path.relative(HTML_ROOT, abs);
             const urlPath = htmlRelToUrlPath(rel);
+            if (SITEMAP_EXCLUDED_PATHS.has(urlPath)) continue;
             const [html, st] = await Promise.all([fs.readFile(abs, "utf8"), fs.stat(abs)]);
             const robots = extractRobotsMeta(html);
             if (/noindex/i.test(robots)) continue;

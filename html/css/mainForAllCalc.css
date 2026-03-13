@@ -1,166 +1,239 @@
-/* Общие стили */
+/* calculators hub page styles */
 
-
-body {
+body.calculators-page {
     background-color: #f4f4f4;
     color: #333;
     display: grid;
     grid-template-rows: auto 1fr auto;
+    overflow-x: hidden;
 }
 
-.layout {
-    flex:1;
+.calculators-page .layout {
+    flex: 1;
+    width: min(1200px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 0.75rem 0 2.5rem;
+    min-width: 0;
 }
 
-/* Main content */
-
-
-.page-title {
-    font-size: 2.2rem;
+.calculators-page .page-title {
+    margin-top: 0.5rem;
     margin-bottom: 0.5rem;
-    margin-top: .5rem;
+    font-size: clamp(1.8rem, 4.2vw, 2.2rem);
     text-align: center;
+    line-height: 1.2;
 }
 
-.page-subtitle {
+.calculators-page .page-subtitle {
     text-align: center;
     margin-bottom: 0.5rem;
     font-size: 1.05rem;
     color: #020202;
 }
 
-.cards-grid {
+.calculators-page .cards-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 1.5rem;
-    width: 100%; 
-    margin: 3rem 0rem;
+    width: 100%;
+    margin: 2rem 0;
     align-items: stretch;
 }
 
-
-.card {
+.calculators-page .card {
     text-align: center;
-    margin: auto;
+    margin: 0;
     width: 100%;
     height: 100%;
-
+    min-width: 0;
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 14px;
-
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-
     text-decoration: none;
     color: #333;
-
     display: flex;
     flex-direction: column;
     justify-content: center;
-
-    transition: transform .2s ease, box-shadow .2s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card h3 {
+.calculators-page .card h3 {
     margin-top: 0;
     margin-bottom: 0.5rem;
     font-size: 1.2rem;
+    line-height: 1.25;
 }
 
-.card p {
+.calculators-page .card p {
     margin: 0;
     font-size: 0.95rem;
     color: #0a0a0a;
+    line-height: 1.45;
 }
 
-.card:hover {
+.calculators-page .card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
 }
 
-.hub-guidance {
+.calculators-page .hub-guidance {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1.25rem;
     margin: 0 auto 2rem;
     max-width: 1200px;
 }
 
-.hub-panel {
+.calculators-page .hub-panel {
+    min-width: 0;
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     padding: 1.25rem 1.25rem 1rem;
 }
 
-.hub-panel h2 {
+.calculators-page .hub-panel h2 {
     margin-top: 0;
     margin-bottom: 0.6rem;
     font-size: 1.25rem;
 }
 
-.hub-panel p {
+.calculators-page .hub-panel p {
     margin: 0 0 0.75rem;
     line-height: 1.55;
 }
 
-.hub-panel ul {
+.calculators-page .hub-panel ul {
     margin: 0;
     padding-left: 1.1rem;
 }
 
-.hub-panel li {
+.calculators-page .hub-panel li {
     margin-bottom: 0.55rem;
     line-height: 1.5;
 }
 
-.hub-faq {
+.calculators-page .hub-faq {
     max-width: 1200px;
     margin: 0 auto 2.5rem;
 }
 
-.hub-faq h2 {
+.calculators-page .hub-faq h2 {
     text-align: center;
     margin: 0 0 1rem;
     font-size: 1.6rem;
 }
 
-.hub-faq-grid {
+.calculators-page .hub-faq-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
     gap: 1rem;
 }
 
-.faq-item {
+.calculators-page .faq-item {
+    min-width: 0;
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-bottom: 0;
+    margin-bottom: 0;
     padding: 1rem 1rem 0.9rem;
 }
 
-.faq-item h3 {
+.calculators-page .faq-item h3 {
     margin: 0 0 0.45rem;
     font-size: 1.05rem;
 }
 
-.faq-item p {
+.calculators-page .faq-item p {
     margin: 0;
     line-height: 1.5;
 }
 
-@media(min-width:1400px){
-    .cards-grid{
-        max-width: 1200px;
-        margin: 5rem auto;
+@media (max-width: 980px) {
+    .calculators-page .burger {
+        justify-self: end;
+        display: flex;
     }
-    .page-title {
-        margin-top: 3rem;
-        }
+
+    .calculators-page .nav-menu {
+        grid-column: 1 / -1;
+        grid-template-columns: 1fr;
+        display: none;
+    }
+
+    .calculators-page #nav-toggle:checked ~ .nav-menu {
+        display: flex;
+        flex-direction: column;
+        margin-top: 1.25rem;
+    }
+
+    .calculators-page .navbar-nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .calculators-page #userControls {
+        width: auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+
+    .calculators-page .layout {
+        width: min(1200px, calc(100% - 1.5rem));
+    }
+
+    .calculators-page .cards-grid {
+        margin: 1.5rem 0 2rem;
+        gap: 1rem;
+    }
+
+    .calculators-page .hub-guidance {
+        grid-template-columns: 1fr;
+    }
+
+    .calculators-page .hub-faq-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
+@media (max-width: 600px) {
+    .calculators-page .layout {
+        width: min(1200px, calc(100% - 1rem));
+        padding-top: 0.5rem;
+        padding-bottom: 2rem;
+    }
 
+    .calculators-page .page-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 0.75rem;
+    }
 
+    .calculators-page .card {
+        padding: 1.1rem 1rem;
+    }
 
+    .calculators-page .hub-panel,
+    .calculators-page .faq-item {
+        padding: 1rem 0.95rem;
+    }
 
+    .calculators-page .hub-faq {
+        margin-bottom: 2rem;
+    }
 
+    .calculators-page .hub-faq h2 {
+        font-size: 1.35rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .calculators-page .layout {
+        padding-top: 2rem;
+    }
+}
 
