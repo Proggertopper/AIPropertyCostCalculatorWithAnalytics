@@ -147,6 +147,8 @@ For a running local or staging deployment:
 SMOKE_BASE_URL=http://127.0.0.1:3000 npm run smoke:api
 ```
 
+Development workflow: AI-assisted development was used to accelerate implementation, testing, debugging, and documentation. All changes were reviewed and validated through automated tests and production checks.
+
 ## Payment-webhook setup
 
 NOWPayments configuration and verification flow are documented in [docs/NOWPAYMENTS_SETUP.md](docs/NOWPAYMENTS_SETUP.md). The webhook implementation verifies the HMAC signature, validates payment amount/currency and records crediting idempotently to prevent duplicate top-ups.
